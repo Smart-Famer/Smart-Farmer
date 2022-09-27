@@ -1,4 +1,5 @@
 import React from "react"
+
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 import "../App.css"
 export default function Login()
@@ -7,6 +8,7 @@ export default function Login()
         <div className="login">
 
             <LoginNavBar/>
+             <div className="home-login"><Login /></div>
             
             <div className="image-container">
                 <img className="login-image" src="images/login_image.png" />
