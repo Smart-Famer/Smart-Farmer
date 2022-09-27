@@ -1,5 +1,6 @@
 import Login from "../components/Login";
 import LoginNavBar from "../components/NavBars/LoginNavbar"
+import Weather from "../components/Weather";
 
 export default function Home()
 {
@@ -7,7 +8,6 @@ export default function Home()
         <div className="home">
             <LoginNavBar/>
             <div className="home-header"><h1>Home</h1></div>
-            <div className="home-login"><Login /></div>
             
         </div>
     )

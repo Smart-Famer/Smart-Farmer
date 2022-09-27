@@ -1,9 +1,11 @@
 import React from 'react'
+import {Container,Row,Col} from 'reactstrap'
 
 export default function Weather(){
-    const [weatherData,setWeatherData] = React.useState({})
+    const [weatherData,setWeatherData] = React.useState(null)
 
     // const coord={"lon":79.8478,"lat":6.9319} for future use (coodinates for colombo)
+    console.log('test')
     const API_key = "ee5cf369f27ce39d86ae06b3e884e7d5"
       React.useEffect(
         ()=>{
@@ -15,11 +17,23 @@ export default function Weather(){
                 .catch(err => console.error(err));
         },[])
       
-    // console.log(weatherData)
+    console.log(weatherData)
     return(
         <div>
-            <h4>Wind Speed: {weatherData.wind.speed}m/s</h4>
-            <h4>Rainfall : {weatherData.weather[0].description}</h4>
+
+            {weatherData && 
+            <Container>
+                <Row>
+                    <Col>Wind Speed: </Col>
+                    <Col>{weatherData.wind.speed}ms<sup>-1</sup></Col>
+                </Row>
+                <Row>
+                    <Col>Rainfall</Col>
+                    <Col>{weatherData.weather[0].description}</Col>
+                </Row>
+            
+            </Container>}
+            
         </div>
     )
 
