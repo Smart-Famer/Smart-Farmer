@@ -1,11 +1,19 @@
-
-
 .home{
   justify-content: center;
-  display: flex;
   
 }
 .home-login{
+  display: flex;
+  justify-content: center;
+}
+.header{
+  background-image: '/Images/Header Image.png';
+}
+.header-img{
+  
+width: 100%;
+margin-bottom: 20px;
+
 
 }
 
