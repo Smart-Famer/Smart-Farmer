@@ -8,8 +8,8 @@
 }
 .meter--container{
 
-    width: 290px;
-    height: 167px;
+    min-width: 290px;
+    min-height: 167px;
     background-color: #ffffff;
     padding: 0;
     box-shadow: 2px 3px #888888;

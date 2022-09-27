@@ -7,7 +7,7 @@ export default function Meter(props){
         <div>
 
             
-            <Container className='meter--container'>
+            <div className='meter--container mt-3'>
                 <div className='meter--heading'>
                     <h5>{props.heading}</h5>
                 </div>
@@ -15,7 +15,7 @@ export default function Meter(props){
                      {props.children}                   
                 </div>
             
-            </Container>
+            </div>
             
         </div>
     )
