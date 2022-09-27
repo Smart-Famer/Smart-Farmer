@@ -1,0 +1,27 @@
+.meter--heading{
+    box-sizing: border-box;
+    background-color: #3dcd58;
+    color:#ffffff;
+    padding: 5px;
+    width: 100%;
+    margin: 0px;
+}
+.meter--container{
+
+    min-width: 290px;
+    min-height: 167px;
+    background-color: #ffffff;
+    padding: 0;
+    box-shadow: 2px 3px #888888;
+}
+.meter--data{
+    padding: 7px;
+    padding-top: 25px;
+}
+.meter--reading{
+    background-color: #cbb0b0;
+    text-align: center;
+}
+body{
+    background-color: #fafafa;
+}

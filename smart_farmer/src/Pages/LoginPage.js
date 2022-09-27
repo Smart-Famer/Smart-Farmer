@@ -13,5 +13,5 @@ export default function Login()
                 <div><h1 className="login-title">Smart Farmer</h1></div>
             </div>
         </div>
-    )
+        )
 }
