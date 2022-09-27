@@ -1,5 +1,6 @@
 import React from 'react'
 import {Container,Row,Col} from 'reactstrap'
+import './Weather.css'
 
 export default function Weather(){
     const [weatherData,setWeatherData] = React.useState(null)
@@ -22,15 +23,20 @@ export default function Weather(){
         <div>
 
             {weatherData && 
-            <Container>
-                <Row>
-                    <Col>Wind Speed: </Col>
-                    <Col>{weatherData.wind.speed}ms<sup>-1</sup></Col>
-                </Row>
-                <Row>
-                    <Col>Rainfall</Col>
-                    <Col>{weatherData.weather[0].description}</Col>
-                </Row>
+            <Container className='weather--container'>
+                <div className='weather--heading'>
+                    <h5>Weather Forcast</h5>
+                </div>
+                <div className='weather--data'>
+                    <Row>
+                        <Col><h6>Wind Speed</h6></Col>
+                        <Col>: {weatherData.wind.speed}ms<sup>-1</sup></Col>
+                    </Row>
+                    <Row>
+                        <Col><h6>Rainfall</h6></Col>
+                        <Col>: {weatherData.weather[0].description}</Col>
+                    </Row>
+                </div>
             
             </Container>}
             

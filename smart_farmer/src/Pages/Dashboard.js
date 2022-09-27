@@ -1,5 +1,6 @@
 import { Navigate, useParams } from "react-router-dom";
-import Weather from "../components/Weather";
+import Temperature from "../components/NavBars/Temperature/Temperature";
+import Weather from "../components/NavBars/Weather/Weather";
 
 
 export default function Dashboard(props)
@@ -11,6 +12,7 @@ export default function Dashboard(props)
         <div className="home">
             <h1>User </h1>
             <Weather/>
+            <Temperature/>
         </div>
     )
 }
