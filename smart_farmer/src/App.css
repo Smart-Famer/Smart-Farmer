@@ -1,11 +1,12 @@
+
 .home{
   justify-content: center;
   
 }
 .home-login{
-<<<<<<< HEAD
   display: flex;
   justify-content: center;
+  background-color: #fafafa;
 }
 .header{
   background-image: '/Images/Header Image.png';
@@ -16,9 +17,7 @@ width: 100%;
 margin-bottom: 20px;
 
 
-=======
  display: flex;
  justify-content: center;
->>>>>>> origin/main
 }
 
