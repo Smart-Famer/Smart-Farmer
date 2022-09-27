@@ -1,24 +1,19 @@
 import React from "react"
+
+import LoginNavBar from "../components/NavBars/LoginNavbar"
 import "../App.css"
-import LoginNavBar
-    from "../components/NavBars/LoginNavbar"
-import Login from "../components/Login"
-import { Button, Container, Row, Col } from 'reactstrap';
-
-export default function LoginPage() {
-    return (
+export default function Login()
+{
+    return(
         <div className="login">
-            <LoginNavBar />
-            {/* <br/>
-            <Container>
-                <Row xs="3">
-                    <Col></Col>
-                    <Col> <Login /></Col>
-                    <Col></Col>
-                </Row>
-            </Container> */}
-            <div className="home-login"><Login /></div>
 
+            <LoginNavBar/>
+             <div className="home-login"><Login /></div>
+            
+            <div className="image-container">
+                <img className="login-image" src="images/login_image.png" />
+                <div><h1 className="login-title">Smart Farmer</h1></div>
+            </div>
         </div>
-    )
+        )
 }
