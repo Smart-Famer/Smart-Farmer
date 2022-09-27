@@ -48,3 +48,32 @@ margin-bottom: 20px;
   text-align: center;
   color: white;
 }
+
+/* Login form with description */
+.login-form{
+  display: flex;
+  flex-direction: row;
+  margin: 25px;
+  align-items: center;
+  box-shadow: 0 0.5em 1.10em;
+}
+.descrip{
+  width: 60%;
+  margin: 5% 10% 0 10%;
+  text-align: justify;
+  flex: 50%;
+}
+.login-form-item{
+  width: 60%;
+  margin: 5% 10% 0 10%;
+  text-align: justify;
+  flex: 50%;
+
+}
+
+/* Responsive login form with description */
+@media (max-width: 1000px) {
+  .login-form {
+    flex-direction: column;
+  }
+}

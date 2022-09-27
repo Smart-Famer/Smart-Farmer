@@ -6,10 +6,9 @@ import { Button } from 'reactstrap';
 
 
 export default function Login() {
-    console.log("test")
     return (
         <div className='cover'>
-            <div className='login-logo'><BsPersonCircle size={80} /></div>
+            <div className='login-logo'><BsPersonCircle size={90} /></div>
 
             <h1>Login</h1>
 

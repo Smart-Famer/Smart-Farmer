@@ -1,23 +1,24 @@
 .cover {
  background-color: #3dcd56;
- width: 50%;
+ width: 100%;
  position: relative;
  border-radius: 12px;
  box-shadow: 0 0.188em 1.550em;
  display: flex;
  flex-direction: column;
  justify-content: space-around;
- margin-top: 5%;
- margin-bottom: 5%;
+ margin-bottom: 20%;
+
 }
 .login-logo{
     text-align: center;
-    left: calc();
-    margin-top: 10%;
+    margin-top: 5%;
+    color: #ffffff;
 }
 .cover h1{
     text-align: center;
     margin: 5%;
+    color: #ffffff;
 }
 .cover label{
     margin:0px 25px 10px 25px ;
