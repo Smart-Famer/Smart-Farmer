@@ -1,3 +1,26 @@
+
+
+.home{
+  justify-content: center;
+  
+}
+.home-login{
+  display: flex;
+  justify-content: center;
+  background-color: #fafafa;
+}
+.header{
+  background-image: '/Images/Header Image.png';
+}
+.header-img{
+  
+width: 100%;
+margin-bottom: 20px;
+
+
+ display: flex;
+ justify-content: center;
+}
 /* login page */
 .login{
   margin: 10px;
@@ -17,6 +40,7 @@
   font-family: 'Source Sans Pro';
   font-style: italic;
   line-height: 1px;
+
 }
 
 .image-container{
