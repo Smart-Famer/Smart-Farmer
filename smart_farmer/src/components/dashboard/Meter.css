@@ -1,4 +1,4 @@
-.weather--heading{
+.meter--heading{
     box-sizing: border-box;
     background-color: #3dcd58;
     color:#ffffff;
@@ -6,7 +6,7 @@
     width: 100%;
     margin: 0px;
 }
-.weather--container{
+.meter--container{
 
     width: 290px;
     height: 167px;
@@ -14,9 +14,13 @@
     padding: 0;
     box-shadow: 2px 3px #888888;
 }
-.weather--data{
+.meter--data{
     padding: 7px;
     padding-top: 25px;
+}
+.meter--reading{
+    background-color: #cbb0b0;
+    text-align: center;
 }
 body{
     background-color: #fafafa;
