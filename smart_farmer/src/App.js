@@ -8,6 +8,7 @@ import NPKpage from './Pages/NPKpage';
 import ElecConPage from './Pages/ElectricConductivityInput'
 import Error from './Pages/Error';
 import Gallery from './Pages/Gallery';
+import Settings from './Pages/SettingsPage';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
@@ -25,6 +26,7 @@ function App() {
           <Route path='dashboard' element={<Dashboard/>}/>
           <Route path='npkinput' element={<NPKpage />}/>
           <Route path='elecinput' element={<ElecConPage />}/>
+          <Route path='settings' element={<Settings />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
