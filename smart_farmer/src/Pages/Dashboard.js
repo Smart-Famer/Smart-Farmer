@@ -8,6 +8,7 @@ import { Container,Row,Col} from "reactstrap";
 import NPK from "../components/dashboard/NPK";
 import Humidity from "../components/dashboard/Humidity";
 import SoilHumidity from "../components/dashboard/SoilHumidity";
+import Sidebar from "../components/SideBar";
 
 
 export default function Dashboard(props)
@@ -16,7 +17,9 @@ export default function Dashboard(props)
     //     return <Navigate to="/login"/>
     // }
     return(
-        <div className="home">
+        <div className="main-container">
+            <Sidebar/>
+            <div className="home">
             <h1>User </h1>
                 <Container>
                     <Row>
@@ -69,6 +72,8 @@ export default function Dashboard(props)
                     
 
                 </Container>
+        </div>
+
         </div>
     )
 }
