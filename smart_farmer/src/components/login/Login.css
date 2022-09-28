@@ -6,7 +6,6 @@
  box-shadow: 0 0.188em 1.550em;
  display: flex;
  flex-direction: column;
- justify-content: space-around;
  margin-bottom: 20%;
 
 }
@@ -21,31 +20,21 @@
     color: #ffffff;
 }
 .cover label{
-    margin:0px 25px 10px 25px ;
+
 }
 .cover input{
-    margin :0 25px 20px 25px ;
-    height: 10xp;
     background-color: #e0e0e0;
-    border-radius: 12px;
-    height: 1.75em;
+    border-radius: 8px;
+
 }
-.login-btn{
-    color: #126628;
-    font-weight: 500;
-    font-size: large;
-    border-color: black;
-    border-style: solid;
-    border-width: 1.75px ;
+.btn-log{
+    color: #126628 !important;
+    border-color: black !important;
     margin: 5% 50% 10% 30%;
     width: 40%;
     height: 50px;
-    background-color:#e0e0e0 ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: center;
+    background-color:#e0e0e0 !important;
+
+
+
 }
