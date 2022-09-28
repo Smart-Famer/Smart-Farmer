@@ -47,4 +47,5 @@
     transition: 0.5s;
     border-radius: 12px;
     cursor: pointer;
+    text-align: center;
 }
