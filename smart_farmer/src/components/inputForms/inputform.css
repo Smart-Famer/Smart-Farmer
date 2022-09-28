@@ -17,13 +17,10 @@
     
 }
 .input--data{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 50px;
-
-
-
+    /* display: flex;
+    justify-content: center; */
+    margin-inline: 15%;
+    padding:  50px 0 50px 0;
 }
 .input--reading{
     background-color: #cbb0b0;
