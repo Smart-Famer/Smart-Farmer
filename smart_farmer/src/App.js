@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard';
 import SharedLayout from './Pages/SharedLayout'
 import LoginPage from './Pages/LoginPage'
 import Error from './Pages/Error'
+import Gallery from './Pages/Gallery'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/login' element={<LoginPage setuser={setUser}/>}/>
         <Route path='/' element={<SharedLayout />} >
           <Route index element={<Dashboard user={user}/>}/>
+          <Route path='gallery' element={<Gallery/>}/>
           <Route path='home' element={<HomePage/>}/>
           <Route path='dashboard' element={<Dashboard/>}/>
           <Route path='*' element={<Error />} />

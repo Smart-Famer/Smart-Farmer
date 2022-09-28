@@ -8,7 +8,7 @@ import {BsPersonPlus} from "react-icons/bs";
 import {GiChart} from "react-icons/gi";
 import {MdOutlineInsertPhoto} from "react-icons/md";
 import {MdOutlineLogout} from "react-icons/md";
-
+import {MdOutlineSettings} from "react-icons/md";
 
 export default function Sidebar(){
     return(
@@ -57,6 +57,12 @@ export default function Sidebar(){
                         Gallery
                         </NavLink>
                     </NavItem>
+                    <NavItem className="sidebar-nav-item">
+                        <MdOutlineSettings className="sidebar-item-logo" size={30}/>
+                        <NavLink className="sidebar-nav-link" href="#">
+                        Settings
+                        </NavLink>
+                    </NavItem >
                     <NavItem className="sidebar-nav-item">
                         <MdOutlineLogout className="sidebar-item-logo" size={30}/>
                         <NavLink className="sidebar-nav-link" href="#">
