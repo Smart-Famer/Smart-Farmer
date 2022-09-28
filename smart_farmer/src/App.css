@@ -1,6 +1,12 @@
 
 
+.main-container{
+  display: flex;
+  margin-top: 7px;
+}
+
 .home{
+  padding: 10px;
   justify-content: center;
   
 }
