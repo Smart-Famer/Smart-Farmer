@@ -63,12 +63,6 @@ margin-bottom: 20px;
   align-items: center;
   box-shadow: 0 0.5em 1.10em;
 }
-.descrip{
-  width: 60%;
-  margin: 5% 10% 0 10%;
-  text-align: justify;
-  flex: 50%;
-}
 .login-form-item{
   width: 60%;
   margin: 5% 10% 0 10%;
