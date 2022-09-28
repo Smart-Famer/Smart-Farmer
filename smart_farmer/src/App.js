@@ -9,6 +9,7 @@ import ElecConPage from './Pages/ElectricConductivityInput'
 import Error from './Pages/Error';
 import Gallery from './Pages/Gallery';
 import Settings from './Pages/SettingsPage';
+import CreateAss from './Pages/CreateAssistantPage';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
@@ -27,6 +28,7 @@ function App() {
           <Route path='npkinput' element={<NPKpage />}/>
           <Route path='elecinput' element={<ElecConPage />}/>
           <Route path='settings' element={<Settings />} />
+          <Route path='createAcc' element={<CreateAss />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
