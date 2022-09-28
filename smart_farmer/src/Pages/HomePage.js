@@ -1,5 +1,5 @@
 
-import Header from "../components/Header.js"
+import Header from "../components/login/Header.js"
 
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 
