@@ -23,13 +23,13 @@ export default function Weather(){
 
             {weatherData && 
                 <>
-                    <Row>
+                    <Row className='align-items-center px-3'>
                         <Col><h6>Wind Speed</h6></Col>
-                        <Col>: {weatherData.wind.speed}ms<sup>-1</sup></Col>
+                        <Col><h6 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{weatherData.wind.speed}ms<sup>-1</sup></h6></Col>
                     </Row>
-                    <Row>
+                    <Row className='align-items-center px-3'>
                         <Col><h6>Rainfall</h6></Col>
-                        <Col>: {weatherData.weather[0].description}</Col>
+                        <Col><h6 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{weatherData.weather[0].description}</h6></Col>
                     </Row>
                 </>
                 }
