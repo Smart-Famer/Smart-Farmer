@@ -27,7 +27,7 @@ export default function LineChart(props) {
 
   const options = {
     responsive: true,
-    scales:{xAxis: {title: {text: props.xAxisLabel,display:true}}, yAxis: {title:{text:props.yAxisName,display:true}}},
+    scales:{xAxis: {title: {text: props.xAxisLabel,display:true}}, yAxis: {title:{text:props.yAxisLabel,display:true}}},
     plugins: {
       legend: {
         position: 'top',
