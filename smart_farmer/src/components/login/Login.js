@@ -16,10 +16,11 @@ export default function Login() {
             <input type='text' placeholder='Username' />
             <label>Password</label>
             <input type='password' placeholder='Password' />
-            <div className='login-btn'>
-                {/* <Button name='login-btn'>Login</Button> */}
+            {/* <div className='login-btn'>
+                
                 Login
-            </div>
+            </div> */}
+            <Button className='login-btn' type='submit'>Login</Button>
         </div>
 
     )

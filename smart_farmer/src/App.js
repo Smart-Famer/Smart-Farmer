@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard';
 import SharedLayout from './Pages/SharedLayout';
 import LoginPage from './Pages/LoginPage';
 import NPKpage from './Pages/NPKpage';
+import ElecConPage from './Pages/ElectricConductivityInput'
 import Error from './Pages/Error';
 import Gallery from './Pages/Gallery';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='home' element={<HomePage/>}/>
           <Route path='dashboard' element={<Dashboard/>}/>
           <Route path='npkinput' element={<NPKpage />}/>
+          <Route path='elecinput' element={<ElecConPage />}/>
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>

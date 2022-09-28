@@ -1,5 +1,6 @@
-
-
+body{
+  background-color: #e6f3e8 !important;
+}
 .main-container{
   display: flex;
   margin-top: 7px;
@@ -76,4 +77,9 @@ margin-bottom: 20px;
   .login-form {
     flex-direction: column;
   }
+}
+
+/* npk input */
+.btn-green{
+  background-color: #3dcd56;
 }

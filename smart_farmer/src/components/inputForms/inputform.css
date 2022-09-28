@@ -30,12 +30,19 @@
 .data-label{
     margin: 12px;
 }
+
 .input-box{
     display: flex;
     flex-direction: column;
     margin-left: 10%;
     width: 100%;
+    justify-content: center;
 }
+
 body{
     background-color: #fafafa;
+}
+
+.btn-green{
+    background-color: #3dcd58 !important;
 }
