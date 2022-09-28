@@ -9,6 +9,7 @@ import NPK from "../components/dashboard/NPK";
 import Humidity from "../components/dashboard/Humidity";
 import SoilHumidity from "../components/dashboard/SoilHumidity";
 import Sidebar from "../components/SideBar";
+import RecentPhotos from "../components/dashboard/RecentPhotos";
 
 
 export default function Dashboard(props)
@@ -64,6 +65,12 @@ export default function Dashboard(props)
                         <Col>
                             <Meter heading='Humidity'>
                                 <SoilHumidity/>
+                            </Meter>
+                        </Col>
+                        
+                        <Col>
+                            <Meter heading='Humidity'>
+                                <RecentPhotos/>
                             </Meter>
                         </Col>
                         
