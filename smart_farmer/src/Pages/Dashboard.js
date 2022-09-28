@@ -20,7 +20,6 @@ export default function Dashboard(props)
         <div className="main-container">
             <Sidebar/>
             <div className="home">
-            <h1>User </h1>
                 <Container>
                     <Row>
                         <Col>
