@@ -1,7 +1,10 @@
 import React from "react"
 import "./navStyle.css"
+import { NavItem, NavLink, Nav } from "reactstrap"
 export default function LoginNavBar(){
+    
     return(
+
         <div className="login-nav-container">
             <nav className="login-nav">
                 <img className="nav-icon" alt="Just an Image" src="images/nav-icon.png"/>

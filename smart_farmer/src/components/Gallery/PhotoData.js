@@ -30,7 +30,7 @@ const photos =
 
           "2022/9/8":[
             {
-              src: 'https://picsum.photos/id/237/200/300',
+              src: 'https://picsum.photos/id/237/1200/400',
               altText: 'Slide 1',
               caption: 'Slide 1',
               key: 1,
@@ -39,7 +39,7 @@ const photos =
                 
             },
             {
-              src: 'https://picsum.photos/200/300?grayscale',
+              src: 'https://picsum.photos/1200/400?grayscale',
               altText: 'Slide 2',
               caption: 'Slide 2',
               key: 2,

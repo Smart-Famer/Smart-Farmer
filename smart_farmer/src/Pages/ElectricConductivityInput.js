@@ -1,14 +1,17 @@
 import React from "react";
 import Input from "../components/inputForms/InputForm";
 import ElecInput from "../components/inputForms/ElectricConductivityInput.js"
+import Sidebar from "../components/Sidebar/SideBar"
 
 export default function EleInput() {
     return (
-        <div>
-            <Input formName='Electric Conductivity Input'>
-                <ElecInput />
-            </Input>
-
+        <div className="main-container">
+            <Sidebar/>
+            <div>
+                <Input formName='Electric Conductivity Input'>
+                    <ElecInput />
+                </Input>
+            </div>
         </div>
     )
 }

@@ -54,14 +54,13 @@ function Example(props) {
   });
 
   return (
-      <div className='carousel-viewport'>
+      <div>
         <Carousel
         activeIndex={activeIndex}
         next={next}
         previous={previous}
         {...props}
         interval={false}
-        className="carousel-viewport"
       >
           <CarouselIndicators
             items={props.items}
