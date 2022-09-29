@@ -35,7 +35,7 @@ export default function Profile(props) {
 
                         </Col>
                         <Col className="d-flex justify-content-center">
-                            <img className="rounded w-75" src={profilePic}/>
+                            <img className="rounded w-75" src={profilePic} alt="Profile Picture"/>
                         </Col>
                     </Row>
                 </Container>

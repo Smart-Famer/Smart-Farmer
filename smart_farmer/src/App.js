@@ -17,7 +17,6 @@ import HistoricalData from './Pages/ViewHistorical';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import CropYieldDataPage from './Pages/CropsYieldDataPage';
-import ViewProfile from './Pages/ViewProfilePage';
 import ViewProfilePage from './Pages/ViewProfilePage';
 
 function App() {
