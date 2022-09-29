@@ -2,10 +2,15 @@ import './App.css';
 import 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import Dashboard from './Pages/Dashboard';
-import SharedLayout from './Pages/SharedLayout'
-import LoginPage from './Pages/LoginPage'
-import Error from './Pages/Error'
-import Gallery from './Pages/Gallery'
+import SharedLayout from './Pages/SharedLayout';
+import LoginPage from './Pages/LoginPage';
+import NPKpage from './Pages/NPKpage';
+import ElecConPage from './Pages/ElectricConductivityInput'
+import Error from './Pages/Error';
+import Gallery from './Pages/Gallery';
+import Settings from './Pages/SettingsPage';
+import CreateAss from './Pages/CreateAssistantPage';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -20,6 +25,10 @@ function App() {
           <Route path='gallery' element={<Gallery/>}/>
           <Route path='home' element={<HomePage/>}/>
           <Route path='dashboard' element={<Dashboard/>}/>
+          <Route path='npkinput' element={<NPKpage />}/>
+          <Route path='elecinput' element={<ElecConPage />}/>
+          <Route path='settings' element={<Settings />} />
+          <Route path='createAcc' element={<CreateAss />} />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+// import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import DonutChart from 'react-donut-chart';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+// ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DoughnutChart(props) {
   const x = props.reading
