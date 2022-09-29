@@ -5,8 +5,8 @@ import { BarChart } from "../components/dashboard/BarChart";
 export default function CropYieldDataPage(){
     return(
         <BarChart
-            xAxisLabel="Month"
-            yAxisLabel="Yield"
+            yAxisLabel="Month"
+            xAxisLabel="Yield (kg)"
             chartTitle = 'Crop Yield Chart'
             xAxisValues = {['January', 'February', 'March', 'April', 'May', 'June', 'July']}
             dataSets={[
