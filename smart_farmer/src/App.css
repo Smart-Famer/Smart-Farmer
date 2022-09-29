@@ -117,3 +117,23 @@ margin-bottom: 20px;
 .recentPhotos--container{
   min-width: 500px;
 }
+.profile--heading{
+  box-sizing: border-box;
+  background-color: #3dcd58;
+  color:#ffffff;
+  padding: 5px;
+  width: 100%;
+  margin: 0px;
+}
+.profile--container{
+  width: 700px;
+  height: 400px;
+  background-color: #ffffff;
+  padding: 0;
+  box-shadow: 2px 3px #888888;
+}
+.profile--data{
+  padding: 7px;
+  padding-top: 25px;
+}
+

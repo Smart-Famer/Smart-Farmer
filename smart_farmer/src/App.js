@@ -17,6 +17,8 @@ import HistoricalData from './Pages/ViewHistorical';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import CropYieldDataPage from './Pages/CropsYieldDataPage';
+import ViewProfile from './Pages/ViewProfilePage';
+import ViewProfilePage from './Pages/ViewProfilePage';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -35,6 +37,7 @@ function App() {
           <Route path='createAcc' element={<CreateAss />} />
           <Route path='control' element={<ControlPanel/>}/>
           <Route path='cropYield' element={<CropYieldDataPage/>}/>
+          <Route path='viewProfile' element={<ViewProfilePage/>}/>
           <Route path='history' element={<HistoricalData />} />
           <Route path='*' element={<Error />} />
         </Route>
