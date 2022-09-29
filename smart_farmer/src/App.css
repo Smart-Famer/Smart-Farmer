@@ -111,3 +111,9 @@ margin-bottom: 20px;
   height: 40px;
   width: 80px;
 }
+.historicalData--container{
+  min-width: 600px;
+}
+.recentPhotos--container{
+  min-width: 500px;
+}
