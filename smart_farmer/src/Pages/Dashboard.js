@@ -8,7 +8,7 @@ import { Container,Row,Col} from "reactstrap";
 import NPK from "../components/dashboard/NPK";
 import Humidity from "../components/dashboard/Humidity";
 import SoilHumidity from "../components/dashboard/SoilHumidity";
-import Sidebar from "../components/SideBar";
+import Sidebar from "../components/Sidebar/SideBar";
 import RecentPhotos from "../components/dashboard/RecentPhotos";
 import HistoricalData from "../components/dashboard/HistoricalData";
 
