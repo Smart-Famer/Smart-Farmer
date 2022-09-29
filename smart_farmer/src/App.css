@@ -1,5 +1,8 @@
 
-
+/* 
+html, body {
+  max-width: 100%;
+} */
 .main-container{
   display: flex;
   margin-top: 7px;
@@ -53,4 +56,32 @@ margin-bottom: 20px;
   position: relative;
   text-align: center;
   color: white;
+}
+
+/* gallery page */
+.gallery{
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-image-date{
+  background-color:  #3DCD56;
+  color: white;
+  padding: 5px;
+  width: 100%;
+}
+
+.gallery-image-section{
+  box-shadow: 5px 5px 5px -5px #333;
+}
+
+.carousel{
+  padding: 10px;
+}
+
+.gallery-delete-button{
+  border-radius: 10px;
+  height: 40px;
+  width: 80px;
 }
