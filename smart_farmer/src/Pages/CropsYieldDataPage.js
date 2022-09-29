@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChart } from "../components/dashboard/BarChart";
+import { BarChart } from "../components/BarChart";
 
 
 export default function CropYieldDataPage(){
