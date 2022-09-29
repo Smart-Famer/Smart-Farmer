@@ -24,6 +24,7 @@ export default function Dashboard(props)
             <div className="home">
                 <Container>
                     <Row>
+                                               
                         <Col>
                             <Meter heading='Temperature'>
                                 <Temperature/>
