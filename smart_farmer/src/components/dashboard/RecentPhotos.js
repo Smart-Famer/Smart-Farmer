@@ -2,10 +2,11 @@ import React from "react";
 import {Row,Col } from "reactstrap";
 import farmImage1 from './images/farmImage1.jpg'
 import farmImage2 from './images/farmImage2.jpg'
+import "../../App.css"
 
 export default function RecentPhotos(){
     return(
-        <Row>
+        <Row className="recentPhotos--container">
             <Col className="d-flex justify-content-center" >
                 <div>
                     <Row>

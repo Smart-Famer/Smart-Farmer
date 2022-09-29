@@ -24,32 +24,31 @@ export default function Dashboard(props)
             <div className="home">
                 <Container>
                     <Row>
+                                               
                         <Col>
                             <Meter heading='Temperature'>
                                 <Temperature/>
                             </Meter>
                         </Col>
-                        <Col>
-                            <Meter heading='Weather'>
-                                <Weather/>
-                            </Meter>
-                        </Col>
-                        <Col>
-                            <Meter heading='Rainfall'>
-                                <RainFall/>
-                            </Meter>
-                        </Col>
-                        <Col>
-                            <Meter heading='Rainfall'>
-                                <RainFall/>
-                            </Meter>
-                        </Col>
-                        
+
+
                         <Col>
                             <Meter heading='Electric Conductivity'>
                                 <ElectricConductivity/>
                             </Meter>
                         </Col>
+                        <Col>
+                            <Meter heading='Rainfall'>
+                                <RainFall/>
+                            </Meter>
+                        </Col>
+
+                        <Col>
+                            <Meter heading='Weather'>
+                                <Weather/>
+                            </Meter>
+                        </Col>
+                        
                         
                         <Col>
                             <Meter heading='NPK Levels'>
@@ -64,13 +63,13 @@ export default function Dashboard(props)
                         </Col>
                         
                         <Col>
-                            <Meter heading='Humidity'>
+                            <Meter heading='Soil Humidity'>
                                 <SoilHumidity/>
                             </Meter>
                         </Col>
                         
                         <Col>
-                            <Meter heading='Humidity'>
+                            <Meter heading='Recent Photos'>
                                 <RecentPhotos/>
                             </Meter>
                         </Col>

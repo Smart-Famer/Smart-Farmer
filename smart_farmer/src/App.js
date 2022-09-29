@@ -11,10 +11,12 @@ import Gallery from './Pages/Gallery';
 import Settings from './Pages/SettingsPage';
 import CreateAss from './Pages/CreateAssistantPage';
 import ControlPanel from './Pages/ContolPanel';
+import HistoricalData from './Pages/ViewHistorical';
 import Test from "./Pages/Test"
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
+import CropYieldDataPage from './Pages/CropsYieldDataPage';
 
 function App() {
   const [user, setUser] = useState(null)
@@ -32,6 +34,8 @@ function App() {
           <Route path='settings' element={<Settings />} />
           <Route path='createAcc' element={<CreateAss />} />
           <Route path='control' element={<ControlPanel/>}/>
+          <Route path='cropYield' element={<CropYieldDataPage/>}/>
+          <Route path='history' element={<HistoricalData />} />
           <Route path='test' element={<Test/>}/>
           <Route path='*' element={<Error />} />
         </Route>

@@ -1,10 +1,12 @@
 import React from "react";
 import {Row,Col} from "reactstrap";
 import LineChart from "./LineChart";
+import {Link} from "react-router-dom"
+import "../../App.css"
 
 export default function HistoricalData(props){
     return(
-        <Row className="px-5">
+        <Row className="px-5 historicalData--container">
             <Col >
             <LineChart
                 xAxisLabel='Date'
@@ -26,6 +28,10 @@ export default function HistoricalData(props){
                                 
                                 }]}
                 />
+                <div className="d-flex flex-row-reverse">
+                    <Link style={{ textDecoration: 'none' }}>{"View All>"}</Link>
+                </div>
+                
              </Col>
         </Row>
     )
