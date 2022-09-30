@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Settings() {
+export default function AddSensor() {
     return (
             <form >
                 <div className="form-group  p-3">

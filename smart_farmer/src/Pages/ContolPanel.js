@@ -1,7 +1,7 @@
 // import { Navigate, useParams } from "react-router-dom";
 import WaterPumpContainer from "../components/contol-panel/WaterPumpContainer";
 import CameraContainer from "../components/contol-panel/CameraContainer";
-
+import Sidebar from "../components/Sidebar/SideBar";
 
 
 export default function Dashboard(props)
@@ -21,7 +21,8 @@ export default function Dashboard(props)
     ]
     const cameras=["camera-1","camera-2"]
     return(
-        <div>
+        <div className="main-container">
+            <Sidebar/>
             <div className="Control">
                 <WaterPumpContainer pumps={pumps} threshhold="10" />
                 <CameraContainer cameras={cameras}/>

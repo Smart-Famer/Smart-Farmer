@@ -84,4 +84,19 @@ margin-bottom: 20px;
   background-color: #3dcd56;
 }
 
-/* gallery page */
+.control{
+  min-width:75vw;
+}
+
+.historicalData--container{
+  min-width:75vw;
+  padding: 0;
+  position: relative;
+}
+
+.crop-yield-chart-container{
+  min-width:75vw;
+  padding: 0;
+  position: relative;
+  margin: 5%;
+}

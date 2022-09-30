@@ -1,9 +1,14 @@
 import React from "react";
+import { GiParasaurolophus } from "react-icons/gi";
 import { BarChart } from "../components/BarChart";
+import Sidebar from "../components/Sidebar/SideBar"
 
 
-export default function CropYieldDataPage(){
+export default function CropYieldDataPage(props){
     return(
+        <div className="main-container">
+            <Sidebar user={props.user}/>
+        <div className="crop-yield-chart-container">
         <BarChart
             yAxisLabel="Month"
             xAxisLabel="Yield (kg)"
@@ -31,5 +36,9 @@ export default function CropYieldDataPage(){
                         ]
                     }
         />
+
+
+        </div>
+        </div>
     )
 }

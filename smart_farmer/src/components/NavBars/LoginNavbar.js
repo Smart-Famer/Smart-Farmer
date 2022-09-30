@@ -1,16 +1,16 @@
 import React from "react"
 import "./navStyle.css"
 import { NavItem, NavLink, Nav } from "reactstrap"
+import { Link } from "react-router-dom"
 export default function LoginNavBar(){
     
     return(
 
-        <div className="login-nav-container">
-            <nav className="login-nav">
-                <img className="nav-icon" alt="Just an Image" src="images/nav-icon.png"/>
-                <h4 className="logo-name">Smart Farmer</h4>
-                <h4 className="log-out-btn">Log out</h4>
-                <h4 className="contact-btn">Contact us</h4>
+        <div className="nav-container">
+            <nav className="top-nav">
+                <img className="login-nav-icon" alt="Brand" src="images/nav-icon.png"/>
+                <Link className="login-logo-name" style={{textDecoration: 'none'}} to="/login"> <h4 >Smart Farmer</h4></Link>
+                <Link className="login-contact-btn" style={{textDecoration: 'none'}} to="/home"><h4>Contact us</h4></Link>
             </nav>
             <div className="bottom-border"></div>
         </div>
