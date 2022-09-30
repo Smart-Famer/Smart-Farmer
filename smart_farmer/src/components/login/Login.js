@@ -34,7 +34,7 @@ export default function Login() {
           .then((data) => {
             console.log(data, "userRegister");
             if (data.status === "ok") {
-              alert("login successful");
+            //   alert("login successful");
               console.log(data.data);
               window.localStorage.setItem("token", data.data);
               window.location.href = "./home";
