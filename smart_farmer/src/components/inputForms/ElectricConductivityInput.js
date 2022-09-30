@@ -13,7 +13,7 @@ export default function ElectricConductivityInput() {
                     <label for="inputElecCon" className="col-sm-1 col-form-label">sm<sup>-1</sup></label>
 
                 </div>
-             <button type="button" classNameName="btn btn-green btn-block m-4">Submit</button>
+             <button type="button" className="btn btn-green btn-block m-4">Submit</button>
 
             </form>
         </div>

@@ -8,18 +8,18 @@
 }
 .input--container{
 
-    max-width:1000px;
+    min-width:75vw;
     background-color: #ffffff;
     padding: 0;
     box-shadow: 2px 3px #888888;
     position: relative;
-    margin: 25%;
+    margin: 5%;
     
 }
 .input--data{
     /* display: flex;
     justify-content: center; */
-    margin-inline: 15%;
+    margin-inline:10% 0%;
     padding:  50px 0 50px 0;
 }
 .input--reading{

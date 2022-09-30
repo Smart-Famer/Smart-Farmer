@@ -1,11 +1,10 @@
 .control-water-pump-container{
-    max-width:1000px;
+    min-width:75vw;
     background-color: #ffffff;
     padding: 0;
     box-shadow: 2px 3px #888888;
     position: relative;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin: 5%;
 }
 
 .pump-container-title{
@@ -33,12 +32,13 @@
 
 
 .control-camera-container{
-    max-width:1000px;
+    min-width:75vw;
     max-height: 100%;
     background-color: #ffffff;
     padding: 0;
     box-shadow: 2px 3px #888888;
-    margin: 10% 10% 0% 10%; 
+    position: relative;
+    margin: 5%;
 }
 
 .camera-container{
