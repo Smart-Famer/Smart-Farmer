@@ -18,9 +18,9 @@ import UserSession from "../components/Utils/UserSession"
 
 export default function Dashboard(props)
 {
-    if(UserSession.username===undefined){
-        return <Navigate to="/login"/>
-    }
+    // if(UserSession.username===undefined){
+    //     return <Navigate to="/login"/>
+    // }
     return(
         <div className="main-container">
             <Sidebar/>

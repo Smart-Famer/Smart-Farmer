@@ -73,7 +73,7 @@ export default function Sidebar(props){
                     </NavItem >
                     <NavItem className="sidebar-nav-item">
                         <MdOutlineLogout className="sidebar-item-logo" size={30}/>
-                        <NavLink className="sidebar-nav-link" href="#">
+                        <NavLink className="sidebar-nav-link" href="/login">
                         Logout
                         </NavLink>
                     </NavItem >

@@ -1,6 +1,6 @@
 const UserProfile = {
   username:"Joe Smith",
-  type:"Assistant"
+  type:"Manager"
 }
   
 export default UserProfile;

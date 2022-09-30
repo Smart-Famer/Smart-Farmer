@@ -29,7 +29,7 @@ export default function HistoricalData(){
                                 }]}
                 />
                 <div className="d-flex flex-row-reverse">
-                    <Link style={{ textDecoration: 'none' }}>{"View All>"}</Link>
+                    <Link to="/history" style={{ textDecoration: 'none' }}>{"View All>"}</Link>
                 </div>
                 
              </Col>
