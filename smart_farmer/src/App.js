@@ -12,7 +12,6 @@ import Settings from './Pages/SettingsPage';
 import CreateAss from './Pages/CreateAssistantPage';
 import ControlPanel from './Pages/ContolPanel';
 import HistoricalData from './Pages/ViewHistorical';
-import ViewProfile from "./Pages/ViewProfile"
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
@@ -40,7 +39,7 @@ function App() {
           <Route path='controlPanel' element={<ControlPanel />}/>
           <Route path='cropYield' element={<CropYieldDataPage />}/>
           <Route path='history' element={<HistoricalData  />} />
-          <Route path='viewProfilePage' element={<ViewProfile />}/>
+          <Route path='viewProfilePage' element={<ViewProfilePage />}/>
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
