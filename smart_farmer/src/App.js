@@ -17,7 +17,8 @@ import ViewProfile from "./Pages/ViewProfile"
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import CropYieldDataPage from './Pages/CropsYieldDataPage';
-import UserSession from "./components/Utils/UserSession"
+import ViewProfilePage from './Pages/ViewProfilePage';
+import UserSession from "./components/Utils/UserSession";
 
 function App() {
 

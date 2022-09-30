@@ -4,7 +4,7 @@ import LineChart from "./LineChart";
 import {Link} from "react-router-dom"
 import "../../App.css"
 
-export default function HistoricalData(props){
+export default function HistoricalData(){
     return(
         <Row className="px-5 historicalData--container">
             <Col >

@@ -93,10 +93,20 @@ margin-bottom: 20px;
   padding: 0;
   position: relative;
 }
-
-.crop-yield-chart-container{
-  min-width:75vw;
+.profile--container{
+  width: 700px;
+  height: 400px;
+  background-color: #ffffff;
   padding: 0;
-  position: relative;
-  margin: 5%;
+  box-shadow: 2px 3px #888888;
 }
+.profile--data{
+  padding: 7px;
+  padding-top: 25px;
+}
+
+.historicalData--container{
+  min-width: 600px;
+}
+.recentPhotos--container{
+  min-width: 500px;
