@@ -1,0 +1,38 @@
+.cover {
+ background-color: #3dcd56;
+ width: 100%;
+ position: relative;
+ border-radius: 12px;
+ box-shadow: 0 0.188em 1.550em;
+ display: flex;
+ flex-direction: column;
+ margin-bottom: 20%;
+
+}
+.login-logo{
+    text-align: center;
+    margin-top: 5%;
+    color: #ffffff;
+}
+.cover h1{
+    text-align: center;
+    margin: 5%;
+    color: #ffffff;
+}
+.cover label{
+
+}
+.cover input{
+    background-color: #e0e0e0;
+    border-radius: 8px;
+
+}
+.btn-log{
+    color: #126628 !important;
+    border-color: black !important;
+    margin: 5% 50% 10% 30%;
+    width: 40%;
+    height: 50px;
+    background-color:#e0e0e0 !important;
+
+}
