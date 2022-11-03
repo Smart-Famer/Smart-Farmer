@@ -10,7 +10,6 @@ const login = async (req,res)=>{
         const user = await User.signIn(data)
         const token = createToken(user)
         const {_id, email, user_type, first_name, second_name, location, profile_picture} = user
-        console.log(user.second_name)
         res.status(200).json({details:{
             _id, email, user_type, first_name, second_name, location, profile_picture
         }, token})

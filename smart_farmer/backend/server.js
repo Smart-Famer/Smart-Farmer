@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const morgan = require('morgan')
 const userRouter = require("./routes/user")
+const managerRouter = require("./routes/manager")
 
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use("/api/user",userRouter)
+app.use("/api/manager",managerRouter)
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
