@@ -8,14 +8,16 @@ const managerRouter = require("./routes/manager")
 const dataReadingRouter = require("./routes/dataReading")
 const {createTest} = require('./controllers/testController')
 
-
 const app = express()
 
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
-
+app.post("/api/fetch-data",(req, res)=>{
+    console.log(req.body.temperature)
+    res.status(200).json({msg:`Data Recieved : ${req.body.temperature}`})
+})
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
 app.use("/api/datareading",dataReadingRouter)
