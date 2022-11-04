@@ -27,35 +27,37 @@ const farmSchema = new Schema({
         unique:true
     },
 
-    current_readings:{
-        weather:{
-            type:new Schema(
-                {
-                    reading:String
-                },
-                {
-                    timestamps:true
-                }),
-        },
-        npk_levels:{
-            type:new Schema(
-                {
-                    reading:[String]
-                },
-                {
-                    timestamps:true
-                })
-        },
-        elect_conductivity:{
-            type:new Schema(
-                {
-                    reading:[String]
-                }, 
-                {
-                    timestamps:true
-                })
-        }
-    }
+
+
+    // current_readings:{
+    //     weather:{
+    //         type:new Schema(
+    //             {
+    //                 reading:String
+    //             },
+    //             {
+    //                 timestamps:true
+    //             }),
+    //     },
+    //     npk_levels:{
+    //         type:new Schema(
+    //             {
+    //                 reading:[String]
+    //             },
+    //             {
+    //                 timestamps:true
+    //             })
+    //     },
+    //     elect_conductivity:{
+    //         type:new Schema(
+    //             {
+    //                 reading:[String]
+    //             }, 
+    //             {
+    //                 timestamps:true
+    //             })
+    //     }
+    // }
 
 },{timestamps:true})
 
