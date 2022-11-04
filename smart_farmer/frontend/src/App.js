@@ -12,6 +12,7 @@ import Settings from './Pages/SettingsPage';
 import CreateAss from './Pages/CreateAssistantPage';
 import ControlPanel from './Pages/ContolPanel';
 import HistoricalData from './Pages/ViewHistorical';
+import Farm from './Pages/CreateFarm'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CropYieldDataPage from './Pages/CropsYieldDataPage';
@@ -42,6 +43,7 @@ function App() {
           <Route path='cropYield' element={<CropYieldDataPage />}/>
           <Route path='history' element={<HistoricalData  />} />
           <Route path='viewProfilePage' element={<ViewProfilePage />}/>
+          <Route path='createFarm' element={<Farm />}/>
           <Route path='*' element={<Error />} />
         </Route>
         <Route path='test' element={<Test/>}/>
