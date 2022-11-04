@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-const sendTemp = ()=>{
+const sendReading = (type)=>{
     temperature = Math.random()*50
-    axios.post('http://localhost:4000/api/fetch-data',{
+    axios.post(`http://localhost:4000/api/fetch-data/${type}`,{
         temperature
     })
   .then((response) => {
@@ -13,4 +13,6 @@ const sendTemp = ()=>{
   });
 }
 
-setInterval(sendTemp,5000)
+setInterval(sendReading,10000,'temp')
+setInterval(sendReading,7000,'humidity')
+setInterval(sendReading,10000,'rainfall')
