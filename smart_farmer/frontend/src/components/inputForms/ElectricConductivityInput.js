@@ -32,7 +32,7 @@ export default function ElectricConductivityInput() {
     if(response.ok){
       setError(null)
       setInputElecCon('')
-      console.log('new electric conductivity level added:',json)
+      console.log('New electric conductivity level added:',json)
     }
 
   }
