@@ -14,10 +14,12 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.post("/api/fetch-data/temp",(req, res)=>{
-    console.log(req.body.temperature)
-    res.status(200).json({msg:`Data Recieved : ${req.body.temperature}`})
-})
+// app.post("/api/fetch-data/temp",(req, res)=>{
+//     console.log(req.body.reading)
+//     console.log(req.body.sourceId)
+//     res.status(200).json({msg:`Data Recieved : ${req.body.reading}`})
+// })
+// app.user("/api/fetch-data/",dataReadingRouter)
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
 app.use("/api/datareading",dataReadingRouter)
