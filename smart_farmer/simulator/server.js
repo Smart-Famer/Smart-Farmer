@@ -14,4 +14,3 @@ const sendTemp = ()=>{
 }
 
 setInterval(sendTemp,5000)
-
