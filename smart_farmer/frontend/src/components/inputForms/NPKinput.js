@@ -1,13 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col } from "reactstrap";
 import { Button } from 'reactstrap';
 import './inputform.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function NPKInput() {
+ 
+    const [nitrogenLevel, setNitrogenLevel] = useState('')
+    const [potassium, setPotassiumLevel] = useState('')
+    const [phosphorus, setPhosphorus] = useState('')
+    const inputNPK = ""
+    useEffect(()=>{inputNPK=`${nitrogenLevel},${phosphorus},${potassium}`},[nitrogenLevel,phosphorus,potassium])
+    const [error, setError] = useState(null)
+        
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault()
+    
+        const reading = ''
+        const sourceId = "NPK_123"
+        let timestamp = new Date().toJSON();
+    
+        const dataReading = {reading,sourceId,timestamp}
+        
+        const response = await fetch('/api/datareading',{
+            method: 'POST', 
+            body:JSON.stringify(dataReading),
+            headers: {
+                'Content-type':'application/json'
+            }
+        })
+        const json = await response.json()
+    
+        if(!response.ok){
+          setError(json.error)
+        }
+        if(response.ok){
+          setError(null)
+        //   setInputNpk('')
+          console.log('New electric conductivity level added:',json)
+        }
+    
+      }
+
+
+
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div class="form-group row p-3">
                     <label for="inputNitrogen" class="col-sm-4 col-form-label">Nitrogen</label>
                     <div class="col-sm-4">

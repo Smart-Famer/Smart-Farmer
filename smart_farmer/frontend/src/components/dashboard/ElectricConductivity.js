@@ -19,8 +19,6 @@ export default function ElectricConductivity(){
       fetchWorkouts()
     }, [])
 
-    // console.log(electricCon.reading)
-
     return(
         <>
         <Row className="px-5">
