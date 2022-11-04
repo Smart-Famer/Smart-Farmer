@@ -76,12 +76,13 @@ export default function Dashboard(props)
                                 <RecentPhotos/>
                             </Meter>
                         </Col>
-                        
+                
                         <Col>
                             <Meter heading='Historical Data'>
                                 <HistoricalData/>
                             </Meter>
                         </Col>
+                        
                         
                     </Row>
                     

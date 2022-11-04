@@ -1,0 +1,13 @@
+
+.row--farm{
+
+    /* min-width: 290px; */
+    min-width: 310px;
+    min-height: 167px;
+    /* min-height: 250px; */
+   
+}
+
+body{
+    background-color: #fafafa;
+}

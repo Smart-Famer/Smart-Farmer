@@ -5,6 +5,13 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 export default function NavBar(){
     const user = useAuthContext().user.details
 
+    //For testing 
+    // const user= {  
+    //     first_name :"Madara",
+    //     second_name : "Semini",
+    //     user_type : "Assistant"
+    // }
+
     return(
         <div className="nav-container">
             <nav className="top-nav">
@@ -13,8 +20,8 @@ export default function NavBar(){
                     <div className="top-nav-info-type"><p>Matara - Sri Lanka</p></div>
                 </div>
                 <div className="top-nav-user-info">
-                    <div className="top-nav-info-name"><p>{user.first_name+" "+user.second_name}</p></div>
-                    <div className="top-nav-info-type"><p>Farm {user.user_type}</p></div>
+                    <div data-testid='top-nav-info-name' className="top-nav-info-name"><p>{user.first_name+" "+user.second_name}</p></div>
+                    <div data-testid='top-nav-info-type' className="top-nav-info-type"><p>Farm {user.user_type}</p></div>
                 </div>
                 <div className="top-nav-items">
                     <img className="top-nav-icon" alt="Brand" src="images/nav-icon.png"/>
