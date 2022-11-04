@@ -1,6 +1,21 @@
 const farmModel = require('../models/farmModel')
 const mongoose =require('mongoose')
 
+const getKeys = async (req,res)=>{
+    const {farm_id} = req.params
+    console.log(farm_id)
+
+    if(!mongoose.Types.ObjectId.isValid(farm_id)){
+        return res.status(404).json({error:"Invalid ID"})
+    }
+
+    const farmDetails = await farmModel.findOne({_id:farm_id},{elec_conductivity_key:1,NPK_levels_key:1,weather_api_key:1})
+
+    if(!farmDetails){
+        return res.status(404).json({error:"No suche workout found"})
+    }
+    res.status(200).json(farmDetails)
+}
 const getFarms = async (req,res)=>{
     let {farm_ids} = req.body
 
@@ -135,8 +150,8 @@ const deleteFarm = async (req,res)=>{
     }
 
 
-
 module.exports={
+    getKeys,
     createFarm,
     updateFarm,
     deleteFarm,

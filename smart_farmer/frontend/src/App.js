@@ -19,6 +19,7 @@ import ViewProfilePage from './Pages/ViewProfilePage';
 import UserSession from "./components/Utils/UserSession";
 import {useAuthContext} from "./hooks/useAuthContext"
 import Login from './components/login/Login';
+import Test from './Pages/Test';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           <Route path='viewProfilePage' element={<ViewProfilePage />}/>
           <Route path='*' element={<Error />} />
         </Route>
+        <Route path='test' element={<Test/>}/>
       </Routes>
     </BrowserRouter>
 
