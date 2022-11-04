@@ -2,16 +2,16 @@ const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 
 const createToken=({_id, email, user_type, first_name, second_name, location, profile_picture})=>{
-    return jwt.sign({_id, email, user_type, first_name, second_name, location, profile_picture},process.env.SECRET, {expiresIn:"1d"})
+    return jwt.sign({_id, email, user_type, first_name, second_name, location, profile_picture, farms},process.env.SECRET, {expiresIn:"1d"})
 }
 const login = async (req,res)=>{
     data=req.body
     try{
         const user = await User.signIn(data)
         const token = createToken(user)
-        const {_id, email, user_type, first_name, second_name, location, profile_picture} = user
+        const {_id, email, user_type, first_name, second_name, location, profile_picture, farms} = user
         res.status(200).json({details:{
-            _id, email, user_type, first_name, second_name, location, profile_picture
+            _id, email, user_type, first_name, second_name, location, profile_picture, farms
         }, token})
     }catch(err){
         res.status(404).json({error:err.message})

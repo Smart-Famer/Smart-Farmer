@@ -5,31 +5,45 @@ import { Container, Row, Col } from "reactstrap";
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 import Sidebar from "../components/Sidebar/SideBar.js"
 import Card from "../components/cards/card.js"
+import { useAuthContext } from "../hooks/useAuthContext.js";
+import { useEffect } from "react";
+import { useState } from "react";
 
-export default function Home() {
+export default function  Home() {
+    const {user} = useAuthContext()
+    const [farm_list, setFarmList] = useState([])
+    console.log(farm_list)
+    useEffect(() => {
+        
+        const fetchFarms = async () => {
+            const response = await fetch(`http://localhost:4000/api/manager/get-farms`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({farm_ids:user.details.farms})
+            })
+            const json = await response.json()
+            console.log(json)
+            if (response.ok) {
+                setFarmList(json)
+            }
+        }
+        fetchFarms()
+    }, [])
+
+    const farm_components = farm_list.map((farm)=><Col key={farm.id}><Card id={farm.id} name={farm.name} location={farm.location}></Card></Col>)
+    
     return (
         <div className="main-container">
             <Sidebar />
             <div className="home">
                 <Header />
                 <div className="farm-card p-5">
+                    
                     <Container >
                         <Row>
-                            <Col>
-                                <Card name="My Farm 1" location="Matara-Sri lanka" />
-                            </Col>
-                            <Col>
-                                <Card name="My Farm 2" location="Matara-Sri lanka" />
-                            </Col>
-                            <Col>
-                                <Card name="My Farm 3" location="Matara-Sri lanka" />
-                            </Col>
-                            <Col>
-                                <Card name="My Farm 4" location="Matara-Sri lanka" />
-                            </Col>
-                            <Col>
-                                <Card name="My Farm 5" location="Matara-Sri lanka" />
-                            </Col>
+                            {farm_components}
                         </Row>
 
 
