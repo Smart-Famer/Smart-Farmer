@@ -27,7 +27,7 @@ export default function NPK(){
 
     useEffect(() => {
       const fetchNpkLevels = async () => {
-        const response = await fetch(`/api/datareading/${sourceId}`)
+        const response = await fetch(`http://localhost:4000/api/datareading/${sourceId}`)
         const json = await response.json()
 
 
