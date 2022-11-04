@@ -11,14 +11,15 @@ export default function ElectricConductivityInput() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const electricCon = {inputElecCon}
-    console.log(electricCon)
+    const reading = inputElecCon
+    const sourceId = "Elect_123"
+    let timestamp = new Date().toJSON();
 
-    // const keyResponse = await fetch('/api/manager/get-keys/:farm_id')/
+    const dataReading = {reading,sourceId,timestamp}
     
-    const response = await fetch('/api/electicCon',{
-        method: 'POST',
-        body:JSON.stringify(electricCon),
+    const response = await fetch('/api/datareading',{
+        method: 'POST', 
+        body:JSON.stringify(dataReading),
         headers: {
             'Content-type':'application/json'
         }
@@ -51,7 +52,7 @@ export default function ElectricConductivityInput() {
                     <label htmlFor="inputElecCon" className="col-sm-1 col-form-label">sm<sup>-1</sup></label>
 
                 </div>
-             <button type="button" className="btn btn-green btn-block m-4">Submit</button>
+             <button className="btn btn-green btn-block m-4">Submit</button>
             {error && (<DisplayAlert type={'danger'} content={error} />)}
             </form>
         </div>
