@@ -14,7 +14,7 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.post("/api/fetch-data",(req, res)=>{
+app.post("/api/fetch-data/temp",(req, res)=>{
     console.log(req.body.temperature)
     res.status(200).json({msg:`Data Recieved : ${req.body.temperature}`})
 })
