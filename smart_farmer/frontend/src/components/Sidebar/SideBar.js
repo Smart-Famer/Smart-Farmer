@@ -67,7 +67,7 @@ export default function Sidebar(props){
                     <NavItem className="sidebar-nav-item">
                         <GiChart className="sidebar-item-logo" size={30}/>
                         <Link className="sidebar-nav-link" to="/cropYield">
-                        Crop Yeild
+                        Crop Yield
                         </Link>
                     </NavItem>
                     <NavItem className="sidebar-nav-item">
