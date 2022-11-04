@@ -5,6 +5,9 @@ const cors = require('cors')
 const morgan = require('morgan')
 const userRouter = require("./routes/user")
 const managerRouter = require("./routes/manager")
+const dataReadingRouter = require("./routes/dataReading")
+const {createTest} = require('./controllers/testController')
+
 
 const app = express()
 
@@ -14,6 +17,9 @@ app.use(morgan('dev'))
 
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
+app.use("/api/datareading",dataReadingRouter)
+// app.post("/test",createTest)
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
