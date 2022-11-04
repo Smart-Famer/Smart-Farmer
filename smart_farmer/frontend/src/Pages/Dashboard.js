@@ -12,15 +12,14 @@ import Sidebar from "../components/Sidebar/SideBar";
 import RecentPhotos from "../components/dashboard/RecentPhotos";
 import HistoricalData from "../components/dashboard/HistoricalData";
 import { Navigate, useParams } from "react-router";
-import { propTypes } from "react-bootstrap/esm/Image";
-import UserSession from "../components/Utils/UserSession"
-
+import {useAuthContext} from "../hooks/useAuthContext"
 
 export default function Dashboard(props)
 {
-    // if(UserSession.username===undefined){
-    //     return <Navigate to="/login"/>
-    // }
+    const {user} = useAuthContext()
+    if(!user){
+        return <Navigate to="/login"/>      
+    }
     return(
         <div className="main-container">
             <Sidebar/>
