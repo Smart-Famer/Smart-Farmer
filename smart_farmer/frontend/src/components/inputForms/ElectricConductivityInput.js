@@ -17,7 +17,7 @@ export default function ElectricConductivityInput() {
 
     const dataReading = {reading,sourceId,timestamp}
     
-    const response = await fetch('/api/datareading',{
+    const response = await fetch('http://localhost:4000/api/datareading',{
         method: 'POST', 
         body:JSON.stringify(dataReading),
         headers: {
