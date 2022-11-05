@@ -33,7 +33,8 @@ const userSchema = new Schema({
     location:{
         type:String,
         required:true
-    }
+    },
+    farms:[String]
 
 },{timestamps:true})
 
