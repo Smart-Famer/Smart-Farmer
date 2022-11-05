@@ -13,10 +13,8 @@ const getReading= async (req,res)=>{
     res.status(200).json(dataReading)
 }
 const getReadings= async (req,res)=>{
-    const {sourceIds} = req.body
-    console.log(typeof(sourceIds))
-    const dataReadings = await dataReadingModel.find({sourceId:{$in:sourceIds}},null,{sort: { 'timestamp' : -1 } })
-    console.log(dataReadings)
+    const {sourceId} = req.params
+    const dataReadings = await dataReadingModel.find({sourceId},null,{sort: { 'timestamp' : -1 } })
     if(!dataReadings){
         return res.status(404).json({error:"No such source id found"})
     }
