@@ -12,7 +12,7 @@ const router = express.Router()
 
 router.post('/',createDataReading)
 router.get('/:sourceId',getReading)
-router.post('/get-readings',getReadings)
+router.post('/get-readings/:sourceId',getReadings)
 // router.post('/temp',(req,res)=>{console.log(req.body.timestamp);})
 // router.post('/hum',(req,res)=>{console.log(req.body.reading);})
 // router.post('/rain',(req,res)=>{console.log(req.body.reading);})

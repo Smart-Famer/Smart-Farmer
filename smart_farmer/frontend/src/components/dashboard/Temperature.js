@@ -3,7 +3,7 @@ import {Row,Col } from "reactstrap";
 
 export default function Temperature(){
 
-    const sourceIds = ["Temp_5","Temp_6"]
+    const sourceIds = ["Temp_2","Temp_5"]
     const [temperatures, setTemperatures] = useState([])
     
     // console.log(temperatures)

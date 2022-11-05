@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Row,Col} from "reactstrap";
 import LineChart from "./LineChart";
 import {Link} from "react-router-dom"
 import "../../App.css"
 
 export default function HistoricalData(){
+
+    const  sourceId='Temp_2'
+    const [temperatures, setTemperatures] = useState(null)
+
+    useEffect(() => {
+      const fetchTemperatures = async () => {
+        const response = await fetch(`/api/datareading/get-readings${sourceId}`)
+        const json = await response.json()
+
+        if (response.ok) {
+            temperatures(json)
+        }
+      }
+  
+      fetchTemperatures()
+    }, [])
+
     return(
         <Row className="px-5 historicalData--container">
             <Col >
