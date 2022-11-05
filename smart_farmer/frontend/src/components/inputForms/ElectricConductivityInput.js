@@ -43,8 +43,10 @@ export default function ElectricConductivityInput() {
                     <div className="col-sm-7">
                         <input 
                                 type="text" 
+                                data-testid="elec-con-input"
                                 className="form-control"
                                 id="inputElecCon" 
+                                placeholder="Electric Conductivity"
                                 value={inputElecCon}
                                 onChange={(e)=>{setInputElecCon(e.target.value)}}
                                 />

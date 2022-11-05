@@ -22,7 +22,7 @@ export default function ElectricConductivity(){
     return(
         <>
         <Row className="px-5">
-            <Col ><h1 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{electricCon && (electricCon.reading)} sm<sup>-1</sup></h1></Col>
+            <Col ><h1 data-testid="elec-con" className="bg-secondary bg-opacity-25 rounded py-3 text-center" >{electricCon && (electricCon.reading)} sm<sup>-1</sup></h1></Col>
         </Row>
         <div className="d-flex flex-row-reverse">
                     <Link to="/elecinput" style={{ textDecoration: 'none' }}>{"Add inputs>"}</Link>
