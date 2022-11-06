@@ -1,7 +1,7 @@
 
 import Header from "../components/login/Header.js"
 import { Link } from "react-router-dom"
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 import Sidebar from "../components/Sidebar/SideBar.js"
 import Card from "../components/cards/card.js"
@@ -12,9 +12,6 @@ export default function Home() {
             <Sidebar />
             <div className="home">
                 <Header />
-                <Button color="primary" href="/createFarm">Add Farm</Button>
-
-
                 <div className="farm-card p-5">
                     <Container >
                         <Row>
