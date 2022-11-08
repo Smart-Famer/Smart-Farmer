@@ -1,5 +1,6 @@
 import React from "react";
 import { GiParasaurolophus } from "react-icons/gi";
+import { Link } from "react-router-dom";
 import { BarChart } from "../components/BarChart";
 import Sidebar from "../components/Sidebar/SideBar"
 
@@ -36,6 +37,10 @@ export default function CropYieldDataPage(props){
                         ]
                     }
         />
+            <div className="d-flex flex-row-reverse">
+                    <Link to="/user/farm/cropyieldinput"  style={{ textDecoration: 'none'}}>{"Add Crop Yield Details>"}</Link>
+            </div>
+
 
 
         </div>

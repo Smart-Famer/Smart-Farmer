@@ -10,9 +10,10 @@ const createYield = async(req,res)=>{
             date,
             yield
         })
+        res.json(cropYield)
     }
-    catch(err){
-        res.json(err)
+    catch(error){
+        res.json(error)
     }
 }
 module.exports = {createYield}
