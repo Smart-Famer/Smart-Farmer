@@ -17,7 +17,7 @@ export default function Temperature(){
                 const json = await response.json()
                 temp_list.push(json)
             }
-            console.log(temp_list)
+            //console.log(temp_list)
             setTemperatures(temp_list)
     
         }
@@ -37,7 +37,7 @@ export default function Temperature(){
         // }
         fetchTemperature()
     }, [])
-    console.log(temperatures)
+    //console.log(temperatures)
     const components = temperatures.map((temp)=>{
         return <Col ><h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{temp.reading}&deg;C</h3></Col>
     })

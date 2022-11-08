@@ -41,7 +41,7 @@ export default function NPKInput() {
           setNitrogenLevel('')
           setPhosphorus('')
           setPotassiumLevel('')
-          console.log('New electric conductivity level added:',json)
+          console.log('New npk level added:',json)
         }
     
       }

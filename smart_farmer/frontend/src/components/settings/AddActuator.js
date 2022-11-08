@@ -14,7 +14,7 @@ export default function AddActuator() {
 
     const actuator = {actuator_type,name,port}
     
-    console.log(actuator)
+    //console.log(actuator)
     const response = await fetch('http://localhost:4000/api/addModule/actuator',{
         method: 'POST', 
         body:JSON.stringify(actuator),

@@ -11,10 +11,12 @@ import {MdOutlineInsertPhoto} from "react-icons/md";
 import {MdOutlineLogout} from "react-icons/md";
 import {MdOutlineSettings} from "react-icons/md";
 import {AiOutlineTool} from "react-icons/ai";
-import UserSession from "../Utils/UserSession"
 import { useLogout } from "../../hooks/useLogout";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFarmContext } from "../../hooks/useFarmContext";
+
 export default function Sidebar(props){
+    const {farm} = useFarmContext()
     const {logout} = useLogout()
     const user = useAuthContext().user.details
     const handleClick =()=>{
@@ -36,52 +38,52 @@ export default function Sidebar(props){
                 <Nav className="sidebar-nav" vertical pills>
                     <NavItem  className="sidebar-nav-item">
                         <BiHome className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/home">
+                        <Link className="sidebar-nav-link" to="/user/home">
                         Home
                         </Link>
                     </NavItem>
-                    <NavItem  className="sidebar-nav-item">
+                    {farm && <NavItem  className="sidebar-nav-item">
                         <MdOutlineSpaceDashboard className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/">
+                        <Link className="sidebar-nav-link" to="/user/farm/dashboard">
                         Dashboard
                         </Link>
-                    </NavItem>
+                    </NavItem>}
                     <NavItem className="sidebar-nav-item">
                         <BsPerson className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/viewProfilePage">
+                        <Link className="sidebar-nav-link" to="/user/viewProfilePage">
                         Profile
                         </Link>
                     </NavItem>
-                    {user.user_type==="Manager"&&<NavItem className="sidebar-nav-item">
+                    {user.user_type==="Manager" && <NavItem className="sidebar-nav-item">
                         <BsPersonPlus className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/createAcc">
+                        <Link className="sidebar-nav-link" to="/user/createAcc">
                         Create Account
                         </Link>
                     </NavItem>}
-                    {user.user_type==="Assistant"&&<NavItem className="sidebar-nav-item">
+                    {user.user_type==="Assistant" && farm && <NavItem className="sidebar-nav-item">
                         <AiOutlineTool className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/controlPanel">
+                        <Link className="sidebar-nav-link" to="/user/farm/controlPanel">
                         Control Panel
                         </Link>
                     </NavItem>}
-                    <NavItem className="sidebar-nav-item">
+                    {farm && <NavItem className="sidebar-nav-item">
                         <GiChart className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/cropYield">
+                        <Link className="sidebar-nav-link" to="/user/farm/cropYield">
                         Crop Yield
                         </Link>
-                    </NavItem>
-                    <NavItem className="sidebar-nav-item">
+                    </NavItem>}
+                    {farm && <NavItem className="sidebar-nav-item">
                         <MdOutlineInsertPhoto className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/gallery">
+                        <Link className="sidebar-nav-link" to="/user/farm/gallery">
                         Gallery
                         </Link>
-                    </NavItem>
-                    <NavItem className="sidebar-nav-item">
+                    </NavItem>}
+                    {farm && <NavItem className="sidebar-nav-item">
                         <MdOutlineSettings className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/settings">
+                        <Link className="sidebar-nav-link" to="/user/farm/settings">
                         Settings
                         </Link>
-                    </NavItem >
+                    </NavItem >}
                     <NavItem className="sidebar-nav-item">
                         <MdOutlineLogout className="sidebar-item-logo" size={30}/>
                         <Link onClick={handleClick} className="sidebar-nav-link" to="/">

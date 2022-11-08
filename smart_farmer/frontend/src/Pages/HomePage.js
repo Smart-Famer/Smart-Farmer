@@ -8,11 +8,13 @@ import Card from "../components/cards/card.js"
 import { useAuthContext } from "../hooks/useAuthContext.js";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useFarmContext } from "../hooks/useFarmContext.js";
 
 export default function  Home() {
     const {user} = useAuthContext()
+    const {dispatchFarm} = useFarmContext()
     const [farm_list, setFarmList] = useState([])
-    console.log(farm_list)
+    //console.log(farm_list)
     useEffect(() => {
         
         const fetchFarms = async () => {
@@ -24,15 +26,16 @@ export default function  Home() {
                 body:JSON.stringify({farm_ids:user.details.farms})
             })
             const json = await response.json()
-            console.log(json)
+            //console.log(json)
             if (response.ok) {
                 setFarmList(json)
             }
         }
         fetchFarms()
+        dispatchFarm({type:"REMOVE"})
     }, [])
 
-    const farm_components = farm_list.map((farm)=><Col key={farm.id}><Card id={farm.id} name={farm.name} location={farm.location}></Card></Col>)
+    const farm_components = farm_list.map((farm)=><Col key={farm._id}><Card id={farm._id} name={farm.name} location={farm.location}></Card></Col>)
     
     return (
         <div className="main-container">

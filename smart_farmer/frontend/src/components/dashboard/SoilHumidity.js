@@ -16,14 +16,14 @@ export default function SoilHumidity(){
                 const json = await response.json()
                 humidies_list.push(json)
             }
-            console.log(humidies_list)
+            //console.log(humidies_list)
             setHumidities(humidies_list)
     
         }
 
         fetchHumidity()
     }, [])
-    console.log(humidities)
+    //console.log(humidities)
     const components = humidities.map((humidity)=>{
         return <Col className="d-flex justify-content-center" ><DoughnutChart activeColor={'#ff4d4d'} inActiveColor={'#ffe6e6'} reading={Number(humidity.reading)} readingName={'Sensor 01'}/></Col>
     })
