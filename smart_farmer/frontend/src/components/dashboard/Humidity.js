@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {Row,Col } from "reactstrap";
+import { useFarmContext } from "../../hooks/useFarmContext";
 import DoughnutChart from "./DoughNutChart";
 
 export default function Humidity(){
-
+    const {farm} = useFarmContext()
     const sourceIds = ["hum_8","hum_10"]
     const [humidities, setHumidities] = useState([])
     
