@@ -6,7 +6,7 @@ const morgan = require('morgan')
 const userRouter = require("./routes/user")
 const managerRouter = require("./routes/manager")
 const dataReadingRouter = require("./routes/dataReading")
-const addModuleRouter = require('./routes/addModule')
+const addModuleRouter = require('./routes/Modules')
 const {createTest} = require('./controllers/testController')
 const cropYield = require('./routes/cropYield')
 
@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
 app.use("/api/datareading",dataReadingRouter)
-app.use("/api/addModule",addModuleRouter)
+app.use("/api/modules",addModuleRouter)
 app.use("/api/cropyield/",cropYield)
 
 
