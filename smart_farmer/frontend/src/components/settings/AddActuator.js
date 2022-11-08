@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function AddActuator() {
 
-    const [actuator_type, setActuator_type] = useState('')
+    const [actuator_type, setActuator_type] = useState('Water Pump')
     const [name, setName] = useState('')
     const [port, setPort] = useState('')
     const [error, setError] = useState(null)
-    
+    const {farm, dispatchFarm} = useFarmContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -15,9 +16,13 @@ export default function AddActuator() {
     const actuator = {actuator_type,name,port}
     
     //console.log(actuator)
-    const response = await fetch('http://localhost:4000/api/addModule/actuator',{
+    const response = await fetch('http://localhost:4000/api/modules/add-actuator',{
         method: 'POST', 
-        body:JSON.stringify(actuator),
+        body:JSON.stringify({
+          actuator,
+          farm_id:farm._id,
+          farm_name:farm.name
+        }),
         headers: {
             'Content-type':'application/json'
         }
@@ -26,17 +31,20 @@ export default function AddActuator() {
 
     if(!response.ok){
       setError(json.error)
+      console.log(json.error)
     }
     if(response.ok){
       setError(null)
-      setActuator_type('')
+      setActuator_type('Water Pump')
       setName('')
       setPort('')
+      dispatchFarm({type:"ADD-ACTUATOR", payload:json})
       console.log('New Actuator added:',json)
     }
   }
 
     return (
+            //should validate port number (4-digit, numeric)
             <form onSubmit={handleSubmit}>
                 <div className="form-group  p-3">
                         <label htmlFor="inputActuatorType">Actuator Type</label>
@@ -48,7 +56,7 @@ export default function AddActuator() {
                             id="inputSensorType" className="form-control">
                             {/* <option selected>Choose...</option> */}
                             <option>Water Pump</option>
-                            <option>Camara</option>
+                            <option>Camera</option>
                         </select>
                     </div>
                 <div className="form-group p-3">
@@ -56,18 +64,19 @@ export default function AddActuator() {
                     <input 
                         value={name}
                         onChange={(e)=>{setName(e.target.value)}}
-                        type="text" className="form-control" id="inputActuator" placeholder="Actuator 1,2.."/>
+                        type="text" className="form-control" id="inputActuator" placeholder="Actuator 1,2.." required={true}/>
                 </div>
                 <div className="form-group p-3">
                     <label htmlFor="inputActuatorPort">Port Number</label>
                     <input 
                         value={port}
                         onChange={(e)=>{setPort(e.target.value)}}
-                        type="text" className="form-control" id="inputActuatorPort" />
+                        type="text" className="form-control" id="inputActuatorPort" required={true}/>
                 </div>
                 
             
                 <button type="submit" className="btn btn-green">Connect</button>
+                {error&&<div className="error">{error}</div>}
             </form>
         
     )

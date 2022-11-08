@@ -8,7 +8,7 @@ export default function ElectricConductivityInput() {
     const [inputElecCon, setInputElecCon] = useState('')
     const [error, setError] = useState(null) 
     const {farm} = useFarmContext()
-    console.log(farm)
+    // console.log(farm)
     
 
   const handleSubmit = async (e) => {

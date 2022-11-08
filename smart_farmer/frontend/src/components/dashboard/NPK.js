@@ -56,7 +56,7 @@ export default function NPK(){
                 <Col ><h6 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{npkLevel.split(",")[2]} mgL<sup>-1</sup></h6></Col>
             </Row>
             <div className="d-flex flex-row-reverse">
-                    <Link to="/npkinput" style={{ textDecoration: 'none' }}>{"Add Inputs>"}</Link>
+                    <Link to="/user/farm/npkinput" style={{ textDecoration: 'none' }}>{"Add Inputs>"}</Link>
             </div>
             
         </>

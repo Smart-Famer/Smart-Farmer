@@ -11,6 +11,37 @@ export const farmReducer = (state, action)=>{
             return {
                 farm:null
             }
+        case "ADD-SENSOR":
+            const sensors = {...state.farm.sensors}
+            if(action.payload.sensor_type==="Temperature"){
+                sensors.Temperature.push(action.payload)
+            }else if(action.payload.sensor_type==="Humidity"){
+                sensors.Humidity.push(action.payload)
+            }else if(action.payload.sensor_type==="RainFall"){
+                sensors.RainFall.push(action.payload)
+            }else{
+                sensors.Soil.push(action.payload)
+            }
+            return {
+                farm:{
+                    ...state.farm,
+                    sensors
+                }
+            }
+        case "ADD-ACTUATOR":
+            const actuators = {...state.farm.actuators}
+            if(action.payload.actuator_type==="Water Pump"){
+                actuators.Pump.push(action.payload)
+            }else if(action.payload.actuator_type==="Camera"){
+                actuators.Camera.push(action.payload)
+            }
+
+            return {
+                farm:{
+                    ...state.farm,
+                    actuators
+                }
+            }
         default:
             return state
     }

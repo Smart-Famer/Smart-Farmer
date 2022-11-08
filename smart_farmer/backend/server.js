@@ -10,12 +10,12 @@ const addModuleRouter = require('./routes/addModule')
 const {createTest} = require('./controllers/testController')
 const cropYield = require('./routes/cropYield')
 
-const app = express()
 
-app.use(cors())
-app.use(express.json())
-app.use(morgan('dev'))
+const app = express();
 
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
 
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
@@ -23,19 +23,15 @@ app.use("/api/datareading",dataReadingRouter)
 app.use("/api/addModule",addModuleRouter)
 app.use("/api/cropyield/",cropYield)
 
-// let date = new Date('2022-10-12').toISOString();
-// let isoDate = new Date(date);
 
-// console.log(typeof(date))
-// console.log(typeof(isoDate))
-
-mongoose.connect(process.env.MONGO_URI)
-    .then(()=>{
-        console.log("Connected to the database")
-        app.listen(process.env.PORT,()=>{
-            console.log("Server is listening on port 4000...")
-        })
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to the database");
+    app.listen(process.env.PORT, () => {
+      console.log("Server is listening on port 4000...");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
