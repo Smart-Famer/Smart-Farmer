@@ -25,14 +25,13 @@ export const useLogin = ()=>{
           })
         
         const json = await response.json()
-
         if(!response.ok){
             setIsLoading(false)
             setError(json.error)
         }
         if(response.ok){
             setIsLoading(false)
-            localStorage.setItem('user', JSON.stringify(json))
+            // localStorage.setItem('user', JSON.stringify(json))
             dispatchAuthState({type:"LOGIN", payload:json})
         }  
     }

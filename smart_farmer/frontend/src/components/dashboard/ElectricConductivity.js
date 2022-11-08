@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {Row,Col} from "reactstrap";
 import { Link } from "react-router-dom";
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function ElectricConductivity(){
-    const sourceId = 'Elect_123'
+    const {farm} = useFarmContext()
+    const sourceId = farm.elec_conductivity_key
     const [electricCon, setElectricCon] = useState(null)
 
     useEffect(() => {
@@ -25,7 +27,7 @@ export default function ElectricConductivity(){
             <Col ><h1 data-testid="elec-con" className="bg-secondary bg-opacity-25 rounded py-3 text-center" >{electricCon && (electricCon.reading)} sm<sup>-1</sup></h1></Col>
         </Row>
         <div className="d-flex flex-row-reverse">
-                    <Link to="/elecinput" style={{ textDecoration: 'none' }}>{"Add inputs>"}</Link>
+                    <Link to="/user/farm/elecinput" style={{ textDecoration: 'none' }}>{"Add inputs>"}</Link>
         </div>
         </>
     )

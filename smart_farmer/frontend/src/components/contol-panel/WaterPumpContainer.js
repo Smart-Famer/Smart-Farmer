@@ -15,7 +15,7 @@ export default function WaterPumpContainer(props)
     }
     function handleSubmit(event){
         event.preventDefault();
-        console.log(threshHold)
+        //console.log(threshHold)
     }
     return(
         <div>

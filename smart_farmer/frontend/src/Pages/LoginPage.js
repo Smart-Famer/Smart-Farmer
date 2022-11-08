@@ -5,18 +5,14 @@ import Header from "../components/login/Header"
 import "../App.css"
 import {useAuthContext} from "../hooks/useAuthContext"
 import { Navigate } from "react-router-dom"
+import LoginNavBar from "../components/NavBars/LoginNavbar"
 
 
 export default function LoginPage() {
-    const {user} = useAuthContext()
-
-    if(user){
-        return <Navigate to="/"/>
-    }
-    
+ 
     return (
         <div className="login">
-
+            <LoginNavBar/>
             <Header />
 
             <div className="login-form">

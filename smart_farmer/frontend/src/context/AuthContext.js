@@ -18,16 +18,19 @@ export const authReducer = (state, action)=>{
 }
 export const AuthContextProvider = ({children})=>{
 
-    const user = JSON.parse(localStorage.getItem('user'))
-    const [AuthState, dispatchAuthState] = useReducer(authReducer,{
-        user:user
+    const [AuthState, dispatchAuthState] = useReducer(authReducer,null,()=>{
+        const user = JSON.parse(localStorage.getItem('user'))
+        return user
     })
-    // console.log('AuthContext state:', AuthState)
+    console.log('AuthContext state:', AuthState)
     useEffect(()=>{
-        if(user){
-            dispatchAuthState({type:"LOGIN", payload:user})
-        }
-    }, [])
+        // if(user){
+        //     dispatchAuthState({type:"LOGIN", payload:user})
+        // }
+        localStorage.setItem('user', JSON.stringify(AuthState));
+
+    }, [AuthState])
+    //console.log(localStorage.getItem('user')==="null"?"Present":"Absent")
     return(
         <AuthContext.Provider value={{...AuthState, dispatchAuthState}}>
             {children}

@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import './inputform.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayAlert from "../DisplayAlert";
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function ElectricConductivityInput() {
     const [inputElecCon, setInputElecCon] = useState('')
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null) 
+    const {farm} = useFarmContext()
+    console.log(farm)
     
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const reading = inputElecCon
-    const sourceId = "Elect_123"
+    const sourceId = farm.elec_conductivity_key
     let timestamp = new Date().toJSON();
 
     const dataReading = {reading,sourceId,timestamp}
