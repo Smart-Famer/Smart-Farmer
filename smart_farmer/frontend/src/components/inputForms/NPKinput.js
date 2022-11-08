@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState } from "react";
 import './inputform.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayAlert from "../DisplayAlert";
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function NPKInput() {
  
@@ -9,6 +10,7 @@ export default function NPKInput() {
     const [potassium, setPotassiumLevel] = useState('')
     const [phosphorus, setPhosphorus] = useState('')
     const inputNPK = useRef('')
+    const {farm} = useFarmContext()
 
     useEffect(()=>{inputNPK.current =`${nitrogenLevel},${phosphorus},${potassium}`},[nitrogenLevel,phosphorus,potassium])
 
@@ -19,7 +21,7 @@ export default function NPKInput() {
         e.preventDefault()
     
         const reading = inputNPK.current
-        const sourceId = "NPK_123"
+        const sourceId = farm.NPK_levels_key
         let timestamp = new Date().toJSON();
     
         const dataReading = {reading,sourceId,timestamp}
@@ -55,6 +57,7 @@ export default function NPKInput() {
                     <label htmlFor="inputNitrogen" className="col-sm-4 col-form-label">Nitrogen</label>
                     <div className="col-sm-4">
                         <input 
+                        value={nitrogenLevel}
                         type="text" 
                         className="form-control" 
                         id="inputNitrogen" 
@@ -67,7 +70,8 @@ export default function NPKInput() {
                 <div className="form-group row p-3">
                     <label htmlFor="inputPhosphorus" className="col-sm-4 col-form-label">Phosphorus</label>
                     <div className="col-sm-4">
-                        <input 
+                        <input
+                        value={phosphorus} 
                         type="text" 
                         className="form-control" 
                         id="inputPhosphorus"
@@ -81,6 +85,7 @@ export default function NPKInput() {
                     <label htmlFor="inputPotassium" className="col-sm-4 col-form-label">Potassium</label>
                     <div className="col-sm-4">
                         <input 
+                        value={potassium}
                         type="text" 
                         className="form-control" 
                         id="inputPotassium" 
