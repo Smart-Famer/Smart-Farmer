@@ -8,6 +8,7 @@ const managerRouter = require("./routes/manager")
 const dataReadingRouter = require("./routes/dataReading")
 const addModuleRouter = require('./routes/addModule')
 const {createTest} = require('./controllers/testController')
+const cropYield = require('./routes/cropYield')
 
 const app = express()
 
@@ -20,8 +21,13 @@ app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
 app.use("/api/datareading",dataReadingRouter)
 app.use("/api/addModule",addModuleRouter)
-// app.post("/test",createTest)
+app.use("/api/cropyield/",cropYield)
 
+// let date = new Date('2022-10-12').toISOString();
+// let isoDate = new Date(date);
+
+// console.log(typeof(date))
+// console.log(typeof(isoDate))
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
