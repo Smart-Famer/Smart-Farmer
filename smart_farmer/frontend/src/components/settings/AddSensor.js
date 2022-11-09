@@ -33,7 +33,7 @@ export default function AddSensor() {
     const json = await response.json()
 
     if(!response.ok){
-      setError(json.error)
+      setError(json.err)
       console.log(json.error)
     }
     if(response.ok){

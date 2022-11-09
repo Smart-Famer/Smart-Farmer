@@ -29,6 +29,7 @@ export default function FarmLayout()
                 <Route path='settings' element={<Settings  />} />
                 <Route path='controlPanel' element={<ControlPanel />}/>
                 <Route path='cropYield' element={<CropYieldDataPage />}/>
+                <Route path='cropyieldinput' element={<CropYieldInput />}/>
                 <Route path='history' element={<HistoricalData  />} />
                 <Route path='createAcc' element={
                     <AssistantContextProvider>
