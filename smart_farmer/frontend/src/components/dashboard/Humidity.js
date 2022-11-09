@@ -5,8 +5,11 @@ import DoughnutChart from "./DoughNutChart";
 
 export default function Humidity(){
     const {farm} = useFarmContext()
-    const sourceIds = ["hum_8","hum_10"]
+    const sourceIds = farm.sensors.Humidity.map((sensor)=>sensor.port)
+    // console.log(sourceIds)
     const [humidities, setHumidities] = useState([])
+
+    const sensor_names = farm.sensors.Humidity.map((sensor)=>sensor.name.replace(farm.name+"_",""))
     
 
     useEffect(() => {
@@ -27,7 +30,7 @@ export default function Humidity(){
     }, [])
     //console.log(humidities)
     const components = humidities.map((humidity)=>{
-        return <Col className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidity.reading)} readingName={'Sensor 01'}/></Col>
+        return <Col className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidity.reading)} readingName={sensor_names[humidities.indexOf(humidity)]}/></Col>
     })
 
     return(

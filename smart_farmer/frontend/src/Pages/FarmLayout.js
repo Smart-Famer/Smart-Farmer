@@ -13,6 +13,8 @@ import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
 import Error from './Error';
+import { AssistantContextProvider } from "../context/AssistantContext";
+
 //import Test from './Test';
 export default function FarmLayout()
 {
@@ -28,6 +30,11 @@ export default function FarmLayout()
                 <Route path='controlPanel' element={<ControlPanel />}/>
                 <Route path='cropYield' element={<CropYieldDataPage />}/>
                 <Route path='history' element={<HistoricalData  />} />
+                <Route path='createAcc' element={
+                    <AssistantContextProvider>
+                        <CreateAss />
+                    </AssistantContextProvider>
+                } />
             </Routes>
         </section>
     )

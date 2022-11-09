@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {Row,Col } from "reactstrap";
+import { useFarmContext } from "../../hooks/useFarmContext";
 import DoughnutChart from "./DoughNutChart";
 
 export default function SoilHumidity(){
-    const sourceIds = ["shum_4","shum_5"]
+    const {farm} = useFarmContext()
+    const sourceIds = farm.sensors.Soil.map((sensor)=>sensor.port)
     const [humidities, setHumidities] = useState([])
-    
+    const sensor_names = farm.sensors.Soil.map((sensor)=>sensor.name.replace(farm.name+"_",""))
 
     useEffect(() => {
         const fetchHumidity=async ()=>{
@@ -25,7 +27,7 @@ export default function SoilHumidity(){
     }, [])
     //console.log(humidities)
     const components = humidities.map((humidity)=>{
-        return <Col className="d-flex justify-content-center" ><DoughnutChart activeColor={'#ff4d4d'} inActiveColor={'#ffe6e6'} reading={Number(humidity.reading)} readingName={'Sensor 01'}/></Col>
+        return <Col className="d-flex justify-content-center" ><DoughnutChart activeColor={'#ff4d4d'} inActiveColor={'#ffe6e6'} reading={Number(humidity.reading)} readingName={sensor_names[humidities.indexOf(humidity)]}/></Col>
     })
 
     return(

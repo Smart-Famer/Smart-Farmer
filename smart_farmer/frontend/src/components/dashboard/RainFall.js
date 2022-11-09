@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {Row,Col} from "reactstrap";
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function RainFall(props){
-    const sourceId = 'Rain_7'
+    const {farm} = useFarmContext()
+  
+
+    const sourceId = farm.sensors.RainFall.map((sensor)=>sensor.port)[0]
     const [rainfall, setRainfall] = useState(null)
 
     useEffect(() => {
