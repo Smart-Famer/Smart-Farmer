@@ -10,7 +10,7 @@ const getYield = async(req,res)=>{
 
     try {
         const yieldData = await cropYieldModel.find(
-            {farm_id:farm_id,date:{$gte:start,$lte:end}}
+            {farm_id:farm_id,date:{$gte:start,$lte:end}},{},{sort: { 'date' : 1 } }
         )
         if(!yieldData){
             res.status(404).json({error:`No yield data for this farm in the date range of ${start} to ${end}`})
