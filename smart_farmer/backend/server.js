@@ -25,6 +25,53 @@ app.use("/api/cropyield/",cropYield)
 // app.post("/test",createTest)
 
 
+let x = ['a','b','c']
+let y = x.map((e)=>{
+    return 0
+})
+y[1]=1
+console.log(y)
+
+// const date = new Date()
+// const month = date.getMonth()
+// console.log(date)
+// console.log(month)
+
+// function random_rgb() {
+//     const R = Math.floor((Math.random() * 255) + 1);
+//     const G = Math.floor((Math.random() * 255) + 1);
+//     const B = Math.floor((Math.random() * 255) + 1);
+//     const rgb = `(rgb(${R},${G},${B}))`
+//     return rgb
+// }
+
+// var color = random_rgb();
+
+// console.log(color)
+
+// function random_rgb() {
+//     const R = Math.floor((Math.random() * 255) + 1);
+//     const G = Math.floor((Math.random() * 255) + 1);
+//     const B = Math.floor((Math.random() * 255) + 1);
+//     const rgb = [R,G,B]
+//     return rgb
+// }
+
+// let color = random_rgb();
+// let test = `(${color.join(",")})`
+// console.log(test)
+
+
+
+
+// let car = {
+//     'type':'toyota'
+// }
+// let en = 'engine'
+// car[en] = 'v8'
+
+// console.log(car)
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(()=>{
