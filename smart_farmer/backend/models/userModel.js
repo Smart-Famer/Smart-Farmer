@@ -88,4 +88,70 @@ userSchema.statics.signIn = async function({email, password}){
     return user
 }
 
+userSchema.statics.updateUser = async function(data){
+    const {_id,email,first_name, second_name, location} = data
+    if(!email || !first_name || !second_name || !location){
+        throw Error("Enter all feilds")
+    }
+    
+    if(!validator.isEmail(email)){
+        throw Error("Invalid Email")
+    }
+
+    const exists = await this.findOne({
+        email,
+        _id:{
+            $nin:[_id]
+        }})
+    if(exists){
+        throw Error("Email already taken")
+    }
+
+    const user = await this.findOneAndUpdate({_id},{...data},{new:true})
+    return user
+}
+
+userSchema.statics.updatePass = async function(data){
+    const {curPass,newPass,_id}=data
+
+    if(!curPass || !newPass){
+        throw Error("Both the password cannot be empty")
+    }
+    
+    const {password} = await this.findOne({_id})
+    const match = await bcrypt.compare(curPass, password)
+    if(!match){
+        throw Error("Provided existing password is incorrect")
+    }
+
+    if(!validator.isStrongPassword(newPass)){
+        throw Error("New Password is not Strong Enough!")
+    }
+
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(newPass, salt)
+
+    const user = await this.findOneAndUpdate({_id},{password:hash},{new:true})
+    return user
+}
+
+// userSchema.statics.getPass = async function(data){
+//     const {curPass,newPass,_id}=data
+
+    // const {password} = await this.findOne({_id})
+    // const match = await bcrypt.compare(curPass, password)
+    // if(!match){
+    //     throw Error("Provided existing password is incorrect")
+    // }
+
+    // if(!validator.isStrongPassword(newPass)){
+    //     throw Error("New Password is not Strong Enough!")
+    // }
+
+//     const salt = await bcrypt.genSalt(10)
+//     const hash = await bcrypt.hash(newPass, salt)
+
+    
+//     return {hash}
+// }
 module.exports = mongoose.model('User', userSchema)

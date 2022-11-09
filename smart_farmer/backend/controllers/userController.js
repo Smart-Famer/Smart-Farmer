@@ -33,6 +33,23 @@ const signup = async (req,res)=>{
     }
 }
 
+const updateUser = async (req,res)=>{
+    const data = req.body
+    const {_id} = req.params
+    try{
+        const user = await User.updateUser({...data, _id})
+        const token = createToken(user)
+        // const {password,...newUser} = user
+        res.status(200).json({
+            details:{...user._doc},
+            token
+        })
+            
+    }catch(err){
+        res.status(404).json({error:err.message})
+    }
+}
+
 const getAssistants = async (req, res)=>{
     const {farm_id} = req.body
     try{
@@ -74,10 +91,26 @@ const attachFarm = async(req,res) =>{
     }
 }
 
+const updatePassword = async (req, res)=>{
+    const data = req.body
+    const {_id} = req.params
+    try{
+        if(!mongoose.Types.ObjectId.isValid(_id)){
+            throw Error("Invalid User ID")
+        }
+        const user = await User.updatePass({...data,_id})
+        res.status(200).json(user)
+    }catch(err){
+        res.status(400).json({error:err.message})
+    }
+
+}
 module.exports = {
     login,
     signup,
     getAssistants,
     detachFarm,
-    attachFarm
+    attachFarm,
+    updateUser,
+    updatePassword
 }

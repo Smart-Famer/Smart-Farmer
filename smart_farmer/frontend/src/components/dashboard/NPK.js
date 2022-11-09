@@ -8,24 +8,6 @@ export default function NPK(){
     const sourceId = farm.NPK_levels_key 
     const [npkLevel, setNpkLevel] = useState('')
 
-
-
-
-    // useEffect(()=>{
-    //     if(npkLevel){
-    //         const array = npkLevel.split(",")
-    //         nitrogen.current = array[0]
-    //         phosphorus.current = array[1]
-    //         potassium.current = array[2]
-
-    //         console.log(nitrogen)
-
-    //     }
-        
-    // },[npkLevel])
-
-
-
     useEffect(() => {
       const fetchNpkLevels = async () => {
         const response = await fetch(`http://localhost:4000/api/datareading/${sourceId}`)

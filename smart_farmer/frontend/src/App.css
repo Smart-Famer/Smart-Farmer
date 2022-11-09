@@ -94,12 +94,13 @@ margin-bottom: 20px;
   position: relative;
 }
 .profile--container{
-  min-width:75vw;
+  width:100%;
   background-color: #ffffff;
   padding: 0;
   box-shadow: 2px 3px #888888;
   position: relative;
   margin: 5%;
+  height: 100%;
 }
 .profile--data{
   padding: 7px;
