@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {Row,Col } from "reactstrap";
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function Temperature(){
-
-    const sourceIds = ["Temp_2","Temp_5"]
+    const {farm} = useFarmContext()
+    const sourceIds = farm.sensors.Temperature.map((sensor)=>sensor.port)
     const [temperatures, setTemperatures] = useState([])
-    
+
+    const sensor_names = farm.sensors.Temperature.map((sensor)=>sensor.name.replace(farm.name+"_",""))
+
     // console.log(temperatures)
     // console.log(JSON.stringify({sourceIds:sourceIds}))
     useEffect(() => {

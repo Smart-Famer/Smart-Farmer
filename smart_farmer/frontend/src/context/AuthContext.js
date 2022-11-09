@@ -11,6 +11,16 @@ export const authReducer = (state, action)=>{
             return{
                 user:null
             }
+        case "UPDATE":
+            return{
+                user:{
+                    details:{
+                        ...state.user.details,
+                        ...action.payload.details
+                    },
+                    token:action.payload.token
+                }
+            }
         default:
             return state
     }

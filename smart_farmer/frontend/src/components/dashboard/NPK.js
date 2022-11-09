@@ -1,30 +1,12 @@
 import React, { useEffect,useState } from "react";
 import {Row,Col} from "reactstrap";
 import { Link } from "react-router-dom";
-import { useFarmContext} from "../../hooks/useFarmContext";
+import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function NPK(){
     const {farm} = useFarmContext()
-    const sourceId = farm.NPK_levels_key 
+    const sourceId = farm.NPK_levels_key
     const [npkLevel, setNpkLevel] = useState('')
-
-
-
-
-    // useEffect(()=>{
-    //     if(npkLevel){
-    //         const array = npkLevel.split(",")
-    //         nitrogen.current = array[0]
-    //         phosphorus.current = array[1]
-    //         potassium.current = array[2]
-
-    //         console.log(nitrogen)
-
-    //     }
-        
-    // },[npkLevel])
-
-
 
     useEffect(() => {
       const fetchNpkLevels = async () => {

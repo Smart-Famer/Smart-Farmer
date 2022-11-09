@@ -13,7 +13,9 @@ import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
 import Error from './Error';
-import CropYieldInput from "../components/inputForms/CropYieldInput";
+import { AssistantContextProvider } from "../context/AssistantContext";
+import CropYieldInput from '../components/inputForms/CropYieldInput'
+
 //import Test from './Test';
 export default function FarmLayout()
 {
@@ -30,6 +32,11 @@ export default function FarmLayout()
                 <Route path='cropYield' element={<CropYieldDataPage />}/>
                 <Route path='cropyieldinput' element={<CropYieldInput />}/>
                 <Route path='history' element={<HistoricalData  />} />
+                <Route path='createAcc' element={
+                    <AssistantContextProvider>
+                        <CreateAss />
+                    </AssistantContextProvider>
+                } />
             </Routes>
         </section>
     )
