@@ -14,6 +14,7 @@ import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
 import Error from './Error';
 import { AssistantContextProvider } from "../context/AssistantContext";
+import CropYieldInput from '../components/inputForms/CropYieldInput'
 
 //import Test from './Test';
 export default function FarmLayout()
