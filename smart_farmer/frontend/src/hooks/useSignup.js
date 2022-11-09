@@ -1,12 +1,14 @@
 import {useState} from 'react'
 import { useAuthContext } from './useAuthContext'
+import { useFarmContext } from './useFarmContext'
 
 export const useSignup =()=>{
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] =useState(null)
     const {dispatchAuthState} = useAuthContext()
+    const {farm} = useFarmContext()
 
-    const signup = async (email, password)=>{
+    const signup = async (first_name, second_name, email, password, location)=>{
 
         setIsLoading(true)
         setError(null)
@@ -20,8 +22,14 @@ export const useSignup =()=>{
             "Access-Control-Allow-Origin": "*",
           },
           body: JSON.stringify({
+            first_name,
+            second_name,
             email,
             password,
+            location,
+            user_type:"Assistant",
+            profile_picture:"default.jpg",
+            farms:[farm._id]
           }),
         })
 
@@ -32,15 +40,11 @@ export const useSignup =()=>{
             setError(json.error)
         }
         if(response.ok){
-            localStorage.setItem('user', JSON.stringify(json))
-            dispatchAuthState({
-                type:"LOGIN",
-                payload:json
-            })
             setIsLoading(false)
+            return json
         }
 
     }
 
-    return( signup, error, isLoading )
+    return {signup, error, isLoading, setError} 
 }

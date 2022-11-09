@@ -8,7 +8,6 @@ import NPKpage from './NPKpage';
 import ElecConPage from './ElectricConductivityInput'
 import Gallery from './Gallery';
 import Settings from './SettingsPage';
-import CreateAss from './CreateAssistantPage';
 import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
@@ -29,7 +28,6 @@ export default function UserLayout()
                 <Route path='*' element={<Error/>}/>
                 <Route path='home' element={<HomePage />}/>
                 <Route path='farm/*' element={farm ? <FarmLayout />:<Navigate to="/user/home"/>}/>
-                <Route path='createAcc' element={<CreateAss />} />
                 <Route path='viewProfilePage' element={<ViewProfilePage />}/>
             </Routes>
         </section>

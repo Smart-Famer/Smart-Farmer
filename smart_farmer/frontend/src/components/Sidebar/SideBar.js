@@ -54,9 +54,9 @@ export default function Sidebar(props){
                         Profile
                         </Link>
                     </NavItem>
-                    {user.user_type==="Manager" && <NavItem className="sidebar-nav-item">
+                    {user.user_type==="Manager" && farm &&<NavItem className="sidebar-nav-item">
                         <BsPersonPlus className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/user/createAcc">
+                        <Link className="sidebar-nav-link" to="/user/farm/createAcc">
                         Create Account
                         </Link>
                     </NavItem>}

@@ -15,7 +15,10 @@ export default function AddSensor() {
     e.preventDefault()
 
     const sensor = {sensor_type,name,port}
-   
+    if(sensor_type==="RainFall" && farm.sensors.RainFall.length===1){
+      setError("Rainfall sensor already added! Delete it to add a new one")
+      return
+    }
     const response = await fetch('http://localhost:4000/api/modules/add-sensor',{
         method: 'POST', 
         body:JSON.stringify({
