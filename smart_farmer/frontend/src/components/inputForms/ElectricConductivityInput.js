@@ -3,6 +3,8 @@ import './inputform.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DisplayAlert from "../DisplayAlert";
 import { useFarmContext } from "../../hooks/useFarmContext";
+import ModalTemp from "../Modal/Modal"
+import { ButtonToggle } from "reactstrap";
 
 export default function ElectricConductivityInput() {
     const [inputElecCon, setInputElecCon] = useState('')

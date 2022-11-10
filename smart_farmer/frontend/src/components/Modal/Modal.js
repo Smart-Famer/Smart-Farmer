@@ -1,36 +1,78 @@
-import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-    Button, Modal, ModalFooter,
-    ModalHeader, ModalBody
-} from "reactstrap"
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-export default function Modal(Props) {
-    // Modal open state
-    const [modal, setModal] = React.useState(false);
+export default function ModalTemp(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Error
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {/* <h4>{}</h4> */}
+        <p>
+          {props.message}
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="danger" onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import {
+//     Button, Modal, ModalFooter,
+//     ModalHeader, ModalBody
+// } from "reactstrap"
+
+// export default function ModalTemp({title,message}) {
+//     // Modal open state
+//     const [modal, setModal] = React.useState(false);
   
-    // Toggle for Modal
-    const toggle = () => setModal(!modal);
+//     // Toggle for Modal
+//     const toggle = () => setModal(!modal);
   
-    return (
-        <div style={{
-            display: 'block', width: 700, padding: 30
-        }}>
-            {/* <h4>ReactJS Reactstrap Modal Component</h4>
-            <Button color="danger"
-                onClick={toggle}>Click me to open Modal</Button> */}
-            <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader
-                    toggle={toggle}>{Props.title}</ModalHeader>
-                <ModalBody>
-                    {Props.message}
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="green" onClick={toggle}>Okay</Button>
-                </ModalFooter>
-            </Modal>
-        </div >
-    );
+//     return (
+//         <div style={{
+//             display: 'block', width: 700, padding: 30
+//         }}>
+//             {/* <h4>ReactJS Reactstrap Modal Component</h4>
+//             <Button color="danger"
+//                 onClick={toggle}>Click me to open Modal</Button> */}
+//             <Modal isOpen={modal} toggle={toggle}>
+//                 <ModalHeader
+//                     toggle={toggle}>{title}</ModalHeader>
+//                 <ModalBody>
+//                     {message}
+//                 </ModalBody>
+//                 <ModalFooter>
+//                     <Button color="green" onClick={toggle}>Okay</Button>
+//                 </ModalFooter>
+//             </Modal>
+//         </div >
+//     );
     
 
-}
+// }
