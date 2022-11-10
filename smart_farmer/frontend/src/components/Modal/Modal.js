@@ -11,7 +11,7 @@ export default function ModalTemp(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Error
+          {props.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

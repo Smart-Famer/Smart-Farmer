@@ -64,6 +64,7 @@ export default function Login() {
         </button>
         {/* {error && <DisplayAlert type={"danger"} content={error} />} */}
         {error && <ModalTemp
+        title={"Error"}
         message={error}
         show={modalShow}
         onHide={() => setModalShow(false)}
