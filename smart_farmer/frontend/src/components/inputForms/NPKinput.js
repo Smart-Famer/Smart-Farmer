@@ -28,6 +28,7 @@ export default function NPKInput() {
 
     const dataReading = { reading, sourceId, timestamp };
 
+
     const response = await fetch("http://localhost:4000/api/datareading", {
       method: "POST",
       body: JSON.stringify(dataReading),

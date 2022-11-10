@@ -12,7 +12,9 @@ export default function CropYieldDataPage(props) {
   // const [dataSet,setDataSet] = useState([])
   // const [cropYieldData,setCropYieldData] = useState(null)
   const [xAxisV, setXaxisV] = useState([]);
+  const [cropNames, setCropNames] = useState([])
   const [cropYieldData, setCropYieldData] = useState([]);
+
 
     const rgb_list = []
   function random_rgb() {
@@ -74,6 +76,16 @@ export default function CropYieldDataPage(props) {
             temp_cropyield[cropname].months.push(months[month_ind]);
           }
         });
+        setCropNames(temp_cropname)
+        // let temp_cropVisibility = {}
+        // temp_cropname.forEach((crop)=>{
+        //   temp_cropVisibility[crop]=true
+        // })
+        // setCropVisibility(temp_cropVisibility)
+
+
+        
+        
         // console.log(temp_cropyield)
         let temp_dataSet = [];
 
@@ -93,6 +105,7 @@ export default function CropYieldDataPage(props) {
 
           temp["label"] = element;
           temp["data"] = monthYield;
+          temp['visibility']= true;
           let color = random_rgb();
           temp["borderColor"] = `rgb(${color.join()})`;
           let backgroundColor = [...color, 0.5];
@@ -101,13 +114,41 @@ export default function CropYieldDataPage(props) {
         });
         setXaxisV(temp_x);
         setCropYieldData(temp_dataSet);
-        console.log("inside if", cropYieldData);
       }
     };
     fetchYieldData();
   }, []);
 
+  // let temp_cropVisibility = {};
+  // cropNames.forEach((crop) => {
+  //   temp_cropVisibility[crop] = true;
+  // });
+  // setCropVisibility(temp_cropVisibility);
+  // console.log(cropVisibility)
 
+  const handleChange = (e)=>{
+      const crop_name = e.currentTarget.id
+      let temp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
+      for (let crop of temp_cropYieldData) {
+        if(crop.label===crop_name){
+          crop.visibility = !crop.visibility
+        }
+      }
+      setCropYieldData(temp_cropYieldData)
+  }
+  
+  
+  let crop_checkboxes = cropNames.map((crop)=>{
+    return (
+      <h5 key={crop}>
+        <input type="checkbox" id={crop} defaultChecked onChange={handleChange}/>
+        <label htmlFor={crop}> {crop}</label>
+      </h5>
+    )
+  })
+
+  
+  
   return (
     <div className="main-container">
       <Sidebar user={props.user} />
@@ -119,10 +160,14 @@ export default function CropYieldDataPage(props) {
             chartTitle="Crop Yield Chart"
 
             xAxisValues={xAxisV}
-            dataSets={cropYieldData}
+            dataSets={cropYieldData.filter((x)=>{
+              return x.visibility===true;
+            })}
 
           />
         )}
+        {crop_checkboxes}
+
         <div className="d-flex flex-row-reverse">
           <Link
             to="/user/farm/cropyieldinput"
