@@ -14,7 +14,6 @@ export default function CropYieldDataPage(props) {
   const [xAxisV, setXaxisV] = useState([]);
   const [cropNames, setCropNames] = useState([])
   const [cropYieldData, setCropYieldData] = useState([]);
-  const [cropVisibility, setCropVisibility] = useState({});
 
 
     const rgb_list = []
@@ -136,8 +135,9 @@ export default function CropYieldDataPage(props) {
         }
       }
       setCropYieldData(temp_cropYieldData)
-
   }
+  // let crop_months = 
+
   let crop_checkboxes = cropNames.map((crop)=>{
     return (
       <h5 key={crop}>
@@ -165,7 +165,10 @@ export default function CropYieldDataPage(props) {
 
           />
         )}
-        {crop_checkboxes}
+        <div>
+          {crop_checkboxes}
+        </div>
+
         <div className="d-flex flex-row-reverse">
           <Link
             to="/user/farm/cropyieldinput"
