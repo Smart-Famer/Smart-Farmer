@@ -22,7 +22,7 @@ app.use("/api/manager",managerRouter)
 app.use("/api/datareading",dataReadingRouter)
 app.use("/api/modules",addModuleRouter)
 app.use("/api/cropyield/",cropYield)
-// app.post("/test",createTest)
+
 
 
 let x = ['a','b','c']
@@ -73,13 +73,14 @@ console.log(y)
 // console.log(car)
 
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(()=>{
-        console.log("Connected to the database")
-        app.listen(process.env.PORT,()=>{
-            console.log("Server is listening on port 4000...")
-        })
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to the database");
+    app.listen(process.env.PORT, () => {
+      console.log("Server is listening on port 4000...");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });

@@ -3,7 +3,7 @@ import NavBar from '../NavBar';
 import { BrowserRouter } from "react-router-dom";
 import { AuthContext } from '../../../context/AuthContext';
 
-const MockNavbar = () => {
+const MockNavbar = () => { 
 
     const context = {
         user: {
