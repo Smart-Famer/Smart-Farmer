@@ -33,7 +33,7 @@ export default function CropYieldDataPage(props) {
   useEffect(() => {
     const fetchYieldData = async () => {
       const response = await fetch(
-        `http://localhost:4000/api/cropyield/${farm_id}`
+        `${process.env.REACT_APP_HOST}/api/cropyield/${farm_id}`
       );
       const json = await response.json();
 
@@ -112,19 +112,12 @@ export default function CropYieldDataPage(props) {
           temp["backgroundColor"] = `rgb(${backgroundColor.join()})`;
           temp_dataSet.push(temp);
         });
-      setXaxisV(temp_x);
+        setXaxisV(temp_x);
         setCropYieldData(temp_dataSet);
       }
     };
     fetchYieldData();
   }, []);
-
-  // let temp_cropVisibility = {};
-  // cropNames.forEach((crop) => {
-  //   temp_cropVisibility[crop] = true;
-  // });
-  // setCropVisibility(temp_cropVisibility);
-  // console.log(cropVisibility)
 
   const handleChange = (e)=>{
       const crop_name = e.currentTarget.id

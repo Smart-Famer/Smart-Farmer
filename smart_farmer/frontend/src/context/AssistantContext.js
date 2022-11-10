@@ -32,13 +32,15 @@ export const AssistantContextProvider = ({children})=>{
     const {farm} = useFarmContext()
     const [Assistants, dispatchAssistants] = useReducer(assistantReducer,null,()=>{
         const fetchAssistants = async ()=>{
-            const response = await fetch(`http://localhost:4000/api/user/get-assistants`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
+            const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/get-assistants`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
                 },
-                body:JSON.stringify({farm_id:farm._id})
-            })
+                body: JSON.stringify({ farm_id: farm._id }),
+              }
+            );
 
             const json = await response.json()
             return({

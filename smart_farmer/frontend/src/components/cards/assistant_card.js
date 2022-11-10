@@ -10,13 +10,15 @@ export default function AssistantCard(props) {
     const {assistants, setAssistants,name,location,email,id} = props
     const {farm} = useFarmContext()
     const handleDelete = async ()=>{
-        const response = await fetch(`http://localhost:4000/api/user/detach-farm`,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/detach-farm`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-            body:JSON.stringify({farm_id:farm._id, user_id:id})
-        })
+            body: JSON.stringify({ farm_id: farm._id, user_id: id }),
+          }
+        );
         const json = await response.json()
         //console.log("farm",json)
         if (response.ok) {

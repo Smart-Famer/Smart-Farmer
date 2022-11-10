@@ -13,17 +13,19 @@ export default function CropYieldInput(props){
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
-        const response = await fetch(`http://localhost:4000/api/cropyield/`,{
-            method:'POST',
-            body:JSON.stringify({
-                farm_id:farm_id,
-                crop_name:crop_name,
-                date:date,
-                yield:amount
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/cropyield/`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              farm_id: farm_id,
+              crop_name: crop_name,
+              date: date,
+              yield: amount,
             }),
-            
-            headers:{'Content-type':'application/json'}
-        })
+
+            headers: { "Content-type": "application/json" },
+          }
+        );
 
         const json = await response.json()
         if(!response.ok){

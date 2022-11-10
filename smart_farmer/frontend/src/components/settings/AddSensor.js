@@ -20,8 +20,7 @@ export default function AddSensor() {
       setError("Rainfall sensor already added! Delete it to add a new one");
       return;
     }
-    const response = await fetch(
-      "http://localhost:4000/api/modules/add-sensor",
+    const response = await fetch(`${process.env.REACT_APP_HOST}/api/modules/add-sensor`,
       {
         method: "POST",
         body: JSON.stringify({
