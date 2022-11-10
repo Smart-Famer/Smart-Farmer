@@ -84,8 +84,8 @@ export default function CropYieldDataPage(props) {
         // setCropVisibility(temp_cropVisibility)
 
 
-
-    
+        
+        
         // console.log(temp_cropyield)
         let temp_dataSet = [];
 
@@ -147,7 +147,8 @@ export default function CropYieldDataPage(props) {
     )
   })
 
-
+  
+  
   return (
     <div className="main-container">
       <Sidebar user={props.user} />

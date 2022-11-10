@@ -1,64 +1,86 @@
 import React, { useState } from "react";
-import './inputform.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import "./inputform.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import DisplayAlert from "../DisplayAlert";
 import { useFarmContext } from "../../hooks/useFarmContext";
+import ModalTemp from "../Modal/Modal";
 
 export default function ElectricConductivityInput() {
-    const [inputElecCon, setInputElecCon] = useState('')
-    const [error, setError] = useState(null) 
-    const {farm} = useFarmContext()
-    // console.log(farm)
-    
+  const [modalShow, setModalShow] = useState(false);
+  const [inputElecCon, setInputElecCon] = useState("");
+  const [error, setError] = useState(null);
+  const { farm } = useFarmContext();
+  // console.log(farm)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const reading = inputElecCon
-    const sourceId = farm.elec_conductivity_key
+    const reading = inputElecCon;
+    const sourceId = farm.elec_conductivity_key;
     let timestamp = new Date().toJSON();
 
-    const dataReading = {reading,sourceId,timestamp}
-    
-    const response = await fetch('http://localhost:4000/api/datareading',{
-        method: 'POST', 
-        body:JSON.stringify(dataReading),
-        headers: {
-            'Content-type':'application/json'
-        }
-    })
-    const json = await response.json()
+    const dataReading = { reading, sourceId, timestamp };
 
-    if(!response.ok){
-      setError(json.error)
+    const response = await fetch("http://localhost:4000/api/datareading", {
+      method: "POST",
+      body: JSON.stringify(dataReading),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
     }
-    if(response.ok){
-      setError(null)
-      setInputElecCon('')
-      console.log('New electric conductivity level added:',json)
+    if (response.ok) {
+      setError(null);
+      setInputElecCon("");
+      console.log("New electric conductivity level added:", json);
     }
-
-  }
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group row p-3">
-                    <div className="col-sm-7">
-                        <input 
-                                type="text" 
-                                className="form-control"
-                                id="inputElecCon" 
-                                value={inputElecCon}
-                                onChange={(e)=>{setInputElecCon(e.target.value)}}
-                                />
-                    </div>
-                    <label htmlFor="inputElecCon" className="col-sm-1 col-form-label">sm<sup>-1</sup></label>
-
-                </div>
-             <button className="btn btn-green btn-block m-4">Submit</button>
-            {error && (<DisplayAlert type={'danger'} content={error} />)}
-            </form>
+    setModalShow(true);
+  };
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group row p-3">
+          <div className="col-sm-7">
+            <input
+              type="text"
+              data-testid="elec-con-input"
+              className="form-control"
+              id="inputElecCon"
+              placeholder="Electric Conductivity"
+              value={inputElecCon}
+              onChange={(e) => {
+                setInputElecCon(e.target.value);
+              }}
+            />
+          </div>
+          <label htmlFor="inputElecCon" className="col-sm-1 col-form-label">
+            sm<sup>-1</sup>
+          </label>
         </div>
-
-    )
+        <button className="btn btn-green btn-block m-4">Submit</button>
+        {/* {error && (<DisplayAlert type={'danger'} content={error} />)} */}
+        {error && (
+          <ModalTemp
+          title={"Error"}
+            message={error}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!error && (
+          <ModalTemp
+          title={"Successful"}
+            message={"New electric conductivity level added successfully"}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
+    </div>
+  );
 }
