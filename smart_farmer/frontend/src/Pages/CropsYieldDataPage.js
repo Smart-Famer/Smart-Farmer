@@ -99,39 +99,14 @@ export default function CropYieldDataPage(props) {
           temp["backgroundColor"] = `rgb(${backgroundColor.join()})`;
           temp_dataSet.push(temp);
         });
-        // console.log(temp_x)
         setXaxisV(temp_x);
-        // console.log(xAxisV.current)
-        // console.log(temp_dataSet)
-
         setCropYieldData(temp_dataSet);
         console.log("inside if", cropYieldData);
       }
     };
     fetchYieldData();
   }, []);
-  console.log("outside of if", cropYieldData);
-  const x = ["January", "September", "Octorber", "November"];
-  const yd = [
-    {
-      label: "Beatroot",
-      data: [400],
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "apple",
-      data: [0, 150],
-      borderColor: "rgb(255, 150, 132)",
-      backgroundColor: "rgba(255, 150, 132, 0.5)",
-    },
-    {
-      label: "caret",
-      data: [0, 0, 400, 350],
-      borderColor: "rgb(155, 105, 132)",
-      backgroundColor: "rgba(155, 105, 132, 0.5)",
-    },
-  ];
+
 
   return (
     <div className="main-container">
@@ -142,32 +117,10 @@ export default function CropYieldDataPage(props) {
             yAxisLabel="Month"
             xAxisLabel="Yield (kg)"
             chartTitle="Crop Yield Chart"
-            // xAxisValues = {['January', 'February', 'March', 'April', 'May', 'June', 'July']}
-            // dataSets={[
-            //             {
-            //                 label: 'Carrot',
-            //                 data: [100,200,300,400,500,600,700],
-            //                 borderColor: 'rgb(255, 99, 132)',
-            //                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            //             },
-            //             {
-            //                 label: 'Grains',
-            //                 data: [800, 260, 300, 600, 550, 400, 500],
-            //                 borderColor: 'rgb(53, 162, 235)',
-            //                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            //             },
-            //             {
-            //                 label: 'Fruit',
-            //                 data: [500, 360, 400, 500, 550, 680, 700],
-            //                 borderColor: 'rgb(0, 255, 153)',
-            //                 backgroundColor: 'rgba(0, 255, 153, 0.5)',
-            //             },
-            //             ]
-            //         }
+
             xAxisValues={xAxisV}
             dataSets={cropYieldData}
-            // xAxisValues = {x}
-            // dataSets = {yd}
+
           />
         )}
         <div className="d-flex flex-row-reverse">
