@@ -112,7 +112,7 @@ export default function CropYieldDataPage(props) {
           temp["backgroundColor"] = `rgb(${backgroundColor.join()})`;
           temp_dataSet.push(temp);
         });
-        setXaxisV(temp_x);
+      setXaxisV(temp_x);
         setCropYieldData(temp_dataSet);
       }
     };
