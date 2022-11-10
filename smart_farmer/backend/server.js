@@ -10,18 +10,20 @@ const addModuleRouter = require('./routes/Modules')
 const {createTest} = require('./controllers/testController')
 const cropYield = require('./routes/cropYield')
 
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
+
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
 app.use("/api/datareading",dataReadingRouter)
 app.use("/api/modules",addModuleRouter)
 app.use("/api/cropyield/",cropYield)
+
+
 
 let x = ['a','b','c']
 let y = x.map((e)=>{

@@ -13,9 +13,14 @@ import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
 import Error from './Error';
+
 import CropYieldInput from "../components/inputForms/CropYieldInput";
 import { AssistantContextProvider } from "../context/AssistantContext";
-// import CropYieldInput from '../components/inputForms/CropYieldInput'
+
+
+import { AssistantContextProvider } from "../context/AssistantContext";
+import CropYieldInput from '../components/inputForms/CropYieldInput'
+
 
 export default function FarmLayout()
 {
