@@ -1,4 +1,5 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-router-dom";
 import UserLayout from "./Pages/UserLayout";
 import LoginPage from "./Pages/LoginPage";

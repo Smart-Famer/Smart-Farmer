@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 import "../App.css"
@@ -9,16 +9,18 @@ import Slideshow from "../components/Gallery/Slideshow"
 import CardCarousel from "../components/Gallery/cardCarousel"
 import PhotoGallery from "../components/Gallery/photoGallery"
 import { PhotoContextProvider } from "../context/photoContext"
+import { useParams } from "react-router"
 
 export default function Gallery()
 {
+    const {date} =useParams()
     return(
         <div className="main-container">
             <div>
                 <Sidebar/>
             </div>
             <PhotoContextProvider>
-                <PhotoGallery/>
+                <CardCarousel date={date}/>
             </PhotoContextProvider>
         </div>                
     )

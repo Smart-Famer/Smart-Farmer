@@ -1,14 +1,15 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const morgan = require("morgan");
-const userRouter = require("./routes/user");
-const managerRouter = require("./routes/manager");
-const dataReadingRouter = require("./routes/dataReading");
-const addModuleRouter = require("./routes/Modules");
-const { createTest } = require("./controllers/testController");
-const cropYield = require("./routes/cropYield");
+require('dotenv').config()
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
+const morgan = require('morgan')
+const userRouter = require("./routes/user")
+const managerRouter = require("./routes/manager")
+const dataReadingRouter = require("./routes/dataReading")
+const addModuleRouter = require('./routes/Modules')
+const {createTest} = require('./controllers/testController')
+const cropYield = require('./routes/cropYield')
+const photoData = require('./routes/photoData')
 
 const app = express();
 
@@ -22,12 +23,12 @@ app.use("/api/datareading", dataReadingRouter);
 app.use("/api/modules", addModuleRouter);
 app.use("/api/cropyield/", cropYield);
 
-let x = ["a", "b", "c"];
-let y = x.map((e) => {
-  return 0;
-});
-y[1] = 1;
-console.log(y);
+app.use("/api/user",userRouter)
+app.use("/api/manager",managerRouter)
+app.use("/api/datareading",dataReadingRouter)
+app.use("/api/modules",addModuleRouter)
+app.use("/api/cropyield/",cropYield)
+app.use("/api/photos/",photoData)
 
 let arr = ["a", "c", "d"];
 arr.splice(1, 0, "m");
