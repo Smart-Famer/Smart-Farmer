@@ -1,33 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
-import { GiParasaurolophus } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { BarChart } from "../components/BarChart";
 import Sidebar from "../components/Sidebar/SideBar";
 import { useFarmContext } from "../hooks/useFarmContext";
+import distinctColors from "distinct-colors";
 
 export default function CropYieldDataPage(props) {
   const { farm } = useFarmContext();
   const farm_id = farm._id;
-  // const [xAxisV,setXaxisV] = useState([])
-  // const [dataSet,setDataSet] = useState([])
-  // const [cropYieldData,setCropYieldData] = useState(null)
+
   const [xAxisV, setXaxisV] = useState([]);
-  const [cropNames, setCropNames] = useState([])
+  const [cropNames, setCropNames] = useState([]);
+  const [temp_cropMonths, setCropMonths] = useState([]);
   const [cropYieldData, setCropYieldData] = useState([]);
 
+  const [tmp_cropYieldData, setTmp_cropYieldData] = useState([]);
+  const [tmp_cropMonths, setTmp_cropMonths] = useState([]);
 
-    const rgb_list = []
-  function random_rgb() {
-    while (true){
-        const R = Math.floor(Math.random() * 255 + 1);
-        const G = Math.floor(Math.random() * 255 + 1);
-        const B = Math.floor(Math.random() * 255 + 1);
-        const rgb = [R, G, B];
-        if(!(rgb_list.includes(rgb))){
-            rgb_list.push(rgb)
-            return rgb;
-        }
-    }
+  function getColorList(colors_count) {
+    var palette = distinctColors({ count: colors_count }).map((color) => {
+      return color._rgb;
+    });
+    return palette;
   }
 
   useEffect(() => {
@@ -76,24 +70,17 @@ export default function CropYieldDataPage(props) {
             temp_cropyield[cropname].months.push(months[month_ind]);
           }
         });
-        setCropNames(temp_cropname)
-        // let temp_cropVisibility = {}
-        // temp_cropname.forEach((crop)=>{
-        //   temp_cropVisibility[crop]=true
-        // })
-        // setCropVisibility(temp_cropVisibility)
+        setCropNames(temp_cropname);
+        setCropMonths(temp_x);
 
-
-        
-        
-        // console.log(temp_cropyield)
         let temp_dataSet = [];
-
+        const colorList = getColorList(temp_cropname.length);
         temp_cropname.forEach((element) => {
           let temp = {};
           let temp_yields = temp_cropyield[element].yields;
           let temp_months = temp_cropyield[element].months;
           let monthYield = [];
+          let cropIndex = temp_cropname.indexOf(element);
           temp_x.forEach((month) => {
             if (temp_months.includes(month)) {
               let yield_index = temp_months.indexOf(month);
@@ -105,62 +92,130 @@ export default function CropYieldDataPage(props) {
 
           temp["label"] = element;
           temp["data"] = monthYield;
-          temp['visibility']= true;
-          let color = random_rgb();
+          temp["visibility"] = true;
+          let color = colorList[cropIndex];
+          let temp_color_ = color;
+          temp_color_[-1] = 0.5;
           temp["borderColor"] = `rgb(${color.join()})`;
-          let backgroundColor = [...color, 0.5];
+          let backgroundColor = temp_color_;
           temp["backgroundColor"] = `rgb(${backgroundColor.join()})`;
           temp_dataSet.push(temp);
         });
         setXaxisV(temp_x);
         setCropYieldData(temp_dataSet);
+        setTmp_cropMonths(temp_x);
+        setTmp_cropYieldData(temp_dataSet);
       }
     };
     fetchYieldData();
+    // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
+    // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
   }, []);
 
-  const handleChange = (e)=>{
-      const crop_name = e.currentTarget.id
-      let temp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
-      for (let crop of temp_cropYieldData) {
-        if(crop.label===crop_name){
-          crop.visibility = !crop.visibility
-        }
+  // console.log(cropYieldData);
+
+  const handleCropChange = (e) => {
+    const crop_name = e.currentTarget.id;
+    let temp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
+    for (let crop of temp_cropYieldData) {
+      if (crop.label === crop_name) {
+        crop.visibility = !crop.visibility;
       }
-      setCropYieldData(temp_cropYieldData)
-  }
-  // let crop_months = 
+    }
+    setCropYieldData(temp_cropYieldData);
+  };
 
-  let crop_checkboxes = cropNames.map((crop)=>{
+  const handleMonthChange = (e) => {
+    let temp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
+    let temp_cropMonths = JSON.parse(JSON.stringify(xAxisV)); //months which are corresponding to yields
+    // console.log(temp_cropMonths)
+
+    const month = e.currentTarget.id; //clicked checkbox name
+    const month_index = tmp_cropMonths.indexOf(month); //index of clicked checkbox month in xAxisV array
+    if (!e.currentTarget.checked) {
+      for (const crop of temp_cropYieldData) {
+        // crop.data[month_index]='changed'
+        crop.data.splice(month_index, 1);
+      }
+      temp_cropMonths.splice(month_index, 1);
+    } else {
+      console.log(tmp_cropYieldData);
+      console.log(tmp_cropMonths);
+      for (const crop of temp_cropYieldData) {
+        const crop_index = temp_cropYieldData.indexOf(crop);
+        crop.data.splice(
+          month_index,
+          0,
+          tmp_cropYieldData[crop_index].data[month_index]
+        );
+      }
+      temp_cropMonths.splice(month_index, 0, tmp_cropMonths[month_index]);
+    }
+
+    setCropYieldData(temp_cropYieldData);
+    setXaxisV(temp_cropMonths);
+  };
+
+  let monthsCheckboxes = temp_cropMonths.map((month) => {
     return (
-      <h5 key={crop}>
-        <input type="checkbox" id={crop} defaultChecked onChange={handleChange}/>
-        <label htmlFor={crop}> {crop}</label>
-      </h5>
-    )
-  })
+      <div key={month} className='form-check'>
+        <input
+          type="checkbox"
+          className="form-check-input"
+          id={month}
+          defaultChecked
+          onChange={handleMonthChange}
+        />
+        <label className="form-check-label" htmlFor={month}> {month}</label>
+      </div>
+    );
+  });
 
-  
-  
+  let crop_checkboxes = cropNames.map((crop) => {
+    return (
+      <div key={crop} className='form-check'>
+        <input
+          type="checkbox"
+          className="form-check-input"
+          id={crop}
+          defaultChecked
+          onChange={handleCropChange}
+        />
+        <label className="form-check-label" htmlFor={crop}> {crop}</label>
+      </div>
+    );
+  });
+
   return (
     <div className="main-container">
       <Sidebar user={props.user} />
       <div className="crop-yield-chart-container">
-        {cropYieldData !== [] && xAxisV !== [] && (
-          <BarChart
-            yAxisLabel="Month"
-            xAxisLabel="Yield (kg)"
-            chartTitle="Crop Yield Chart"
+        <div className="row">
+          <div className="col-sm-8">
+            {cropYieldData !== [] && xAxisV !== [] && (
+              <BarChart
+                yAxisLabel="Month"
+                xAxisLabel="Yield (kg)"
+                chartTitle="Crop Yield Chart"
+                xAxisValues={xAxisV}
+                dataSets={cropYieldData.filter((x) => {
+                  return x.visibility === true;
+                })}
+              />
+            )}
+          </div>
+          <div className="col-sm-4">
+            <div className="">
+              <h3>Select the crops</h3>
+              {crop_checkboxes}
+            </div>
+            <br />
+            <div>
+              <h3>Select the months</h3>
 
-            xAxisValues={xAxisV}
-            dataSets={cropYieldData.filter((x)=>{
-              return x.visibility===true;
-            })}
-
-          />
-        )}
-        <div>
-          {crop_checkboxes}
+              {monthsCheckboxes}
+            </div>
+          </div>
         </div>
 
         <div className="d-flex flex-row-reverse">
