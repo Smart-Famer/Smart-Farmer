@@ -191,7 +191,7 @@ export default function CropYieldDataPage(props) {
       <Sidebar user={props.user} />
       <div className="crop-yield-chart-container">
         <div className="row">
-          <div className="col-sm-8">
+          <div className="col-sm-10">
             {cropYieldData !== [] && xAxisV !== [] && (
               <BarChart
                 yAxisLabel="Month"
@@ -204,7 +204,7 @@ export default function CropYieldDataPage(props) {
               />
             )}
           </div>
-          <div className="col-sm-4">
+          <div className="col-sm-2">
             <div className="">
               <h3>Select the crops</h3>
               {crop_checkboxes}
