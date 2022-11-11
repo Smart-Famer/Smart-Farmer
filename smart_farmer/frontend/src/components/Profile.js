@@ -21,7 +21,9 @@ export default function Profile(props) {
         e.preventDefault()
         setError(null)
         setSuccess(null)
-        const response = await fetch(`http://localhost:4000/api/user/update-password/${user._id}`, {
+        const response = await fetch(
+          `${process.env.REACT_APP_HOST}/api/user/update-password/${user._id}`,
+          {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -31,9 +33,10 @@ export default function Profile(props) {
             },
             body: JSON.stringify({
               curPass,
-              newPass
+              newPass,
             }),
-          })
+          }
+        );
         const json = await response.json()
         if(response.ok){
             setSuccess("Password changed Successfully!")

@@ -33,17 +33,18 @@ const sendReading = (type)=>{
         break;
     }
     if(typeof reading !== 'undefined' && typeof sourceId !== 'undefined'){
-      axios.post(`http://localhost:4000/api/datareading/`,{
-        sourceId,
-        reading,
-        timestamp
-    })
-  .then((response) => {
-    console.log(response.data.reading,response.data.sourceId);
-  })
-  .catch((error) => {
-    console.log("error");
-  });
+      axios
+        .post(`${process.env.REACT_APP_HOST}/api/datareading/`, {
+          sourceId,
+          reading,
+          timestamp,
+        })
+        .then((response) => {
+          console.log(response.data.reading, response.data.sourceId);
+        })
+        .catch((error) => {
+          console.log("error");
+        });
     }
     
 }

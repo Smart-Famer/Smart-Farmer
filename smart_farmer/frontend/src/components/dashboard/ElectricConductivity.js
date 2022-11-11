@@ -10,7 +10,8 @@ export default function ElectricConductivity(){
 
     useEffect(() => {
       const fetchWorkouts = async () => {
-        const response = await fetch(`http://localhost:4000/api/datareading/${sourceId}`)
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceId}`
+        );
         const json = await response.json()
 
         if (response.ok) {
@@ -24,7 +25,9 @@ export default function ElectricConductivity(){
     return(
         <>
         <Row className="px-5">
+
             <Col ><h1 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{electricCon && (electricCon.reading)} sm<sup>-1</sup></h1></Col>
+
         </Row>
         <div className="d-flex flex-row-reverse">
                     <Link to="/user/farm/elecinput" style={{ textDecoration: 'none' }}>{"Add inputs>"}</Link>

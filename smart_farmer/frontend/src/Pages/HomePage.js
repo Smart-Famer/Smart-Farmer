@@ -18,13 +18,15 @@ export default function  Home() {
     useEffect(() => {
         
         const fetchFarms = async () => {
-            const response = await fetch(`http://localhost:4000/api/manager/get-farms`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
+            const response = await fetch(`${process.env.REACT_APP_HOST}/api/manager/get-farms`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
                 },
-                body:JSON.stringify({farm_ids:user.details.farms})
-            })
+                body: JSON.stringify({ farm_ids: user.details.farms }),
+              }
+            );
             const json = await response.json()
             //console.log(json)
             if (response.ok) {

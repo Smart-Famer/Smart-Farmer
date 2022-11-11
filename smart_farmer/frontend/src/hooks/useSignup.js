@@ -13,25 +13,27 @@ export const useSignup =()=>{
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("http://localhost:4000/api/user/signup", {
-          method: "POST",
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify({
-            first_name,
-            second_name,
-            email,
-            password,
-            location,
-            user_type:"Assistant",
-            profile_picture:"default.jpg",
-            farms:[farm._id]
-          }),
-        })
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/signup`,
+          {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              first_name,
+              second_name,
+              email,
+              password,
+              location,
+              user_type: "Assistant",
+              profile_picture: "default.jpg",
+              farms: [farm._id],
+            }),
+          }
+        );
 
         const json = await response.json()
         

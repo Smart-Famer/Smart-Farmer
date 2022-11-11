@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import {Row,Col} from "reactstrap";
 import { Link } from "react-router-dom";
+
 import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function NPK(){
@@ -10,7 +11,8 @@ export default function NPK(){
 
     useEffect(() => {
       const fetchNpkLevels = async () => {
-        const response = await fetch(`http://localhost:4000/api/datareading/${sourceId}`)
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceId}`
+        );
         const json = await response.json()
 
 

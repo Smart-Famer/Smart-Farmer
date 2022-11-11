@@ -11,7 +11,8 @@ export default function RainFall(props){
 
     useEffect(() => {
       const fetchRainFall = async () => {
-        const response = await fetch(`http://localhost:4000/api/datareading/${sourceId}`)
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceId}`
+        );
         const json = await response.json()
 
         if (response.ok) {
