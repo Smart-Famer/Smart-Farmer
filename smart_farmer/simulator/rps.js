@@ -10,7 +10,7 @@ function getRandomDate(startDate, endDate) {
   return new Date(timestamp);
 }
 
-const startDate = new Date("2022-10-31");
+const startDate = new Date("2022-11-7");
 let dateArr = [];
 let i = 0;
 for (let i = 0; i < 7; i++) {
