@@ -10,6 +10,7 @@ const addModuleRouter = require('./routes/Modules')
 const {createTest} = require('./controllers/testController')
 const cropYield = require('./routes/cropYield')
 const photoData = require('./routes/photoData')
+const adminRouter =require("./routes/admin")
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/api/datareading",dataReadingRouter)
 app.use("/api/modules",addModuleRouter)
 app.use("/api/cropyield/",cropYield)
 app.use("/api/photos/",photoData)
+app.use("/api/admin",adminRouter)
 
 let arr = ["a", "c", "d"];
 arr.splice(1, 0, "m");

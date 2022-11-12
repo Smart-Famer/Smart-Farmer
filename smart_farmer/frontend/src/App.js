@@ -30,7 +30,7 @@ function App() {
           </FarmContextProvider>
           :<Navigate to="/login" />}
         />
-        {/* <Route path="/admin" element={<Admin />} /> */}
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

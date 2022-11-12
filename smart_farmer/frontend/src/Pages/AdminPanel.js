@@ -14,31 +14,44 @@ export default function AdminPanel(props) {
   // if (!user) {
   //   return <Navigate to="/login" />;
   // }
-  const { dispatchFarm } = useFarmContext();
   const [farm_list, setFarmList] = useState([]);
-  console.log(farm_list)
+  const [manager_list, setManagerList] = useState([]);
+  const [assitant_list, setAssiatantList] = useState([]);
   useEffect(() => {
     const fetchFarms = async () => {
       const response = await fetch(
-        `http://localhost:4000/api/manager/get-farms`,
-        {
-          // method: "POST",
-          // headers: {
-          //   "Content-Type": "application/json",
-          // },
-          // body: JSON.stringify({ farm_ids: user.details.farms }),
-        }
+        `http://localhost:4000/api/admin/`
       );
       const json = await response.json();
-      //console.log(json)
       if (response.ok) {
         setFarmList(json);
       }
+    };const fetchManagers= async () => {
+      const response = await fetch(
+        `http://localhost:4000/api/admin/get-all-mangers`
+      );
+      const json = await response.json();
+      console.log(json);
+      if (response.ok) {
+        setManagerList(json);
+      }
     };
-    fetchFarms();
-    dispatchFarm({ type: "ADD" });
-  }, []);
+    const fetchAssistants = async () => {
+      const response = await fetch(
+        `http://localhost:4000/api/admin/get-all-assistants`
+      );
+      const json = await response.json();
+      console.log(json);
+      if (response.ok) {
+        setAssiatantList(json);
+      }
+    };
 
+    fetchFarms();
+    fetchManagers();
+    fetchAssistants();
+
+  }, []);
 
   return (
     <div className="main-container">
@@ -49,19 +62,19 @@ export default function AdminPanel(props) {
             <Row>
               <Col>
                 <Meter heading="Number of Farms">
-                  <Counter count="10" />
+                  <Counter count={farm_list.length} farms={farm_list}/>
                 </Meter>
               </Col>
 
               <Col>
                 <Meter heading="Number of Mangers">
-                  <Counter count="15" />
+                  <Counter count={manager_list.length} farms={farm_list}/>
                 </Meter>
               </Col>
 
               <Col>
                 <Meter heading="Number of Farm Assistants">
-                  <Counter count="26" />
+                  <Counter count={assitant_list.length} farms={farm_list}/>
                 </Meter>
               </Col>
             </Row>
