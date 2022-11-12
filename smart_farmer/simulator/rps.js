@@ -10,11 +10,25 @@ function getRandomDate(startDate, endDate) {
   return new Date(timestamp);
 }
 
+const startDate = new Date("2022-10-31");
+let dateArr = [];
+let i = 0;
+for (let i = 0; i < 7; i++) {
+  const newday = startDate.getDate(startDate) + 1;
+  startDate.setDate(newday);
+  let daystr = startDate.toString();
+  dateArr.push(daystr);
+}
+console.log(dateArr);
+
 const sendReading = (type) => {
-  let timestamp = getRandomDate(new Date("2022-11-29"), new Date("2022-11-30"));
+  // let timestamp = getRandomDate(new Date("2022-11-29"), new Date("2022-11-30"));
+  timestamp = new Date(dateArr[i])
   console.log(timestamp);
   source_index = Math.round(Math.random() * 10);
   source_id = "";
+  i++;
+  console.log(i)
   switch (type) {
     case "temp":
       for (let index = 0; index < temp_array.length; index++) {
@@ -29,7 +43,7 @@ const sendReading = (type) => {
               timestamp,
             })
             .then((response) => {
-              console.log(response.data.reading, response.data.sourceId);
+              console.log(response.data.reading, response.data.sourceId,response.data.timestamp);
             })
             .catch((error) => {
               console.log("error");
@@ -54,10 +68,12 @@ const sendReading = (type) => {
   }
 };
 
+
+
 // sendReading('temp')
 
 // sendReading('temp')
-setInterval(sendReading, 2000, "temp");
+setInterval(sendReading, 5000, "temp");
 // setInterval(sendReading,2000,'hum')
 // setInterval(sendReading,6000,'shum')
 // setInterval(sendReading,7000,'rain')

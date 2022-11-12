@@ -1,10 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col } from "reactstrap";
-import LineChart from "./LineChart";
 import { Link } from "react-router-dom";
 import "../../App.css";
+import { useFarmContext } from "../../hooks/useFarmContext";
+import LineChart from "./LineChart";
 
 export default function HistoricalData() {
+    const { farm } = useFarmContext();
+    const sourceIds = farm.sensors.Temperature.map((e)=>{
+      return e.port
+    });
+    const [xAxisV,setXaxisV] = useState([])
+    const [sensorNames,setSensorNames] = useState([])
+
+    useEffect(() => {
+      const fetchYieldData = async () => {
+        const response = await fetch(
+          `${process.env.REACT_APP_HOST}/aapi/history/temp?sourceids=${sourceIds.join(",")}&duration=weakly`
+        );
+        const json = await response.json();
+
+        if (response.ok) {
+          console.log(json)
+        }
+      };
+      fetchYieldData();
+      // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
+      // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
+    }, []);
   return (
     <>
       <div className="row">
