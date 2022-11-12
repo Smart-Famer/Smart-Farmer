@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
 import { useFarmContext } from '../../hooks/useFarmContext';
-import { useSignup } from '../../hooks/useSignup';
 import DisplayAlert from '../DisplayAlert';
 
 export default function AddAss(props) {
@@ -23,13 +17,15 @@ export default function AddAss(props) {
         setError("Assistant with the given ID is already added. Try a new one!")
         return
     }
-    const response = await fetch(`http://localhost:4000/api/user/attach-farm`,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
+    const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/attach-farm`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify({farm_id:farm._id, user_id:_id})
-    })
+        body: JSON.stringify({ farm_id: farm._id, user_id: _id }),
+      }
+    );
     const json = await response.json()
     if(response.ok){
         setAssistants([...assistants,json])

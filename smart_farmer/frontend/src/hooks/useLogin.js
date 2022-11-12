@@ -10,19 +10,21 @@ export const useLogin = ()=>{
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("http://localhost:4000/api/user/login", {
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/login`,
+          {
             method: "POST",
             crossDomain: true,
             headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify({
               email,
               password,
             }),
-          })
+          }
+        );
         
         const json = await response.json()
         if(!response.ok){

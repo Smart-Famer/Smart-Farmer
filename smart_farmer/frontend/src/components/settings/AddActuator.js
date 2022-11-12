@@ -17,8 +17,7 @@ export default function AddActuator() {
     const actuator = { actuator_type, name, port };
 
     //console.log(actuator)
-    const response = await fetch(
-      "http://localhost:4000/api/modules/add-actuator",
+    const response = await fetch(`${process.env.REACT_APP_HOST}/api/modules/add-actuator`,
       {
         method: "POST",
         body: JSON.stringify({

@@ -14,18 +14,20 @@ export const useUpdate =()=>{
         // setIsLoading(true)
         setError(null)
 
-        const response = await fetch(`http://localhost:4000/api/user/update/${user._id}`, {
-          method: "POST",
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify({
-            ...data
-          }),
-        })
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/update/${user._id}`,
+          {
+            method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              ...data,
+            }),
+          }
+        );
 
         const json = await response.json()
         

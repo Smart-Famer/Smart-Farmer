@@ -10,7 +10,8 @@ export default function ElectricConductivity(){
 
     useEffect(() => {
       const fetchWorkouts = async () => {
-        const response = await fetch(`http://localhost:4000/api/datareading/${sourceId}`)
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceId}`
+        );
         const json = await response.json()
 
         if (response.ok) {

@@ -18,9 +18,9 @@ import CropYieldInput from "../components/inputForms/CropYieldInput";
 import { AssistantContextProvider } from "../context/AssistantContext";
 
 
-import { AssistantContextProvider } from "../context/AssistantContext";
-import CropYieldInput from '../components/inputForms/CropYieldInput'
-
+// import { AssistantContextProvider } from "../context/AssistantContext";
+// import CropYieldInput from '../components/inputForms/CropYieldInput'
+import GalleryItem from './GalleryItem'
 
 export default function FarmLayout()
 {
@@ -30,6 +30,7 @@ export default function FarmLayout()
                 <Route path='*' element={<Error/>}/>
                 <Route path='dashboard' element={<Dashboard />}/>
                 <Route path='gallery' element={<Gallery />}/>
+                <Route path='gallery/:date' element={<GalleryItem />}/>
                 <Route path='npkinput' element={<NPKpage />}/>
                 <Route path='elecinput' element={<ElecConPage />}/>
                 <Route path='settings' element={<Settings  />} />

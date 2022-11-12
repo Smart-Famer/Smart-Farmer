@@ -29,13 +29,15 @@ export default function NPKInput() {
     const dataReading = { reading, sourceId, timestamp };
 
 
-    const response = await fetch("http://localhost:4000/api/datareading", {
-      method: "POST",
-      body: JSON.stringify(dataReading),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+    const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading`,
+      {
+        method: "POST",
+        body: JSON.stringify(dataReading),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
     const json = await response.json();
 
     if (!response.ok) {

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Col, Container, Row } from "reactstrap";
+import AssistantCard from "../components/cards/assistant_card.js";
 import Input from "../components/inputForms/InputForm";
 import Sidebar from "../components/Sidebar/SideBar";
-import CreateAss from "../components/userManagment/createAssitant";
 import AddAss from "../components/userManagment/addAssistant";
+import CreateAss from "../components/userManagment/createAssitant";
 import { useFarmContext } from "../hooks/useFarmContext";
-import AssistantCard from "../components/cards/assistant_card.js"
-import { Container, Row, Col } from "reactstrap";
-import { useAssistantContext } from "../hooks/useAssistantContext";
 
 
 export default function CreateAssistantPage() {
@@ -16,13 +15,15 @@ export default function CreateAssistantPage() {
     // const {assistants, dispatchAssistants} = useAssistantContext()
     useEffect(()=>{
         const fetchAssistants = async ()=>{
-            const response = await fetch(`http://localhost:4000/api/user/get-assistants`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
+            const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/get-assistants`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
                 },
-                body:JSON.stringify({farm_id:farm._id})
-            })
+                body: JSON.stringify({ farm_id: farm._id }),
+              }
+            );
 
             const json = await response.json()
             setAssistants(json)
