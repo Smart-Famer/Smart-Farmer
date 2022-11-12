@@ -16,6 +16,14 @@ const getKeys = async (req,res)=>{
     }
     res.status(200).json(farmDetails)
 }
+//get all farms
+const getAllFarms = async (req, res) => {
+    console.log("getAllFarms");
+    const farmList= await farmModel.find({}).sort({ createdAt: -1 });
+  
+    res.status(200).json(farmList);
+  };
+
 const getFarms = async (req,res)=>{
     let {farm_ids} = req.body
 
@@ -157,5 +165,6 @@ module.exports={
     deleteFarm,
     updateSensor,
     updateActuator,
-    getFarms
+    getFarms,
+    getAllFarms
 }
