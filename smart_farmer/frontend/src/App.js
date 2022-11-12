@@ -2,6 +2,7 @@ import "./App.css";
 import "react-router-dom";
 import UserLayout from "./Pages/UserLayout";
 import LoginPage from "./Pages/LoginPage";
+import Admin from "./Pages/AdminPanel"
 import Error from "./Pages/Error";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
@@ -15,6 +16,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/login"
           element={!user ? <LoginPage /> : <Navigate to="/user/home" />}
@@ -27,6 +29,7 @@ function App() {
           </FarmContextProvider>
           :<Navigate to="/login" />}
         />
+        {/* <Route path="/admin" element={<Admin />} /> */}
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
