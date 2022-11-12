@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import distinctColors from "distinct-colors";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BarChart } from "../components/BarChart";
 import Sidebar from "../components/Sidebar/SideBar";
 import { useFarmContext } from "../hooks/useFarmContext";
-import distinctColors from "distinct-colors";
 
 export default function CropYieldDataPage(props) {
   const { farm } = useFarmContext();
