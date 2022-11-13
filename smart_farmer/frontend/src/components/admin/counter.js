@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function Counter(props) {
+
   return (
     <Row>
       <Col>
@@ -14,9 +15,11 @@ export default function Counter(props) {
         </div>
       </Col>
       <div className="d-flex flex-row-reverse">
-        <Link to="/user/farm/elecinput" style={{ textDecoration: "none" }}>
-          {<Button color="success">View</Button>}
-        </Link>
+        {
+          <Button color="success" >
+            View
+          </Button>
+        }
       </div>
     </Row>
   );

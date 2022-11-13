@@ -3,8 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-router-dom";
 import UserLayout from "./Pages/UserLayout";
 import LoginPage from "./Pages/LoginPage";
-import Admin from "./Pages/AdminPanel"
 import Error from "./Pages/Error";
+import AdminLayout from "./Pages/AdminLayout"
+import Admin from "./Pages/AdminPanel"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { FarmContextProvider } from "./context/FarmContext";
@@ -17,7 +18,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<LoginPage />} />
         <Route
           path="/login"
           element={!user ? <LoginPage /> : <Navigate to="/user/home" />}
@@ -30,7 +30,7 @@ function App() {
           </FarmContextProvider>
           :<Navigate to="/login" />}
         />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
