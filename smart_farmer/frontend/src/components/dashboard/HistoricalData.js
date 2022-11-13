@@ -14,6 +14,7 @@ export default function HistoricalData() {
   const [xAxisV, setXaxisV] = useState([]);
   const [sensorIds, setSensorIds] = useState([]);
   const [data,setData]=useState([])
+  const [duration,setDuration]=useState('weekly');
 
   function getColorList(colors_count) {
     var palette = distinctColors({ count: colors_count }).map((color) => {
@@ -27,12 +28,10 @@ export default function HistoricalData() {
       const response = await fetch(
         `${
           process.env.REACT_APP_HOST
-        }/api/history/temp?sourceids=${sourceIds.join(",")}&duration=weakly`
+        }/api/history/temp?sourceids=${sourceIds.join(",")}&duration=${duration}`
       );
       const json = await response.json();
-
       if (response.ok) {
-        // console.log(json);
         //load data for x axis
         let temp_x = [];
         let temp_dataSet = [];
@@ -41,10 +40,14 @@ export default function HistoricalData() {
 
 
         json.forEach((element) => {
-          const date = new Date(element.timestamp);
-          const fullDate = `${date.getFullYear()}/${
-            date.getMonth() + 1
-          }/${date.getDate()}`;
+          let fullDate = element.timestamp
+          if (duration === "weekly") {
+            const date = new Date(element.timestamp);
+            fullDate = `${date.getFullYear()}/${
+              date.getMonth() + 1
+            }/${date.getDate()}`;
+          }
+          
           if (!temp_x.includes(fullDate)) {
             temp_x.push(fullDate);
           }
@@ -52,10 +55,13 @@ export default function HistoricalData() {
 
           json.forEach((element) => {
             const sourceId = element.sourceId;
+          let fullDate = element.timestamp;
+          if (duration === "weekly") {
             const date = new Date(element.timestamp);
-            const fullDate = `${date.getFullYear()}/${
+            fullDate = `${date.getFullYear()}/${
               date.getMonth() + 1
             }/${date.getDate()}`;
+          }
             if (!(sourceId in temp_sensorData)) {
               temp_sensorIds.push(sourceId);
               temp_sensorData[sourceId] = { x: [], y: [] };
@@ -67,7 +73,6 @@ export default function HistoricalData() {
             }
           });
             setSensorIds(temp_sensorIds);
-
             //
             
             let colorList = getColorList(temp_sensorIds.length);
@@ -105,8 +110,13 @@ export default function HistoricalData() {
     fetchTempData();
     // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
     // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
-  }, []);
-  // console.log(data)
+  }, [duration]);
+
+  const handleDurationChange = (e)=>{
+    const duration = e.currentTarget.value
+    setDuration(duration)
+  }
+  console.log(duration)
 
   return (
     <>
@@ -120,10 +130,10 @@ export default function HistoricalData() {
             id="section"
             className="form-select"
             aria-label="Default select example"
+            onChange={handleDurationChange}
           >
             <option value="weekly">Weekly</option>
-            <option value="weekly">Monthly</option>
-            <option value="yearly">Yearly</option>
+            <option value="monthly">Monthly</option>
           </select>
         </div>
       </div>
@@ -136,7 +146,7 @@ export default function HistoricalData() {
             // xAxisValues={[
             //   "23/09/2022",
             //   "24/09/2022",
-            //   "25/09/2022" 
+            //   "25/09/2022"
             //   "26/09/2022",
             //   "27/09/2022",
             //   "28/09/2022",
