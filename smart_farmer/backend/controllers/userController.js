@@ -62,6 +62,20 @@ const getAssistants = async (req, res)=>{
         res.status(404).json({error:err.message})
     }
 }
+//get all managers
+const getAllMangers = async (req, res) => {
+    console.log("getAllManagers");
+    const farmList= await User.find({user_type:"Manager"}).sort({ createdAt: -1 });
+  
+    res.status(200).json(farmList);
+  };
+  //get all assistants
+const getAllAssistants = async (req, res) => {
+    console.log("getAllAssistants");
+    const farmList= await User.find({user_type:"Assistant"}).sort({ createdAt: -1 });
+  
+    res.status(200).json(farmList);
+  };
 
 const detachFarm = async(req,res) =>{
     const {farm_id,user_id} = req.body
@@ -112,5 +126,7 @@ module.exports = {
     detachFarm,
     attachFarm,
     updateUser,
-    updatePassword
+    updatePassword,
+    getAllMangers,
+    getAllAssistants
 }

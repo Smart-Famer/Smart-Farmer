@@ -26,9 +26,11 @@ const MockElecCon= () => {
 }
 
 const addTask  = async (tasks) => {
-    const inputElement = await screen.getByPlaceholderText("Electric Conductivity");
+    const inputElement =  screen.getByPlaceholderText("Electric Conductivity");
     // const inputElement = screen.findByTestId("elec-con-input")
-    const buttonElement = screen.findByRole("button", { name: /Submit/i} );
+    const buttonElement = await screen.findByRole("button", {
+      name: /Submit/i,
+    });
     tasks.forEach((task) => {
         // fireEvent.change(inputElement, { target: { value: task } });
         fireEvent.change(inputElement,{target : {value : task}})
