@@ -36,16 +36,6 @@ app.use("/api/admin",adminRouter)
 
 app.use('/api/history/temp',historicalDataRouter)
 
-  const start = new Date("2021-12-30")
-  for (let i = 0; i < 365; i++) {
-    const date = start.getDate()+1;
-    start.setDate(date)
-    console.log(start)
-    
-  }
-  console.log(start.getDate()+1);
-  start.setDate(start.getDate()+1)
-  console.log(start)
 
 mongoose
   .connect(process.env.MONGO_URI)
