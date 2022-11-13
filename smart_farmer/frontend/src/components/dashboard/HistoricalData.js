@@ -15,6 +15,9 @@ export default function HistoricalData() {
   const [sensorIds, setSensorIds] = useState([]);
   const [data,setData]=useState([])
   const [duration,setDuration]=useState('weekly');
+  let currentDate = new Date();
+  let temp_startDay = `${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${currentDate.getDate()-7}`;
+  const [startDate,setStartDate] = useState(temp_startDay)
 
   function getColorList(colors_count) {
     var palette = distinctColors({ count: colors_count }).map((color) => {
@@ -28,7 +31,7 @@ export default function HistoricalData() {
       const response = await fetch(
         `${
           process.env.REACT_APP_HOST
-        }/api/history/temp?sourceids=${sourceIds.join(",")}&duration=${duration}`
+        }/api/history/temp?sourceids=${sourceIds.join(",")}&startdate=${startDate}&duration=${duration}`
       );
       const json = await response.json();
       if (response.ok) {
@@ -111,6 +114,8 @@ export default function HistoricalData() {
     // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
     // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
   }, [duration]);
+  console.log(xAxisV)
+  console.log(data)
 
   const handleDurationChange = (e)=>{
     const duration = e.currentTarget.value

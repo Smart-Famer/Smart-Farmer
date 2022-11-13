@@ -27,6 +27,8 @@ const getTempHistory = async (req, res) => {
   const source_ids = req.query.sourceids;
   const sourceIds = source_ids.split(",");
   const duration = req.query.duration;
+  const startDate = req.query.startdate;
+  console.log(startDate)
   let tempHistory = null;
           const months = [
             "January",
@@ -68,7 +70,8 @@ const getTempHistory = async (req, res) => {
       sourceId: {
         $in: sourceIds,
       },
-    });
+      timestamp:{$gte:startDate}
+    }).limit(8*sourceIds.length);
   }
   
   if (!tempHistory) {
