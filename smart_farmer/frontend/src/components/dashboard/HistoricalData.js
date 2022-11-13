@@ -265,7 +265,7 @@ export default function HistoricalData() {
         )}
       </div>
       <div className="row px-5 historicalData--container">
-        <div className="col-sm-8">
+        <div className="col-sm-10">
           <LineChart
             xAxisLabel="Date"
             yAxisLabel="Temperature"
@@ -281,7 +281,7 @@ export default function HistoricalData() {
             </Link>
           </div> */}
         </div>
-        <div className="col-sm-4">
+        <div className="col-sm-2">
           <div>
             <h5>Filter by sensor:</h5>
             {sensorCheckBox}
