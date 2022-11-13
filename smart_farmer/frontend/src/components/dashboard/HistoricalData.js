@@ -135,7 +135,6 @@ export default function HistoricalData() {
           }
         });
         setSensorIds(temp_sensorIds);
-      console.log(sensorPortName);
 
         //
 
@@ -187,7 +186,6 @@ export default function HistoricalData() {
   const handleTypeChange = (e) =>{
     const type = e.currentTarget.value;
     setType(type);
-    console.log(type)
   }
 
   const handleSensorChange = (e) => {
@@ -196,7 +194,6 @@ export default function HistoricalData() {
     for (let d of temp_data) {
       if (d.label === sensorName) {
         d.visibility = !d.visibility;
-        console.log(d)
       }
     }
     setData(temp_data);
