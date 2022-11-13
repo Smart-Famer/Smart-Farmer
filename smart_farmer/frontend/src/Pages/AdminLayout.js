@@ -13,7 +13,7 @@ export default function AdminLayout()
     return(
         
         <section>
-            <Navbar/>
+            {/* <Navbar/> */}
             <Routes>
                 <Route path='*' element={<Error/>}/>
                 <Route path='' element={<Admin />}/>

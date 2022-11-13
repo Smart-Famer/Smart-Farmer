@@ -13,10 +13,54 @@ export default function Card(props) {
     const {dispatchFarm} = useFarmContext()
     const navigate = useNavigate()
     const handleClick = async ()=>{
-    console.log("handle");
+      const response = await fetch(`${process.env.REACT_APP_HOST}/api/manager/get-farms`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ farm_ids: [props.id] }),
+      }
+    );
+    const json = await response.json()
+    //console.log("farm",json)
+    if (response.ok) {
+        let farm = json[0]
+
+        const res1 = await fetch(`${process.env.REACT_APP_HOST}/api/modules/get-sensors`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ sensor_ids: farm.sensors }),
+          }
+        );
+        const sensors = await res1.json()
+
+        const res2 = await fetch(`${process.env.REACT_APP_HOST}/api/modules/get-actuators`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ actuator_ids: farm.actuators }),
+          }
+        );
+        const actuators = await res2.json()
+
+        farm={
+            ...farm,
+            sensors,
+            actuators
         }
-        navigate("/user/viewAll")
-    
+        dispatchFarm({
+            type:"ADD",
+            payload:farm
+        })
+    }
+    navigate("/user/farm/dashboard")
+}
 
     return (
 
