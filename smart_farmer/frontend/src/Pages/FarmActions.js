@@ -1,6 +1,6 @@
 
 import Header from "../components/login/Header.js"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Container, Row, Col } from "reactstrap";
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 import Sidebar from "../components/Sidebar/SideBar.js"
@@ -11,16 +11,13 @@ import { useState } from "react";
 import { useFarmContext } from "../hooks/useFarmContext.js";
 import '../components/FarmManagement/farmCard'
 import { HiViewGridAdd } from "react-icons/hi";
+import FarmForm from "../components/FarmManagement/farmForm"
 
 export default function  Home() {
-    const navigate = useNavigate()
     const {user} = useAuthContext()
     const {dispatchFarm} = useFarmContext()
     const [farm_list, setFarmList] = useState([])
     //console.log(farm_list)
-    const handleAction = ()=>{
-        navigate("/user/farm-actions/add")
-    }
     useEffect(() => {
         
         const fetchFarms = async () => {
@@ -48,22 +45,9 @@ export default function  Home() {
     return (
         <div className="main-container">
             <Sidebar />
-            <div className="home">
-                <Header />
-                <div className="farm-card p-4">
-                    <div class="text-center pb-5"><button class="btn btn-lg btn-success rounded-pill" onClick={handleAction}><HiViewGridAdd size={40}/></button></div>
-                    <Container >
-                        <Row>
-                            {farm_components}
-                        </Row>
-
-
-                    </Container>
-
-                </div>
+            <div class="row m-4 mx-auto">
+                    <FarmForm/>
             </div>
-
-
         </div>
     )
 }

@@ -11,6 +11,8 @@ const {createTest} = require('./controllers/testController')
 const cropYield = require('./routes/cropYield')
 const photoData = require('./routes/photoData')
 const adminRouter =require("./routes/admin")
+const historicalDataRouter = require('./routes/historicalData')
+
 
 const app = express();
 
@@ -32,9 +34,8 @@ app.use("/api/cropyield/",cropYield)
 app.use("/api/photos/",photoData)
 app.use("/api/admin",adminRouter)
 
-let arr = ["a", "c", "d"];
-arr.splice(1, 0, "m");
-console.log(arr);
+app.use('/api/history/temp',historicalDataRouter)
+
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -47,3 +48,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+
+

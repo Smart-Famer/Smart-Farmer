@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import distinctColors from "distinct-colors";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BarChart } from "../components/BarChart";
 import Sidebar from "../components/Sidebar/SideBar";
 import { useFarmContext } from "../hooks/useFarmContext";
-import distinctColors from "distinct-colors";
 
 export default function CropYieldDataPage(props) {
   const { farm } = useFarmContext();
@@ -128,7 +128,6 @@ export default function CropYieldDataPage(props) {
   const handleMonthChange = (e) => {
     let temp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
     let temp_cropMonths = JSON.parse(JSON.stringify(xAxisV)); //months which are corresponding to yields
-    // console.log(temp_cropMonths)
 
     const month = e.currentTarget.id; //clicked checkbox name
     const month_index = tmp_cropMonths.indexOf(month); //index of clicked checkbox month in xAxisV array

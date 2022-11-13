@@ -32,7 +32,7 @@ export const PhotoContextProvider = ({children})=>{
     const [photos, dispatchPhotos] = useReducer(photoReducer,{})
     useEffect(()=>{
         const fetchPhotos = async ()=>{
-            const response = await fetch(`http://localhost:4000/api/photos/get-photos/${farm._id}`,{
+            const response = await fetch(`${process.env.REACT_APP_HOST}/api/photos/get-photos/${farm._id}`,{
                 method:"GET",
                 headers:{
                     "Content-Type":"application/json"
