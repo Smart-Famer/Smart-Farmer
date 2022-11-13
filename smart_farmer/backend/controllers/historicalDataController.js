@@ -28,7 +28,6 @@ const getTempHistory = async (req, res) => {
   const sourceIds = source_ids.split(",");
   const duration = req.query.duration;
   const startDate = req.query.startdate;
-  console.log(startDate)
   let tempHistory = null;
           const months = [
             "January",
