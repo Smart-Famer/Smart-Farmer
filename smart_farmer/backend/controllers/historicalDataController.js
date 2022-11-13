@@ -1,29 +1,7 @@
 const dataReadingModel = require("../models/dataReadingModel");
 const mongoose = require("mongoose");
 
-// const getTempAvg = async (req, res) => {
-//   const source_ids = req.query.sourceids;
-//   const sourceIds = source_ids.split(",");
-//   const duration = req.query.duration;
-//   console.log(sourceIds, duration);
-//   const tempHistory = await dataReadingModel.aggregate([
-//     {
-//       $match: {sourceId: {$in: sourceIds}},
-//     },
-//     {
-//       $group: {
-//         _id: { month:{$month:"$timestamp"}, sourceId:"$sourceId" },
-//         avgReading: { $avg: "$reading" },
-//       },
-//     },
-//   ]);
-//   if (!tempHistory) {
-//     return res.status(404).json({ error: "Data Loading error!" });
-//   }
- 
-//   res.status(200).json(tempHistory);
-// };
-const getTempHistory = async (req, res) => {
+const getReadingHistory = async (req, res) => {
   const source_ids = req.query.sourceids;
   const sourceIds = source_ids.split(",");
   const duration = req.query.duration;
@@ -55,17 +33,17 @@ const getTempHistory = async (req, res) => {
         },
       },
     ]);
-    tempHistory=temp.map((e)=>{
+    readingHistory=temp.map((e)=>{
       return {
         sourceId:e._id.sourceId,
         timestamp:months[e._id.month],
         reading:e.reading
       }
     })
-    // console.log(tempHistory_)
-    // tempHistory=temp;
+    // console.log(readingHistory_)
+    // readingHistory=temp;
   }else{
-     tempHistory = await dataReadingModel.find({
+     readingHistory = await dataReadingModel.find({
       sourceId: {
         $in: sourceIds,
       },
@@ -73,12 +51,12 @@ const getTempHistory = async (req, res) => {
     }).limit(8*sourceIds.length);
   }
   
-  if (!tempHistory) {
+  if (!readingHistory) {
     return res.status(404).json({ error: "Data Loading error!" });
   }
-  res.status(200).json(tempHistory);
+  res.status(200).json(readingHistory);
 };
 
 module.exports = {
-  getTempHistory,
+  getReadingHistory,
 };

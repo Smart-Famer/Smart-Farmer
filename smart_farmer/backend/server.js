@@ -34,7 +34,7 @@ app.use("/api/cropyield/",cropYield)
 app.use("/api/photos/",photoData)
 app.use("/api/admin",adminRouter)
 
-app.use('/api/history/temp',historicalDataRouter)
+app.use('/api/history/',historicalDataRouter)
 
 
 mongoose

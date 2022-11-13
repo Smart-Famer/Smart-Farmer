@@ -9,20 +9,31 @@ import LineChart from "./LineChart";
 
 export default function HistoricalData() {
   const { farm } = useFarmContext();
-  const sourceIds = farm.sensors.Temperature.map((e) => {
-    return e.port;
+  
+
+  
+  let sensorPortName = {};
+  farm.sensors.Temperature.forEach((sensor) => {
+    sensorPortName[sensor.port] = sensor.name;
   });
-  const temperatureSensors = farm.sensors.Temperature;
-  const sensorPortName = {};
-  temperatureSensors.forEach((sensor) => {
+  farm.sensors.Humidity.forEach((sensor) => {
+    sensorPortName[sensor.port] = sensor.name;
+  });
+  farm.sensors.Soil.forEach((sensor) => {
+    sensorPortName[sensor.port] = sensor.name;
+  });
+  farm.sensors.RainFall.forEach((sensor) => {
     sensorPortName[sensor.port] = sensor.name;
   });
 
+
+  const [type,setType] = useState('temp')
   const [xAxisV, setXaxisV] = useState([]);
   const [sensorIds, setSensorIds] = useState([]);
   const [data, setData] = useState([]);
   const [duration, setDuration] = useState("weekly");
   const [error, SetError] = useState("");
+
 
   let currentDate = new Date();
   let temp_startDay = `${currentDate.getFullYear()}-${
@@ -38,11 +49,42 @@ export default function HistoricalData() {
   }
 
   useEffect(() => {
+
+      let sourceIds = null
+      let sensorDetails = null
+      switch (type) {
+        case "temp":
+          sourceIds = farm.sensors.Temperature.map((e) => {
+            return e.port;
+          });
+          break;
+        case "humidity":
+          sourceIds = farm.sensors.Humidity.map((e) => {
+            return e.port;
+          });
+          break;
+        case "soil_humidity":
+          sourceIds = farm.sensors.Soil.map((e) => {
+            return e.port;
+          });
+          break;
+        case "rainfall":
+          sourceIds = farm.sensors.RainFall.map((e) => {
+            return e.port;
+          });
+          break;
+        default:
+          sourceIds = farm.sensors.Temperature.map((e) => {
+            return e.port;
+          });
+      }
+      
+      
     const fetchTempData = async () => {
       const response = await fetch(
         `${
           process.env.REACT_APP_HOST
-        }/api/history/temp?sourceids=${sourceIds.join(
+        }/api/history/?&sourceids=${sourceIds.join(
           ","
         )}&startdate=${startDate}&duration=${duration}`
       );
@@ -93,6 +135,8 @@ export default function HistoricalData() {
           }
         });
         setSensorIds(temp_sensorIds);
+      console.log(sensorPortName);
+
         //
 
         let colorList = getColorList(temp_sensorIds.length);
@@ -130,7 +174,7 @@ export default function HistoricalData() {
     fetchTempData();
     // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
     // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
-  }, [duration, startDate]);
+  }, [duration, startDate,type]);
 
   const handleDurationChange = (e) => {
     const duration = e.currentTarget.value;
@@ -140,6 +184,11 @@ export default function HistoricalData() {
     const date = e.currentTarget.value;
     setStartDate(date);
   };
+  const handleTypeChange = (e) =>{
+    const type = e.currentTarget.value;
+    setType(type);
+    console.log(type)
+  }
 
   const handleSensorChange = (e) => {
     const sensorName = sensorPortName[e.currentTarget.id];
@@ -155,7 +204,7 @@ export default function HistoricalData() {
 
   const sensorCheckBox = sensorIds.map((sensorId) => {
     return (
-      <div className="form-check">
+      <div key={sensorId} className="form-check">
         <input
           className="form-check-input"
           type="checkbox"
@@ -172,6 +221,20 @@ export default function HistoricalData() {
 
   return (
     <>
+      <div className="row d-flex justify-content-center">
+        <div className="col-sm-4 mb-3">
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            onChange={handleTypeChange}
+          >
+            <option value="temp">Temperature</option>
+            <option value="humidity">Humidity</option>
+            <option value="soil_humidity">Soil Humidity</option>
+            <option value="rainfall">Rainfall</option>
+          </select>
+        </div>
+      </div>
       <div className="row">
         <div className="col-sm-1 text-end">
           <label htmlFor="secton">Filter By:</label>
@@ -188,19 +251,21 @@ export default function HistoricalData() {
             <option value="monthly">Monthly</option>
           </select>
         </div>
-        {duration==='weekly'&&(<>
-          <div className="col-sm-1 text-end">
-            <label htmlFor="startDate">Start Date:</label>
-          </div>
-          <div className="col-sm-2">
-            <input
-              type="date"
-              className="form-control"
-              id="startDate"
-              onChange={handleStartDateChange}
-            />
-          </div>
-        </>)}
+        {duration === "weekly" && (
+          <>
+            <div className="col-sm-1 text-end">
+              <label htmlFor="startDate">Start Date:</label>
+            </div>
+            <div className="col-sm-2">
+              <input
+                type="date"
+                className="form-control"
+                id="startDate"
+                onChange={handleStartDateChange}
+              />
+            </div>
+          </>
+        )}
       </div>
       <div className="row px-5 historicalData--container">
         <div className="col-sm-8">
@@ -213,11 +278,11 @@ export default function HistoricalData() {
               return x.visibility === true;
             })}
           />
-          <div className="d-flex flex-row-reverse">
+          {/* <div className="d-flex flex-row-reverse">
             <Link to="/history" style={{ textDecoration: "none" }}>
               {"View All>"}
             </Link>
-          </div>
+          </div> */}
         </div>
         <div className="col-sm-4">
           <div>
