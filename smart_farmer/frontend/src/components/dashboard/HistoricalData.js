@@ -188,17 +188,19 @@ export default function HistoricalData() {
             <option value="monthly">Monthly</option>
           </select>
         </div>
-        <div className="col-sm-1 text-end">
-          <label htmlFor="startDate">Start Date:</label>
-        </div>
-        <div className="col-sm-2">
-          <input
-            type="date"
-            className="form-control"
-            id="startDate"
-            onChange={handleStartDateChange}
-          />
-        </div>
+        {duration==='weekly'&&(<>
+          <div className="col-sm-1 text-end">
+            <label htmlFor="startDate">Start Date:</label>
+          </div>
+          <div className="col-sm-2">
+            <input
+              type="date"
+              className="form-control"
+              id="startDate"
+              onChange={handleStartDateChange}
+            />
+          </div>
+        </>)}
       </div>
       <div className="row px-5 historicalData--container">
         <div className="col-sm-8">
