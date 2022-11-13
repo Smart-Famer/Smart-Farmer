@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './card.css';
+import '../cards/card.css'
 import { useNavigate } from "react-router";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import { MdCreate } from "react-icons/md";
@@ -64,7 +64,7 @@ export default function Card(props) {
 
     return (
 
-        <div className="row--farm">
+        <div className="row--farm ">
             <div className="col-sm-12">
                 <div id={props.key} className="card">
                 <div class="embed-responsive">
@@ -72,8 +72,8 @@ export default function Card(props) {
                     width={"100%"}
                     height={"300px"}
                     loading="lazy"
-                    allowfullscreen
-                    referrerpolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
                     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCi02J9WcBGHLfNAViDd2n41OsK6PMZN30
                       &q=Matara,Sri Lanka">
                   </iframe>

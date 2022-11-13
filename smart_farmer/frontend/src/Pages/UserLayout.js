@@ -14,6 +14,7 @@ import CropYieldDataPage from './CropsYieldDataPage';
 import ViewProfilePage from './ViewProfilePage';
 import Error from './Error';
 import FarmLayout from "./FarmLayout";
+import FarmActions from "./FarmActions"
 import { useFarmContext } from "../hooks/useFarmContext";
 //import Test from './Test';
 
@@ -27,6 +28,7 @@ export default function UserLayout()
             <Routes>
                 <Route path='*' element={<Error/>}/>
                 <Route path='home' element={<HomePage />}/>
+                <Route path='farm-actions/:action' element={<FarmActions />}/>
                 <Route path='farm/*' element={farm ? <FarmLayout />:<Navigate to="/user/home"/>}/>
                 <Route path='viewProfilePage' element={<ViewProfilePage />}/>
             </Routes>
