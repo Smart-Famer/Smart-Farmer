@@ -9,13 +9,13 @@ export default function SettingsPage()
     return(
         <div className="main-container">
             <Sidebar/>
-            <div>
-                <div className="AddSensor">
+            <div class="row">
+                <div className="col-6 m-1">
                     <Input formName='Add New Sensor'>
                         <AddSensor />
                     </Input>
                 </div>
-                <div className="AddActuator">
+                <div className="col-6 m-1">
                     <Input formName='Add New Actuator'>
                         <AddActuator />
                     </Input>
