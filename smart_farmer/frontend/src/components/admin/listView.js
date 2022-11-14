@@ -3,6 +3,7 @@ import { Table } from 'reactstrap';
 
 export default function ListView(content) {
 
+  console.log(content.iteamList);
     return (
       <Table striped>
         <thead>

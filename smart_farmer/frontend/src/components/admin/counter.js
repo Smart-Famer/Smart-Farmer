@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function Counter(props) {
+
+  const navigate = useNavigate()
+    const handleClick = async ()=>{
+      navigate("/admin/viewAll")
+    }
 
   return (
     <Row>
@@ -16,7 +20,7 @@ export default function Counter(props) {
       </Col>
       <div className="d-flex flex-row-reverse">
         {
-          <Button color="success" >
+          <Button color="success" onClick={handleClick} >
             View
           </Button>
         }

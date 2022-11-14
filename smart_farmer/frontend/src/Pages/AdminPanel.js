@@ -25,7 +25,8 @@ export default function AdminPanel(props) {
       if (response.ok) {
         setFarmList(json);
       }
-    };const fetchManagers= async () => {
+    };
+    const fetchManagers= async () => {
       const response = await fetch(
         `http://localhost:4000/api/admin/get-all-mangers`
       );
