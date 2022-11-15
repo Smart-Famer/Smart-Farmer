@@ -2,23 +2,27 @@
 import WaterPumpContainer from "../components/contol-panel/WaterPumpContainer";
 import CameraContainer from "../components/contol-panel/CameraContainer";
 import Sidebar from "../components/Sidebar/SideBar";
+import { useFarmContext } from "../hooks/useFarmContext";
+import { useEffect } from "react";
 
 
 export default function Dashboard(props)
 {
-    // if(!props.user){
-    //     return <Navigate to="/login"/>
-    // }
-    const pumps=[
-        {
-            name:"Pump1",
-            status:"on"
-        },
-        {
-            name:"Pump2",
-            status:"off"
-        }
-    ]
+    const {farm}= useFarmContext()
+    const pumps = farm.actuators.Pump
+    
+    
+
+    // const pumps=[
+    //     {
+    //         name:"Pump1",
+    //         status:"on"
+    //     },
+    //     {
+    //         name:"Pump2",
+    //         status:"off"
+    //     }
+    // ]
     const cameras=["camera-1","camera-2"]
     return(
         <div className="main-container">
