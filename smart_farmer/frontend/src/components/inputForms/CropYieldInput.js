@@ -62,7 +62,7 @@ export default function CropYieldInput(props){
                       <input 
                           value={amount}
                           onChange={(e)=>{setAmount(e.target.value)}}
-                          type="text" className="form-control" id="yield" placeholder="Sensor 1,2.." required={true}/>
+                          type="text" className="form-control" id="yield" placeholder="Crop yield in kilo" required={true}/>
                   </div>
                   
               
