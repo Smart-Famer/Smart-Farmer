@@ -12,7 +12,7 @@ export default function NavBar(){
             <nav className="top-nav">
                 {farm&&<div className="top-nav-user-info">
                     <div className="top-nav-info-name"><p>{farm.name}</p></div>
-                    <div className="top-nav-info-type"><p>{farm.location}</p></div>
+                    <div className="top-nav-info-type"><p>{farm.address}</p></div>
                 </div>}
                 <div className="top-nav-user-info">
                     <div data-testid='top-nav-info-name' className="top-nav-info-name"><p>{user.first_name+" "+user.second_name}</p></div>

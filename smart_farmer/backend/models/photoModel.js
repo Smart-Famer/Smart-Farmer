@@ -26,7 +26,7 @@ const photoSchema = new Schema(
 //         timeField:'timestamp',
 //         metaField:'metadata',
 //         granularity:'hours'
-//     }
+//     }`
 // }
 
 module.exports = mongoose.model('photo', photoSchema)

@@ -92,12 +92,13 @@ const getAllAssistants = async (req, res) => {
   };
 
 const detachFarm = async(req,res) =>{
+    console.log(req.body)
     const {farm_id,user_id} = req.body
     try{
-        await User.updateOne({_id:user_id},{$pullAll:{
+        const user = await User.findOneAndUpdate({_id:user_id},{$pullAll:{
             farms:[farm_id]
         }})
-        res.status(200).json({message:"successfully removed"})
+        res.status(200).json(user)
     }catch(err){
         res.status(400).json({error:err.message})
     }
@@ -112,7 +113,7 @@ const attachFarm = async(req,res) =>{
         }
         const user = await User.findOneAndUpdate({_id:user_id},{$push:{
             farms:farm_id
-        }})
+        }},{new: true})
         res.status(200).json(user)
     }catch(err){
         res.status(400).json({error:err.message})

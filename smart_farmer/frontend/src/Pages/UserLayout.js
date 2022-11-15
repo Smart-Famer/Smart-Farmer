@@ -28,7 +28,7 @@ export default function UserLayout()
             <Routes>
                 <Route path='*' element={<Error/>}/>
                 <Route path='home' element={<HomePage />}/>
-                <Route path='farm-actions/:action' element={<FarmActions />}/>
+                <Route path='farm-actions/:action/:_id' element={<FarmActions />}/>
                 <Route path='farm/*' element={farm ? <FarmLayout />:<Navigate to="/user/home"/>}/>
                 <Route path='viewProfilePage' element={<ViewProfilePage />}/>
             </Routes>

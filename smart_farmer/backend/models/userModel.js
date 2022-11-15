@@ -27,12 +27,10 @@ const userSchema = new Schema({
         required:true
     },
     profile_picture:{
-        type:String,
-        required:true
+        type:String
     },
     location:{
         type:String,
-        required:true
     },
     farms:[String]
 

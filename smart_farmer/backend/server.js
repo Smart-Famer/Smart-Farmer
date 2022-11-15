@@ -11,6 +11,7 @@ const {createTest} = require('./controllers/testController')
 const cropYield = require('./routes/cropYield')
 const photoData = require('./routes/photoData')
 const adminRouter =require("./routes/admin")
+const farmRouter =require("./routes/farm")
 const historicalDataRouter = require('./routes/historicalData')
 
 
@@ -20,11 +21,11 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use("/api/user", userRouter);
-app.use("/api/manager", managerRouter);
-app.use("/api/datareading", dataReadingRouter);
-app.use("/api/modules", addModuleRouter);
-app.use("/api/cropyield/", cropYield);
+// app.use("/api/user", userRouter);
+// app.use("/api/manager", managerRouter);
+// app.use("/api/datareading", dataReadingRouter);
+// app.use("/api/modules", addModuleRouter);
+// app.use("/api/cropyield/", cropYield);
 
 app.use("/api/user",userRouter)
 app.use("/api/manager",managerRouter)
@@ -33,8 +34,9 @@ app.use("/api/modules",addModuleRouter)
 app.use("/api/cropyield/",cropYield)
 app.use("/api/photos/",photoData)
 app.use("/api/admin",adminRouter)
+app.use("/api/farm",farmRouter)
 
-app.use('/api/history/temp',historicalDataRouter)
+app.use('/api/history/',historicalDataRouter)
 
 
 mongoose

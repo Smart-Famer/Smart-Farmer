@@ -9,6 +9,7 @@ export default function CropYieldDataPage(props) {
   const { farm } = useFarmContext();
   const farm_id = farm._id;
 
+
   const [xAxisV, setXaxisV] = useState([]);
   const [cropNames, setCropNames] = useState([]);
   const [temp_cropMonths, setCropMonths] = useState([]);
@@ -184,6 +185,7 @@ export default function CropYieldDataPage(props) {
       </div>
     );
   });
+  
 
   return (
     <div className="main-container">
