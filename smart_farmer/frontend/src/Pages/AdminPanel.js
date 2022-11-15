@@ -1,4 +1,3 @@
-// import { Navigate, useParams } from "react-router-dom";
 import Header from "../components/login/Header";
 import Meter from "../components/dashboard/Meter";
 import { Container, Row, Col } from "reactstrap";

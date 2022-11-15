@@ -9,6 +9,7 @@ export default function CropYieldDataPage(props) {
   const { farm } = useFarmContext();
   const farm_id = farm._id;
 
+
   const [xAxisV, setXaxisV] = useState([]);
   const [cropNames, setCropNames] = useState([]);
   const [temp_cropMonths, setCropMonths] = useState([]);
@@ -128,7 +129,6 @@ export default function CropYieldDataPage(props) {
   const handleMonthChange = (e) => {
     let temp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
     let temp_cropMonths = JSON.parse(JSON.stringify(xAxisV)); //months which are corresponding to yields
-    // console.log(temp_cropMonths)
 
     const month = e.currentTarget.id; //clicked checkbox name
     const month_index = tmp_cropMonths.indexOf(month); //index of clicked checkbox month in xAxisV array
@@ -185,6 +185,7 @@ export default function CropYieldDataPage(props) {
       </div>
     );
   });
+  
 
   return (
     <div className="main-container">

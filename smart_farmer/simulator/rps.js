@@ -10,10 +10,10 @@ function getRandomDate(startDate, endDate) {
   return new Date(timestamp);
 }
 
-const startDate = new Date("2022-11-7");
+const startDate = new Date("2022-9-1");
 let dateArr = [];
 let i = 0;
-for (let i = 0; i < 7; i++) {
+for (let i = 0; i < 91 ; i++) {
   const newday = startDate.getDate(startDate) + 1;
   startDate.setDate(newday);
   let daystr = startDate.toString();
@@ -54,12 +54,81 @@ const sendReading = (type) => {
 
       break;
     case "hum":
-      sourceId = hum_array[source_index];
+      for (let index = 0; index < temp_array.length; index++) {
+        const sourceId = hum_array[index];
+        reading = (Math.random() * 50).toFixed(2);
+
+        if (typeof reading !== "undefined" && typeof sourceId !== "undefined") {
+          axios
+            .post(`http://localhost:4000/api/datareading/`, {
+              sourceId,
+              reading,
+              timestamp,
+            })
+            .then((response) => {
+              console.log(
+                response.data.reading,
+                response.data.sourceId,
+                response.data.timestamp
+              );
+            })
+            .catch((error) => {
+              console.log("error");
+            });
+        }
+      }
+      sourceId = temp_array[source_index];
       break;
     case "shum":
+      for (let index = 0; index < temp_array.length; index++) {
+        const sourceId = shum_array[index];
+        reading = (Math.random() * 50).toFixed(2);
+
+        if (typeof reading !== "undefined" && typeof sourceId !== "undefined") {
+          axios
+            .post(`http://localhost:4000/api/datareading/`, {
+              sourceId,
+              reading,
+              timestamp,
+            })
+            .then((response) => {
+              console.log(
+                response.data.reading,
+                response.data.sourceId,
+                response.data.timestamp
+              );
+            })
+            .catch((error) => {
+              console.log("error");
+            });
+        }
+      }
       sourceId = shum_array[source_index];
       break;
     case "rain":
+      for (let index = 0; index < temp_array.length; index++) {
+        const sourceId = rain_array[index];
+        reading = (Math.random() * 50).toFixed(2);
+
+        if (typeof reading !== "undefined" && typeof sourceId !== "undefined") {
+          axios
+            .post(`http://localhost:4000/api/datareading/`, {
+              sourceId,
+              reading,
+              timestamp,
+            })
+            .then((response) => {
+              console.log(
+                response.data.reading,
+                response.data.sourceId,
+                response.data.timestamp
+              );
+            })
+            .catch((error) => {
+              console.log("error");
+            });
+        }
+      }
       sourceId = rain_array[source_index];
       break;
 
@@ -73,7 +142,7 @@ const sendReading = (type) => {
 // sendReading('temp')
 
 // sendReading('temp')
-setInterval(sendReading, 5000, "temp");
+// setInterval(sendReading, 2000, "temp");
 // setInterval(sendReading,2000,'hum')
-// setInterval(sendReading,6000,'shum')
-// setInterval(sendReading,7000,'rain')
+// setInterval(sendReading,2000,'shum')
+setInterval(sendReading,2000,'rain')
