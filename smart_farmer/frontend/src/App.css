@@ -134,4 +134,12 @@ margin-bottom: 20px;
     padding: 0;
     position: relative;
     margin: 5%;
+}.class-col {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  flex: 1;
+  height: 100%;
 }
+
+

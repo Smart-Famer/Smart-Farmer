@@ -1,11 +1,13 @@
 import React from "react";
 import ListView from "../components/admin/managerList";
-import { Container } from "reactstrap";
+import { Container, Button, Row, Col } from "reactstrap";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ViewAll() {
   const [input, setInput] = useState("");
   const [countryListDefault, setCountryListDefault] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchManagers = async () => {
@@ -34,17 +36,29 @@ export default function ViewAll() {
     );
   };
 
+  const handleClick = () => {
+    navigate("/admin/createManager");
+  }
+
   return (
     <div className="p-5">
       <Container className="p-5 bg-white">
         <div className="p-2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="search"
-            onChange={(e) => setInput(e.target.value)}
-          ></input>
+          <Row>
+            <Col>
+              <input
+                type="text"
+                placeholder="Search..."
+                className="search"
+                onChange={(e) => setInput(e.target.value)}
+              ></input>
+            </Col>
+            <Col className="class-col">
+              <Button color="success" onClick={handleClick}>Add Manager</Button>
+            </Col>
+          </Row>
         </div>
+
         <div className="m-5">
           <ListView iteamList={search(countryListDefault)} />
         </div>

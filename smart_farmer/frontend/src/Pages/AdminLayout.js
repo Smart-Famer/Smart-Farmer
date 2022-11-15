@@ -7,6 +7,7 @@ import Admin from "./AdminPanel"
 import ViewAllFarms from "./ViewAllFarms";
 import ViewAllManagers from "./ViewAllManagers";
 import ViewAllAssistants from "./ViewAllassistants";
+import CreateManagerPage from "./CreateMangerPage";
 
 //import Test from './Test';
 
@@ -23,6 +24,7 @@ export default function AdminLayout()
                 <Route path='viewAllFarms' element={<ViewAllFarms />}/>
                 <Route path='viewAllManagers' element={<ViewAllManagers />}/>
                 <Route path='viewAllAssistants' element={<ViewAllAssistants />}/>
+                <Route path='createManager' element={<CreateManagerPage />}/>
             </Routes>
         </section>
     )
