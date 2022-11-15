@@ -5,14 +5,77 @@ import { useNavigate } from "react-router";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import { MdCreate } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 
 export default function Card(props) {
 
     //console.log("props",props)
+    const {user, dispatchAuthState} = useAuthContext()
     const {dispatchFarm} = useFarmContext()
     const navigate = useNavigate()
-    const handleClick = async ()=>{
+
+    const handleEdit = ()=>{
+      navigate(`/user/farm-actions/edit/${props.id}`)
+    }
+
+    const handleLeave = async ()=>{
+      const response = await fetch(`${process.env.REACT_APP_HOST}/api/user/detach-farm`,{
+        method:"POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify({
+          farm_id:props.id,
+          user_id:user.details._id
+        })
+      })
+
+      const json = await response.json()
+      if(response.ok){
+        dispatchAuthState(
+          {
+            type:"UPDATE",
+            payload:{
+              details:{
+                farms:user.details.farms.filter(id=>props.id!==id)
+              }
+            }
+          }
+        )
+        alert("Successfully left the farm")
+      }else{
+        console.log(json.error)
+      }
+    }
+
+    const handleDelete = async ()=>{
+      const response = await fetch(`${process.env.REACT_APP_HOST}/api/farm/delete-farm/${props.id}`,{
+        method:"GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      const json = await response.json()
+      if(response.ok){
+        dispatchAuthState(
+          {
+            type:"UPDATE",
+            payload:{
+              details:{
+                farms:user.details.farms.filter(id=>json._id!==id)
+              }
+            }
+          }
+        )
+        alert("Farm Deleted Successfully")
+      }else{
+        console.log(json.error)
+      }
+    }
+
+    const handleEnter = async ()=>{
         const response = await fetch(`${process.env.REACT_APP_HOST}/api/manager/get-farms`,
           {
             method: "POST",
@@ -74,19 +137,19 @@ export default function Card(props) {
                     loading="lazy"
                     allowFullScreen
                     referrerPolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCi02J9WcBGHLfNAViDd2n41OsK6PMZN30
-                      &q=Matara,Sri Lanka">
+                    src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCi02J9WcBGHLfNAViDd2n41OsK6PMZN30&q=${props.latitude},${props.longitude}`}>
                   </iframe>
                 </div>
                     <div className="card-body">
-                        <h5 className="card-title">{props.name}<button href="#" className="btn btn-sm btn-dark ms-3 rounded-pill" onClick={handleClick}><MdCreate size={15}/></button></h5>
-                        <p className="card-location">{props.location}</p>
+                        <h5 className="card-title">{props.name}{user.details.user_type==="Manager"&&<button className="btn btn-sm btn-dark ms-3 rounded-pill" onClick={handleEdit}><MdCreate size={15}/></button>}</h5>
+                        <p className="card-location">{props.address}</p>
                         <div class="row">
                           <div class="col-10">
-                            <button href="#" className="btn btn-success rounded-pill" onClick={handleClick}>Enter</button>
+                            <button className="btn btn-success rounded-pill" onClick={handleEnter}>Enter</button>
                           </div>
                           <div class="col-2">
-                            <button href="#" className="btn btn-sm btn-danger" onClick={handleClick}><MdDeleteOutline size={20}/></button>
+                            {user.details.user_type==="Assistant"&&<button className="btn btn-sm btn-danger" onClick={handleLeave}>Leave</button>}
+                            {user.details.user_type==="Manager"&&<button className="btn btn-sm btn-danger" onClick={handleDelete}><MdDeleteOutline size={20}/></button>}
                           </div>
                         </div>
                     </div>

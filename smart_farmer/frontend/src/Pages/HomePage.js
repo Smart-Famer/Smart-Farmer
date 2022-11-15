@@ -14,15 +14,14 @@ import { HiViewGridAdd } from "react-icons/hi";
 
 export default function  Home() {
     const navigate = useNavigate()
-    const {user} = useAuthContext()
+    let {user} = useAuthContext()
     const {dispatchFarm} = useFarmContext()
     const [farm_list, setFarmList] = useState([])
     //console.log(farm_list)
     const handleAction = ()=>{
-        navigate("/user/farm-actions/add")
+        navigate("/user/farm-actions/add/00")
     }
     useEffect(() => {
-        
         const fetchFarms = async () => {
             const response = await fetch(`${process.env.REACT_APP_HOST}/api/manager/get-farms`,
               {
@@ -34,6 +33,8 @@ export default function  Home() {
               }
             );
             const json = await response.json()
+            // alert(JSON.stringify(json.length))
+
             //console.log(json)
             if (response.ok) {
                 setFarmList(json)
@@ -41,9 +42,9 @@ export default function  Home() {
         }
         fetchFarms()
         dispatchFarm({type:"REMOVE"})
-    }, [])
+    }, [user])
 
-    const farm_components = farm_list.map((farm)=><Col key={farm._id}><FarmCard id={farm._id} name={farm.name} location={farm.location}></FarmCard></Col>)
+    const farm_components = farm_list.map((farm)=><Col key={farm._id}><FarmCard id={farm._id} name={farm.name} address={farm.address} latitude={farm.location.latitude} longitude={farm.location.longitude}></FarmCard></Col>)
     
     return (
         <div className="main-container">
@@ -51,7 +52,7 @@ export default function  Home() {
             <div className="home">
                 <Header />
                 <div className="farm-card p-4">
-                    <div class="text-center pb-5"><button class="btn btn-lg btn-success rounded-pill" onClick={handleAction}><HiViewGridAdd size={40}/></button></div>
+                    {user.details.user_type==="Manager"&&<div class="text-center pb-5"><button class="btn btn-lg btn-success rounded-pill" onClick={handleAction}><HiViewGridAdd size={40}/></button></div>}
                     <Container >
                         <Row>
                             {farm_components}
