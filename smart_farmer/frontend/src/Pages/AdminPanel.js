@@ -11,7 +11,7 @@ import { useFarmContext } from "../hooks/useFarmContext.js";
 export default function AdminPanel(props) {
   // const { user } = useAuthContext();
   // if (!user) {
-  //   return <Navigate to="/login" />;
+  //   return <Navigate to="/adminLogin" />;
   // }
   const [farm_list, setFarmList] = useState([]);
   const [manager_list, setManagerList] = useState([]);
@@ -31,7 +31,7 @@ export default function AdminPanel(props) {
         `http://localhost:4000/api/admin/get-all-mangers`
       );
       const json = await response.json();
-      console.log(json);
+      // console.log(json);
       if (response.ok) {
         setManagerList(json);
       }
@@ -41,7 +41,7 @@ export default function AdminPanel(props) {
         `http://localhost:4000/api/admin/get-all-assistants`
       );
       const json = await response.json();
-      console.log(json);
+      // console.log(json);
       if (response.ok) {
         setAssiatantList(json);
       }
@@ -62,19 +62,19 @@ export default function AdminPanel(props) {
             <Row>
               <Col>
                 <Meter heading="Number of Farms">
-                  <Counter count={farm_list.length} farms={farm_list}/>
+                  <Counter card_id="Farm" count={farm_list.length} />
                 </Meter>
               </Col>
 
               <Col>
                 <Meter heading="Number of Mangers">
-                  <Counter count={manager_list.length} farms={farm_list}/>
+                  <Counter card_id="Manager"  count={manager_list.length} />
                 </Meter>
               </Col>
 
               <Col>
                 <Meter heading="Number of Farm Assistants">
-                  <Counter count={assitant_list.length} farms={farm_list}/>
+                  <Counter card_id="Assistant" count={assitant_list.length} />
                 </Meter>
               </Col>
             </Row>
