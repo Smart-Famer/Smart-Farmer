@@ -1,33 +1,40 @@
-const mongoose  = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const farmSchema = new Schema({
-    name:{
-        type:String,
-        required:true,
-        unique:true
+const farmSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    location:{
-        type:String,
-        required:true
+    location: {
+      latitude: Number,
+      longitude: Number
     },
-    sensors:[String],
-    actuators:[String],
+    sensors: [String],
+    actuators: [String],
 
-    weather_api_key:{
-        type:String,
-        unique:true
+    weather_api_key: {
+      type: String,
+      unique: true,
     },
-    elec_conductivity_key:{
-        type:String,
-        unique:true
+    elec_conductivity_key: {
+      type: String,
+      unique: true,
     },
-    NPK_levels_key:{
-        type:String,
-        unique:true
+    NPK_levels_key: {
+      type: String,
+      unique: true,
     },
-
-
+    address: {
+      type: String,
+      required: true,
+    },
+    area: {
+      type: Number,
+      required: true,
+    },
 
     // current_readings:{
     //     weather:{
@@ -52,26 +59,26 @@ const farmSchema = new Schema({
     //         type:new Schema(
     //             {
     //                 reading:[String]
-    //             }, 
+    //             },
     //             {
     //                 timestamps:true
     //             })
     //     }
     // }
+  },
+  { timestamps: true }
+);
 
-},{timestamps:true})
+farmSchema.statics.updateKeys = async function (_id) {
+  await this.updateOne(
+    { _id },
+    {
+      weather_api_key: `we-${_id}`,
+      elec_conductivity_key: `elec-${_id}`,
+      NPK_levels_key: `npk-${_id}`,
+    }
+  );
+  return await this.findOne({ _id });
+};
 
-
-
-farmSchema.statics.updateKeys = async function(_id)
-{
-    await this.updateOne({_id},{
-        weather_api_key:`we-${_id}`,
-        elec_conductivity_key:`elec-${_id}`,
-        NPK_levels_key:`npk-${_id}`
-    })
-    return await this.findOne({_id})
-
-}
-
-module.exports = mongoose.model('Farm', farmSchema)
+module.exports = mongoose.model("Farm", farmSchema);
