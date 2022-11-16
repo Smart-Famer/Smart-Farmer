@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "reactstrap";
 import Input from "../components/inputForms/InputForm";
-import CreateAss from "../components/userManagment/createManager";
+import CreateManager from "../components/userManagment/createManager";
 
 export default function CreateManagerPage() {
   const [Managers, setManagers] = useState([]);
@@ -23,7 +22,7 @@ export default function CreateManagerPage() {
     <div className="main-container">
       <div>
         <Input formName="Create Manager">
-          <CreateAss manager={Managers} setManager={setManagers} />
+          <CreateManager manager={Managers} setManager={setManagers} />
         </Input>
       </div>
     </div>
