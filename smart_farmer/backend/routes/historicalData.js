@@ -1,12 +1,12 @@
 const express = require('express');
 
 const {
-  getTempHistory,
+  getReadingHistory,
 } = require("../controllers/historicalDataController");
 
 const router = express.Router()
 
-router.get('/',getTempHistory)
+router.get("/", getReadingHistory);
 // router.get("/avg", getTempAvg);
 
 module.exports = router

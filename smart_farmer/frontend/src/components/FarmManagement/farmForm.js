@@ -1,63 +1,190 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import DisplayAlert from '../DisplayAlert';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useUpdate } from '../../hooks/useUpdate';
+import { useNavigate } from 'react-router';
 
-export default function ProfileForm(props) {
+
+export default function FarmForm(props){
     const user = useAuthContext().user.details
+    const [farm_name, setFarmName] = useState("")
+    const [farm_area, setArea] = useState("")
+    const [latitude, setLatitude] = useState("")
+    const [longitude, setLongitude] = useState("")
+    const [address, setAddress] = useState("")
+    const [error, setError] = useState(null)
+    const [success, setSuccess]= useState(null)
+    const navigate = useNavigate()
     const {dispatchAuthState} = useAuthContext()
-    const [first_name, setfirstName] = useState(user.first_name)
-    const [second_name, setSecondName] = useState(user.second_name)
-    const [location, setLocation] = useState(user.location)
-    const [email, setEmail] = useState(user.email)
-    const [readonly, setReadonly] = useState(true)
-    const {updateUser,error,success, setError, setSuccess} = useUpdate()
+    // console.log(address)
+    const updateFarm = async (farm_id,data)=>{
+      const response = await fetch(`${process.env.REACT_APP_HOST}/api/farm/update-farm/${farm_id}`,
+      {
+        method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              ...data
+            }),
+      })
 
-    const handleChange= (method,ev)=>{
-        if(!readonly){
-            method(ev.target.value)
+      const json = await response.json()
+      if(response.ok){
+        setSuccess("Farm updated successsfully")
+        alert("Farm updated successsfully")
+        navigate("/user/home")
+      }else{
+        // alert(json.error)
+        setError(json.error)
+      }
+    }
+
+    const addFarm = async (data)=>{
+      const response1 = await fetch(`${process.env.REACT_APP_HOST}/api/farm/add-farm`,
+      {
+        method: "POST",
+            crossDomain: true,
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: JSON.stringify({
+              ...data
+            }),
+      })
+      const json1 = await response1.json()
+
+      if(response1.ok){
+        const response2 = await fetch(`${process.env.REACT_APP_HOST}/api/user/attach-farm`,
+        {
+          method: "POST",
+              crossDomain: true,
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+              },
+              body: JSON.stringify({
+                farm_id:json1._id,
+                user_id:user._id
+              }),
+        })
+        const json2=await response2.json()
+        if(response2.ok){
+          console.log("updated user", json2)
+          setSuccess("New farm created successfully")
+          dispatchAuthState({type:"UPDATE", payload:{details:json2}})
+          alert("New farm created successfully")
+          // alert(JSON.stringify(json2))
+          navigate("/user/home")  
+        }else{
+          await fetch(`${process.env.REACT_APP_HOST}/api/farm/delete-farm/${json1._id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+          })
+          setError(json2.error)
         }
-    }
-    const handleCancel =()=>{
-      setReadonly(true)
+  
+      }else{
+        setError(json1.error)
+      }
     }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null)
-    setSuccess(null)
-    const newObj = await updateUser({first_name,second_name,location,email,})
-    if(!newObj.error){
-      setfirstName(newObj.details.first_name)
-      setSecondName(newObj.details.second_name)
-      setLocation(newObj.details.location)
-      setEmail(newObj.details.email)
-      setSuccess("Profile Updated Successfully!")
-      // console.log(user)
-      setReadonly(true)
-    }else{
-      setError(newObj.error)
-      setReadonly(false)
-    }
-  };
 
+    const setFarmDetails = async(farm_id)=>{
+      const response = await fetch(`${process.env.REACT_APP_HOST}/api/farm/get-farm/${farm_id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+    )
+
+      const json = await response.json()
+      if(response.ok){
+        // console.log(json)
+        setFarmName(json.name)
+        setArea(json.area)
+        setLatitude(json.location.latitude)
+        setLongitude(json.location.longitude)
+        setAddress(json.address)
+      }else{
+        setError(json.error)
+      }
+    }
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError(null)
+      setSuccess(null)
+      if(props.action==="edit"){
+        updateFarm(props.farm_id,{
+          name:farm_name,
+          area:farm_area,
+          location:{
+            latitude:latitude,
+            longitude:longitude
+          },
+          address:address 
+        })
+      }else{
+        addFarm({
+          name:farm_name,
+          area:farm_area,
+          location:{
+            latitude:latitude,
+            longitude:longitude
+          },
+          address:address 
+        })
+      }
+    };
+  
+    useEffect(()=>{
+      if(props.action==="edit"){
+        setFarmDetails(props.farm_id)
+      }  
+    },[])
   return (
-    <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-            <form class="col-12">
-                <legend>Add Farm</legend>
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Example label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input"/>
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Another label</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input"/>
-                </div>
-            </form>   
-        </div>
+    <form onSubmit={handleSubmit}>
+    <div class="mb-3">
+        <label htmlFor="formGroupExampleInput" class="form-label">Farm Name</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Farm Name" value={farm_name} onChange={(e)=>{setFarmName(e.target.value)}} required={true}/>
     </div>
+    <div class="mb-3">
+        <label htmlFor="formGroupExampleInput2" class="form-label">Farm Area (m <sup>2</sup>)</label>
+        <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="Farm Area" value={farm_area} onChange={(e)=>{setArea(e.target.value)}} required={true}/>
+    </div>
+    <div class="mb-3">
+        <label htmlFor="formGroupExampleInput2" class="form-label">Latitude</label>
+        <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="Latitude" value={latitude} onChange={(e)=>{setLatitude(e.target.value)}} required={true}/>
+    </div>
+    <div class="mb-3">
+        <label htmlFor="formGroupExampleInput2" class="form-label">Longitude</label>
+        <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="Longitude" value={longitude} onChange={(e)=>{setLongitude(e.target.value)}} required={true}/>
+    </div>
+    <div class="mb-3">
+        <label htmlFor="formGroupExampleInput2" class="form-label">Address</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Address" value={address} onChange={(e)=>{setAddress(e.target.value)}} required={true}/>
+    </div>
+
+    {props.action==="edit"&&<button type="submit" class="btn btn-success">Edit Farm</button>}
+    {props.action==="add"&&<button type="submit" class="btn btn-success">Add Farm</button>}
+
+    <br></br>
+    {error && (<DisplayAlert type={'danger'} content={error} />)}
+    {success && (<DisplayAlert type={'success'} content={success} />)}
+  </form>
+
       
   );
 }

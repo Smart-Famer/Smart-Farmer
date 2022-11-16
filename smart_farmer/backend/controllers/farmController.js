@@ -1,4 +1,8 @@
 const farmModel = require('../models/farmModel')
+const userModel =require('../models/userModel')
+const sensorModel =require('../models/sensorModel')
+const actuatorModel =require('../models/actuatorModel')
+
 const mongoose =require('mongoose')
 
 const getKeys = async (req,res)=>{
@@ -55,11 +59,23 @@ const getFarms = async (req,res)=>{
     res.status(200).json(farms)
 }
 
+const getFarm = async (req,res)=>{
+    let {_id} = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(400).json({error: 'No such farm is found'})
+    }
+
+    const farm = await farmModel.findOne({_id})
+
+    res.status(200).json(farm)
+}
+
 const createFarm = async (req,res)=>{
-    const {name, location} = req.body
+    const {name, location, area, address} = req.body
 
     try{
-        if(!name || !location){
+        if(!name || !location || !area || !address){
             throw Error("All fields must be filled")
         }
         const exists = await farmModel.findOne({name})
@@ -67,7 +83,7 @@ const createFarm = async (req,res)=>{
             throw Error("Farm with the same name already in use")
         }
 
-        const farm = await farmModel.create({name,location})     
+        const farm = await farmModel.create({name,location, area, address})     
         return res.status(200).json(await farmModel.updateKeys(farm._id))
     }catch(err){
         res.status(400).json({error:err.message})
@@ -75,18 +91,27 @@ const createFarm = async (req,res)=>{
 }
 
 const updateFarm = async (req,res)=>{
-    const {id} = req.params
+    const {_id} = req.params
 
     const {name} = req.body
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(400).json({error: 'No such farm is found'})
     }
 
-    if(await farmModel.findOne({name})){
+    const exists = await await farmModel.findOne(
+        {
+            name,
+            _id:{
+                $nin:[_id]
+            }
+        }
+    )
+    console.log(_id,exists)
+    if(exists){
         return res.status(400).json({error: 'farm name already exists'})
     }
-    const farm = await farmModel.findOneAndUpdate({_id: id}, {
+    const farm = await farmModel.findOneAndUpdate({_id}, {
         ...req.body
     })
 
@@ -162,20 +187,47 @@ const updateActuator = async (req,res)=>{
 }
 
 const deleteFarm = async (req,res)=>{
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({error: 'No such farm found'})
+    const {_id} = req.params
+    try{
+        if (!mongoose.Types.ObjectId.isValid(_id)) {
+            throw Error('Invalid farm ID')
+        }
+        
+        const farm = await farmModel.findOneAndDelete({_id})
+        if(!farm) {
+            throw Error('No such farm found')
+        }
+        
+        const {sensors,actuators} = farm
+    
+        await sensorModel.deleteMany(
+            {
+                _id:{
+                    $in:sensors
+                }
+            })
+        
+        await actuatorModel.deleteMany(
+            {
+                _id:{
+                    $in:actuators
+                }
+            }
+        )
+        await userModel.updateMany(
+            {
+                farms:{$in:[_id]}
+            },
+            {
+                $pullAll:{farms:[_id]}
+            })
+    
+        res.status(200).json(farm)
+    
+    }catch(err){
+        res.status(400).json({error:err.message})
     }
-    
-      const farm = await farmModel.findOneAndDelete({_id: id})
-    
-      if(!farm) {
-        return res.status(400).json({error: 'No such farm found'})
-      }
-    
-      res.status(200).json(farm)
-    }
+}
 
 
 module.exports={
@@ -187,5 +239,6 @@ module.exports={
     updateActuator,
     getFarms,
     getAllFarms,
-    getSingleFarm
+    getSingleFarm,
+    getFarm
 }
