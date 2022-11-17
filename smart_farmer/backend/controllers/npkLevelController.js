@@ -16,9 +16,9 @@ const getNpkLevel = async (req, res) => {
 const getHistoricalNpkLevels = async (req, res) => {
   const sourceId = req.query.sourceid;
   const duration = req.query.duration;
-  const startDate = req.query.startdate;
+  // const startDate = req.query.startdate;
 
-  console.log(sourceId,duration,startDate)
+  // console.log(sourceId,duration,startDate)
   let tempHistory = null;
   const months = [
     "January",
@@ -69,10 +69,8 @@ const getHistoricalNpkLevels = async (req, res) => {
   } else {
     readingHistory = await npkLevelModel
       .find({
-        sourceId:sourceId,
-        timestamp: { $gte: startDate },
+        sourceId:sourceId
       })
-      .limit(7);
   }
 
   if (!readingHistory) {

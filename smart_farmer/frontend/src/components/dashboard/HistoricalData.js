@@ -213,57 +213,54 @@ export default function HistoricalData() {
 
   return (
     <>
-      <div className="form-group">
-        <div className="row me-4 ms-4">
-          <div class="col col-md-4 col-sm-6">
-            <label for="inputAddress" class="form-label">Address</label>
-            <select
-              class="form-control" 
-              id="inputAddress"
-              aria-label="Default select example"
-              onChange={handleTypeChange}
-              >
-              <option value="temp">Temperature</option>
-              <option value="humidity">Humidity</option>
-              <option value="soil_humidity">Soil Humidity</option>
-              <option value="rainfall">Rainfall</option>
-            </select>
-          </div>
-        </div>
-        <br></br>
-        <div className="row me-4 ms-4">
-          <div class="col col-md-4">
-            <label for="inputEmail4" class="form-label">Email</label>
-            <div className="col-sm">
-              <select
-                name="section"
-                class="form-control" 
-                id="inputEmail4"
-                aria-label="Default select example"
-                onChange={handleDurationChange}
-                >
-                <option value="weekly">Weekly</option>
-                <option value="monthly">Monthly</option>
-              </select>
-            </div>
-          </div>
-          <div class="col col-md-4">
-            {duration === "weekly" && (
-              <>
-                <label htmlFor="startDate" class="form-label">Start Date:</label>              
-                <input
-                  type="date"
-                  class="form-control" 
-                  id="inputPassword4"
-                  onChange={handleStartDateChange}
-                />
-              </>
-            )}
+      <div className="row d-flex justify-content-center">
+        <div className="col-sm-4 mb-3">
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            onChange={handleTypeChange}
+          >
+            <option value="temp">Temperature</option>
+            <option value="humidity">Humidity</option>
+            <option value="soil_humidity">Soil Humidity</option>
+            <option value="rainfall">Rainfall</option>
+          </select>
         </div>
       </div>
-        </div>
       <div className="row">
-        <div className="col-lg-9">
+        <div className="col-sm-1 text-end">
+          <label htmlFor="secton">Filter By:</label>
+        </div>
+        <div className="col-sm-2">
+          <select
+            name="section"
+            id="section"
+            className="form-select"
+            aria-label="Default select example"
+            onChange={handleDurationChange}
+          >
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+        {duration === "weekly" && (
+          <>
+            <div className="col-sm-1 text-end">
+              <label htmlFor="startDate">Start Date:</label>
+            </div>
+            <div className="col-sm-2">
+              <input
+                type="date"
+                className="form-control"
+                id="startDate"
+                onChange={handleStartDateChange}
+              />
+            </div>
+          </>
+        )}
+      </div>
+      <div className="row px-5 historicalData--container">
+        <div className="col-sm-10">
           <LineChart
             xAxisLabel="Date"
             yAxisLabel="Temperature"
@@ -279,7 +276,7 @@ export default function HistoricalData() {
             </Link>
           </div> */}
         </div>
-        <div className="col-lg-3 m-2">
+        <div className="col-sm-2">
           <div>
             <h5>Filter by sensor:</h5>
             {sensorCheckBox}

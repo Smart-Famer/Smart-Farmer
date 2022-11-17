@@ -36,17 +36,19 @@ export default function PhotoCard({ date, _id }) {
 
   // console.log(countState)
   return (
-    <div class="col">
-      <div class="card">
-        <img src={photo.src} class="card-img-top" alt="Waterfall" />
-        <div class="card-body ">
-          <h5 class="card-title"></h5>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Time - {photo.time}</li>
-            <li class="list-group-item">Camera Angle - {photo.camera_angle}</li>
+    <div className="col">
+      <div className="card">
+        <img src={photo.src} className="card-img-top" alt="Waterfall" />
+        <div className="card-body ">
+          <h5 className="card-title"></h5>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">Time - {photo.time}</li>
+            <li className="list-group-item">
+              Camera Angle - {photo.camera_angle}
+            </li>
           </ul>
           <button
-            class="btn btn-danger btn-sm mt-3 ms-3"
+            className="btn btn-danger btn-sm mt-3 ms-3"
             onClick={handleDelete}
           >
             Delete
