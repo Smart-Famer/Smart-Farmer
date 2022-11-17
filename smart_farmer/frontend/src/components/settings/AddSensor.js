@@ -106,6 +106,7 @@ export default function AddSensor() {
         <ModalTemp
           title={"Error"}
           message={error}
+          color="danger"
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
@@ -114,6 +115,7 @@ export default function AddSensor() {
         <ModalTemp
           title={"Successful"}
           message={"New electric conductivity level added successfully"}
+          color="primary"
           show={modalShow}
           onHide={() => setModalShow(false)}
         />

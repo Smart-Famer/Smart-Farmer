@@ -69,12 +69,14 @@ export default function Login() {
         {validateError && <ModalTemp
         title={"Error"}
         message={validateError}
+        color="danger"
         show={modalShow}
         onHide={() => setModalShow(false)}
       />}
       {error && !validateError && <ModalTemp
         title={"Error"}
         message={error}
+        color="danger"
         show={modalShow}
         onHide={() => setModalShow(false)}
       />}

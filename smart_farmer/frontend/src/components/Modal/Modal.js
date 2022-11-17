@@ -21,7 +21,7 @@ export default function ModalTemp(props) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={props.onHide}>Close</Button>
+        <Button variant={props.color} onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

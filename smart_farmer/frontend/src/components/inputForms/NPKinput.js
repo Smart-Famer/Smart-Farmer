@@ -3,15 +3,33 @@ import "./inputform.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DisplayAlert from "../DisplayAlert";
 import { useFarmContext } from "../../hooks/useFarmContext";
-import ModalTemp from "../Modal/Modal";
+import PopUpModal from "../Modal/Modal";
 
 export default function NPKInput() {
   const [modalShow, setModalShow] = useState(false);
   const [nitrogenLevel, setNitrogenLevel] = useState("");
   const [potassium, setPotassiumLevel] = useState("");
   const [phosphorus, setPhosphorus] = useState("");
+  const [validateError, setValidate] =useState("");
   const inputNPK = useRef("");
   const { farm } = useFarmContext();
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (n,p,k)=>{
+    var error = "";
+    if (!n || !p || !k) {
+      return error = "Enter values for all the inputs !";
+    }
+    else if(!isNumber(n) || !isNumber(p)|| !isNumber(k)){
+      return error = "Enter a number as input !";
+    }
+  }
 
   useEffect(() => {
     inputNPK.current = `${nitrogenLevel},${phosphorus},${potassium}`;
@@ -21,6 +39,8 @@ export default function NPKInput() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setValidate(Validate(nitrogenLevel,phosphorus,potassium))
+    // console.log(nitrogenLevel);
 
     const reading = inputNPK.current;
     const sourceId = farm.NPK_levels_key;
@@ -115,18 +135,20 @@ export default function NPKInput() {
         </div>
         <button className="btn btn-green btn-block m-4">Submit</button>
         {/* {error && (<DisplayAlert type={'danger'} content={error}/>)}  */}
-        {error && (
-          <ModalTemp
+        {validateError && (
+          <PopUpModal
             title={"Error"}
-            message={error}
+            message={validateError}
+            color="danger"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
         )}
-        {!error && (
-          <ModalTemp
+        {!validateError && !error && (
+          <PopUpModal
             title={"Successful"}
             message={"New npk levels added successfully"}
+            color="primary"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
