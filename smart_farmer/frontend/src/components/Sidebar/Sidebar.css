@@ -2,8 +2,8 @@
     min-height: 100vh !important;
     /* z-index: 100;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); */
-    width:230px;
-    min-width: 180px;
+    /* width:230px; */
+    /* min-width: 180px; */
     background-color: #3DCD56;
     color: white;
 }
@@ -55,4 +55,8 @@
 .sidebar-item-logo{
     align-items: center;
     justify-content: center;
+}
+
+.offcanvas-header{
+    background-color: #3DCD56;;
 }

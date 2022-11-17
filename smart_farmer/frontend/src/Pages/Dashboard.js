@@ -8,7 +8,7 @@ import { Container,Row,Col} from "reactstrap";
 import NPK from "../components/dashboard/NPK";
 import Humidity from "../components/dashboard/Humidity";
 import SoilHumidity from "../components/dashboard/SoilHumidity";
-import Sidebar from "../components/Sidebar/SideBar";
+import Sidebar from "../components/Sidebar/SideBar1";
 import RecentPhotos from "../components/dashboard/RecentPhotos";
 import HistoricalData from "../components/dashboard/HistoricalData";
 import { Navigate, useParams } from "react-router";
@@ -21,9 +21,8 @@ export default function Dashboard(props)
         return <Navigate to="/login"/>      
     }
     return(
-        <div className="main-container">
-            <Sidebar/>
-            <div className="home">
+        <div className="row main-container">
+            <div className="">
                 <Container>
                     <Row>
                                                

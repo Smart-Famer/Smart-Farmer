@@ -48,7 +48,6 @@ export default function Profile(props) {
     }
     return(
         <div className='main-container'>
-            <Sidebar/>
             <div className='profile--container mt-3'>
                 <div className='profile--heading'>
                     <h5>Profile View</h5>

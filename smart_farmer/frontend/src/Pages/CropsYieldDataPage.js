@@ -189,7 +189,6 @@ export default function CropYieldDataPage(props) {
 
   return (
     <div className="main-container">
-      <Sidebar user={props.user} />
       <div className="crop-yield-chart-container">
         <div className="row">
           <div className="col-sm-10">
