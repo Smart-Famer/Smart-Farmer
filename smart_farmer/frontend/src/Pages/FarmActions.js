@@ -25,7 +25,6 @@ export default function  FarmAction() {
   }
   return (
       <div className="main-container">
-          <Sidebar />
           <div class="mx-auto">
               <InputForm formName={formName}>
                 <FarmForm action={action} farm_id={_id}/>

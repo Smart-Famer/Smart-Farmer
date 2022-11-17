@@ -14,9 +14,6 @@ export default function Gallery()
 {
     return(
         <div className="main-container">
-            <div>
-                <Sidebar/>
-            </div>
             <PhotoContextProvider>
                 <PhotoGallery/>
             </PhotoContextProvider>

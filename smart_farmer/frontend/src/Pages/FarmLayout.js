@@ -21,11 +21,15 @@ import { AssistantContextProvider } from "../context/AssistantContext";
 // import { AssistantContextProvider } from "../context/AssistantContext";
 // import CropYieldInput from '../components/inputForms/CropYieldInput'
 import GalleryItem from './GalleryItem'
+import Sidebar from "../components/Sidebar/SideBar1";
 
 export default function FarmLayout()
 {
     return(
-        <section>
+        <>
+            <div>
+                <Sidebar/>
+            </div>
             <Routes>
                 <Route path='*' element={<Error/>}/>
                 <Route path='dashboard' element={<Dashboard />}/>
@@ -44,6 +48,6 @@ export default function FarmLayout()
                     </AssistantContextProvider>
                 } />
             </Routes>
-        </section>
+        </>
     )
 }

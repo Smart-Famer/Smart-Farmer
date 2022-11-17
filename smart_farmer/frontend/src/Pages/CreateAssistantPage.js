@@ -38,7 +38,6 @@ export default function CreateAssistantPage() {
     }
     return (
         <div className="main-container">
-            <Sidebar/>
             <div>
                 <div className="farm-card p-5">
                     

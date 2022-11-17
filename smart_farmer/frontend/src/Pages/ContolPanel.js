@@ -26,7 +26,6 @@ export default function Dashboard(props)
     const cameras=["camera-1","camera-2"]
     return(
         <div className="main-container">
-            <Sidebar/>
             <div className="Control">
                 <WaterPumpContainer pumps={pumps} threshhold="10" />
                 <CameraContainer cameras={cameras}/>

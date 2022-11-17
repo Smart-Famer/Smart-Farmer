@@ -8,7 +8,6 @@ export default function SettingsPage()
 {
     return(
         <div className="main-container">
-            <Sidebar/>
             <div class="row">
                 <div className="col-6 m-1">
                     <Input formName='Add New Sensor'>

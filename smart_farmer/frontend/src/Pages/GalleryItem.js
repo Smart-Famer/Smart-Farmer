@@ -16,9 +16,6 @@ export default function Gallery()
     const {date} =useParams()
     return(
         <div className="main-container">
-            <div>
-                <Sidebar/>
-            </div>
             <PhotoContextProvider>
                 <CardCarousel date={date}/>
             </PhotoContextProvider>

@@ -1,5 +1,6 @@
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "react-router-dom";
 import UserLayout from "./Pages/UserLayout";
 import LoginPage from "./Pages/LoginPage";
@@ -33,6 +34,9 @@ function App() {
         <Route path="/admin/*" element={<AdminLayout />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <footer>
+        
+      </footer>
     </BrowserRouter>
   );
 }
