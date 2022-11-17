@@ -21,29 +21,34 @@ import { AssistantContextProvider } from "../context/AssistantContext";
 // import { AssistantContextProvider } from "../context/AssistantContext";
 // import CropYieldInput from '../components/inputForms/CropYieldInput'
 import GalleryItem from './GalleryItem'
+import HistoricalNPKpage from "./HistoricalNpkPage";
 
 export default function FarmLayout()
 {
-    return(
-        <section>
-            <Routes>
-                <Route path='*' element={<Error/>}/>
-                <Route path='dashboard' element={<Dashboard />}/>
-                <Route path='gallery' element={<Gallery />}/>
-                <Route path='gallery/:date' element={<GalleryItem />}/>
-                <Route path='npkinput' element={<NPKpage />}/>
-                <Route path='elecinput' element={<ElecConPage />}/>
-                <Route path='settings' element={<Settings  />} />
-                <Route path='controlPanel' element={<ControlPanel />}/>
-                <Route path='cropYield' element={<CropYieldDataPage />}/>
-                <Route path='cropyieldinput' element={<CropYieldInput />}/>
-                <Route path='history' element={<HistoricalData  />} />
-                <Route path='createAcc' element={
-                    <AssistantContextProvider>
-                        <CreateAss />
-                    </AssistantContextProvider>
-                } />
-            </Routes>
-        </section>
-    )
+    return (
+      <section>
+        <Routes>
+          <Route path="*" element={<Error />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="gallery" element={<Gallery />} />
+          <Route path="gallery/:date" element={<GalleryItem />} />
+          <Route path="npkinput" element={<NPKpage />} />
+          <Route path="historicalnpk" element={<HistoricalNPKpage />} />
+          <Route path="elecinput" element={<ElecConPage />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="controlPanel" element={<ControlPanel />} />
+          <Route path="cropYield" element={<CropYieldDataPage />} />
+          <Route path="cropyieldinput" element={<CropYieldInput />} />
+          <Route path="history" element={<HistoricalData />} />
+          <Route
+            path="createAcc"
+            element={
+              <AssistantContextProvider>
+                <CreateAss />
+              </AssistantContextProvider>
+            }
+          />
+        </Routes>
+      </section>
+    );
 }

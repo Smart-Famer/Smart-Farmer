@@ -10,8 +10,6 @@ export default function Temperature(){
     const sensor_names = farm.sensors.Temperature.map((sensor)=>{
         return sensor.name.replace(farm.name+"_","")
     })
-    // console.log(sensor_names);
-    // console.log(sourceIds)
 
     const nameId = {}
     farm.sensors.Temperature.forEach(data => {
@@ -30,24 +28,10 @@ export default function Temperature(){
                 const json = await response.json()
                 temp_list.push(json)
             }
-            //console.log(temp_list)
             setTemperatures(temp_list)
     
         }
-        // const fetchTemperature = async () => {
-        //     const response = await fetch(`http://localhost:4000/api/datareading/get-readings`,{
-        //         method:"POST",
-        //         headers:{
-        //             "Content-Type":"application/json"
-        //         },    
-        //         body:JSON.stringify({sourceIds:sourceIds})
-        //     })
-        //     const json = await response.json()
-        //     console.log(json)
-        //     if (response.ok) {
-        //         setTemperatures(json)
-        //     }
-        // }
+
         fetchTemperature()
     }, [])
     const components = temperatures.map((temp)=>{
