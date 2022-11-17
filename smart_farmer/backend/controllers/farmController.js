@@ -35,9 +35,7 @@ const getAllFarms = async (req, res) => {
 const getUserFarm = async (req, res) => {
   console.log("getUserFarm");
 
-//   console.log(req.params);
   const { _id } = req.params;
-//   console.log(_id);
 
   //check the validity of the id
   if (!mongoose.Types.ObjectId.isValid(_id)) {
@@ -46,13 +44,11 @@ const getUserFarm = async (req, res) => {
 
   const user = await userModel.findById(_id);
 
-//   console.log(user);
   if (!user) {
     return res.status(404).json({ error: "No such user" });
   }
 
   let farm_ids = user.farms;
-//   console.log(user.farms);
   farm_ids = farm_ids.filter((id) => mongoose.Types.ObjectId.isValid(id));
   const farms = await farmModel.find({
     _id: {

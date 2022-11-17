@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
-import { Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 import { useState } from "react";
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+import ConfirmDelete from "./confirmModal";
 
 
 function AssistFarm(props) {
@@ -30,7 +32,20 @@ function AssistFarm(props) {
   return <ul style={{ listStyleType: "none" }}>{farm_list}</ul>;
 }
 
+
+
 export default function ManagerList(content) {
+  const [modalShow, setModalShow] = useState(false);
+  const [delete_id, setDeleteID] = useState(false);
+  const [delete_name, setDeleteName] = useState(false);
+
+  const handleDelete = (id,name)=>{
+
+    setModalShow(true)
+    setDeleteID(id)
+    setDeleteName(name)
+  }
+ 
   // const [farm_list, setFarmList] = useState([]);
   // const [farm_iteam_list, setFarmIteamList] = useState([]);
 
@@ -74,10 +89,12 @@ export default function ManagerList(content) {
   // }, []);
 
   // console.log(farm_list);
+  
 
 
   return (
-    <Table striped>
+    <div>
+      <Table striped>
       <thead>
         <tr>
           <th>Firts Name</th>
@@ -89,7 +106,7 @@ export default function ManagerList(content) {
       </thead>
       <tbody>
         {content.iteamList.map((manager) => (
-          <tr key={manager.id}>
+          <tr key={manager._id}>
             <td>{manager.first_name}</td>
             <td>{manager.second_name}</td>
             <td>{manager.email}</td>
@@ -97,9 +114,22 @@ export default function ManagerList(content) {
             <AssistFarm _id={manager._id} />
             </td>
             <td>{manager.location}</td>
+            <td><Button color="danger" onClick={()=> handleDelete(manager._id,manager.first_name)} ><RiDeleteBin5Fill /></Button></td>
+            <ConfirmDelete
+              title={"Are you sure?"}
+              message={"Are you sure you want to delete "+ delete_name +"?"}
+              id={delete_id}
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+            />
           </tr>
+          
         ))}
       </tbody>
     </Table>
+    
+    </div>
+    
+    
   );
 }
