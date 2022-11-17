@@ -2,29 +2,31 @@ import React, { useState } from 'react';
 import { useSignup } from '../../hooks/useManagerSignUp';
 import DisplayAlert from '../DisplayAlert';
 
-export default function CreateManager(props) {
+export default function CreateManager() {
   const [validated, setValidated] = useState(false);
   const [first_name, setfirstName] = useState("")
   const [second_name, setSecondName] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [location, setLocation] = useState("")
   const [email, setEmail] = useState("")
   const {signup, error, isLoading, setError} = useSignup()
-  const {manager,setManager} = props
   const [success, setSuccess] = useState(null)
 
   const handleSubmit = async (e) => {
+    console.log(first_name, second_name, email, password, location);
     e.preventDefault();
     setError(null)
     setSuccess(null)
     const newObj = await signup(first_name, second_name, email, password, location)
+    console.log(newObj);
     if(newObj._doc){
       setfirstName("")
       setSecondName("")
       setPassword("")
+      setConfirmPassword("")
       setLocation("")
       setEmail("")
-      setManager([...manager,newObj._doc])
       setSuccess("Manager Created Successfully!")
     }
 
@@ -83,6 +85,19 @@ export default function CreateManager(props) {
                         />
             </div>
             <label className="col-sm-1 col-form-label">Password</label>
+
+        </div>
+        <div className="form-group row p-3">
+            <div className="col-sm-7">
+                <input 
+                        type="password" 
+                        className="form-control" 
+                        value={password}
+                        onChange={(e)=>{setConfirmPassword(e.target.value)}}
+                        required={true}
+                        />
+            </div>
+            <label className="col-sm-1 col-form-label">Confirm Password</label>
 
         </div>
         <div className="form-group row p-3">
