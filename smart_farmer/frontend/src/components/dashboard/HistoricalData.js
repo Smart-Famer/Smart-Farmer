@@ -43,6 +43,13 @@ export default function HistoricalData() {
     return palette;
   }
 
+  function getActualName(name){
+    let temp = name.split("_");
+    let nameWithoutFarmArr = temp.slice(1);
+    let nameWithoutFarm = nameWithoutFarmArr.join("_");
+    return nameWithoutFarm;
+  }
+
   useEffect(() => {
 
       let sourceIds = null
@@ -150,7 +157,7 @@ export default function HistoricalData() {
             }
           });
 
-          temp["label"] = sensorPortName[id];
+          temp["label"] = getActualName(sensorPortName[id]);
           temp["data"] = xy;
           temp["visibility"] = true;
           let color = colorList[sensorIndex];
@@ -187,7 +194,7 @@ export default function HistoricalData() {
     const sensorName = sensorPortName[e.currentTarget.id];
     let temp_data = JSON.parse(JSON.stringify(data));
     for (let d of temp_data) {
-      if (d.label === sensorName) {
+      if (d.label === getActualName(sensorName)) {
         d.visibility = !d.visibility;
       }
     }
@@ -205,7 +212,7 @@ export default function HistoricalData() {
           defaultChecked
         />
         <label className="form-check-label" htmlFor={sensorId}>
-          {sensorPortName[sensorId]}
+          {getActualName(sensorPortName[sensorId])}
         </label>
       </div>
     );
