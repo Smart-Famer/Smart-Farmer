@@ -176,7 +176,7 @@ export default function HistoricalData() {
   }, [duration, startDate,type]);
 
   const handleDurationChange = (e) => {
-    const duration = e.currentTarget.value;
+  const duration = e.currentTarget.value;
     setDuration(duration);
   };
   const handleStartDateChange = (e) => {

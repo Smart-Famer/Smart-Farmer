@@ -87,6 +87,24 @@ body{
     font-size:30px;
 }
 
+@media screen and (max-width:12010px) {
+    .top-nav-info-name{
+        font-size: 17px;
+    }
+}
+@media screen and (max-width:600px) {
+    .top-nav-info-name{
+        font-size: 17px;
+    }
+}
+@media screen and (max-width:502px) {
+    .top-nav-info-name{
+        font-size: 15px;
+    }
+}
+
+
+
 
 
 

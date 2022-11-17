@@ -7,10 +7,20 @@ export default function Temperature(){
     const sourceIds = farm.sensors.Temperature.map((sensor)=>sensor.port)
     const [temperatures, setTemperatures] = useState([])
 
-    const sensor_names = farm.sensors.Temperature.map((sensor)=>sensor.name.replace(farm.name+"_",""))
+    const sensor_names = farm.sensors.Temperature.map((sensor)=>{
+        return sensor.name.replace(farm.name+"_","")
+    })
+    // console.log(sensor_names);
+    // console.log(sourceIds)
 
-    // console.log(temperatures)
-    // console.log(JSON.stringify({sourceIds:sourceIds}))
+    const nameId = {}
+    farm.sensors.Temperature.forEach(data => {
+        let temp = data.name.split("_")
+        let nameWithoutFarmArr = temp.slice(1)
+        let nameWithoutFarm = nameWithoutFarmArr.join("_")
+        nameId[data.port] = nameWithoutFarm;
+    });
+
     useEffect(() => {
         const fetchTemperature=async ()=>{
             let i=0;
@@ -40,11 +50,11 @@ export default function Temperature(){
         // }
         fetchTemperature()
     }, [])
-    //console.log(temperatures)
     const components = temperatures.map((temp)=>{
-        return <Col ><h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{temp.reading}&deg;C</h3></Col>
+        return <Col key={temp._id} ><h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{temp.reading}&deg;C</h3>
+        <h6 className="text-center">{nameId[temp.sourceId]}</h6>
+        </Col>
     })
-    // console.log(components)
     return(
         <Row>
             {components}

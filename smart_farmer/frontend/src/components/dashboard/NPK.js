@@ -14,9 +14,7 @@ export default function NPK(){
         const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceId}`
         );
         const json = await response.json()
-
-
-
+        
         if (response.ok) {
             setNpkLevel(json.reading)
         }

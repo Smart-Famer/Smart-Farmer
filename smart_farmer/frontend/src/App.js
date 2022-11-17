@@ -9,6 +9,8 @@ import Admin from "./Pages/AdminPanel"
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { FarmContextProvider } from "./context/FarmContext";
+// import io from "socket.io-client";
+// const socket = io.connect('http://localhost:4000')
 
 function App() {
   //console.log(user.username)

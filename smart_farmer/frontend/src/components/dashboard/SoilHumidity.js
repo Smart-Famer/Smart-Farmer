@@ -27,7 +27,7 @@ export default function SoilHumidity(){
     }, [])
     //console.log(humidities)
     const components = humidities.map((humidity)=>{
-        return <Col className="d-flex justify-content-center" ><DoughnutChart activeColor={'#ff4d4d'} inActiveColor={'#ffe6e6'} reading={Number(humidity.reading)} readingName={sensor_names[humidities.indexOf(humidity)]}/></Col>
+        return <Col key={humidity._id} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#ff4d4d'} inActiveColor={'#ffe6e6'} reading={Number(humidity.reading)} readingName={sensor_names[humidities.indexOf(humidity)]}/></Col>
     })
 
     return(
