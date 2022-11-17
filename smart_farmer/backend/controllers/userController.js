@@ -62,6 +62,20 @@ const getAssistants = async (req, res)=>{
         res.status(404).json({error:err.message})
     }
 }
+
+//get farm manager
+const getMangers = async (req, res)=>{
+    const {farm_id} = req.body
+    try{
+        const assistants = await User.find({
+            user_type:"Assistant",
+            farms:farm_id
+        },{_id:1,email:1,first_name:1,second_name:1,location:1,profile_picture:1})
+        res.status(200).json(assistants)  
+    }catch(err){
+        res.status(404).json({error:err.message})
+    }
+}
 //get all managers
 const getAllMangers = async (req, res) => {
     console.log("getAllManagers");
@@ -129,5 +143,6 @@ module.exports = {
     updateUser,
     updatePassword,
     getAllMangers,
-    getAllAssistants
+    getAllAssistants,
+    getMangers
 }

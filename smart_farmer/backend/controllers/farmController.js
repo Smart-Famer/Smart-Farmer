@@ -28,6 +28,26 @@ const getAllFarms = async (req, res) => {
     res.status(200).json(farmList);
   };
 
+//get a single farm
+const getSingleFarm = async (req, res) => {
+    console.log("getSingleFarm");
+  
+    const { id } = req.params;
+  
+    //check the validity of the id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such farm" });
+    }
+  
+    const farm = await farmModel.findById(id);
+  
+    if (!farm) {
+      return res.status(404).json({ error: "No such farm" });
+    }
+  
+    res.status(200).json(farmModel);
+  };
+
 const getFarms = async (req,res)=>{
     let {farm_ids} = req.body
 
@@ -219,5 +239,6 @@ module.exports={
     updateActuator,
     getFarms,
     getAllFarms,
+    getSingleFarm,
     getFarm
 }

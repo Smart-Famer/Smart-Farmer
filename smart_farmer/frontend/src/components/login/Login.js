@@ -1,19 +1,21 @@
-import { useState } from "react";
-import "./Login.css";
-import { BsPersonCircle } from "react-icons/bs";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import { BsPersonCircle } from "react-icons/bs";
 import { useLogin } from "../../hooks/useLogin";
-import DisplayAlert from "../DisplayAlert";
 import ModalTemp from "../Modal/Modal";
+import "./Login.css";
+import Validation from "./loginValidation";
 
 export default function Login() {
   const [modalShow, setModalShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validateError, setError] =useState("")
   const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(Validation(email,password));
     await login(email, password);
     setModalShow(true)
     setEmail("");
@@ -31,7 +33,7 @@ export default function Login() {
         <div className="form-group p-3 px-5">
           <label htmlFor="email">Username</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="email"
             aria-describedby="emailHelp"
@@ -63,7 +65,13 @@ export default function Login() {
           Login
         </button>
         {/* {error && <DisplayAlert type={"danger"} content={error} />} */}
-        {error && <ModalTemp
+        {validateError && <ModalTemp
+        title={"Error"}
+        message={validateError}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />}
+      {error && !validateError && <ModalTemp
         title={"Error"}
         message={error}
         show={modalShow}
