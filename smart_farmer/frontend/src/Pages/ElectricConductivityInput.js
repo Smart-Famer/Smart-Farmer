@@ -6,7 +6,6 @@ import Sidebar from "../components/Sidebar/SideBar"
 export default function EleInput() {
     return (
         <div className="main-container">
-            <Sidebar/>
             <div>
                 <Input formName='Electric Conductivity Input'>
                     <ElecInput />

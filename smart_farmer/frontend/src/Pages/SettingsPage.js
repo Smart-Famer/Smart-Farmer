@@ -7,26 +7,25 @@ import EditSensor from "../components/settings/EditSensor";
 
 export default function SettingsPage()
 {
-    return (
-      <div className="main-container">
-        <Sidebar />
-        <div class="row">
-          <div className="col-6 m-1">
-            <Input formName="Add New Sensor">
-              <AddSensor />
-            </Input>
-          </div>
-          <div className="col-6 m-1">
-            <Input formName="Edit Sensor">
-              <EditSensor />
-            </Input>
-          </div>
-          <div className="col-6 m-1">
-            <Input formName="Add New Actuator">
-              <AddActuator />
-            </Input>
-          </div>
-        </div>
+    return(
+        <div className="main-container">
+            <div class="row">
+                <div className="col-6 m-1">
+                    <Input formName='Add New Sensor'>
+                        <AddSensor />
+                    </Input>
+                </div>
+                <div className="col-6 m-1">
+                    <Input formName="Edit Sensor">
+                      <EditSensor />
+                    </Input>
+                </div>
+                <div className="col-6 m-1">
+                    <Input formName='Add New Actuator'>
+                        <AddActuator />
+                    </Input>
+                </div>
+            </div>
       </div>
     );
 }

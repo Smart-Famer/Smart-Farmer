@@ -13,42 +13,39 @@ import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
 import Error from './Error';
-
 import CropYieldInput from "../components/inputForms/CropYieldInput";
 import { AssistantContextProvider } from "../context/AssistantContext";
-
-
 // import { AssistantContextProvider } from "../context/AssistantContext";
 // import CropYieldInput from '../components/inputForms/CropYieldInput'
 import GalleryItem from './GalleryItem'
 import HistoricalNPKpage from "./HistoricalNpkPage";
+import Sidebar from "../components/Sidebar/SideBar1";
 
 export default function FarmLayout()
 {
-    return (
-      <section>
-        <Routes>
-          <Route path="*" element={<Error />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="gallery/:date" element={<GalleryItem />} />
-          <Route path="npkinput" element={<NPKpage />} />
-          <Route path="historicalnpk" element={<HistoricalNPKpage />} />
-          <Route path="elecinput" element={<ElecConPage />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="controlPanel" element={<ControlPanel />} />
-          <Route path="cropYield" element={<CropYieldDataPage />} />
-          <Route path="cropyieldinput" element={<CropYieldInput />} />
-          <Route path="history" element={<HistoricalData />} />
-          <Route
-            path="createAcc"
-            element={
-              <AssistantContextProvider>
-                <CreateAss />
-              </AssistantContextProvider>
-            }
-          />
-        </Routes>
-      </section>
-    );
-}
+    return(
+        <>
+            <div>
+                <Sidebar/>
+            </div>
+            <Routes>
+                <Route path='*' element={<Error/>}/>
+                <Route path='dashboard' element={<Dashboard />}/>
+                <Route path='gallery' element={<Gallery />}/>
+                <Route path='gallery/:date' element={<GalleryItem />}/>
+                <Route path='npkinput' element={<NPKpage />}/>
+                <Route path="historicalnpk" element={<HistoricalNPKpage />} />
+                <Route path='elecinput' element={<ElecConPage />}/>
+                <Route path='settings' element={<Settings  />} />
+                <Route path='controlPanel' element={<ControlPanel />}/>
+                <Route path='cropYield' element={<CropYieldDataPage />}/>
+                <Route path='cropyieldinput' element={<CropYieldInput />}/>
+                <Route path='history' element={<HistoricalData  />} />
+                <Route path='createAcc' element={
+                    <AssistantContextProvider>
+                        <CreateAss />
+                    </AssistantContextProvider>
+                } />
+            </Routes>
+        </>
+    )

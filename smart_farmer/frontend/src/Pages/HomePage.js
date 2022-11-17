@@ -48,7 +48,6 @@ export default function  Home() {
     
     return (
         <div className="main-container">
-            <Sidebar />
             <div className="home">
                 <Header />
                 <div className="farm-card p-4">
