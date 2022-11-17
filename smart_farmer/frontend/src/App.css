@@ -143,3 +143,14 @@ margin-bottom: 20px;
 }
 
 
+th {
+  text-align: center;
+  padding: 8px;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+

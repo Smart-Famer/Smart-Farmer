@@ -18,19 +18,20 @@ function AssistFarm(props) {
       // setFarmList(json);
       let tempList = json.map((farm) => <li>{farm.name}</li>);
       if (tempList.length != 0) setList(tempList);
-      else setList("No Farms");
+      else setList(<li>{"No Farms"}</li>);
     }
   };
   useEffect(() => {
     fetchFarms(props?._id);
   }, []);
 
-  return <ul>{farm_list}</ul>;
+  return <ul style={{ listStyleType: "none" }}>{farm_list}</ul>;
 }
 
 export default function AssistantList(content) {
   return (
-    <Table striped>
+    <div style={{overflowx:"auto"}}>
+      <Table className="view-table" style={{overflowx:"auto"}} striped>
       <thead>
         <tr>
           <th>Firts Name</th>
@@ -55,5 +56,7 @@ export default function AssistantList(content) {
         ))}
       </tbody>
     </Table>
+    </div>
+    
   );
 }
