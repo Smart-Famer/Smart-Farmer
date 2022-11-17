@@ -5,16 +5,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import DisplayAlert from "../DisplayAlert";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import ModalTemp from "../Modal/Modal";
+import validator from "validator";
 
 export default function ElectricConductivityInput() {
   const [modalShow, setModalShow] = useState(false);
   const [inputElecCon, setInputElecCon] = useState("");
   const [error, setError] = useState(null);
+  const [validateError, setValidate] =useState("");
   const { farm } = useFarmContext();
   // console.log(farm)
 
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (input)=>{
+    var error = "";
+    if (!input) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(input)){
+      return error = "Enter a number !";
+
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(Validate(inputElecCon))
 
     const reading = inputElecCon;
     const sourceId = farm.elec_conductivity_key;
@@ -67,15 +87,15 @@ export default function ElectricConductivityInput() {
         </div>
         <button className="btn btn-green btn-block m-4">Submit</button>
         {/* {error && (<DisplayAlert type={'danger'} content={error} />)} */}
-        {error && (
+        {validateError && (
           <ModalTemp
           title={"Error"}
-            message={error}
+            message={validateError}
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
         )}
-        {!error && (
+        {!validateError && (
           <ModalTemp
           title={"Successful"}
             message={"New electric conductivity level added successfully"}
