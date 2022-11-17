@@ -92,7 +92,7 @@ export default function CreateManager() {
                 <input 
                         type="password" 
                         className="form-control" 
-                        value={password}
+                        value={confirmPassword}
                         onChange={(e)=>{setConfirmPassword(e.target.value)}}
                         required={true}
                         />
