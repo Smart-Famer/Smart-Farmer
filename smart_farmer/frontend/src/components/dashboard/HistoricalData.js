@@ -1,17 +1,12 @@
 import distinctColors from "distinct-colors";
 import React, { useEffect, useState } from "react";
-import { GiCardJackClubs } from "react-icons/gi";
-// import { LineChart } from "react-chartjs-2/dist/utils";
-import { Link } from "react-router-dom";
 import "../../App.css";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import LineChart from "./LineChart";
 
 export default function HistoricalData() {
   const { farm } = useFarmContext();
-  
-
-  
+   
   let sensorPortName = {};
   farm.sensors.Temperature.forEach((sensor) => {
     sensorPortName[sensor.port] = sensor.name;
