@@ -54,7 +54,8 @@ const editActuator = async (req, res) => {
     }
     const actuator = await ActuatorModel.findOneAndUpdate(
       { port },
-      { name, actuator_type }
+      { name, actuator_type },
+      { new:true }
     );
     res.status(200).json(actuator);
   } catch (err) {
@@ -62,7 +63,25 @@ const editActuator = async (req, res) => {
   }
 };
 
+const deleteActuator = async (req, res)=>{
+  const {_id} = req.params
+  try{
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw Error("Invalid actuator ID");
+    }
+
+    const actuator = await ActuatorModel.findOneAndDelete({_id})
+    if(!actuator){
+      throw Error("actuator doesn't exist");
+    }
+    res.status(200).json(actuator)
+  }catch(err){
+    res.status(400).json({error:err.message})
+  }
+}
+
 module.exports = {
   getActuators,
   editActuator,
+  deleteActuator
 };
