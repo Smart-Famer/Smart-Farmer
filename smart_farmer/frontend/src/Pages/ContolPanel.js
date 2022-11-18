@@ -10,28 +10,25 @@ export default function Dashboard(props) {
 
   const pumps = farm?.actuators?.Pump;
 
-  useEffect(() => {
-    console.log("Farm is ", farm);
-  }, [farm]);
 
-  // const pumps=[
-  //     {
-  //         name:"Pump1",
-  //         status:"on"
-  //     },
-  //     {
-  //         name:"Pump2",
-  //         status:"off"
-  //     }
-  // ]
-  const cameras = ["camera-1", "camera-2"];
-  return (
-    <div className="main-container">
-      <Sidebar />
-      <div className="Control">
-        <WaterPumpContainer pumps={pumps} threshhold="10" />
-        <CameraContainer cameras={cameras} />
-      </div>
-    </div>
-  );
+    // const pumps=[
+    //     {
+    //         name:"Pump1",
+    //         status:"on"
+    //     },
+    //     {
+    //         name:"Pump2",
+    //         status:"off"
+    //     }
+    // ]
+    const cameras=["camera-1","camera-2"]
+    return(
+        <div className="main-container">
+            <div className="Control">
+                <WaterPumpContainer pumps={pumps} threshhold="10" />
+                <CameraContainer cameras={cameras}/>
+            </div>       
+        </div>
+    )
 }
+

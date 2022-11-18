@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../Sidebar/SideBar";
 import './inputform.css';
 import {useFarmContext} from '../../hooks/useFarmContext'
+import InputForm from "./InputForm"
 
 export default function CropYieldInput(props){
     const {farm} = useFarmContext()
@@ -40,36 +41,44 @@ export default function CropYieldInput(props){
     }
 
     return (
-            <div className="main-container">
-                <Sidebar/>
-              <form onSubmit={handleSubmit} >
-                  <div className="form-group p-3">
-                      <label htmlFor="crop_name">Crop Name</label>
-                      <input 
-                          value={crop_name}
-                          onChange={(e)=>{setCropName(e.target.value)}}
-                          type="text" className="form-control" id="crop_name" placeholder="Crop Name" required={true}/>
-                  </div>
-                  <div className="form-group p-3">
-                      <label htmlFor="date">Date</label>
-                      <input 
-                          value={date}
-                          onChange={(e)=>{setDate(e.target.value)}}
-                          type="date" className="form-control" id="date" required={true}/>
-                  </div>
-                  <div className="form-group p-3">
-                      <label htmlFor="yield">Crop Yield</label>
-                      <input 
-                          value={amount}
-                          onChange={(e)=>{setAmount(e.target.value)}}
-                          type="text" className="form-control" id="yield" placeholder="Crop yield in kilo" required={true}/>
-                  </div>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-10 col-md-6">
+            <InputForm formName="Add Crop Yeild Data">
+              <div className="row justify-content-center">
+                <div className="col">
+                  <form onSubmit={handleSubmit} className="me-5">
+                      <div className="form-group mb-4">
+                          <label htmlFor="crop_name">Crop Name</label>
+                          <input 
+                              value={crop_name}
+                              onChange={(e)=>{setCropName(e.target.value)}}
+                              type="text" className="form-control" id="crop_name" placeholder="Crop Name" required={true}/>
+                      </div>
+                      <div className="form-group mb-4">
+                          <label htmlFor="date">Date</label>
+                          <input 
+                              value={date}
+                              onChange={(e)=>{setDate(e.target.value)}}
+                              type="date" className="form-control" id="date" required={true}/>
+                      </div>
+                      <div className="form-group mb-4">
+                          <label htmlFor="yield">Crop Yield</label>
+                          <input 
+                              value={amount}
+                              onChange={(e)=>{setAmount(e.target.value)}}
+                              type="text" className="form-control" id="yield" placeholder="Crop yield in kilo" required={true}/>
+                      </div>
+                      
                   
-              
-                  <button type="submit" className="btn btn-green">Connect</button>
-                  {error&&<div className="error">{error}</div>}
-              </form>
-            </div>
-          
+                      <button type="submit" className="btn btn-green">Add</button>
+                      {error&&<div className="error">{error}</div>}
+                  </form>
+                </div>
+              </div>
+            </InputForm>
+          </div>
+        </div>
+      </div>
       )
 }

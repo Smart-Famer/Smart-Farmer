@@ -1,4 +1,5 @@
 const ActuatorModel = require('../models/actuatorModel')
+const farmModel = require("../models/farmModel")
 const mongoose =require('mongoose')
 
 const getActuators = async (req,res)=>{
@@ -23,6 +24,45 @@ const getActuators = async (req,res)=>{
     res.status(200).json(actuators)
 }
 
-module.exports=  {
-    getActuators
-}
+const editActuator = async (req, res) => {
+  const { actuator, farm_id, farm_name } = req.body;
+
+  const name = farm_name + "_" + actuator.name;
+  const port = farm_id + "-" + actuator.port;
+  const { actuator_type } = actuator;
+
+  const actuator_ids = (
+    await farmModel.findOne({ _id: farm_id }, { actuators: 1 })
+  ).actuators;
+
+  const exists_name = await ActuatorModel.findOne({
+    _id: {
+      $in: actuator_ids,
+    },
+    name: name,
+  });
+  //   const exists_port = await ActuatorModel.findOne({
+  //     _id: {
+  //       $in: sensor_ids,
+  //     },
+  //     port: port,
+  //   });
+  console.log(exists_name);
+  try {
+    if (exists_name) {
+      throw Error("Actuator Name Already Exists");
+    }
+    const actuator = await ActuatorModel.findOneAndUpdate(
+      { port },
+      { name, actuator_type }
+    );
+    res.status(200).json(actuator);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+module.exports = {
+  getActuators,
+  editActuator,
+};

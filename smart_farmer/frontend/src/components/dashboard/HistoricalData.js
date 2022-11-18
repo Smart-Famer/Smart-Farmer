@@ -1,17 +1,12 @@
 import distinctColors from "distinct-colors";
 import React, { useEffect, useState } from "react";
-import { GiCardJackClubs } from "react-icons/gi";
-// import { LineChart } from "react-chartjs-2/dist/utils";
-import { Link } from "react-router-dom";
 import "../../App.css";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import LineChart from "./LineChart";
 
 export default function HistoricalData() {
   const { farm } = useFarmContext();
-  
-
-  
+   
   let sensorPortName = {};
   farm.sensors.Temperature.forEach((sensor) => {
     sensorPortName[sensor.port] = sensor.name;
@@ -46,6 +41,13 @@ export default function HistoricalData() {
       return color._rgb;
     });
     return palette;
+  }
+
+  function getActualName(name){
+    let temp = name.split("_");
+    let nameWithoutFarmArr = temp.slice(1);
+    let nameWithoutFarm = nameWithoutFarmArr.join("_");
+    return nameWithoutFarm;
   }
 
   useEffect(() => {
@@ -155,7 +157,7 @@ export default function HistoricalData() {
             }
           });
 
-          temp["label"] = sensorPortName[id];
+          temp["label"] = getActualName(sensorPortName[id]);
           temp["data"] = xy;
           temp["visibility"] = true;
           let color = colorList[sensorIndex];
@@ -176,7 +178,7 @@ export default function HistoricalData() {
   }, [duration, startDate,type]);
 
   const handleDurationChange = (e) => {
-    const duration = e.currentTarget.value;
+  const duration = e.currentTarget.value;
     setDuration(duration);
   };
   const handleStartDateChange = (e) => {
@@ -192,7 +194,7 @@ export default function HistoricalData() {
     const sensorName = sensorPortName[e.currentTarget.id];
     let temp_data = JSON.parse(JSON.stringify(data));
     for (let d of temp_data) {
-      if (d.label === sensorName) {
+      if (d.label === getActualName(sensorName)) {
         d.visibility = !d.visibility;
       }
     }
@@ -210,7 +212,7 @@ export default function HistoricalData() {
           defaultChecked
         />
         <label className="form-check-label" htmlFor={sensorId}>
-          {sensorPortName[sensorId]}
+          {getActualName(sensorPortName[sensorId])}
         </label>
       </div>
     );
@@ -218,55 +220,58 @@ export default function HistoricalData() {
 
   return (
     <>
-      <div className="row d-flex justify-content-center">
-        <div className="col-sm-4 mb-3">
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            onChange={handleTypeChange}
-          >
-            <option value="temp">Temperature</option>
-            <option value="humidity">Humidity</option>
-            <option value="soil_humidity">Soil Humidity</option>
-            <option value="rainfall">Rainfall</option>
-          </select>
+         <div className="form-group">
+        <div className="row me-4 ms-4">
+          <div class="col col-md-4 col-sm-6">
+            <label for="inputAddress" class="form-label">Address</label>
+            <select
+              class="form-control" 
+              id="inputAddress"
+              aria-label="Default select example"
+              onChange={handleTypeChange}
+              >
+              <option value="temp">Temperature</option>
+              <option value="humidity">Humidity</option>
+              <option value="soil_humidity">Soil Humidity</option>
+              <option value="rainfall">Rainfall</option>
+            </select>
+          </div>
         </div>
+        <br></br>
+        <div className="row me-4 ms-4">
+          <div class="col col-md-4">
+            <label for="inputEmail4" class="form-label">Email</label>
+            <div className="col-sm">
+              <select
+                name="section"
+                class="form-control" 
+                id="inputEmail4"
+                aria-label="Default select example"
+                onChange={handleDurationChange}
+                >
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+            </div>
+          <div class="col col-md-4">
+            {duration === "weekly" && (
+              <>
+                <label htmlFor="startDate" class="form-label">Start Date:</label>              
+                <input
+                  type="date"
+                  class="form-control" 
+                  id="inputPassword4"
+                  onChange={handleStartDateChange}
+                />
+              </>
+            )}
+        </div>
+      </div>
       </div>
       <div className="row">
-        <div className="col-sm-1 text-end">
-          <label htmlFor="secton">Filter By:</label>
-        </div>
-        <div className="col-sm-2">
-          <select
-            name="section"
-            id="section"
-            className="form-select"
-            aria-label="Default select example"
-            onChange={handleDurationChange}
-          >
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-          </select>
-        </div>
-        {duration === "weekly" && (
-          <>
-            <div className="col-sm-1 text-end">
-              <label htmlFor="startDate">Start Date:</label>
-            </div>
-            <div className="col-sm-2">
-              <input
-                type="date"
-                className="form-control"
-                id="startDate"
-                onChange={handleStartDateChange}
-              />
-            </div>
-          </>
-        )}
-      </div>
-      <div className="row px-5 historicalData--container">
-        <div className="col-sm-10">
-          <LineChart
+        <div className="col-lg-9">
+        <LineChart
             xAxisLabel="Date"
             yAxisLabel="Temperature"
             xAxisValues={xAxisV}
@@ -281,7 +286,7 @@ export default function HistoricalData() {
             </Link>
           </div> */}
         </div>
-        <div className="col-sm-2">
+        <div className="col-lg-3 m-2">
           <div>
             <h5>Filter by sensor:</h5>
             {sensorCheckBox}

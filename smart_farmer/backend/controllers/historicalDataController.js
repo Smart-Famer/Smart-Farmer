@@ -23,32 +23,38 @@ const getReadingHistory = async (req, res) => {
           ];
   if(duration=="monthly"){
   temp = await dataReadingModel.aggregate([
-      {
-        $match: { sourceId: { $in: sourceIds } },
-      },
-      {
-        $group: {
-          _id: {year:{$year:"$timestamp"}, month: {$month: "$timestamp" }, sourceId: "$sourceId" },
-          reading: { $avg: "$reading" },
+    {
+      $match: { sourceId: { $in: sourceIds } },
+    },
+    {
+      $group: {
+        _id: {
+          year: { $year: "$timestamp" },
+          month: { $month: "$timestamp" },
+          sourceId: "$sourceId",
         },
+        reading: { $avg: "$reading" },
       },
-    ]);
+    }
+    ,
+    {
+      $sort: { month: 1 },
+    },
+  ]);
     readingHistory=temp.map((e)=>{
       return {
         sourceId:e._id.sourceId,
-        timestamp:months[e._id.month],
+        timestamp:months[e._id.month-1],
         reading:e.reading
       }
     })
-    // console.log(readingHistory_)
-    // readingHistory=temp;
   }else{
      readingHistory = await dataReadingModel.find({
       sourceId: {
         $in: sourceIds,
       },
       timestamp:{$gte:startDate}
-    }).limit(8*sourceIds.length);
+    }).limit(7*sourceIds.length);
   }
   
   if (!readingHistory) {

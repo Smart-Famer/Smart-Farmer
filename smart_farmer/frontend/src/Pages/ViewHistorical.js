@@ -8,7 +8,6 @@ import Sidebar from "../components/Sidebar/SideBar";
 export default function HistoryPage() {
     return (
         <div className="main-container">
-            <Sidebar/>
             <div className="historicalData--container">
                 <Row >
                     <Col >

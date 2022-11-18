@@ -1,30 +1,73 @@
-import { Link } from "react-router-dom"
-import {MdOutlineSettings} from "react-icons/md";
-import "./navStyle.css"
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useFarmContext } from "../../hooks/useFarmContext";
-export default function NavBar(){
-    const user = useAuthContext().user.details
-    const {farm} = useFarmContext()
+import { Link, Navigate } from "react-router-dom";
+import "./navStyle.css";
+import { useLogout } from "../../hooks/useLogout";
+export default function NavBar() {
+  const { logout } = useLogout();
+  const handleClick = () => {
+    logout();
+    return <Navigate to="/" />;
+  };
 
-    return(
-        <div className="nav-container">
-            <nav className="top-nav">
-                {farm&&<div className="top-nav-user-info">
-                    <div className="top-nav-info-name"><p>{farm.name}</p></div>
-                    <div className="top-nav-info-type"><p>{farm.address}</p></div>
-                </div>}
-                <div className="top-nav-user-info">
-                    <div data-testid='top-nav-info-name' className="top-nav-info-name"><p>{user.first_name+" "+user.second_name}</p></div>
-                    <div data-testid='top-nav-info-type' className="top-nav-info-type"><p>Farm {user.user_type}</p></div>
-                </div>
-                <div className="top-nav-items">
-                    <img className="top-nav-icon" alt="Brand" src="../images/nav-icon.png"/>
-                    <Link className="top-nav-logo-name" style={{textDecoration: 'none'}} to="/"> <h4 >Smart Farmer</h4></Link>
-                    <Link className="top-settings-btn" style={{textDecoration: 'none'}} to="/user/viewProfilePage"><MdOutlineSettings className="sidebar-item-logo" size={30}/></Link>
-                </div>
-            </nav>
-            <div className="bottom-border"></div>
+  return (
+    <header className="">
+      <nav className="navbar navbar-expand-md">
+        <div className="navbar-brand fs-3 ms-2">
+          <button
+            className="btn float-start"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvas"
+            role="button"
+          >
+            <img
+              className="inline-block align-text-top me-2"
+              alt="Brand"
+              src="../images/nav-icon.png"
+              width="35"
+              height="30"
+            />
+          </button>
+          <span className="top-nav-logo-name fw-bold">Smart Farmer</span>
         </div>
-    )
+        <button
+          className="navbar-toggler me-3"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse ul-bg" id="navbarNavDropdown">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item ms-auto">
+              <Link
+                className="nav-link mx-3 fs-5"
+                style={{ textDecoration: "none" }}
+                to="/user/viewProfilePage"
+              >
+                Profile
+              </Link>
+            </li>
+            <li className="nav-item ms-auto">
+              <Link onClick={handleClick} className="nav-link mx-3 fs-5" to="/">
+                Logout
+              </Link>
+            </li>
+            <li className="nav-item ms-auto">
+              <Link
+                className="nav-link mx-3 fs-5"
+                style={{ textDecoration: "none" }}
+                to="/user/home"
+              >
+                Home
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div className="bottom-border"></div>
+    </header>
+  );
 }

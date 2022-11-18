@@ -10,46 +10,29 @@ export default function NPKInput() {
   const [nitrogenLevel, setNitrogenLevel] = useState("");
   const [potassium, setPotassiumLevel] = useState("");
   const [phosphorus, setPhosphorus] = useState("");
-  const [validateError, setValidate] =useState("");
-  const inputNPK = useRef("");
+
   const { farm } = useFarmContext();
 
-  const isNumber=(str) =>{
-    if (str.trim() === '') {
-      return false;
-    }
-  
-    return !isNaN(str);
-  }
-  const Validate= (n,p,k)=>{
-    var error = "";
-    if (!n || !p || !k) {
-      return error = "Enter values for all the inputs !";
-    }
-    else if(!isNumber(n) || !isNumber(p)|| !isNumber(k)){
-      return error = "Enter a number as input !";
-    }
-  }
-
-  useEffect(() => {
-    inputNPK.current = `${nitrogenLevel},${phosphorus},${potassium}`;
-  }, [nitrogenLevel, phosphorus, potassium]);
 
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValidate(Validate(nitrogenLevel,phosphorus,potassium))
-    // console.log(nitrogenLevel);
 
-    const reading = inputNPK.current;
+
     const sourceId = farm.NPK_levels_key;
     let timestamp = new Date().toJSON();
 
-    const dataReading = { reading, sourceId, timestamp };
+    const dataReading = { 
+       sourceId,
+       timestamp,
+       n:nitrogenLevel,
+       p:phosphorus,
+       k:potassium
+     };
 
 
-    const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading`,
+    const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/npklevel`,
       {
         method: "POST",
         body: JSON.stringify(dataReading),
