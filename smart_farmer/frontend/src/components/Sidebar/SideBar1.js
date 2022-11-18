@@ -1,8 +1,9 @@
-import React from "react"
-import { useFarmContext } from "../../hooks/useFarmContext"
-import {Link, Navigate} from "react-router-dom"
-import { useAuthContext } from "../../hooks/useAuthContext"
-import "./Sidebar.css"
+import React from "react";
+import { useFarmContext } from "../../hooks/useFarmContext";
+import { Link, Navigate } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import "./Sidebar.css";
+
 
 export default function Sidebar1(){
     const {farm} = useFarmContext()
@@ -26,41 +27,73 @@ export default function Sidebar1(){
     <div className="offcanvas-body px-0">
         <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
             <li className="nav-item fs-5 ">
-                <Link className="nav-link text-truncate" to="/user/farm/dashboard">
-                    <i className="bi-columns-gap"></i><span class="ms-1 d-none d-sm-inline">Dashboard</span>
-                </Link>
+              <Link
+                className="nav-link text-truncate"
+                to="/user/farm/dashboard"
+              >
+                <i className="bi-columns-gap"></i>
+                <span className="ms-1 d-none d-sm-inline">Dashboard</span>
+              </Link>
             </li>
             <br></br>
-            {user?.details.user_type==="Manager"&&<><li className="nav-item fs-5">
-                <Link className="nav-link text-truncate" to="/user/farm/createAcc">
-                    <i className="fs-5 bi-person-plus"></i><span class="ms-1 d-none d-sm-inline">Create Account</span>          
-                </Link>
-            </li><br></br></>}    
-            {user?.details.user_type==="Assistant"&&<><li className="nav-item fs-5">
-                <Link className="nav-link text-truncate" to="/user/farm/controlPanel">
-                    <i className="fs-5 bi-toggles2"></i><span class="ms-1 d-none d-sm-inline">Control Panel</span>                        
-                </Link>
-            </li><br></br></>}
+            {user?.details.user_type === "Manager" && (
+              <>
+                <li className="nav-item fs-5">
+                  <Link
+                    className="nav-link text-truncate"
+                    to="/user/farm/createAcc"
+                  >
+                    <i className="fs-5 bi-person-plus"></i>
+                    <span className="ms-1 d-none d-sm-inline">
+                      Create Account
+                    </span>
+                  </Link>
+                </li>
+                <br></br>
+              </>
+            )}
+            {user?.details.user_type === "Assistant" && (
+              <>
+                <li className="nav-item fs-5">
+                  <Link
+                    className="nav-link text-truncate"
+                    to="/user/farm/controlPanel"
+                  >
+                    <i className="fs-5 bi-toggles2"></i>
+                    <span className="ms-1 d-none d-sm-inline">
+                      Control Panel
+                    </span>
+                  </Link>
+                </li>
+                <br></br>
+              </>
+            )}
             <li className="nav-item fs-5">
-                <Link className="nav-link text-truncate" to="/user/farm/cropYield">
-                    <i className="fs-5 bi-graph-up"></i><span class="ms-1 d-none d-sm-inline">Crop Yield</span>
-                </Link>
+              <Link
+                className="nav-link text-truncate"
+                to="/user/farm/cropYield"
+              >
+                <i className="fs-5 bi-graph-up"></i>
+                <span className="ms-1 d-none d-sm-inline">Crop Yield</span>
+              </Link>
             </li>
             <br></br>
             <li className="nav-item fs-5">
-                <Link className="nav-link text-truncate" to="/user/farm/gallery">
-                    <i className="fs-5 bi-images"></i><span class="ms-1 d-none d-sm-inline">Gallery</span>
-                 </Link>
+              <Link className="nav-link text-truncate" to="/user/farm/gallery">
+                <i className="fs-5 bi-images"></i>
+                <span className="ms-1 d-none d-sm-inline">Gallery</span>
+              </Link>
             </li>
             <br></br>
             <li className="nav-item fs-5">
-                <Link className="nav-link text-truncate" to="/user/farm/settings">
-                    <i className="fs-5 bi-gear"></i><span class="ms-1 d-none d-sm-inline">Settings</span>                        
-                </Link>
+              <Link className="nav-link text-truncate" to="/user/farm/settings">
+                <i className="fs-5 bi-gear"></i>
+                <span className="ms-1 d-none d-sm-inline">Settings</span>
+              </Link>
             </li>
-        </ul>
-    </div>
-</div>
-</>
-    )
+          </ul>
+        </div>
+      </div>
+    </>
+  );
 }

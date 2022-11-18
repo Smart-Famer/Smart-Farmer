@@ -1,21 +1,17 @@
-import distinctColors from "distinct-colors";
-import React, { useEffect, useState } from "react";
 import "../App.css";
-import { useFarmContext } from "../hooks/useFarmContext";
-import LineChart from "../components/dashboard/LineChart";
 import Sidebar from "../components/Sidebar/SideBar";
+import NpkLevelChart from "../components/NpkLevelChart";
+import Input from "../components/inputForms/InputForm";
 
 
 export default function HistoricalNPKpage() {
-    
-
-
   return (
     <div className="main-container">
-      <Sidebar />
+    <Sidebar/>
       <div>
-        {/* <LineChart
-        /> */}
+        <Input formName="NPK Historical Data">
+          <NpkLevelChart/>
+        </Input>
       </div>
     </div>
   );

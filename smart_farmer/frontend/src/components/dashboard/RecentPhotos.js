@@ -66,8 +66,7 @@ export default function RecentPhotos(){
                         <img className="w-75" src={farmImage1} alt="farmImage1"/>
                     </div>
                 </div>
-
             </div>
         </div>
-    )
+  );
 }

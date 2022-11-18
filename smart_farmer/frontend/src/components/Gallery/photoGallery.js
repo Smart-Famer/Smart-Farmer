@@ -1,16 +1,16 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import PhotoData from "./PhotoData"
-import React, { useEffect, useState } from "react"
-import DateCard from './dateCard'
-import { usePhotoContext } from "../../hooks/usePhotoContext"
-import "./Carousel.css"
-import { useFarmContext } from '../../hooks/useFarmContext';
-import DateFilter from '../dateFilter/dateFilter';
+import "bootstrap/dist/css/bootstrap.css";
+import PhotoData from "./PhotoData";
+import React, { useEffect, useState } from "react";
+import DateCard from "./dateCard";
+import { usePhotoContext } from "../../hooks/usePhotoContext";
+import "./Carousel.css";
+import { useFarmContext } from "../../hooks/useFarmContext";
+import DateFilter from "../dateFilter/dateFilter";
 
-export default function PhotoGallery(){
-    const {farm} = useFarmContext()
-    const {photos, dispatchPhotos} = usePhotoContext()
-    const [display_cards,setCards]= useState(null)
+export default function PhotoGallery() {
+  const { farm } = useFarmContext();
+  const { photos, dispatchPhotos } = usePhotoContext();
+  const [display_cards, setCards] = useState(null);
 
     useEffect(()=>{        
         const keys = Object.keys(photos)
@@ -18,10 +18,8 @@ export default function PhotoGallery(){
         <DateCard date={date}/>
         </div>)
 
-        setCards(cards)
-    },[photos])
-
-
+    setCards(cards);
+  }, [photos]);
     
     return(
         <div>
@@ -34,8 +32,7 @@ export default function PhotoGallery(){
                 {display_cards}
                 {display_cards&&display_cards.length===0 && <h4 class="fw-bold text-danger font-monospace">No Photos are Taken yet! Try taking some photos and upload them to monitor your progress.. </h4>}
             </div>
-        </div>
 
-        
-    )     
-}                       
+        </div>
+  );
+}
