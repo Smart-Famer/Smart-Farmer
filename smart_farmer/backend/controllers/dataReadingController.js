@@ -40,8 +40,8 @@ const  createDataReading= async (req,res)=>{
             reading
         })
         res.json(dataReading)
-    }catch(err){
-        res.json(err)
+    }catch(error){
+        res.json(error)
     }
 }
 module.exports = {
