@@ -1,10 +1,9 @@
-import { useState } from "react";
-import "./Login.css";
-import { BsPersonCircle } from "react-icons/bs";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import { BsPersonCircle } from "react-icons/bs";
 import { useLogin } from "../../hooks/useLogin";
-import DisplayAlert from "../DisplayAlert";
 import ModalTemp from "../Modal/Modal";
+import "./Login.css";
 import Validation from "./loginValidation";
 
 export default function Login() {

@@ -18,14 +18,7 @@ import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function Sidebar(props){
     const {farm} = useFarmContext()
-    const {logout} = useLogout()
     const user = useAuthContext().user.details
-    const handleClick =()=>{
-        logout()
-        return(
-            <Navigate to="/"/>
-        )
-    }
 
     return(
         <div className="sidebar">
@@ -37,24 +30,12 @@ export default function Sidebar(props){
             </div>
             <div className="sidebar-center">
                 <Nav className="sidebar-nav" vertical pills>
-                    <NavItem  className="sidebar-nav-item">
-                        <BiHome className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/user/home">
-                        Home
-                        </Link>
-                    </NavItem>
                     {farm && <NavItem  className="sidebar-nav-item">
                         <MdOutlineSpaceDashboard className="sidebar-item-logo" size={30}/>
                         <Link className="sidebar-nav-link" to="/user/farm/dashboard">
                         Dashboard
                         </Link>
                     </NavItem>}
-                    <NavItem className="sidebar-nav-item">
-                        <BsPerson className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/user/viewProfilePage">
-                        Profile
-                        </Link>
-                    </NavItem>
                     {user.user_type==="Manager" && farm &&<NavItem className="sidebar-nav-item">
                         <BsPersonPlus className="sidebar-item-logo" size={30}/>
                         <Link className="sidebar-nav-link" to="/user/farm/createAcc">
@@ -69,7 +50,7 @@ export default function Sidebar(props){
                     </NavItem>}
                     {farm && <NavItem className="sidebar-nav-item">
                         <GiChart className="sidebar-item-logo" size={30}/>
-                        <Link className="sidebar-nav-link" to="/user/farm/cropYield">
+                        <Link className="sidebar-nav-link  text-truncate" to="/user/farm/cropYield">
                         Crop Yield
                         </Link>
                     </NavItem>}
@@ -85,12 +66,6 @@ export default function Sidebar(props){
                         Settings
                         </Link>
                     </NavItem >}
-                    <NavItem className="sidebar-nav-item">
-                        <MdOutlineLogout className="sidebar-item-logo" size={30}/>
-                        <Link onClick={handleClick} className="sidebar-nav-link" to="/">
-                        Logout
-                        </Link>
-                    </NavItem >
                 </Nav>
             </div>
         </div>

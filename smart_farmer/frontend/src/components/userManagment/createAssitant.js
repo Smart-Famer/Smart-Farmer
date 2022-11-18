@@ -31,9 +31,10 @@ export default function CreateAss(props) {
   };
 
   return (
-    <div>
+    <div className='pe-4'>
       <form onSubmit={handleSubmit}>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+            <label className="col-sm-4 col-form-label">First Name</label>
             <div className="col-sm-7">
                 <input 
                         type="text" 
@@ -43,10 +44,10 @@ export default function CreateAss(props) {
                         required={true}
                         />
             </div>
-            <label className="col-sm-1 col-form-label">First Name</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+            <label className="col-sm-4 col-form-label">Second Name</label>
             <div className="col-sm-7">
                 <input 
                         type="text" 
@@ -56,10 +57,10 @@ export default function CreateAss(props) {
                         required={true}
                         />
             </div>
-            <label className="col-sm-1 col-form-label">Second Name</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+            <label className="col-sm-4 col-form-label">Email</label>
             <div className="col-sm-7">
                 <input 
                         type="email" 
@@ -69,10 +70,9 @@ export default function CreateAss(props) {
                         required={true}
                         />
             </div>
-            <label className="col-sm-1 col-form-label">Email</label>
-
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+            <label className="col-sm-4 col-form-label">Password</label>
             <div className="col-sm-7">
                 <input 
                         type="password" 
@@ -82,10 +82,10 @@ export default function CreateAss(props) {
                         required={true}
                         />
             </div>
-            <label className="col-sm-1 col-form-label">Password</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+            <label className="col-sm-4 col-form-label">Location</label>
             <div className="col-sm-7">
                 <input 
                         type="text" 
@@ -95,10 +95,9 @@ export default function CreateAss(props) {
                         required={true}
                         />
             </div>
-            <label className="col-sm-1 col-form-label">Location</label>
 
         </div>
-        <button type="submit" className="btn btn-green btn-block m-4">Create</button>
+        <button type="submit" className="btn btn-success btn-block">Create</button>
         {error && (<DisplayAlert type={'danger'} content={error} />)}
         {success && (<DisplayAlert type={'success'} content={success} />)}
       </form>

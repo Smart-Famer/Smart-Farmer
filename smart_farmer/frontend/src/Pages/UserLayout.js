@@ -23,7 +23,7 @@ export default function UserLayout()
 {
     const { farm } = useFarmContext()
     return(
-        <section>
+        <>
             <Navbar/>
             <Routes>
                 <Route path='*' element={<Error/>}/>
@@ -32,6 +32,6 @@ export default function UserLayout()
                 <Route path='farm/*' element={farm ? <FarmLayout />:<Navigate to="/user/home"/>}/>
                 <Route path='viewProfilePage' element={<ViewProfilePage />}/>
             </Routes>
-        </section>
+        </>
     )
 }

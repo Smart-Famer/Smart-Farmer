@@ -4,14 +4,21 @@ import { Link } from "react-router-dom"
 export default function LoginNavBar(){
     
     return(
-
-        <div className="nav-container">
-            <nav className="top-nav">
-                <img className="login-nav-icon" alt="Brand" src="images/nav-icon.png"/>
-                <Link className="login-logo-name" style={{textDecoration: 'none'}} to="/login"> <h4 >Smart Farmer</h4></Link>
-                <Link className="login-contact-btn" style={{textDecoration: 'none'}} to="/home"><h4>Contact us</h4></Link>
-            </nav>
-            <div className="bottom-border"></div>
-        </div>
+        <header>
+            <div>
+                <nav className="navbar">
+                <div className="navbar-brand fs-3 ms-2">
+                    <img className="inline-block align-text-top me-2" alt="Brand" src="../images/nav-icon.png" width="35" height="30"/>
+                    <span className="top-nav-logo-name fw-bold" >Smart Farmer</span>
+                </div>
+                <ul className="navbar-nav">
+                    <li className="nav-item ms-auto">
+                        <Link className="nav-link mx-3 fs-5" style={{textDecoration: 'none'}} to="/home">Contact us</Link>
+                    </li>
+                </ul>
+                </nav>
+                <div className="bottom-border"></div>
+            </div>
+        </header>
     )
 }

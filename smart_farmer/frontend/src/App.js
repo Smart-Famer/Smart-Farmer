@@ -1,5 +1,6 @@
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "react-router-dom";
 import UserLayout from "./Pages/UserLayout";
 import LoginPage from "./Pages/LoginPage";
@@ -9,6 +10,8 @@ import AdminLogin from "./Pages/AdminLogin";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { FarmContextProvider } from "./context/FarmContext";
+// import io from "socket.io-client";
+// const socket = io.connect('http://localhost:4000')
 
 function App() {
   //console.log(user.username)
@@ -37,6 +40,9 @@ function App() {
 
         <Route path="*" element={<Error />} />
       </Routes>
+      <footer>
+        
+      </footer>
     </BrowserRouter>
   );
 }
