@@ -150,7 +150,7 @@ export default function Card(props) {
                   className="btn btn-sm btn-dark ms-3 rounded-pill"
                   onClick={handleEdit}
                 >
-                  <MdCreate size={15} />
+                  <i className="bi-pencil"></i>
                 </button>
               )}
             </h5>
@@ -161,7 +161,7 @@ export default function Card(props) {
                   className="btn btn-success rounded-pill"
                   onClick={handleEnter}
                 >
-                  Enter
+                  Enter <i class="bi bi-box-arrow-in-right"></i>
                 </button>
               </div>
               <div className="col-2">
@@ -178,7 +178,7 @@ export default function Card(props) {
                     className="btn btn-sm btn-danger"
                     onClick={handleDelete}
                   >
-                    <MdDeleteOutline size={20} />
+                    <i className="bi bi-trash3"></i>
                   </button>
                 )}
               </div>

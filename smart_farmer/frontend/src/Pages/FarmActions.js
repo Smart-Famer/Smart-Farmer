@@ -23,8 +23,8 @@ export default function FarmAction() {
     formName = "Edit Farm";
   }
   return (
-    <div className="main-container">
-      <div className="mx-auto">
+    <div className="row justify-content-center">
+      <div className="col-11 col-sm-10 col-md-9 col-lg-7">
         <InputForm formName={formName}>
           <FarmForm action={action} farm_id={_id} />
         </InputForm>

@@ -161,102 +161,104 @@ export default function FarmForm(props) {
     }
   }, []);
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label htmlFor="formGroupExampleInput" className="form-label">
-          Farm Name
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="formGroupExampleInput"
-          placeholder="Farm Name"
-          value={farm_name}
-          onChange={(e) => {
-            setFarmName(e.target.value);
-          }}
-          required={true}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="formGroupExampleInput2" className="form-label">
-          Farm Area (m <sup>2</sup>)
-        </label>
-        <input
-          type="number"
-          className="form-control"
-          id="formGroupExampleInput2"
-          placeholder="Farm Area"
-          value={farm_area}
-          onChange={(e) => {
-            setArea(e.target.value);
-          }}
-          required={true}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="formGroupExampleInput2" className="form-label">
-          Latitude
-        </label>
-        <input
-          type="number"
-          className="form-control"
-          id="formGroupExampleInput2"
-          placeholder="Latitude"
-          value={latitude}
-          onChange={(e) => {
-            setLatitude(e.target.value);
-          }}
-          required={true}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="formGroupExampleInput2" className="form-label">
-          Longitude
-        </label>
-        <input
-          type="number"
-          className="form-control"
-          id="formGroupExampleInput2"
-          placeholder="Longitude"
-          value={longitude}
-          onChange={(e) => {
-            setLongitude(e.target.value);
-          }}
-          required={true}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="formGroupExampleInput2" className="form-label">
-          Address
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="formGroupExampleInput2"
-          placeholder="Address"
-          value={address}
-          onChange={(e) => {
-            setAddress(e.target.value);
-          }}
-          required={true}
-        />
-      </div>
+    <div className="me-4">
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput" className="form-label">
+            Farm Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="formGroupExampleInput"
+            placeholder="Farm Name"
+            value={farm_name}
+            onChange={(e) => {
+              setFarmName(e.target.value);
+            }}
+            required={true}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
+            Farm Area (m <sup>2</sup>)
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="formGroupExampleInput2"
+            placeholder="Farm Area"
+            value={farm_area}
+            onChange={(e) => {
+              setArea(e.target.value);
+            }}
+            required={true}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
+            Latitude
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="formGroupExampleInput2"
+            placeholder="Latitude"
+            value={latitude}
+            onChange={(e) => {
+              setLatitude(e.target.value);
+            }}
+            required={true}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
+            Longitude
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="formGroupExampleInput2"
+            placeholder="Longitude"
+            value={longitude}
+            onChange={(e) => {
+              setLongitude(e.target.value);
+            }}
+            required={true}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
+            Address
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="formGroupExampleInput2"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+            }}
+            required={true}
+          />
+        </div>
 
-      {props.action === "edit" && (
-        <button type="submit" className="btn btn-success">
-          Edit Farm
-        </button>
-      )}
-      {props.action === "add" && (
-        <button type="submit" className="btn btn-success">
-          Add Farm
-        </button>
-      )}
+        {props.action === "edit" && (
+          <button type="submit" className="btn btn-success">
+            Edit Farm
+          </button>
+        )}
+        {props.action === "add" && (
+          <button type="submit" className="btn btn-success">
+            Add Farm
+          </button>
+        )}
 
-      <br></br>
-      {error && <DisplayAlert type={"danger"} content={error} />}
-      {success && <DisplayAlert type={"success"} content={success} />}
-    </form>
+        <br></br>
+        {error && <DisplayAlert type={"danger"} content={error} />}
+        {success && <DisplayAlert type={"success"} content={success} />}
+      </form>
+    </div>
   );
 }
