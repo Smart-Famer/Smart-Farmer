@@ -49,74 +49,76 @@ export default function AddActuator() {
 
   return (
     //should validate port number (4-digit, numeric)
-    <form onSubmit={handleSubmit}>
-      <div className="form-group  p-3">
-        <label htmlFor="inputActuatorType">Actuator Type</label>
+    <div className="me-4">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group  mb-4">
+          <label htmlFor="inputActuatorType">Actuator Type</label>
 
-        <select
-          value={actuator_type}
-          onChange={(e) => {
-            setActuator_type(e.target.value);
-          }}
-          id="inputSensorType"
-          className="form-control"
-        >
-          {/* <option selected>Choose...</option> */}
-          <option>Water Pump</option>
-          <option>Camera</option>
-        </select>
-      </div>
-      <div className="form-group p-3">
-        <label htmlFor="inputSensor">Actuator Name</label>
-        <input
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          type="text"
-          className="form-control"
-          id="inputActuator"
-          placeholder="Actuator 1,2.."
-          required={true}
-        />
-      </div>
-      <div className="form-group p-3">
-        <label htmlFor="inputActuatorPort">Port Number</label>
-        <input
-          value={port}
-          onChange={(e) => {
-            setPort(e.target.value);
-          }}
-          type="text"
-          className="form-control"
-          id="inputActuatorPort"
-          required={true}
-        />
-      </div>
+          <select
+            value={actuator_type}
+            onChange={(e) => {
+              setActuator_type(e.target.value);
+            }}
+            id="inputSensorType"
+            className="form-control"
+          >
+            {/* <option selected>Choose...</option> */}
+            <option>Water Pump</option>
+            <option>Camera</option>
+          </select>
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="inputSensor">Actuator Name</label>
+          <input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            type="text"
+            className="form-control"
+            id="inputActuator"
+            placeholder="Actuator 1,2.."
+            required={true}
+          />
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="inputActuatorPort">Port Number</label>
+          <input
+            value={port}
+            onChange={(e) => {
+              setPort(e.target.value);
+            }}
+            type="text"
+            className="form-control"
+            id="inputActuatorPort"
+            required={true}
+          />
+        </div>
 
-      <button type="submit" className="btn btn-green">
-        Connect
-      </button>
-      {/* {error && <div className="error">{error}</div>} */}
+        <button type="submit" className="btn btn-green">
+          Connect
+        </button>
+        {/* {error && <div className="error">{error}</div>} */}
 
-      {error && (
-        <ModalTemp
-          title={"Error"}
-          message={error}
-          color="danger"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-      {!error && (
-        <ModalTemp
-          title={"Successful"}
-          message={"New electric conductivity level added successfully"}
-          color="primary"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-    </form>
+        {error && (
+          <ModalTemp
+            title={"Error"}
+            message={error}
+            color="danger"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!error && (
+          <ModalTemp
+            title={"Successful"}
+            message={"New electric conductivity level added successfully"}
+            color="primary"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
+    </div>
   );
 }

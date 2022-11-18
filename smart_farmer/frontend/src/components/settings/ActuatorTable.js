@@ -58,8 +58,8 @@ export default function ActuatorTable(){
                 <td>{actuator.name.split("_")[1]}</td>
                 <td>Camera</td>
                 <td>{actuator.port.split("-")[1]}</td>
-                <td><button className="btn btn-danger" onClick={()=>{deleteModule("Camera", actuator._id)}}><i class="bi-trash3"></i></button></td>
-                <td><button className="btn btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-actuator/Camera/${actuator._id}`)}}><i class="bi-pencil"></i></button></td>
+                <td><button className="btn btn-sm btn-danger" onClick={()=>{deleteModule("Camera", actuator._id)}}><i class="bi-trash3"></i></button></td>
+                <td><button className="btn btn-sm btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-actuator/Camera/${actuator._id}`)}}><i class="bi-pencil"></i></button></td>
             </tr>
             }),
             Pump:farm?.actuators?.Pump?.map(actuator=>{
@@ -67,8 +67,8 @@ export default function ActuatorTable(){
                     <td>{actuator.name.split("_")[1]}</td>
                     <td>Water Pump</td>
                     <td>{actuator.port.split("-")[1]}</td>
-                    <td><button className="btn btn-danger" onClick={()=>{deleteModule("Pump", actuator._id)}}><i class="bi-trash3"></i></button></td>
-                    <td><button className="btn btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-actuator/Pump/${actuator._id}`)}}><i class="bi-pencil"></i></button></td>
+                    <td><button className="btn btn-sm btn-danger" onClick={()=>{deleteModule("Pump", actuator._id)}}><i class="bi-trash3"></i></button></td>
+                    <td><button className="btn btn-sm btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-actuator/Pump/${actuator._id}`)}}><i class="bi-pencil"></i></button></td>
                 </tr>
                 })
         })
