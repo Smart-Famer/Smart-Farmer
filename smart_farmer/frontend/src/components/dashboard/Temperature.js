@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import {Row,Col } from "reactstrap";
 import { useFarmContext } from "../../hooks/useFarmContext";
 
-export default function Temperature(){
+export default function Temperature({socket}){
     const {farm} = useFarmContext()
     const sourceIds = farm.sensors.Temperature.map((sensor)=>sensor.port)
     const [temperatures, setTemperatures] = useState({})
 
-    const sensor_names = farm.sensors.Temperature.map((sensor)=>{
-        return sensor.name.replace(farm.name+"_","")
-    })
+
 
     const nameId = {}
     farm.sensors.Temperature.forEach(data => {
@@ -23,11 +21,11 @@ export default function Temperature(){
 
     useEffect(() => {
         const fetchTemperature=async ()=>{
+
             const response = await fetch(
               `${process.env.REACT_APP_HOST}/api/datareading/all/?sourceids=${sourceIds.join()}`
             );
             const json  = await response.json();
-            console.log(json);
             if(json){
                 setTemperatures(json);
             }
@@ -36,10 +34,27 @@ export default function Temperature(){
 
         fetchTemperature()
     }, [])
+
+
+    socket.on("dataReadingUpdate", (dataReading) => {
+      if (sourceIds.includes(dataReading.sourceId)) {
+        const temp = {
+          ...temperatures,
+          [dataReading.sourceId]: dataReading.reading,
+        };
+        setTemperatures(temp);
+      }
+    });
+
     const components = sourceIds.map((id)=>{
-        return <Col key={id} ><h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{temperatures[id]}&deg;C</h3>
-        <h6 className="text-center">{nameId[id]}</h6>
-        </Col>
+        return (
+          <Col key={sourceIds.indexOf(id)}>
+            <h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">
+              {temperatures[id]}&deg;C
+            </h3>
+            <h6 className="text-center">{nameId[id]}</h6>
+          </Col>
+        );
     })
     return(
         <Row>
