@@ -19,7 +19,7 @@ export default function AdminPanel(props) {
   useEffect(() => {
     const fetchFarms = async () => {
       const response = await fetch(
-        `http://localhost:4000/api/admin/get-all-farms`
+        `${process.env.REACT_APP_HOST}/api/admin/get-all-farms`
       );
       const json = await response.json();
       if (response.ok) {
@@ -28,7 +28,7 @@ export default function AdminPanel(props) {
     };
     const fetchManagers= async () => {
       const response = await fetch(
-        `http://localhost:4000/api/admin/get-all-mangers`
+        `${process.env.REACT_APP_HOST}/api/admin/get-all-mangers`
       );
       const json = await response.json();
       // console.log(json);
@@ -38,7 +38,7 @@ export default function AdminPanel(props) {
     };
     const fetchAssistants = async () => {
       const response = await fetch(
-        `http://localhost:4000/api/admin/get-all-assistants`
+        `${process.env.REACT_APP_HOST}/api/admin/get-all-assistants`
       );
       const json = await response.json();
       // console.log(json);

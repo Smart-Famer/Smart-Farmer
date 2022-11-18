@@ -11,13 +11,10 @@ import Error from "./Pages/Error";
 import LoginPage from "./Pages/LoginPage";
 import UserLayout from "./Pages/UserLayout";
 import {io} from "socket.io-client";
-const socket = io("http://localhost:4000");
-// const socket = io.connect('http://localhost:4000')
+const socket = io(`${process.env.REACT_APP_HOST}`);
 
 
 function App() {
-  //console.log(user.username)
-  // console.log(UserSession.username)
   const { user } = useAuthContext();
 
 

@@ -9,7 +9,9 @@ export default function ViewAll() {
 
   useEffect(() => {
     const fetchFarms = async () => {
-      const response = await fetch(`http://localhost:4000/api/admin/get-all-assistants`);
+      const response = await fetch(
+        `${process.env.REACT_APP_HOST}/api/admin/get-all-assistants`
+      );
       const json = await response.json();
 
       if (response.ok) {

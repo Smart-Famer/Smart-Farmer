@@ -56,7 +56,7 @@ export default function WaterPumpContainer(props) {
     for (let i = 0; i < pumps.length; i++) {
       const pump = pumps[i];
       const response = await fetch(
-        `https://6371f9a7025414c63702ac13.mockapi.io/api/atuautors/water_pump/${pump.port}`,
+        `${process.env.MOCK_SERVER}/${pump.port}`,
         {
           method: "PUT",
           headers: { "content-type": "application/json" },
