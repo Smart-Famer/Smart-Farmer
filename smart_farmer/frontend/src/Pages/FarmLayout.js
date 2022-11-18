@@ -21,7 +21,7 @@ import GalleryItem from './GalleryItem'
 import HistoricalNPKpage from "./HistoricalNpkPage";
 import Sidebar from "../components/Sidebar/SideBar1";
 
-export default function FarmLayout()
+export default function FarmLayout(props)
 {
     return(
         <>
@@ -30,7 +30,7 @@ export default function FarmLayout()
             </div>
             <Routes>
                 <Route path='*' element={<Error/>}/>
-                <Route path='dashboard' element={<Dashboard />}/>
+                <Route path='dashboard' element={<Dashboard socket={props.socket} />}/>
                 <Route path='gallery' element={<Gallery />}/>
                 <Route path='gallery/:date' element={<GalleryItem />}/>
                 <Route path='npkinput' element={<NPKpage />}/>

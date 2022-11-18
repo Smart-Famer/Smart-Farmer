@@ -1,10 +1,11 @@
 const express = require('express')
 
-const { 
-    createDataReading,
-    getReading,
-    getReadings
-} = require('../controllers/dataReadingController')
+const {
+  createDataReading,
+  getReading,
+  getReadings,
+  getAllReadings,
+} = require("../controllers/dataReadingController");
 
 const {
   createNpkLevel,
@@ -17,6 +18,7 @@ const {
 const router = express.Router()
 
 router.post('/',createDataReading)
+router.get("/all/", getAllReadings);
 router.get('/:sourceId',getReading)
 router.post('/npklevel/',createNpkLevel)
 router.get("/npklevel/historicaldata/", getHistoricalNpkLevels);
