@@ -7,7 +7,7 @@ const {
     deleteFarm,
     updateSensor,
     updateActuator,
-    getFarms
+    getFarms,
 } = require('../controllers/farmController')
 
 router.route('/get-keys/:farm_id').get(getKeys)

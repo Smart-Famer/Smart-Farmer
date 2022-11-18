@@ -10,8 +10,10 @@ export default function ViewProfilePage(){
         <div>
             {farm&&<Sidebar/>}
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="row justify-content-center m-2">
+            <div className='col col-lg-10 col-xl-8'>
             <Profile/>
+            </div>
         </div>
         </>
         

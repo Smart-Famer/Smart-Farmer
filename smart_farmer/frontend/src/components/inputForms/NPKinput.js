@@ -3,19 +3,22 @@ import "./inputform.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import DisplayAlert from "../DisplayAlert";
 import { useFarmContext } from "../../hooks/useFarmContext";
-import ModalTemp from "../Modal/Modal";
+import PopUpModal from "../Modal/Modal";
 
 export default function NPKInput() {
   const [modalShow, setModalShow] = useState(false);
   const [nitrogenLevel, setNitrogenLevel] = useState("");
   const [potassium, setPotassiumLevel] = useState("");
   const [phosphorus, setPhosphorus] = useState("");
+
   const { farm } = useFarmContext();
+
 
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
 
     const sourceId = farm.NPK_levels_key;
     let timestamp = new Date().toJSON();
@@ -115,18 +118,20 @@ export default function NPKInput() {
         </div>
         <button className="btn btn-green btn-block m-4">Submit</button>
         {/* {error && (<DisplayAlert type={'danger'} content={error}/>)}  */}
-        {error && (
-          <ModalTemp
+        {validateError && (
+          <PopUpModal
             title={"Error"}
-            message={error}
+            message={validateError}
+            color="danger"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
         )}
-        {!error && (
-          <ModalTemp
+        {!validateError && !error && (
+          <PopUpModal
             title={"Successful"}
             message={"New npk levels added successfully"}
+            color="primary"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
