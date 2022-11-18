@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFarmContext } from '../../hooks/useFarmContext';
 import DisplayAlert from '../DisplayAlert';
 
-export default function AddAss(props) {
+export default function AddAssistant(props) {
   const [_id, setID] = useState("")
   const {assistants,setAssistants} = props
   const [error, setError] = useState(null)
@@ -52,22 +52,21 @@ export default function AddAss(props) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group row p-3">
-            <div className="col-sm-7">
+      <div class="input-group mb-4">
                 <input 
                         type="text" 
                         className="form-control" 
                         value={_id}
                         onChange={(e)=>{setID(e.target.value)}}
                         required={true}
+                        placeholder="Enter Assistant ID"
                         />
-            </div>
-            <label className="col-sm-1 col-form-label">Enter Assistant ID</label>
-
-        </div>
-        <button type="submit" className="btn btn-green btn-block m-4">Add</button>
+        <button type="submit" className="btn btn-success">Add</button>
+      </div>
+      <div>
         {error && (<DisplayAlert type={'danger'} content={error} />)}
         {success && (<DisplayAlert type={'success'} content={success} />)}
+      </div>
       </form>
     </div>
       

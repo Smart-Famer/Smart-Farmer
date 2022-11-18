@@ -41,7 +41,6 @@ export default function CropYieldInput(props){
 
     return (
             <div className="main-container">
-                <Sidebar/>
               <form onSubmit={handleSubmit} >
                   <div className="form-group p-3">
                       <label htmlFor="crop_name">Crop Name</label>

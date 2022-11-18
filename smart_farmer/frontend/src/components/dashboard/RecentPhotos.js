@@ -6,41 +6,69 @@ import "../../App.css"
 
 export default function RecentPhotos(){
     return(
-        <Row className="recentPhotos--container">
-            <Col className="d-flex justify-content-center" >
-                <div>
-                    <Row>
-                        <Col>Date:</Col>
-                        <Col>: 02/09/2022</Col>
-                    </Row>
-                    <Row>
-                        <Col>Time:</Col>
-                        <Col>: 16.33</Col>
-                    </Row>
-                    <Row>
-                        <Col>Camara angle</Col>
-                        <Col>: 1</Col>
-                    </Row>
-                    <img className="w-75" src={farmImage1} alt="farmImage1"/>
+        <div className="container ">
+            <div className="row mb-3">
+                <div className="col-12 col-md-6">
+                    <div className="row">
+                        <div className="col">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Date</label>
+                        </div>
+                        <div className="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="02/09/2022"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Time</label>
+                        </div>
+                        <div className="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="16:33"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Camera Angle</label>
+                        </div>
+                        <div className="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="1"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <img className="w-75" src={farmImage1} alt="farmImage1"/>
+                    </div>
                 </div>
-            </Col>
-            <Col className="d-flex justify-content-center" >
-                <div>
-                    <Row>
-                        <Col>Date:</Col>
-                        <Col>: 02/09/2022</Col>
-                    </Row>
-                    <Row>
-                        <Col>Time:</Col>
-                        <Col>: 16.33</Col>
-                    </Row>
-                    <Row>
-                        <Col>Camara angle</Col>
-                        <Col>: 1</Col>
-                    </Row>
-                    <img className="w-75" src={farmImage2} alt="farmImage2"/>
+                <hr></hr>
+                <div className="col-12 col-md-6">
+                    <div className="row">
+                        <div className="col">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Date</label>
+                        </div>
+                        <div className="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="02/09/2022"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Time</label>
+                        </div>
+                        <div className="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="16:33"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Camera Angle</label>
+                        </div>
+                        <div className="col">
+                            <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="1"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <img className="w-75" src={farmImage1} alt="farmImage1"/>
+                    </div>
                 </div>
-            </Col>
-        </Row>
+
+            </div>
+        </div>
     )
 }
