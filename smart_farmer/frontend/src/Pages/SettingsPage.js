@@ -4,6 +4,7 @@ import AddSensor from "../components/settings/AddSensor";
 import AddActuator from "../components/settings/AddActuator";
 import Sidebar from "../components/Sidebar/SideBar";
 import EditSensor from "../components/settings/EditSensor";
+import EditActuator from "../components/settings/EditActuator";
 
 export default function SettingsPage() {
   return (
@@ -22,6 +23,11 @@ export default function SettingsPage() {
         <div className="col-6 m-1">
           <Input formName="Add New Actuator">
             <AddActuator />
+          </Input>
+        </div>
+        <div className="col-6 m-1">
+          <Input formName="Edit Actuator">
+            <EditActuator />
           </Input>
         </div>
       </div>

@@ -71,10 +71,6 @@ const editSensor = async (req,res)=>{
           }
         const sensor = await sensorModel.findOneAndUpdate(
             {port},{name,sensor_type});
-        //   await farmModel.updateOne(
-        //     { _id: farm_id },
-        //     { $push: { sensors: sensor._id } }
-        //   );
           res.status(200).json(sensor);
         } catch (err) {
           res.status(400).json({ error: err.message });
