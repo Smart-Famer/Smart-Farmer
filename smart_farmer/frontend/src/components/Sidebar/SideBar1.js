@@ -15,7 +15,7 @@ export default function Sidebar1(){
 //   Button with data-bs-target
 // </button>
 <>
-<div className="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false" style={{maxWidth:200}}>
+<div className="offcanvas offcanvas-start w-25" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="true" data-bs-scroll="true" style={{maxWidth:200}}>
     <div className="offcanvas-header  text-white">
         <h5 className="offcanvas-title d-none d-sm-block fw-bold" id="offcanvas">{farm?.name}</h5>
         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

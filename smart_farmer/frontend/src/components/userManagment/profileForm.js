@@ -54,6 +54,10 @@ export default function ProfileForm(props) {
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Second Name" value={second_name} onChange={(e)=>{handleChange(setSecondName,e)}} required={true}/>
         </div>
         <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Position</label>
+            <input type="text" class="form-control" value={user.user_type} readOnly required={true}/>
+        </div>
+        <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">User ID</label>
             <input type="text" class="form-control" value={user._id} readOnly/>
         </div>
@@ -64,10 +68,6 @@ export default function ProfileForm(props) {
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">Location</label>
             <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Location" value={location} onChange={(e)=>{handleChange(setLocation,e)}} required={true}/>
-        </div>
-        <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">Position</label>
-            <input type="text" class="form-control" value={user.user_type} readOnly required={true}/>
         </div>
 
         <div class="row allign-items-center">

@@ -8,7 +8,7 @@ export default function RecentPhotos(){
     return(
         <div className="container ">
             <div className="row mb-3">
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-md-6 mb-4">
                     <div className="row">
                         <div className="col">
                             <label for="staticEmail" class="col-sm-2 col-form-label">Date</label>
@@ -33,11 +33,10 @@ export default function RecentPhotos(){
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="1"/>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row mt-1">
                         <img className="w-75" src={farmImage1} alt="farmImage1"/>
                     </div>
                 </div>
-                <hr></hr>
                 <div className="col-12 col-md-6">
                     <div className="row">
                         <div className="col">
@@ -63,7 +62,7 @@ export default function RecentPhotos(){
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="1"/>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row mt-1">
                         <img className="w-75" src={farmImage1} alt="farmImage1"/>
                     </div>
                 </div>

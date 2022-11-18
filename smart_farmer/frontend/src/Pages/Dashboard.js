@@ -67,24 +67,27 @@ export default function Dashboard(props)
                             <Meter heading='Soil Humidity'>
                                 <SoilHumidity/>
                             </Meter>
-                        </Col>
-                        
-                        <Col>
-                            <Meter heading='Recent Photos'>
-                                <RecentPhotos/>
-                            </Meter>
-                        </Col>
-                
-                        <Col>
-                            <Meter heading='Historical Data'>
-                                <HistoricalData/>
-                            </Meter>
-                        </Col>
-                        
-                        
+                        </Col>                   
                     </Row>
                     
 
+                </Container>
+                <Container>
+                    <div className="row">
+                            <Col>
+                                <Meter heading='Recent Photos'>
+                                    <RecentPhotos/>
+                                </Meter>
+                            </Col>
+                    </div>
+                    <div className="row">
+                            <Col>
+                                <Meter heading='Historical Data'>
+                                    <HistoricalData/>
+                                </Meter>
+                            </Col>
+
+                    </div>
                 </Container>
         </div>
 

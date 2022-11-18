@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import ProfileForm from './userManagment/profileForm'
 import { MdSettingsSystemDaydream } from 'react-icons/md'
 import DisplayAlert from './DisplayAlert';
+import InputForm from './inputForms/InputForm'
 
 export default function Profile(props) {
     const user = useAuthContext().user.details
@@ -47,45 +48,25 @@ export default function Profile(props) {
         }
     }
     return(
-        <div className='main-container'>
-            <div className='profile--container mt-3'>
-                <div className='profile--heading'>
-                    <h5>Profile View</h5>
-                </div>
-                <div className='profile--data'>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-7">
-                                <div class="row ps-5 pe-5">
-                                    <ProfileForm/>
-                                </div>
-                                <div class="col-12 ps-5 pe-5">
-                                    <div class="input-group mb-2">                                    
-                                        <input type="password" aria-label="First name" class="form-control" placeholder='Enter Current Password' value={curPass} onChange={(e)=>{setCurPass(e.target.value)}}/>
-                                        <input type="password" aria-label="Last name" class="form-control" placeholder='Enter New Password' value={newPass} onChange={(e)=>{setNewPass(e.target.value)}}/>
-                                        <button class="btn btn-danger" type="button" id="button-addon2" onClick={handlePassword}>Change Password</button>
-                                    </div>
-                                    {error && (<DisplayAlert type={'danger'} content={error} />)}
-                                    {success && (<DisplayAlert type={'success'} content={success} />)}
-
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row ps-5 pe-5 mb-3">
-                                    <img class="img-fluid img-thumbnail" src={`/images/${user.profile_picture}`} alt="Profile Picture"/>
-                                </div>
-                                <div class="row ps-5 pe-5 mb-3">
-                                    <div class="input-group">
-                                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"/>
-                                        <button class="btn btn-sm btn-danger" type="button" id="inputGroupFileAddon04">Change</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr></hr>
+        <div className='row justify-content-center'>
+            <InputForm formName="Profile View">
+                <div className='row me-3'>
+                    <div className='col-12 col-md-6 mb-4'>
+                        <ProfileForm/>
                     </div>
-                </div>       
-            </div> 
+                    <div className='col-md-2'></div>
+                    <div className='col-12 col-md-3'>
+                        <div className='row justify-content-center'>
+                            <form className='form'>
+                                <legend className='form-legend'>Change Password</legend>
+                                <input type="password" class="form-control mb-3" placeholder='Enter Current Password' value={curPass} onChange={(e)=>{setCurPass(e.target.value)}}/>
+                                <input type="password" class="form-control mb-3" placeholder='Enter New Password' value={newPass} onChange={(e)=>{setNewPass(e.target.value)}}/>
+                                <button class="btn btn-danger" type="button" id="button-addon2" onClick={handlePassword}>Change Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </InputForm>
         </div>        
            
         
