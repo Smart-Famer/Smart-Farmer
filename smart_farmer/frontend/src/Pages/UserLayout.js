@@ -7,7 +7,6 @@ import Dashboard from './Dashboard';
 import NPKpage from './NPKpage';
 import ElecConPage from './ElectricConductivityInput'
 import Gallery from './Gallery';
-import Settings from './SettingsPage';
 import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';

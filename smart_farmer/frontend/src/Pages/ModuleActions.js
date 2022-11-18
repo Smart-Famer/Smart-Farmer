@@ -5,31 +5,33 @@ import AddActuator from "../components/settings/AddActuator";
 import Sidebar from "../components/Sidebar/SideBar";
 import EditSensor from "../components/settings/EditSensor";
 import EditActuator from "../components/settings/EditActuator";
+import { useParams } from "react-router";
 
-export default function SettingsPage() {
+export default function ModuleActionsPage() {
+  const {type,module,_id} = useParams()
   return (
-    <div className="main-container">
-      <div className="row">
-        <div className="col-6 m-1">
+    <div className="">
+      <div className="row justify-content-center">
+        {type==="add-sensor"&&<div className="col-6">
           <Input formName="Add New Sensor">
             <AddSensor />
           </Input>
-        </div>
-        <div className="col-6 m-1">
+        </div>}
+        {type==="edit-sensor"&&<div className="col-6">
           <Input formName="Edit Sensor">
-            <EditSensor />
+            <EditSensor module={module} _id={_id}/>
           </Input>
-        </div>
-        <div className="col-6 m-1">
+        </div>}
+        {type==="add-actuator"&&<div className="col-6">
           <Input formName="Add New Actuator">
             <AddActuator />
           </Input>
-        </div>
-        <div className="col-6 m-1">
+        </div>}
+        {type==="edit-actuator"&&<div className="col-6">
           <Input formName="Edit Actuator">
-            <EditActuator />
+            <EditActuator module={module} _id={_id}/>
           </Input>
-        </div>
+        </div>}
       </div>
     </div>
   );
