@@ -1,8 +1,8 @@
 import validator from "validator";
 
-export default function Validation(email, password) {
+export default function Validation(first_name, second_name, email, password, c_password) {
   var error = "";
-  if (!email && !password) {
+  if (!first_name && !second_name && !email && !password && !c_password) {
     return error = "Fields need to filled !";
   }
   if (!email) {
@@ -10,8 +10,8 @@ export default function Validation(email, password) {
   } else if (!validator.isEmail(email)) {
     return error= "This isn't an email !";
   }
-  if (!password) {
-    return error= "Password Required !";
+  if (password == c_password) {
+    return error= "Password does not match !";
   }
 }
 
