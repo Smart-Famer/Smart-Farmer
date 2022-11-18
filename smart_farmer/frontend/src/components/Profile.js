@@ -48,7 +48,7 @@ export default function Profile(props) {
     } else if (!response.ok) {
       setError(json.error);
     }
-
+  }
     return(
         <div className='row justify-content-center'>
             <InputForm formName="Profile View">

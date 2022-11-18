@@ -90,6 +90,7 @@ export default function ProfileForm(props) {
         <div class="mb-3">
             <label for="formGroupExampleInput2" class="form-label">User ID</label>
             <input type="text" class="form-control" value={user._id} readOnly/>
+        </div>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">
             User ID

@@ -4,23 +4,6 @@ import { usePhotoContext } from "../../hooks/usePhotoContext";
 import PhotoCard from "./photoCard";
 import "./Carousel.css";
 
-function CardCarousel({ date }) {
-  const navigate = useNavigate();
-  const dayArr = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const { photos, dispatchPhotos } = usePhotoContext();
-  // const [thisPhotos, setState] = useState(photos[date])
-  // useEffect(()=>{
-  //     console.log("photos changed",photos)
-  // },[photos])
-
 function CardCarousel({date}) {
     const navigate = useNavigate()
     const dayArr=["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
