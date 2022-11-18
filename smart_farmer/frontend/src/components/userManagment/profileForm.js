@@ -51,7 +51,7 @@ export default function ProfileForm(props) {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label for="formGroupExampleInput" className="form-label">
+          <label htmlFor="formGroupExampleInput" className="form-label">
             First Name
           </label>
           <input
@@ -67,7 +67,7 @@ export default function ProfileForm(props) {
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
             Second Name
           </label>
           <input
@@ -83,7 +83,7 @@ export default function ProfileForm(props) {
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
             User ID
           </label>
           <input
@@ -94,7 +94,7 @@ export default function ProfileForm(props) {
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
             Email
           </label>
           <input
@@ -110,7 +110,7 @@ export default function ProfileForm(props) {
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
             Location
           </label>
           <input
@@ -126,7 +126,7 @@ export default function ProfileForm(props) {
           />
         </div>
         <div className="mb-3">
-          <label for="formGroupExampleInput2" className="form-label">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
             Position
           </label>
           <input
