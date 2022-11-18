@@ -44,7 +44,7 @@ export default function CropYieldInput(props){
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-10 col-md-6">
-            <InputForm formName="Add Crop Yeild Data">
+            <InputForm formName="Add/Update Crop Yeild Data">
               <div className="row justify-content-center">
                 <div className="col">
                   <form onSubmit={handleSubmit} className="me-5">

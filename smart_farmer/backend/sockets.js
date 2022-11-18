@@ -1,3 +1,3 @@
-const sockets = []
+const sockets = {}
 
-module.exports = {sockets}
+module.exports = sockets

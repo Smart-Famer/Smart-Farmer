@@ -13,13 +13,38 @@ import RecentPhotos from "../components/dashboard/RecentPhotos";
 import HistoricalData from "../components/dashboard/HistoricalData";
 import { Navigate, useParams } from "react-router";
 import {useAuthContext} from "../hooks/useAuthContext"
+import { useEffect } from "react";
+import { useFarmContext } from "../hooks/useFarmContext";
+
 
 export default function Dashboard(props)
 {
     const {user} = useAuthContext()
+    const { farm } = useFarmContext();
+    const socket = props.socket;
+    
+    useEffect(() => {
+        if(user){
+            console.log(socket)
+            const farmId = farm._id
+            socket.emit("join_room", farmId);  
+            console.log('joined to '+farmId)
+
+            
+            socket.on("dataReadingUpdate",(dataReading)=>{
+                debugger
+                console.log(dataReading)
+            });
+            
+        }
+    },[user]);
+
     if(!user){
         return <Navigate to="/login"/>      
     }
+
+    
+
     return(
         <div className="row main-container">
             <div className="">
