@@ -65,7 +65,7 @@ export default function ElectricConductivityInput() {
     setModalShow(true);
   };
   return (
-    <div>
+    <div className="me-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group row p-3">
           <div className="col-sm-7">

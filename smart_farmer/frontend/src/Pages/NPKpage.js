@@ -5,8 +5,8 @@ import Sidebar from "../components/Sidebar/SideBar";
 
 export default function NPKpage() {
     return (
-        <div className="main-container">
-            <div>
+        <div className="row justify-content-center">
+            <div className="col-11 col-md-10 col-lg-8">
                 <Input formName='NPK Input Form'>
                     <NPK />
                 </Input>

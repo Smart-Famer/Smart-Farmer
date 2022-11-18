@@ -5,8 +5,8 @@ import Sidebar from "../components/Sidebar/SideBar"
 
 export default function EleInput() {
     return (
-        <div className="main-container">
-            <div>
+        <div className="row container justify-content-center">
+            <div className="col-11 col-md-6 col-lg-5">
                 <Input formName='Electric Conductivity Input'>
                     <ElecInput />
                 </Input>

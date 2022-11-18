@@ -90,11 +90,11 @@ export default function NpkLevelChart() {
 
   return (
     <>
-    <div className="row">
-        <div className="col-sm-1 text-end">
-          <label htmlFor="secton">Filter By:</label>
+    <div className="row me-4">
+        <div className="col-12 col-sm-2 col-lg-2">
+          <label htmlFor="secton" className="form-label">Filter By:</label>
         </div>
-        <div className="col-sm-2">
+        <div className="col-12 col-sm-4 col-lg-3">
           <select
             name="section"
             id="section"
@@ -106,9 +106,10 @@ export default function NpkLevelChart() {
             <option value="monthly">Monthly</option>
           </select>
         </div>
-        </div>
+    </div>
+    <br></br>
     <div className="row">
-      <div className="col-lg-9">
+      <div className="col-12 col-lg-9">
         <LineChart
           xAxisLabel="Time"
           yAxisLabel="Temperature"
@@ -141,7 +142,7 @@ export default function NpkLevelChart() {
           })}
         />
       </div>
-      <div className="col-lg-3 m-2">
+      <div className="col-12 col-lg-2 me-1">
         <h5>Filter by:</h5>
         <div className="form-check">
           <input
