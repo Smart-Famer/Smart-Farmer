@@ -73,73 +73,75 @@ export default function EditSensor({module,_id}) {
 
   return (
     //should validate port number (4-digit, numeric)
-    <form onSubmit={handleSubmit}>
-      <div className="form-group p-3">
-        <label htmlFor="inputSensorPort">Port Number</label>
-        <input
-          value={port}
-          onChange={(e) => {
-            setPort(e.target.value);
-          }}
-          type="text"
-          className="form-control"
-          id="inputSensorPort"
-          required={true}
-          readOnly={true}
-        />
-      </div>
-      <div className="form-group  p-3">
-        <label htmlFor="inputSensorType">Sensor Type</label>
-        <select
-          value={sensor_type}
-          onChange={(e) => {
-            setSensor_type(e.target.value);
-          }}
-          id="inputSensorType"
-          className="form-control"
-        >
-          {/* <option selected>Choose...</option> */}
-          <option>Temperature</option>
-          <option>Humidity</option>
-          <option>RainFall</option>
-          <option>Soil Humidity</option>
-        </select>
-      </div>
-      <div className="form-group p-3">
-        <label htmlFor="inputSensor">Sensor Name</label>
-        <input
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          type="text"
-          className="form-control"
-          id="inputSensor"
-          placeholder="Sensor 1,2.."
-          required={true}
-        />
-      </div>
+    <div className="me-4">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mb-4">
+          <label htmlFor="inputSensorPort">Port Number</label>
+          <input
+            value={port}
+            onChange={(e) => {
+              setPort(e.target.value);
+            }}
+            type="text"
+            className="form-control"
+            id="inputSensorPort"
+            required={true}
+            readOnly={true}
+          />
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="inputSensorType">Sensor Type</label>
+          <select
+            value={sensor_type}
+            onChange={(e) => {
+              setSensor_type(e.target.value);
+            }}
+            id="inputSensorType"
+            className="form-control"
+          >
+            {/* <option selected>Choose...</option> */}
+            <option>Temperature</option>
+            <option>Humidity</option>
+            <option>RainFall</option>
+            <option>Soil Humidity</option>
+          </select>
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="inputSensor">Sensor Name</label>
+          <input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            type="text"
+            className="form-control"
+            id="inputSensor"
+            placeholder="Sensor 1,2.."
+            required={true}
+          />
+        </div>
 
-      <button type="submit" className="btn btn-green">
-        Edit
-      </button>
-      {/* {error&&<div className="error">{error}</div>} */}
-      {error && (
-        <ModalTemp
-          title={"Error"}
-          message={error}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-      {!error && (
-        <ModalTemp
-          title={"Successful"}
-          message={"Sensor Added Successfully"}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-    </form>
+        <button type="submit" className="btn btn-green">
+          Edit
+        </button>
+        {/* {error&&<div className="error">{error}</div>} */}
+        {error && (
+          <ModalTemp
+            title={"Error"}
+            message={error}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!error && (
+          <ModalTemp
+            title={"Successful"}
+            message={"Sensor Added Successfully"}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
+    </div>
   );
 }

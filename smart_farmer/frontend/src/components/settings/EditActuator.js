@@ -75,71 +75,73 @@ export default function EditActuator({module,_id}) {
 
   return (
     //should validate port number (4-digit, numeric)
-    <form onSubmit={handleSubmit}>
-      <div className="form-group p-3">
-        <label htmlFor="inputSensorPort">Port Number</label>
-        <input
-          value={port}
-          onChange={(e) => {
-            setPort(e.target.value);
-          }}
-          type="text"
-          className="form-control"
-          id="inputSensorPort"
-          required={true}
-          readOnly={true}
-        />
-      </div>
-      <div className="form-group  p-3">
-        <label htmlFor="inputActuatorType">Sensor Type</label>
-        <select
-          value={actuator_type}
-          onChange={(e) => {
-            setActuator_type(e.target.value);
-          }}
-          id="inputActuatorType"
-          className="form-control"
-        >
-          {/* <option selected>Choose...</option> */}
-          <option>Water Pump</option>
-          <option>Camara</option>
-        </select>
-      </div>
-      <div className="form-group p-3">
-        <label htmlFor="inputActuator">Actuator Name</label>
-        <input
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          type="text"
-          className="form-control"
-          id="inputActuator"
-          placeholder="Actuator 1,2.."
-          required={true}
-        />
-      </div>
+    <div className="me-4">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mb-4">
+          <label htmlFor="inputSensorPort">Port Number</label>
+          <input
+            value={port}
+            onChange={(e) => {
+              setPort(e.target.value);
+            }}
+            type="text"
+            className="form-control"
+            id="inputSensorPort"
+            required={true}
+            readOnly={true}
+          />
+        </div>
+        <div className="form-group  mb-4">
+          <label htmlFor="inputActuatorType">Sensor Type</label>
+          <select
+            value={actuator_type}
+            onChange={(e) => {
+              setActuator_type(e.target.value);
+            }}
+            id="inputActuatorType"
+            className="form-control"
+          >
+            {/* <option selected>Choose...</option> */}
+            <option>Water Pump</option>
+            <option>Camara</option>
+          </select>
+        </div>
+        <div className="form-group mb-4">
+          <label htmlFor="inputActuator">Actuator Name</label>
+          <input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            type="text"
+            className="form-control"
+            id="inputActuator"
+            placeholder="Actuator 1,2.."
+            required={true}
+          />
+        </div>
 
-      <button type="submit" className="btn btn-green">
-        Edit
-      </button>
-      {/* {error&&<div className="error">{error}</div>} */}
-      {error && (
-        <ModalTemp
-          title={"Error"}
-          message={error}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-      {!error && (
-        <ModalTemp
-          title={"Successful"}
-          message={"Actuator Edited Successfully"}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-    </form>
+        <button type="submit" className="btn btn-green">
+          Edit
+        </button>
+        {/* {error&&<div className="error">{error}</div>} */}
+        {error && (
+          <ModalTemp
+            title={"Error"}
+            message={error}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!error && (
+          <ModalTemp
+            title={"Successful"}
+            message={"Actuator Edited Successfully"}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
+    </div>
   );
 }

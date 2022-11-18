@@ -58,8 +58,8 @@ export default function SensorTable(){
                 <td>{sensor.name.split("_")[1]}</td>
                 <td>Temp.</td>
                 <td>{sensor.port.split("-")[1]}</td>
-                <td><button className="btn btn-danger" onClick={()=>{deleteModule("Temperature", sensor._id)}}><i class="bi-trash3"></i></button></td>
-                <td><button className="btn btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Temperature/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
+                <td><button className="btn btn-sm btn-danger" onClick={()=>{deleteModule("Temperature", sensor._id)}}><i class="bi-trash3"></i></button></td>
+                <td><button className="btn btn-sm btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Temperature/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
                 </tr>
             }),
             Rainfall:farm?.sensors?.Rainfall?.map(sensor=>{
@@ -67,8 +67,8 @@ export default function SensorTable(){
                     <td>{sensor.name.split("_")[1]}</td>
                     <td>Rainfall</td>
                     <td>{sensor.port.split("-")[1]}</td>
-                    <td><button className="btn btn-danger" onClick={()=>{deleteModule("Rainfall", sensor._id)}}><i class="bi-trash3"></i></button></td>
-                    <td><button className="btn btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Rainfall/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
+                    <td><button className="btn btn-sm btn-danger" onClick={()=>{deleteModule("Rainfall", sensor._id)}}><i class="bi-trash3"></i></button></td>
+                    <td><button className="btn btn-sm btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Rainfall/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
                     </tr>
                 }),
             Humidity:farm?.sensors?.Humidity?.map(sensor=>{
@@ -76,8 +76,8 @@ export default function SensorTable(){
                     <td>{sensor.name.split("_")[1]}</td>
                     <td>Humidity</td>
                     <td>{sensor.port.split("-")[1]}</td>
-                    <td><button className="btn btn-danger" onClick={()=>{deleteModule("Humidity", sensor._id)}}><i class="bi-trash3"></i></button></td>
-                    <td><button className="btn btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Humidity/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
+                    <td><button className="btn btn-sm btn-danger" onClick={()=>{deleteModule("Humidity", sensor._id)}}><i class="bi-trash3"></i></button></td>
+                    <td><button className="btn btn-sm btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Humidity/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
                     </tr>
                 }),
             Soil:farm?.sensors?.Soil?.map(sensor=>{
@@ -85,8 +85,8 @@ export default function SensorTable(){
                     <td>{sensor.name.split("_")[1]}</td>
                     <td>Soil Humidity</td>
                     <td>{sensor.port.split("-")[1]}</td>
-                    <td><button className="btn btn-danger" onClick={()=>{deleteModule("Soil", sensor._id)}}><i class="bi-trash3"></i></button></td>
-                    <td><button className="btn btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Soil/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
+                    <td><button className="btn btn-sm btn-danger" onClick={()=>{deleteModule("Soil", sensor._id)}}><i class="bi-trash3"></i></button></td>
+                    <td><button className="btn btn-sm btn-primary" onClick={()=>{navigate(`/user/farm/Modules/edit-sensor/Soil/${sensor._id}`)}}><i class="bi-pencil"></i></button></td>
                     </tr>
                 })
         })
