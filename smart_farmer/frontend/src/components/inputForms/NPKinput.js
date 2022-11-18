@@ -118,16 +118,16 @@ export default function NPKInput() {
         </div>
         <button className="btn btn-green btn-block m-4">Submit</button>
         {/* {error && (<DisplayAlert type={'danger'} content={error}/>)}  */}
-        {validateError && (
+        {error && (
           <PopUpModal
             title={"Error"}
-            message={validateError}
+            message={error}
             color="danger"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
         )}
-        {!validateError && !error && (
+        {!error && !error && (
           <PopUpModal
             title={"Successful"}
             message={"New npk levels added successfully"}
