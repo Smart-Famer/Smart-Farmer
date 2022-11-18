@@ -9,7 +9,13 @@ export default function Humidity(){
     const [humidities, setHumidities] = useState([])
 
     const sensor_names = farm.sensors.Humidity.map((sensor)=>sensor.name.replace(farm.name+"_",""))
-    
+      function getActualName(name) {
+        let temp = name.split("_");
+        let nameWithoutFarmArr = temp.slice(1);
+        let nameWithoutFarm = nameWithoutFarmArr.join("_");
+        return nameWithoutFarm;
+      }
+
 
     useEffect(() => {
         const fetchHumidity=async ()=>{
@@ -29,7 +35,7 @@ export default function Humidity(){
     }, [])
     // console.log(humidities)
     const components = humidities.map((humidity)=>{
-        return <Col key={humidity._id} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidity.reading)} readingName={sensor_names[humidities.indexOf(humidity)]}/></Col>
+        return <Col key={humidity._id} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidity.reading)} readingName={getActualName(sensor_names[humidities.indexOf(humidity)])}/></Col>
     })
 
     return(
