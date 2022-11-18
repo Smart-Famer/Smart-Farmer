@@ -13,7 +13,7 @@ import { PhotoContextProvider } from "../context/photoContext"
 export default function Gallery()
 {
     return(
-        <div className="main-container">
+        <div className="">
             <PhotoContextProvider>
                 <PhotoGallery/>
             </PhotoContextProvider>
