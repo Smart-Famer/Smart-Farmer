@@ -5,7 +5,11 @@ const mongoose = require('mongoose')
 const getReading= async (req,res)=>{
     const {sourceId} = req.params
     // console.log(sourceId)
-    const dataReading = await dataReadingModel.findOne({sourceId:sourceId},'reading',{sort: { 'timestamp' : -1 } })
+    const dataReading = await dataReadingModel.findOne(
+      { sourceId: sourceId },
+      "sourceId reading",
+      { sort: { timestamp: -1 } }
+    );
     // console.log(dataReading)
     if(!dataReading){
         return res.status(404).json({error:"No such source id found"})
