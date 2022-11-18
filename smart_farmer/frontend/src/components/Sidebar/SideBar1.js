@@ -108,9 +108,9 @@ export default function Sidebar1() {
             </li>
             <br></br>
             <li className="nav-item fs-5">
-              <Link className="nav-link text-truncate" to="/user/farm/settings">
+              <Link className="nav-link text-truncate" to="/user/farm/Modules">
                 <i className="fs-5 bi-gear"></i>
-                <span className="ms-1 d-none d-sm-inline">Settings</span>
+                <span className="ms-1 d-none d-sm-inline">Modules</span>
               </Link>
             </li>
           </ul>
