@@ -7,14 +7,10 @@
     margin: 0px;
 }
 .input--container{
-
-    min-width:75vw;
     background-color: #ffffff;
     padding: 0;
     box-shadow: 2px 3px #888888;
-    position: relative;
-    margin: 5%;
-    
+    position: relative;    
 }
 .input--data{
     /* display: flex;

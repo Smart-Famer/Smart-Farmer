@@ -2,13 +2,11 @@ import distinctColors from "distinct-colors";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BarChart } from "../components/BarChart";
-import Sidebar from "../components/Sidebar/SideBar";
 import { useFarmContext } from "../hooks/useFarmContext";
 
-export default function CropYieldDataPage(props) {
+export default function CropYieldDataPage() {
   const { farm } = useFarmContext();
   const farm_id = farm._id;
-
 
   const [xAxisV, setXaxisV] = useState([]);
   const [cropNames, setCropNames] = useState([]);
@@ -158,7 +156,7 @@ export default function CropYieldDataPage(props) {
 
   let monthsCheckboxes = temp_cropMonths.map((month) => {
     return (
-      <div key={month} className='form-check'>
+      <div key={month} className="form-check">
         <input
           type="checkbox"
           className="form-check-input"
@@ -166,14 +164,17 @@ export default function CropYieldDataPage(props) {
           defaultChecked
           onChange={handleMonthChange}
         />
-        <label className="form-check-label" htmlFor={month}> {month}</label>
+        <label className="form-check-label" htmlFor={month}>
+          {" "}
+          {month}
+        </label>
       </div>
     );
   });
 
   let crop_checkboxes = cropNames.map((crop) => {
     return (
-      <div key={crop} className='form-check'>
+      <div key={crop} className="form-check">
         <input
           type="checkbox"
           className="form-check-input"
@@ -181,51 +182,48 @@ export default function CropYieldDataPage(props) {
           defaultChecked
           onChange={handleCropChange}
         />
-        <label className="form-check-label" htmlFor={crop}> {crop}</label>
+        <label className="form-check-label" htmlFor={crop}>
+          {" "}
+          {crop}
+        </label>
       </div>
     );
   });
-  
 
   return (
-    <div className="main-container">
-      <div className="crop-yield-chart-container">
-        <div className="row">
-          <div className="col-sm-10">
-            {cropYieldData !== [] && xAxisV !== [] && (
-              <BarChart
-                yAxisLabel="Month"
-                xAxisLabel="Yield (kg)"
-                chartTitle="Crop Yield Chart"
-                xAxisValues={xAxisV}
-                dataSets={cropYieldData.filter((x) => {
-                  return x.visibility === true;
-                })}
-              />
-            )}
+    <div className="container">
+      <div className="row mt-4 m-md-4 ">
+        <div className="col-lg-10">
+          {cropYieldData !== [] && xAxisV !== [] && (
+            <BarChart
+              yAxisLabel="Month"
+              xAxisLabel="Yield (kg)"
+              chartTitle="Crop Yield Chart"
+              xAxisValues={xAxisV}
+              dataSets={cropYieldData.filter((x) => {
+                return x.visibility === true;
+              })}
+            />
+          )}
+        </div>
+      </div>
+      <div className="container">
+        <div className="row mt-3 ">
+          <div className="col">
+            <h6>Select the crops</h6>
+            {crop_checkboxes}
           </div>
-          <div className="col-sm-2">
-            <div className="">
-              <h3>Select the crops</h3>
-              {crop_checkboxes}
-            </div>
-            <br />
-            <div>
-              <h3>Select the months</h3>
-
-              {monthsCheckboxes}
-            </div>
+          <div className="col">
+            <h6>Select the months</h6>
+            {monthsCheckboxes}
           </div>
         </div>
+      </div>
 
-        <div className="d-flex flex-row-reverse">
-          <Link
-            to="/user/farm/cropyieldinput"
-            style={{ textDecoration: "none" }}
-          >
-            {"Add Crop Yield Details>"}
-          </Link>
-        </div>
+      <div className="d-flex flex-row-reverse mt-4">
+        <Link to="/user/farm/cropyieldinput" style={{ textDecoration: "none" }}>
+          {"Add Crop Yield Details>"}
+        </Link>
       </div>
     </div>
   );
