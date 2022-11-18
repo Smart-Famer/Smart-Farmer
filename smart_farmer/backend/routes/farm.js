@@ -4,7 +4,8 @@ const {
     updateFarm,
     getFarm,
     createFarm,
-    deleteFarm
+    deleteFarm,
+    getUserFarm
 } = require('../controllers/farmController')
 
 
@@ -13,6 +14,7 @@ const router = express.Router()
 
 router.post('/update-farm/:_id',updateFarm)
 router.get('/get-farm/:_id',getFarm)
+router.get('/get-user-farms/:_id',getUserFarm)
 router.post('/add-farm',createFarm)
 router.get('/delete-farm/:_id',deleteFarm)
 

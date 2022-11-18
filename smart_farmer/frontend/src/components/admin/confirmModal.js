@@ -1,7 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-export default function ModalTemp(props) {
+
+export default function ConfirmDelete(props) {
+
+  const handleClick = async ()=>{
+    const response = await fetch(
+      `${process.env.REACT_APP_HOST}/api/admin/delete-manager/${props.id}`
+    );
+    const json = await response.json();
+   
+    // console.log(json)
+    if (response.ok) {
+      console.log(json);
+    }
+  }
   return (
     <Modal
       {...props}
@@ -21,7 +34,8 @@ export default function ModalTemp(props) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant={props.color} onClick={props.onHide}>Close</Button>
+      <Button variant="danger" onClick={handleClick}>Delete</Button>
+        <Button variant="primary" onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

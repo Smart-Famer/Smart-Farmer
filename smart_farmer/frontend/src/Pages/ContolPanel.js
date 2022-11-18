@@ -5,13 +5,11 @@ import Sidebar from "../components/Sidebar/SideBar";
 import { useFarmContext } from "../hooks/useFarmContext";
 import { useEffect } from "react";
 
+export default function Dashboard(props) {
+  const { farm } = useFarmContext();
 
-export default function Dashboard(props)
-{
-    const {farm}= useFarmContext()
-    const pumps = farm.actuators.Pump
-    
-    
+  const pumps = farm?.actuators?.Pump;
+
 
     // const pumps=[
     //     {
@@ -33,3 +31,4 @@ export default function Dashboard(props)
         </div>
     )
 }
+

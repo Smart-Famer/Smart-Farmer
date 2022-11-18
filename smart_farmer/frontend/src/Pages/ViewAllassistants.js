@@ -43,7 +43,7 @@ export default function ViewAll() {
             onChange={(e) => setInput(e.target.value)}
           ></input>
         </div>
-        <div className="m-5">
+        <div className="m-2" style={{overflowx:"auto"}}>
           <ListView iteamList={search(countryListDefault)} />
         </div>
       </Container>

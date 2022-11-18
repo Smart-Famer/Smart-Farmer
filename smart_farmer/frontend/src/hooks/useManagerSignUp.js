@@ -28,7 +28,7 @@ export const useSignup =()=>{
               email,
               password,
               location,
-              user_type: "Manger",
+              user_type: "Manager",
               profile_picture: "default.jpg"
             }),
           }

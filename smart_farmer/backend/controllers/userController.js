@@ -91,6 +91,38 @@ const getAllAssistants = async (req, res) => {
     res.status(200).json(farmList);
   };
 
+  //delete a manger
+const deleteManger =async (req, res)=>{
+
+    const { _id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw Error("Invalid farm ID");
+    }
+    const user = await User.findById(_id);
+
+    if (!user) {
+      return res.status(404).json({ error: "No such manager" });
+    }
+console.log(user.farms);
+    if(user.farms.length ==0){
+        const deleteuser = await User.findOneAndDelete({ _id });
+        if (!deleteuser) {
+            throw Error("No such manager found");
+        }
+        res.status(200).json(deleteuser);
+        console.log("can delete");
+    }
+    else{
+        console.log("can not delete");
+        throw Error("Can not delete manager with farms")
+    }
+
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+
+};
 const detachFarm = async(req,res) =>{
     console.log(req.body)
     const {farm_id,user_id} = req.body
@@ -144,5 +176,6 @@ module.exports = {
     updatePassword,
     getAllMangers,
     getAllAssistants,
-    getMangers
+    getMangers,
+    deleteManger
 }

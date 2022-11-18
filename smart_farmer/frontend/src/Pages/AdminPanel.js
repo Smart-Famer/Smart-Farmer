@@ -19,7 +19,7 @@ export default function AdminPanel(props) {
   useEffect(() => {
     const fetchFarms = async () => {
       const response = await fetch(
-        `http://localhost:4000/api/admin/`
+        `http://localhost:4000/api/admin/get-all-farms`
       );
       const json = await response.json();
       if (response.ok) {
