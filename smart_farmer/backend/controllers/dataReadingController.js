@@ -56,23 +56,14 @@ const  createDataReading= async (req,res)=>{
             reading
         })
 
-        console.log('befor')
 
-        // const farmdata = await farmModel.findOne({
-        //   sensors: sourceId.split("-")[0],
-        // });
+        
         const farmId = sourceId.split("-")[0];
 
         sockets[farmId].forEach(socket => {
             socket.to(farmId).emit("dataReadingUpdate",{timestamp,sourceId,reading})
-            
         });
         
-        // io.once('connection',(socket)=>{
-        //     socket.on
-        // })
-
-        console.log('after')
 
         res.json(dataReading)
     }catch(error){
