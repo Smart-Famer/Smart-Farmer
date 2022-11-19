@@ -254,6 +254,22 @@ const deleteFarm = async (req, res) => {
   }
 };
 
+const updateSecret = async (req, res)=>{
+  const {_id} = req.params
+  try{
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw Error("Invalid farm ID");
+    }
+
+    const farm = await farmModel.updateSecret(_id)
+    if (!farm){
+      throw Error("No such farm found")
+    }
+    res.status(200).json(farm)
+  }catch(err){
+    res.status(400).json({error:err.message})
+  }
+}
 module.exports = {
   getKeys,
   createFarm,
@@ -265,4 +281,5 @@ module.exports = {
   getAllFarms,
   getUserFarm,
   getFarm,
+  updateSecret
 };

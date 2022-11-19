@@ -5,7 +5,8 @@ const {
     getFarm,
     createFarm,
     deleteFarm,
-    getUserFarm
+    getUserFarm,
+    updateSecret
 } = require('../controllers/farmController')
 
 
@@ -17,5 +18,7 @@ router.get('/get-farm/:_id',getFarm)
 router.get('/get-user-farms/:_id',getUserFarm)
 router.post('/add-farm',createFarm)
 router.get('/delete-farm/:_id',deleteFarm)
+router.get('/update-secret/:_id',updateSecret)
+
 
 module.exports = router
