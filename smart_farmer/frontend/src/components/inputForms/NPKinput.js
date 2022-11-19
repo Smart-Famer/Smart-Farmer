@@ -91,6 +91,7 @@ export default function NPKInput() {
               type="text"
               className="form-control"
               id="inputNitrogen"
+              data-testid="n-input"
               onChange={(e) => {
                 setNitrogenLevel(e.target.value);
               }}
@@ -110,6 +111,7 @@ export default function NPKInput() {
               type="text"
               className="form-control"
               id="inputPhosphorus"
+              data-testid="p-input"
               onChange={(e) => {
                 setPhosphorus(e.target.value);
               }}
@@ -129,6 +131,7 @@ export default function NPKInput() {
               type="text"
               className="form-control"
               id="inputPotassium"
+              data-testid="k-input"
               onChange={(e) => {
                 setPotassiumLevel(e.target.value);
               }}

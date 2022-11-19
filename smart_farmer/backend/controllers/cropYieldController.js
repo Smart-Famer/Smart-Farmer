@@ -23,13 +23,13 @@ const getYield = async(req,res)=>{
 }
 
 const createYield = async(req,res)=>{
-    const {farm_id,crop_name,date,yield} = req.body
+    const {farm_id,crop_name,date,_yield} = req.body
     try{
         const cropYield = await cropYieldModel.create({
             farm_id,
             crop_name,
             date,
-            yield
+            _yield
         })
         res.json(cropYield)
     }

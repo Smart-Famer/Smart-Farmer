@@ -25,26 +25,41 @@ const MockLogin= () => {
         </AuthContext.Provider>
     )
 }
-describe("Test the Login Component", () => {
+describe("Test the Login Component rendering", () => {
   test("render the login form submit button on the screen", async () => {
     render(<MockLogin />);
-    const buttonList = await screen.findAllByRole("button");
+    const buttonList = await screen.findAllByRole("button"); 
     expect(buttonList).toHaveLength(1);
   });
 
+  test("render the login form with password on the screen", () => {
+    render(<MockLogin />);
+    const password = screen.getByPlaceholderText("Password");
+    expect(password).toBeInTheDocument();
+  });
 
+  test("render the login form email on the screen", async () => {
+    render(<MockLogin />);
+    const email = screen.getByPlaceholderText("email");
+    expect(email).toBeInTheDocument();
+  });
+
+
+  
+describe("Test input fields",()=>{
   test("email input field should accept email ", () => {
     render(<MockLogin />);
     const email = screen.getByPlaceholderText("email");
     userEvent.type(email, "dipesh");
     expect(email.value).not.toMatch("dipesh.malvia@gmail.com");
   });
-
   test("passport input should have type password ", () => {
     render(<MockLogin />);
     const password = screen.getByPlaceholderText("Password");
     expect(password).toHaveAttribute("type", "password");
   });
+
+})
 
 //   test("should display alert if error", () => {
 //     render(<MockLogin />);
