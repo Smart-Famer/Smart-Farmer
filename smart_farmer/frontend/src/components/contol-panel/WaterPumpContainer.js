@@ -18,7 +18,7 @@ export default function WaterPumpContainer(props) {
       for (let i = 0; i < pumps.length; i++) {
         const pump = pumps[i];
         const response = await fetch(
-          `https://6371f9a7025414c63702ac13.mockapi.io/api/atuautors/water_pump/${pump.port}`
+          `${process.env.REACT_APP_MOCK_SERVER}/${pump.port}`
         );
         const json = await response.json();
         temp_actuatorData.push(json);
@@ -28,7 +28,7 @@ export default function WaterPumpContainer(props) {
     };
     fetchData();
   }, []);
-  
+
 
   let portNameObj = {};
   props.pumps.forEach((pump) => {
@@ -56,7 +56,7 @@ export default function WaterPumpContainer(props) {
     for (let i = 0; i < pumps.length; i++) {
       const pump = pumps[i];
       const response = await fetch(
-        `${process.env.MOCK_SERVER}/${pump.port}`,
+        `${process.env.REACT_APP_MOCK_SERVER}/${pump.port}`,
         {
           method: "PUT",
           headers: { "content-type": "application/json" },

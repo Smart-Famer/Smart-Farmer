@@ -1,7 +1,6 @@
 import "../App.css";
-import Sidebar from "../components/Sidebar/SideBar";
-import NpkLevelChart from "../components/NpkLevelChart";
 import Input from "../components/inputForms/InputForm";
+import NpkLevelChart from "../components/NpkLevelChart";
 
 
 export default function HistoricalNPKpage() {

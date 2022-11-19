@@ -161,7 +161,7 @@ export default function Card(props) {
                   className="btn btn-success rounded-pill"
                   onClick={handleEnter}
                 >
-                  Enter <i class="bi bi-box-arrow-in-right"></i>
+                  Enter <i className="bi bi-box-arrow-in-right"></i>
                 </button>
               </div>
               <div className="col-2">

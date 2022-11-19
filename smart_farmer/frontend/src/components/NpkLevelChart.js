@@ -55,7 +55,6 @@ export default function NpkLevelChart() {
   const handleTypeChange = (e) => {
     const type = e.currentTarget.id;
     if (e.currentTarget.checked) {
-      console.log(type)
       switch (type) {
         case "nLevel":
           setNVisibility(true);

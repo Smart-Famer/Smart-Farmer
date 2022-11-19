@@ -67,7 +67,7 @@ export default function Home() {
                 className="btn btn-md btn-success rounded-pill"
                 onClick={handleAction}
               >
-                <i class="bi bi-plus-lg shadow fw-bold"></i>
+                <i className="bi bi-plus-lg shadow fw-bold"></i>
               </button>
             </div>
           )}
