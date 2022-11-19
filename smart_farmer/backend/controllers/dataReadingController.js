@@ -43,23 +43,26 @@ const getAllReadings = async (req,res)=>{
     res.status(200).json(latest);
 }
 const  createDataReading= async (req,res)=>{
-    const {timestamp,sourceId,reading}=req.body
+    const {timestamp,reading, secret_key}=req.body
+    let {sourceId} = req.body
 
     console.log(reading)
     console.log(sourceId)
     console.log(timestamp)
+    console.log(secret_key)
 
     try{
+        const farmObj = await farmModel.findOne({secret_key},{_id:1})
+        const farmId = farmObj._id.toString()
+        sourceId = farmId+"-"+sourceId
+        console.log(sourceId, farmId)
         const dataReading = await dataReadingModel.create({
             timestamp,
             sourceId,
             reading
         })
 
-
         
-        const farmId = sourceId.split("-")[0];
-
         sockets[farmId].forEach(socket => {
             socket.to(farmId).emit("dataReadingUpdate",{timestamp,sourceId,reading})
         });
