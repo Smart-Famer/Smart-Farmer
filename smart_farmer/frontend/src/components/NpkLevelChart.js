@@ -5,7 +5,6 @@ import { useFarmContext } from "../hooks/useFarmContext";
 import LineChart from "./dashboard/LineChart";
 
 export default function NpkLevelChart() {
-  const [data, setData] = useState([]);
   const [duration, setDuration] = useState("weekly");
   const [xAxisV, setXaxisV] = useState([]);
   const [nLevels, setNLevels] = useState([]);
@@ -27,7 +26,8 @@ export default function NpkLevelChart() {
       const json = await response.json();
       if (response.ok) {
         const temp_xAxisV = json.map((level) => {
-          return level.timestamp;
+          const day = new Date(level.timestamp)
+          return `${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`;
         });
         const temp_n = json.map((level) => {
           return level.n;
@@ -61,10 +61,10 @@ export default function NpkLevelChart() {
           setNVisibility(true);
           break;
         case "pLevel":
-          setNVisibility(true);
+          setPVisibility(true);
           break;
         case "kLevel":
-          setNVisibility(true);
+          setKVisibility(true);
           break;
 
         default:
@@ -76,10 +76,10 @@ export default function NpkLevelChart() {
           setNVisibility(false);
           break;
         case "pLevel":
-          setNVisibility(false);
+          setPVisibility(false);
           break;
         case "kLevel":
-          setNVisibility(false);
+          setKVisibility(false);
           break;
 
         default:
