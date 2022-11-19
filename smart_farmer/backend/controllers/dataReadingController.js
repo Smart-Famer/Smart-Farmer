@@ -53,6 +53,9 @@ const  createDataReading= async (req,res)=>{
 
     try{
         const farmObj = await farmModel.findOne({secret_key},{_id:1})
+        if(!farmObj){
+            throw Error("Invalid Secret Key. Plz exit an re-enter with a valid key")
+        }
         const farmId = farmObj._id.toString()
         sourceId = farmId+"-"+sourceId
         console.log(sourceId, farmId)
@@ -68,9 +71,9 @@ const  createDataReading= async (req,res)=>{
         });
         
 
-        res.json(dataReading)
-    }catch(error){
-        res.json(error)
+        res.status(200).json(dataReading)
+    }catch(err){
+        res.status(404).json({error:err.message})
     }
 }
 module.exports = {
