@@ -92,40 +92,8 @@ export default function WaterPumpContainer(props) {
           <h5>Water Pumps</h5>
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 p-4">
-          {/* {change && (
-            <DisplayAlert
-              type={"success"}
-              content={"Threshold successfully changed"}
-            />
-          )} */}
-
             {waterPumps}
-
         </div>
-        {/* <div className="threshhold-btn-container">
-          <Form onSubmit={handleSubmit}>
-            <Row className="g-2">
-              <Col>
-                <Input
-                  id="exampleNumber"
-                  name="number"
-                  placeholder="Enter ThreshHold"
-                  type="text"
-                  value={threshHold}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col>
-                <Button
-                  type="submit"
-                  className="btn btn-green mb-4 threshhold-btn"
-                >
-                  Set Threshhold
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        </div> */}
       </div>
     </div>
   );

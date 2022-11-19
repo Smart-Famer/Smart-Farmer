@@ -41,49 +41,28 @@ export default function WaterPump(props)
 
     return (
 
-      <div id={props.key} className="card bg-light border-success mb-4 text-center">
-        <div className="card-body ">
-          <h5 className="card-title">{props?.name.split("_")[1]}</h5>
-          <h6 className="card-subtitle mt-2 mb-2 text-muted ">Port - {props.port.split("-")[1]}</h6>
-          <hr></hr>
-          <div className='text-center'>
-            <button
-              href="#"
-              className="btn btn-success me-2"
-              onClick={()=>{handleClick("started")}}
-            >Start</button>
-            <button
-              href="#"
-              className="btn btn-danger"
-              onClick={()=>{handleClick("stoped")}}
-            >Stop</button>
+      <div>
+        <div id={props.key} className="card bg-light border-success mb-4 text-center">
+          <div className="card-body ">
+            <h5 className="card-title">{props?.name.split("_")[1]}</h5>
+            <h6 className="card-subtitle mt-2 mb-2 text-muted ">Port - {props.port.split("-")[1]}</h6>
+            <hr></hr>
+            <div className='text-center'>
+              <button
+                href="#"
+                className="btn btn-success me-2"
+                onClick={()=>{handleClick("started")}}
+              >Start</button>
+              <button
+                href="#"
+                className="btn btn-danger"
+                onClick={()=>{handleClick("stoped")}}
+              >Stop</button>
+            </div>
+            {error&&<div className='text-red mt-2'>{error}</div>}
+            {success&&<div className='text-success mt-2'>{success}</div>}
           </div>
-          {error&&<div className='text-red mt-2'>{error}</div>}
-          {success&&<div className='text-success mt-2'>{success}</div>}
         </div>
       </div>
     );
 }
-
-      // <div>
-      //   <div>
-      //     {change && state && (
-      //       <DisplayAlert
-      //         type="success"
-      //         content={`${props.pumpname} has started!!!`}
-      //       />
-      //     )}
-      //     {change && !state && (
-      //       <DisplayAlert
-      //         type="warning"
-      //         content={`${props.pumpname} has stoped!!!`}
-      //       />
-      //     )}
-      //     <div>
-      //       <h5>{props.pumpname.split("_")[1]}</h5>
-      //     </div>
-      //     <div>
-            
-      //     </div>
-      //   </div>
-      // </div>
