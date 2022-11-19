@@ -30,7 +30,7 @@ app.use(morgan("dev"));
 
 const io = new Server(server,{
   cors:{
-    origin:"http://localhost:3000",
+    origin:process.env.REACT_APP_HOST,
     methods: ["GET","POST","PUT","DELETE"]
   }
 })

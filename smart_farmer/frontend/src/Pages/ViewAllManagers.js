@@ -12,7 +12,7 @@ export default function ViewAll() {
   useEffect(() => {
     const fetchManagers = async () => {
       const response = await fetch(
-        `http://localhost:4000/api/admin/get-all-mangers`
+        `${process.env.REACT_APP_HOST}/api/admin/get-all-mangers`
       );
       const json = await response.json();
       // json.push({ id: 2, first_name: "Ome", second_name: "Zue" });
