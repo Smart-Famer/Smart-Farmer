@@ -10,9 +10,29 @@ export default function AddActuator() {
   const [port, setPort] = useState("");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
+  const [validateError, setValidate] =useState("");
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (actuator_type, name, port )=>{
+    var error = "";
+    if (!actuator_type || !name || !port) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(port)){
+      return error = "Enter a number as input !";
+
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setValidate(Validate(actuator_type,name,port))
 
     const actuator = { actuator_type, name, port };
 
@@ -99,19 +119,19 @@ export default function AddActuator() {
       </button>
       {/* {error && <div className="error">{error}</div>} */}
 
-      {error && (
+      {validateError && (
         <ModalTemp
           title={"Error"}
-          message={error}
+          message={validateError}
           color="danger"
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
       )}
-      {!error && (
+      {!validateError && !error && (
         <ModalTemp
           title={"Successful"}
-          message={"New electric conductivity level added successfully"}
+          message={"New actuator added successfully"}
           color="primary"
           show={modalShow}
           onHide={() => setModalShow(false)}

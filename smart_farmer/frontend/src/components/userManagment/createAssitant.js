@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useSignup } from '../../hooks/useSignup';
 import DisplayAlert from '../DisplayAlert';
+import ModalTemp from "../Modal/Modal";
+import Validate from './formValidation';
 
 export default function CreateAss(props) {
-  const [validated, setValidated] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [validateError, setValidated] = useState('');
   const [first_name, setfirstName] = useState("")
   const [second_name, setSecondName] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [location, setLocation] = useState("")
   const [email, setEmail] = useState("")
   const {signup, error, isLoading, setError} = useSignup()
@@ -15,6 +19,7 @@ export default function CreateAss(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setValidated(Validate(first_name, second_name, email, password, confirmPassword))
     setError(null)
     setSuccess(null)
     const newObj = await signup(first_name, second_name, email, password, location)
@@ -27,6 +32,7 @@ export default function CreateAss(props) {
       setAssistants([...assistants,newObj._doc])
       setSuccess("Assistant Created Successfully!")
     }
+    setModalShow(true);
 
   };
 
@@ -85,6 +91,19 @@ export default function CreateAss(props) {
 
         </div>
         <div className="form-group mb-3 row">
+            <label className="col-sm-4 col-form-label">Confirm Password</label>
+            <div className="col-sm-7">
+                <input 
+                        type="password" 
+                        className="form-control" 
+                        value={confirmPassword}
+                        onChange={(e)=>{setPassword(e.target.value)}}
+                        required={true}
+                        />
+            </div>
+
+        </div>
+        <div className="form-group mb-3 row">
             <label className="col-sm-4 col-form-label">Location</label>
             <div className="col-sm-7">
                 <input 
@@ -98,8 +117,26 @@ export default function CreateAss(props) {
 
         </div>
         <button type="submit" className="btn btn-success btn-block">Create</button>
-        {error && (<DisplayAlert type={'danger'} content={error} />)}
-        {success && (<DisplayAlert type={'success'} content={success} />)}
+        {/* {error && (<DisplayAlert type={'danger'} content={error} />)}
+        {success && (<DisplayAlert type={'success'} content={success} />)} */}
+        {validateError && (
+        <ModalTemp
+          title={"Error"}
+          message={validateError}
+          color="danger"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+      {!validateError && !error && (
+        <ModalTemp
+          title={"Successful"}
+          message={"Manager created Successfully"}
+          show={modalShow}
+          color="primary"
+          onHide={() => setModalShow(false)}
+        />
+      )}
       </form>
     </div>
       

@@ -10,12 +10,33 @@ export default function EditSensor() {
   const [sensor_type, setSensor_type] = useState("Temperature");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
+  const [validateError, setValidate] =useState("");
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (sensor_type,name,port)=>{
+    var error = "";
+    if (!sensor_type || !name || !port) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(port)){
+      return error = "Enter a number as input !";
+
+    }
+  }
 
    const handleSubmit = async (e) => {
      // console.log(sensor_type)
     const sensor = { sensor_type, name, port };
 
      e.preventDefault();
+     setValidate(Validate(sensor_type,name,port))
+
 
      const response = await fetch(
        `${process.env.REACT_APP_HOST}/api/modules/edit-sensor`,
@@ -100,18 +121,20 @@ export default function EditSensor() {
         Edit
       </button>
       {/* {error&&<div className="error">{error}</div>} */}
-      {error && (
+      {validateError && (
         <ModalTemp
           title={"Error"}
           message={error}
+          color="danger"
           show={modalShow}
           onHide={() => setModalShow(false)}
         />
       )}
-      {!error && (
+      {!validateError && !error && (
         <ModalTemp
           title={"Successful"}
-          message={"Sensor Added Successfully"}
+          message={"Sensor Edited Successfully"}
+          color="primary"
           show={modalShow}
           onHide={() => setModalShow(false)}
         />

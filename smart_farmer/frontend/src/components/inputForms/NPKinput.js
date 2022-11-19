@@ -5,21 +5,43 @@ import DisplayAlert from "../DisplayAlert";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import PopUpModal from "../Modal/Modal";
 
+
+
 export default function NPKInput() {
   const [modalShow, setModalShow] = useState(false);
   const [nitrogenLevel, setNitrogenLevel] = useState("");
   const [potassium, setPotassiumLevel] = useState("");
   const [phosphorus, setPhosphorus] = useState("");
+  const [validateError, setValidate] =useState("");
 
   const { farm } = useFarmContext();
 
 
   const [error, setError] = useState(null);
 
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (n,p,k)=>{
+    console.log(n);
+    var error = "";
+    if (!n || !p || !k) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(n) || !isNumber(p) || !isNumber(k)){
+      return error = "Enter a number as input !";
+
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+    setValidate(Validate(nitrogenLevel,phosphorus,potassium))
+    
     const sourceId = farm.NPK_levels_key;
     let timestamp = new Date().toJSON();
 

@@ -10,12 +10,33 @@ export default function EditActuator() {
   const [actuator_type, setActuator_type] = useState("Water Pump");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
+  const [validateError, setValidate] =useState("");
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (actuator_type, name, port)=>{
+    var error = "";
+    if (!actuator_type || !name || !port) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(port)){
+      return error = "Enter a number as input !";
+
+    }
+  }
+
 
   const handleSubmit = async (e) => {
     // console.log(sensor_type)
     const actuator = { actuator_type, name, port };
 
     e.preventDefault();
+    setValidate(Validate(actuator_type, name, port))
 
     const response = await fetch(
       `${process.env.REACT_APP_HOST}/api/modules/edit-actuator`,
@@ -98,7 +119,7 @@ export default function EditActuator() {
         Edit
       </button>
       {/* {error&&<div className="error">{error}</div>} */}
-      {error && (
+      {validateError && (
         <ModalTemp
           title={"Error"}
           message={error}
@@ -106,7 +127,7 @@ export default function EditActuator() {
           onHide={() => setModalShow(false)}
         />
       )}
-      {!error && (
+      {!validateError && !error && (
         <ModalTemp
           title={"Successful"}
           message={"Actuator Edited Successfully"}
