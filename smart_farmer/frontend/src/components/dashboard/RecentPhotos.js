@@ -31,7 +31,7 @@ export default function RecentPhotos() {
             <h3 className="text-danger">No photos are taken yet!</h3>
           </div>
         ) : (
-          <div className="col-12 col-md-6">{recentPhotos}</div>
+          <div className="row justify-content-center">{recentPhotos}</div>
         )}
       </div>
     </div>
