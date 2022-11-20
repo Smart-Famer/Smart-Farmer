@@ -3,8 +3,6 @@ const userModel = require("../models/userModel");
 const sensorModel = require("../models/sensorModel");
 const actuatorModel = require("../models/actuatorModel");
 
-const mongoose = require("mongoose");
-
 const getKeys = async (req, res) => {
   const { farm_id } = req.params;
   console.log(farm_id);
@@ -270,6 +268,11 @@ const updateSecret = async (req, res)=>{
     res.status(400).json({error:err.message})
   }
 }
+
+
+
+
+
 module.exports = {
   getKeys,
   createFarm,

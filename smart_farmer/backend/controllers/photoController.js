@@ -1,40 +1,68 @@
 const photoModel = require('../models/photoModel')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const cloudinary = require('../utils/cloudinaryConfig')
 
-
-
-const addPhoto = async (req,res)=>{
-    const {farm_id, camera_angle,description} = req.body
-    let {filename} = req.body
-    const {farm_name} = req.params
+const uploadImage = async (req,res)=>{
+    const {public_id,image,farm_id, file_name, camera_angle} = req.body
+  
     try{
-        if(!farm_id || !camera_angle || !filename){
-            throw Error("Enter Farm ID, Camera Angle, File!")
-        }
-        if(!mongoose.Types.ObjectId.isValid(farm_id)){
-            throw Error("Invalid Farm ID")
-        }
+      const result = await cloudinary.uploader.upload(image, {
+          public_id: `${public_id}/${file_name}`,
+          overwrite: true
+      })
 
-        const timestamp = new Date()
-        filename = farm_name+filename
-        const photo = photoModel.create(
-            {
-                timestamp,
-                filename,
-                description,
-                metadata:{
-                    farm_id,
-                    camera_angle
-                }
-            })
+      const photo = await photoModel.create(
+        {
+            metadata:{
+                farm_id,
+                camera_angle
+            },
+            url:result.url
+        })
+      res.json({
+          success: true,
+          ...photo
+      })
+  }catch (e){
+      res.json({
+          success: false,
+          msg: e.message
+      });
+  }
+  }
 
-        res.status(200).json(photo)
-    }catch(err){
-        res.status(400).json({error:err.message})
-    }
+// const addPhoto = async (req,res)=>{
+//     const {farm_id, camera_angle,description} = req.body
+//     let {filename} = req.body
+//     const {farm_name} = req.params
+//     try{
+//         if(!farm_id || !camera_angle || !filename){
+//             throw Error("Enter Farm ID, Camera Angle, File!")
+//         }
+//         if(!mongoose.Types.ObjectId.isValid(farm_id)){
+//             throw Error("Invalid Farm ID")
+//         }
 
-}
+//         const timestamp = new Date()
+//         filename = farm_name+filename
+//         const photo = photoModel.create(
+//             {
+//                 timestamp,
+//                 filename,
+//                 description,
+//                 metadata:{
+//                     farm_id,
+//                     camera_angle
+//                 }
+//             })
+
+//         res.status(200).json(photo)
+//     }catch(err){
+//         res.status(400).json({error:err.message})
+//     }
+
+// }
 
 const getPhotos = async (req, res)=>{
     const {farm_id} = req.params
@@ -96,7 +124,7 @@ const deletePhoto = async (req, res)=>{
     }
 }
 module.exports = {
-    addPhoto,
     getPhotos,
-    deletePhoto
+    deletePhoto,
+    uploadImage,
 }
