@@ -12,7 +12,6 @@ export default function KeyModal() {
   const { farm, dispatchFarm } = useFarmContext();
   const navigate = useNavigate();
 
-  console.log(secret);
   useEffect(() => {
     setSecret(farm?.secret_key);
   }, [farm]);
@@ -65,14 +64,14 @@ export default function KeyModal() {
       });
       setTimeout(() => {
         setState("password");
-        setPass("")
+        setPass("");
       }, 10000);
     }
   };
 
   return (
     <div>
-      <div className="modal" tabindex="-1" id="exampleModal">
+      <div className="modal" tabIndex="-1" id="exampleModal">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -119,7 +118,15 @@ export default function KeyModal() {
                   Enter
                 </button>
               )}
-              {state=="text"&&<button type="button" className="btn btn-success" data-bs-dismiss="modal">OK</button>}
+              {state == "text" && (
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-bs-dismiss="modal"
+                >
+                  OK
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -134,7 +141,7 @@ export default function KeyModal() {
           className="form-control-plaintext"
           id="formGroupExampleInput2"
           placeholder="Address"
-          value={secret}
+          defaultValue={secret}
         />
         <button
           type="button"

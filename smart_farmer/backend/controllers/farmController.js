@@ -2,11 +2,10 @@ const farmModel = require("../models/farmModel");
 const userModel = require("../models/userModel");
 const sensorModel = require("../models/sensorModel");
 const actuatorModel = require("../models/actuatorModel");
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const getKeys = async (req, res) => {
   const { farm_id } = req.params;
-  console.log(farm_id);
 
   if (!mongoose.Types.ObjectId.isValid(farm_id)) {
     return res.status(404).json({ error: "Invalid ID" });
@@ -24,7 +23,6 @@ const getKeys = async (req, res) => {
 };
 //get all farms
 const getAllFarms = async (req, res) => {
-  console.log("getAllFarms");
   const farmList = await farmModel.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(farmList);
@@ -32,8 +30,6 @@ const getAllFarms = async (req, res) => {
 
 //get farms of a given user
 const getUserFarm = async (req, res) => {
-  console.log("getUserFarm");
-
   const { _id } = req.params;
 
   //check the validity of the id
@@ -49,11 +45,14 @@ const getUserFarm = async (req, res) => {
 
   let farm_ids = user.farms;
   farm_ids = farm_ids.filter((id) => mongoose.Types.ObjectId.isValid(id));
-  const farms = await farmModel.find({
-    _id: {
-      $in: farm_ids,
+  const farms = await farmModel.find(
+    {
+      _id: {
+        $in: farm_ids,
+      },
     },
-  },{name:1, _id:0});
+    { name: 1, _id: 0 }
+  );
 
   res.status(200).json(farms);
 };
@@ -96,7 +95,9 @@ const createFarm = async (req, res) => {
     }
 
     const farm = await farmModel.create({ name, location, area, address });
-    return res.status(200).json(await farmModel.updateKeys(farm._id.toString()));
+    return res
+      .status(200)
+      .json(await farmModel.updateKeys(farm._id.toString()));
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -117,7 +118,7 @@ const updateFarm = async (req, res) => {
       $nin: [_id],
     },
   });
-  console.log(_id, exists);
+
   if (exists) {
     return res.status(400).json({ error: "farm name already exists" });
   }
@@ -253,26 +254,22 @@ const deleteFarm = async (req, res) => {
   }
 };
 
-const updateSecret = async (req, res)=>{
-  const {_id} = req.params
-  try{
+const updateSecret = async (req, res) => {
+  const { _id } = req.params;
+  try {
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       throw Error("Invalid farm ID");
     }
 
-    const farm = await farmModel.updateSecret(_id)
-    if (!farm){
-      throw Error("No such farm found")
+    const farm = await farmModel.updateSecret(_id);
+    if (!farm) {
+      throw Error("No such farm found");
     }
-    res.status(200).json(farm)
-  }catch(err){
-    res.status(400).json({error:err.message})
+    res.status(200).json(farm);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
-}
-
-
-
-
+};
 
 module.exports = {
   getKeys,
@@ -285,5 +282,5 @@ module.exports = {
   getAllFarms,
   getUserFarm,
   getFarm,
-  updateSecret
+  updateSecret,
 };

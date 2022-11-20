@@ -48,7 +48,6 @@ export default function ActuatorTable() {
     }
   };
 
-  console.log(tableData);
   useEffect(() => {
     setData({
       ...tableData,

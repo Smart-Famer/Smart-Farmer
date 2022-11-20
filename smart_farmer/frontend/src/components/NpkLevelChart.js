@@ -1,4 +1,3 @@
-import distinctColors from "distinct-colors";
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import { useFarmContext } from "../hooks/useFarmContext";

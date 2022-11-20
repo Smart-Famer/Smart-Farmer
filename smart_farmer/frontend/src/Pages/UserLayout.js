@@ -18,7 +18,6 @@ import { useFarmContext } from "../hooks/useFarmContext";
 //import Test from './Test';
 
 export default function UserLayout(props) {
-  console.log("User Layout");
   const { farm } = useFarmContext();
 
   return (

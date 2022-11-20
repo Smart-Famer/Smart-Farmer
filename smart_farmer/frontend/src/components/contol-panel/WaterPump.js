@@ -15,8 +15,8 @@ export default function WaterPump(props) {
       {
         method: "POST",
         body: JSON.stringify({
-          secret_key:farm.secret_key,
-          data:{msg},
+          secret_key: farm.secret_key,
+          data: { msg },
         }),
 
         headers: { "Content-type": "application/json" },
@@ -29,7 +29,6 @@ export default function WaterPump(props) {
     }
 
     if (response.ok) {
-      console.log(json);
       setSuccess(`Pump succesfully ${mode}!`);
     }
     setTimeout(() => {

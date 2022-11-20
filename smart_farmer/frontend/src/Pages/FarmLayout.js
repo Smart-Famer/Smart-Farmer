@@ -1,30 +1,25 @@
-import "../App.css";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "../components/NavBars/UserNavBar";
-import HomePage from "./HomePage";
-import Dashboard from "./Dashboard";
-import NPKpage from "./NPKpage";
-import ElecConPage from "./ElectricConductivityInput";
-import Gallery from "./Gallery";
-import ModuleActionsPage from "./ModuleActions";
-import CreateAss from "./CreateAssistantPage";
-import ControlPanel from "./ContolPanel";
-import HistoricalData from "./ViewHistorical";
-import CropYieldDataPage from "./CropsYieldDataPage";
-import Error from "./Error";
+import "../App.css";
 import CropYieldInput from "../components/inputForms/CropYieldInput";
+import Sidebar from "../components/Sidebar/SideBar1";
 import { AssistantContextProvider } from "../context/AssistantContext";
-// import { AssistantContextProvider } from "../context/AssistantContext";
-// import CropYieldInput from '../components/inputForms/CropYieldInput'
+import ControlPanel from "./ContolPanel";
+import CreateAss from "./CreateAssistantPage";
+import CropYieldDataPage from "./CropsYieldDataPage";
+import Dashboard from "./Dashboard";
+import ElecConPage from "./ElectricConductivityInput";
+import Error from "./Error";
+import FarmDetailsPage from "./FarmDetails";
+import Gallery from "./Gallery";
 import GalleryItem from "./GalleryItem";
 import HistoricalNPKpage from "./HistoricalNpkPage";
-import Sidebar from "../components/Sidebar/SideBar1";
+import ModuleActionsPage from "./ModuleActions";
 import ModulesPage from "./ModulesPage";
-import FarmDetailsPage from "./FarmDetails";
+import NPKpage from "./NPKpage";
+import HistoricalData from "./ViewHistorical";
 
 export default function FarmLayout(props) {
-  console.log("Farm Layout");
   return (
     <>
       <div>

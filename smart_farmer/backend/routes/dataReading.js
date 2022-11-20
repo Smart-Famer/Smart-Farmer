@@ -3,7 +3,6 @@ const express = require('express')
 const {
   createDataReading,
   getReading,
-  getReadings,
   getAllReadings,
 } = require("../controllers/dataReadingController");
 
@@ -13,7 +12,6 @@ const {
   getHistoricalNpkLevels,
 } = require("../controllers/npkLevelController");
 
-// const {createTest} = require('../controllers/testController')
 
 const router = express.Router()
 

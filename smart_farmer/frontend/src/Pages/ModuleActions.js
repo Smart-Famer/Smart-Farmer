@@ -1,11 +1,10 @@
 import React from "react";
-import Input from "../components/inputForms/InputForm";
-import AddSensor from "../components/settings/AddSensor";
-import AddActuator from "../components/settings/AddActuator";
-import Sidebar from "../components/Sidebar/SideBar";
-import EditSensor from "../components/settings/EditSensor";
-import EditActuator from "../components/settings/EditActuator";
 import { useParams } from "react-router";
+import Input from "../components/inputForms/InputForm";
+import AddActuator from "../components/settings/AddActuator";
+import AddSensor from "../components/settings/AddSensor";
+import EditActuator from "../components/settings/EditActuator";
+import EditSensor from "../components/settings/EditSensor";
 
 export default function ModuleActionsPage() {
   const {type,module,_id} = useParams()

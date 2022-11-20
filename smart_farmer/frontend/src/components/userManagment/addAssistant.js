@@ -36,15 +36,6 @@ export default function AddAssistant(props) {
       setError(json.error);
     }
 
-    // const newObj = await signup(first_name, second_name, email, password, location)
-    // if(!error && newObj){
-    //   setfirstName("")
-    //   setSecondName("")
-    //   setPassword("")
-    //   setLocation("")
-    //   setEmail("")
-    //   setAssistants([...assistants,newObj])
-    // }
   };
 
   return (

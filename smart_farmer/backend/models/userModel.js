@@ -146,23 +146,4 @@ userSchema.statics.comparePass = async function(_id,password){
     return user
 
 }
-// userSchema.statics.getPass = async function(data){
-//     const {curPass,newPass,_id}=data
-
-    // const {password} = await this.findOne({_id})
-    // const match = await bcrypt.compare(curPass, password)
-    // if(!match){
-    //     throw Error("Provided existing password is incorrect")
-    // }
-
-    // if(!validator.isStrongPassword(newPass)){
-    //     throw Error("New Password is not Strong Enough!")
-    // }
-
-//     const salt = await bcrypt.genSalt(10)
-//     const hash = await bcrypt.hash(newPass, salt)
-
-    
-//     return {hash}
-// }
 module.exports = mongoose.model('User', userSchema)

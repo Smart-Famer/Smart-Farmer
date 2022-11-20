@@ -4,99 +4,93 @@ import { useFarmContext } from "../../hooks/useFarmContext";
 import ModalTemp from "../Modal/Modal";
 import { useNavigate } from "react-router";
 
-export default function EditSensor({module,_id}) {
+export default function EditSensor({ module, _id }) {
   const [modalShow, setModalShow] = useState(false);
   const [name, setName] = useState("");
   const [port, setPort] = useState("");
   const [sensor_type, setSensor_type] = useState("Temperature");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [validateError, setValidate] =useState("");
+  const [validateError, setValidate] = useState("");
 
-  const isNumber=(str) =>{
-    if (str.trim() === '') {
+  const isNumber = (str) => {
+    if (str.trim() === "") {
       return false;
     }
-  
+
     return !isNaN(str);
-  }
-  const Validate= (sensor_type,name,port)=>{
+  };
+  const Validate = (sensor_type, name, port) => {
     var error = "";
     if (!sensor_type || !name || !port) {
       throw Error("Enter input value !");
-    }
-    else if(!isNumber(port)){
+    } else if (!isNumber(port)) {
       throw Error("Enter a number as input !");
-
     }
-  }
+  };
 
+  useEffect(() => {
+    const curSensor = farm?.sensors[module]?.find(
+      (sensor) => sensor._id === _id
+    );
 
-    useEffect(()=>{
-      const curSensor = farm?.sensors[module]?.find((sensor)=>sensor._id===_id)
-      console.log(module,_id,curSensor)
-      setName(curSensor?.name.split("_")[1])
-      setPort(curSensor?.port.split("-")[1])
-      setSensor_type(module==="Soil"?"Soil Humidity":module)
-    },[])
-   const handleSubmit = async (e) => {
-     // console.log(sensor_type)
+    setName(curSensor?.name.split("_")[1]);
+    setPort(curSensor?.port.split("-")[1]);
+    setSensor_type(module === "Soil" ? "Soil Humidity" : module);
+  }, []);
+  const handleSubmit = async (e) => {
     const sensor = { sensor_type, name, port };
 
-     e.preventDefault();
-     try{ 
-     Validate(sensor_type,name,port)
+    e.preventDefault();
+    try {
+      Validate(sensor_type, name, port);
 
+      const response = await fetch(
+        `${process.env.REACT_APP_HOST}/api/modules/edit-sensor`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            sensor,
+            farm_id: farm._id,
+            farm_name: farm.name,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      const json = await response.json();
 
-     const response = await fetch(
-       `${process.env.REACT_APP_HOST}/api/modules/edit-sensor`,
-       {
-         method: "PUT",
-         body: JSON.stringify({
-           sensor,
-           farm_id: farm._id,
-           farm_name: farm.name,
-         }),
-         headers: {
-           "Content-type": "application/json",
-         },
-       }
-     );
-     const json = await response.json();
-
-     if (!response.ok) {
-       setError(json.error);
-       console.log(json.error);
-     }
-     if (response.ok) {
-      setError(null)
-      console.log("Sensor Updated:", json);
-
-      dispatchFarm({
-        type:"UPDATE",
-        payload:{
-          sensors:{
-              ...farm.sensors,
-              [module]:farm.sensors[module].map((element)=>{
-                if(element._id===json._id){
-                  return(json)
-                }else{
-                  return element
-                }
-              })
-          }
+      if (!response.ok) {
+        setError(json.error);
       }
-      })
-      navigate("/user/farm/Modules")
+      if (response.ok) {
+        setError(null);
 
-     }
-    }catch(err){
-      setValidate(err.message)
+        dispatchFarm({
+          type: "UPDATE",
+          payload: {
+            sensors: {
+              ...farm.sensors,
+              [module]: farm.sensors[module].map((element) => {
+                if (element._id === json._id) {
+                  return json;
+                } else {
+                  return element;
+                }
+              }),
+            },
+          },
+        });
+        navigate("/user/farm/Modules");
+      }
+    } catch (err) {
+      setValidate(err.message);
     }
-     setModalShow(true);
-   };
+    setModalShow(true);
+  };
 
   return (
     //should validate port number (4-digit, numeric)
@@ -113,7 +107,7 @@ export default function EditSensor({module,_id}) {
             className="form-control"
             id="inputSensorPort"
             required={true}
-            readOnly={true}
+            disabled
           />
         </div>
         <div className="form-group mb-4">
@@ -125,6 +119,7 @@ export default function EditSensor({module,_id}) {
             }}
             id="inputSensorType"
             className="form-control"
+            disabled
           >
             {/* <option selected>Choose...</option> */}
             <option>Temperature</option>
@@ -148,29 +143,29 @@ export default function EditSensor({module,_id}) {
           />
         </div>
 
-      <button type="submit" className="btn btn-green">
-        Edit
-      </button>
-      {/* {error&&<div className="error">{error}</div>} */}
-      {validateError && (
-        <ModalTemp
-          title={"Error"}
-          message={error}
-          color="danger"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-      {!validateError && !error && (
-        <ModalTemp
-          title={"Successful"}
-          message={"Sensor Edited Successfully"}
-          color="primary"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-    </form>
+        <button type="submit" className="btn btn-green">
+          Update
+        </button>
+        {/* {error&&<div className="error">{error}</div>} */}
+        {validateError && (
+          <ModalTemp
+            title={"Error"}
+            message={error}
+            color="danger"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!validateError && !error && (
+          <ModalTemp
+            title={"Successful"}
+            message={"Sensor Edited Successfully"}
+            color="primary"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
     </div>
   );
 }

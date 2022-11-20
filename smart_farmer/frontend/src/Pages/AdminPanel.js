@@ -1,18 +1,10 @@
-import Header from "../components/login/Header";
-import Meter from "../components/dashboard/Meter";
-import { Container, Row, Col } from "reactstrap";
+import { useEffect, useState } from "react";
+import { Col, Container, Row } from "reactstrap";
 import Counter from "../components/admin/counter";
-import { Navigate } from "react-router";
-import { useAuthContext } from "../hooks/useAuthContext.js";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useFarmContext } from "../hooks/useFarmContext.js";
+import Meter from "../components/dashboard/Meter";
+import Header from "../components/login/Header";
 
 export default function AdminPanel(props) {
-  // const { user } = useAuthContext();
-  // if (!user) {
-  //   return <Navigate to="/adminLogin" />;
-  // }
   const [farm_list, setFarmList] = useState([]);
   const [manager_list, setManagerList] = useState([]);
   const [assitant_list, setAssiatantList] = useState([]);
@@ -26,12 +18,12 @@ export default function AdminPanel(props) {
         setFarmList(json);
       }
     };
-    const fetchManagers= async () => {
+    const fetchManagers = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_HOST}/api/admin/get-all-mangers`
       );
       const json = await response.json();
-      // console.log(json);
+      //
       if (response.ok) {
         setManagerList(json);
       }
@@ -41,7 +33,7 @@ export default function AdminPanel(props) {
         `${process.env.REACT_APP_HOST}/api/admin/get-all-assistants`
       );
       const json = await response.json();
-      // console.log(json);
+      //
       if (response.ok) {
         setAssiatantList(json);
       }
@@ -50,7 +42,6 @@ export default function AdminPanel(props) {
     fetchFarms();
     fetchManagers();
     fetchAssistants();
-
   }, []);
 
   return (
@@ -68,7 +59,7 @@ export default function AdminPanel(props) {
 
               <Col>
                 <Meter heading="Number of Mangers">
-                  <Counter card_id="Manager"  count={manager_list.length} />
+                  <Counter card_id="Manager" count={manager_list.length} />
                 </Meter>
               </Col>
 

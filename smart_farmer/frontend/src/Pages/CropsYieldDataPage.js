@@ -7,7 +7,7 @@ import { useFarmContext } from "../hooks/useFarmContext";
 
 export default function CropYieldDataPage() {
   const { farm } = useFarmContext();
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
   const farm_id = farm._id;
 
   const [xAxisV, setXaxisV] = useState([]);
@@ -109,11 +109,9 @@ export default function CropYieldDataPage() {
       }
     };
     fetchYieldData();
-    // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
-    // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
   }, []);
 
-  // console.log(cropYieldData);
+  //
 
   const handleCropChange = (e) => {
     const crop_name = e.currentTarget.id;
@@ -134,13 +132,10 @@ export default function CropYieldDataPage() {
     const month_index = tmp_cropMonths.indexOf(month); //index of clicked checkbox month in xAxisV array
     if (!e.currentTarget.checked) {
       for (const crop of temp_cropYieldData) {
-        // crop.data[month_index]='changed'
         crop.data.splice(month_index, 1);
       }
       temp_cropMonths.splice(month_index, 1);
     } else {
-      console.log(tmp_cropYieldData);
-      console.log(tmp_cropMonths);
       for (const crop of temp_cropYieldData) {
         const crop_index = temp_cropYieldData.indexOf(crop);
         crop.data.splice(
@@ -223,9 +218,14 @@ export default function CropYieldDataPage() {
       </div>
 
       <div className="d-flex flex-row-reverse mt-4">
-        {user.details.user_type==='Assistant' && <Link to="/user/farm/cropyieldinput" style={{ textDecoration: "none" }}>
-          {"Add Crop Yield Details>"}
-        </Link>}
+        {user.details.user_type === "Assistant" && (
+          <Link
+            to="/user/farm/cropyieldinput"
+            style={{ textDecoration: "none" }}
+          >
+            {"Add Crop Yield Details>"}
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import Table from 'react-bootstrap/Table';
-import {Button} from "reactstrap";
 
-import "./ImgTable.css"
+import "./ImgTable.css";
 function ImgTable(props) {
     let Data=[]
     Object.keys(props.photos).forEach((key, index)=>{

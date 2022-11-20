@@ -1,9 +1,6 @@
-// import { Navigate, useParams } from "react-router-dom";
-import WaterPumpContainer from "../components/contol-panel/WaterPumpContainer";
 import CameraContainer from "../components/contol-panel/CameraContainer";
-import Sidebar from "../components/Sidebar/SideBar";
+import WaterPumpContainer from "../components/contol-panel/WaterPumpContainer";
 import { useFarmContext } from "../hooks/useFarmContext";
-import { useEffect } from "react";
 
 export default function Dashboard(props) {
   const { farm } = useFarmContext();

@@ -1,12 +1,9 @@
 const dataReadingModel = require("../models/dataReadingModel");
-const mongoose = require("mongoose");
 const sockets = require("../sockets");
 const farmModel = require("../models/farmModel");
-const sensorModel = require("../models/sensorModel");
 
 const getReading = async (req, res) => {
   const { sourceId } = req.params;
-  // console.log(sourceId)
   const dataReading = await dataReadingModel.findOne(
     { sourceId: sourceId },
     "sourceId reading",
@@ -15,12 +12,11 @@ const getReading = async (req, res) => {
   if (!dataReading) {
     return res.status(404).json({ error: "No such source id found" });
   }
-  // console.log(dataReading)
   res.status(200).json(dataReading);
 };
 const getReadings = async (req, res) => {
   const { sourceIds } = req.body;
-  console.log(typeof sourceIds);
+
   const dataReadings = await dataReadingModel.find(
     { sourceId: { $in: sourceIds } },
     null,
@@ -56,13 +52,7 @@ const createDataReading = async (req, res) => {
   const { timestamp, reading, secret_key } = req.body;
   let { sourceId } = req.body;
 
-  console.log(reading)
-  console.log(sourceId)
-  console.log(timestamp)
-  console.log(secret_key)
-
   try {
-
     const farmObj = await farmModel.findOne({ secret_key }, { _id: 1 });
     if (!farmObj) {
       throw Error("Invalid Secret Key. Plz exit an re-enter with a valid key");
@@ -75,28 +65,19 @@ const createDataReading = async (req, res) => {
     const farmId = farmObj._id.toString();
     sourceId = farmId + "-" + sourceId;
 
-    console.log(sourceId, farmId);
-
-    // const sensor = await sensorModel.findOne({ port: sourceId });
-    // if (!sensor) {
-    //   throw Error("Port Does not Exist");
-    // }
-
-    // console.log(sourceId, farmId);
     const dataReading = await dataReadingModel.create({
       timestamp,
       sourceId,
       reading,
     });
 
-    if(typeof sockets[farmId] !=='undefined'){
-            sockets[farmId].forEach((socket) => {
-              socket
-                .to(farmId)
-                .emit("dataReadingUpdate", { timestamp, sourceId, reading });
-            });
+    if (typeof sockets[farmId] !== "undefined") {
+      sockets[farmId].forEach((socket) => {
+        socket
+          .to(farmId)
+          .emit("dataReadingUpdate", { timestamp, sourceId, reading });
+      });
     }
-
 
     res.status(200).json(dataReading);
   } catch (err) {

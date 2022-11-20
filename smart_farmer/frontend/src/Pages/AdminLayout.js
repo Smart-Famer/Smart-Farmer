@@ -1,20 +1,19 @@
-import "../App.css";
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import Error from "./Error";
+import { Route, Routes } from "react-router-dom";
+import "../App.css";
+import Navbar from "../components/NavBars/AdminNav";
 import Admin from "./AdminPanel";
+import CreateManagerPage from "./CreateMangerPage";
+import Error from "./Error";
+import ViewAllAssistants from "./ViewAllassistants";
 import ViewAllFarms from "./ViewAllFarms";
 import ViewAllManagers from "./ViewAllManagers";
-import ViewAllAssistants from "./ViewAllassistants";
-import CreateManagerPage from "./CreateMangerPage";
-import Navbar from '../components/NavBars/AdminNav'
 //import Test from './Test';
 
 export default function AdminLayout() {
-  console.log("Admin Layout");
   return (
     <section>
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route path="*" element={<Error />} />
         <Route path="dashboard" element={<Admin />} />

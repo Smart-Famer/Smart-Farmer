@@ -9,13 +9,13 @@ export default function ViewAll() {
 
   useEffect(() => {
     const fetchFarms = async () => {
-
-      const response = await fetch(`${process.env.REACT_APP_HOST}/api/admin/get-all-farms`);
+      const response = await fetch(
+        `${process.env.REACT_APP_HOST}/api/admin/get-all-farms`
+      );
 
       const json = await response.json();
 
       if (response.ok) {
-        console.log(json);
         setCountryListDefault(json);
       }
     };

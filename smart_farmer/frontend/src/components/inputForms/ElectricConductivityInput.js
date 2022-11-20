@@ -11,36 +11,38 @@ export default function ElectricConductivityInput() {
   const [modalShow, setModalShow] = useState(false);
   const [inputElecCon, setInputElecCon] = useState("");
   const [error, setError] = useState(null);
-  const [validateError, setValidate] =useState("");
+  const [validateError, setValidate] = useState("");
   const { farm } = useFarmContext();
-  // console.log(farm)
 
-  const isNumber=(str) =>{
-    if (str.trim() === '') {
+  const isNumber = (str) => {
+    if (str.trim() === "") {
       return false;
     }
-  
+
     return !isNaN(str);
-  }
-  const Validate= (input)=>{
+  };
+  const Validate = (input) => {
     var error = "";
     if (!input) {
-      return error = "Enter input value !";
+      return (error = "Enter input value !");
+    } else if (!isNumber(input)) {
+      return (error = "Enter a number as input !");
     }
-    else if(!isNumber(input)){
-      return error = "Enter a number as input !";
-
-    }
-  }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValidate(Validate(inputElecCon))
+    setValidate(Validate(inputElecCon));
 
     const reading = inputElecCon;
     const sourceId = "elec";
     let timestamp = new Date().toJSON();
 
-    const dataReading = { reading, sourceId, timestamp, secret_key:farm.secret_key };
+    const dataReading = {
+      reading,
+      sourceId,
+      timestamp,
+      secret_key: farm.secret_key,
+    };
 
     const response = await fetch(
       `${process.env.REACT_APP_HOST}/api/datareading`,
@@ -60,7 +62,6 @@ export default function ElectricConductivityInput() {
     if (response.ok) {
       setError(null);
       setInputElecCon("");
-      console.log("New electric conductivity level added:", json);
     }
     setModalShow(true);
   };
@@ -89,7 +90,7 @@ export default function ElectricConductivityInput() {
         {/* {error && (<DisplayAlert type={'danger'} content={error} />)} */}
         {validateError && (
           <PopUpModal
-          title={"Error"}
+            title={"Error"}
             message={validateError}
             color="danger"
             show={modalShow}
@@ -98,7 +99,7 @@ export default function ElectricConductivityInput() {
         )}
         {!validateError && (
           <PopUpModal
-          title={"Successful"}
+            title={"Successful"}
             message={"New electric conductivity level added successfully"}
             color="primary"
             show={modalShow}

@@ -42,20 +42,18 @@ const getReadingHistory = async (req, res) => {
     ]);
     readingHistory = temp.map((e) => {
       return {
-        sourceId: e._id.sourceId,
-        timestamp: months[e._id.month - 1],
-        reading: e.reading,
-      };
-    });
-  } else {
-    readingHistory = await dataReadingModel
-      .find({
-        sourceId: {
-          $in: sourceIds,
-        },
-        timestamp: { $gte: startDate },
-      })
-      .limit(7 * sourceIds.length);
+        sourceId:e._id.sourceId,
+        timestamp:months[e._id.month-1],
+        reading:e.reading
+      }
+    })
+  }else{
+     readingHistory = await dataReadingModel.find({
+      sourceId: {
+        $in: sourceIds,
+      },
+      timestamp:{$gte:startDate},
+    }).sort({ timestamp: 1 }).limit(7*sourceIds.length);
   }
 
   if (!readingHistory) {

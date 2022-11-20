@@ -1,19 +1,13 @@
 import React from "react";
-import { useFarmContext } from "../../hooks/useFarmContext";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useFarmContext } from "../../hooks/useFarmContext";
 import "./Sidebar.css";
 
 export default function Sidebar1() {
   const { farm } = useFarmContext();
   const { user } = useAuthContext();
   return (
-    //         <a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-    //   Link with href
-    // </a>
-    // <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-    //   Button with data-bs-target
-    // </button>
     <>
       <div
         className="offcanvas offcanvas-start w-25"

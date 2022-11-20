@@ -1,11 +1,9 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./card.css";
-import { useNavigate } from "react-router";
+import React from "react";
 import { useFarmContext } from "../../hooks/useFarmContext";
+import "./card.css";
 
 export default function AssistantCard(props) {
-  //console.log("props",props)
   const { assistants, setAssistants, name, location, email, id } = props;
   const { farm } = useFarmContext();
   const handleDelete = async () => {
@@ -20,7 +18,7 @@ export default function AssistantCard(props) {
       }
     );
     const json = await response.json();
-    //console.log("farm",json)
+
     if (response.ok) {
       const newArr = assistants.filter(function (ass) {
         return ass._id != id;

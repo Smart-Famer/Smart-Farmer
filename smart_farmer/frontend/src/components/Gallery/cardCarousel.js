@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePhotoContext } from "../../hooks/usePhotoContext";
-import PhotoCard from "./photoCard";
 import "./Carousel.css";
+import PhotoCard from "./photoCard";
 
 function CardCarousel({ date }) {
   const navigate = useNavigate();
@@ -16,10 +16,6 @@ function CardCarousel({ date }) {
     "Saturday",
   ];
   const { photos, dispatchPhotos } = usePhotoContext();
-  // const [thisPhotos, setState] = useState(photos[date])
-  // useEffect(()=>{
-  //     console.log("photos changed",photos)
-  // },[photos])
 
   if (photos[date]) {
     return (

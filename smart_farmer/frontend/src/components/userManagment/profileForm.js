@@ -39,7 +39,7 @@ export default function ProfileForm(props) {
       setLocation(newObj.details.location);
       setEmail(newObj.details.email);
       setSuccess("Profile Updated Successfully!");
-      // console.log(user)
+
       setReadonly(true);
     } else {
       setError(newObj.error);
@@ -91,10 +91,11 @@ export default function ProfileForm(props) {
             type="text"
             className="form-control"
             value={user.user_type}
-            readOnly
+            disabled
             required={true}
           />
         </div>
+
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">
             User ID
@@ -103,18 +104,7 @@ export default function ProfileForm(props) {
             type="text"
             className="form-control"
             value={user._id}
-            readOnly
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="formGroupExampleInput2" className="form-label">
-            User ID
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            value={user._id}
-            readOnly
+            disabled
           />
         </div>
         <div className="mb-3">

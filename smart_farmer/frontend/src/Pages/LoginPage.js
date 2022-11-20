@@ -1,16 +1,12 @@
 import React from "react"
 
-import Login from "../components/login/Login"
-import Header from "../components/login/Header"
 import "../App.css"
-import {useAuthContext} from "../hooks/useAuthContext"
-import { Navigate } from "react-router-dom"
+import Header from "../components/login/Header"
+import Login from "../components/login/Login"
 import LoginNavBar from "../components/NavBars/LoginNavbar"
 
 
 export default function LoginPage() {
- 
-    console.log("User Login")
 
     return (
         <div className="login">

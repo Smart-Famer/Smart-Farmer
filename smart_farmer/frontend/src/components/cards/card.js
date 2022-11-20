@@ -1,13 +1,11 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./card.css";
+import React from "react";
+import { MdCreate, MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { useFarmContext } from "../../hooks/useFarmContext";
-import { MdCreate } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
+import "./card.css";
 
 export default function Card(props) {
-  //console.log("props",props)
   const { dispatchFarm } = useFarmContext();
   const navigate = useNavigate();
   const handleClick = async () => {
@@ -22,7 +20,7 @@ export default function Card(props) {
       }
     );
     const json = await response.json();
-    //console.log("farm",json)
+
     if (response.ok) {
       let farm = json[0];
 
