@@ -62,9 +62,14 @@ const createDataReading = async (req, res) => {
   // console.log(secret_key)
 
   try {
+
     const farmObj = await farmModel.findOne({ secret_key }, { _id: 1 });
     if (!farmObj) {
       throw Error("Invalid Secret Key. Plz exit an re-enter with a valid key");
+    }
+
+    if (!/^\d+$/.test(reading)) {
+      throw Error("Invalid reading!!!");
     }
 
     const farmId = farmObj._id.toString();
