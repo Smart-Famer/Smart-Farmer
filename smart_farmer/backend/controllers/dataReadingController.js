@@ -49,10 +49,10 @@ const  createDataReading= async (req,res)=>{
     const {timestamp,reading, secret_key}=req.body
     let {sourceId} = req.body
 
-    console.log(reading)
-    console.log(sourceId)
-    console.log(timestamp)
-    console.log(secret_key)
+    // console.log(reading)
+    // console.log(sourceId)
+    // console.log(timestamp)
+    // console.log(secret_key)
 
     try{
         const farmObj = await farmModel.findOne({secret_key},{_id:1})
@@ -75,10 +75,11 @@ const  createDataReading= async (req,res)=>{
             reading
         })
 
-        
-        sockets[farmId].forEach(socket => {
-            socket.to(farmId).emit("dataReadingUpdate",{timestamp,sourceId,reading})
-        });
+        if(sockets[farmId]){
+            sockets[farmId].forEach(socket => {
+                socket.to(farmId).emit("dataReadingUpdate",{timestamp,sourceId,reading})
+            });
+        }
         
 
         res.status(200).json(dataReading)
