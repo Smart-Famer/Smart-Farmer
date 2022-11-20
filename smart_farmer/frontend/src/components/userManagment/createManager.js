@@ -16,10 +16,29 @@ export default function CreateManager() {
   const {signup, error, isLoading, setError} = useSignup()
   const [success, setSuccess] = useState(null)
 
+
+  // const Validation = (first_name, second_name, email, password, c_password) =>{
+  //   console.log(password);
+  //   var error = "";
+  //   if (!first_name && !second_name && !email && !password && !c_password) {
+  //     throw Error("Fields need to filled !");
+  //   }
+  //   if (!email) {
+  //     return error = "Email Required !";
+  //   } else if (!validator.isEmail(email)) {
+  //     throw Error("This isn't an email !");
+  //   }
+  //   if (password !== c_password) {
+  //     console.log("true");
+  //     throw Error( "Password does not match !");
+  //   }
+  // }
+
   const handleSubmit = async (e) => {
     console.log(first_name, second_name, email, password, location);
     e.preventDefault();
-    setValidated(Validate(first_name, second_name, email, password, confirmPassword))
+try{ 
+    Validate(first_name, second_name, email, password, confirmPassword)
     setError(null)
     setSuccess(null)
     const newObj = await signup(first_name, second_name, email, password, location)
@@ -33,11 +52,14 @@ export default function CreateManager() {
       setEmail("")
       setSuccess("Manager Created Successfully!")
     }
+  }catch(err){
+    setValidated(err.message)
+  }
     setModalShow(true);
   };
 
   return (
-    <div>
+    <div className='pe-4'>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3 row">
         <label className="col-sm-4 col-form-label">First Name</label>

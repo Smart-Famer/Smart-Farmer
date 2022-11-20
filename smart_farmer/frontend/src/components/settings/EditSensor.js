@@ -25,10 +25,10 @@ export default function EditSensor({module,_id}) {
   const Validate= (sensor_type,name,port)=>{
     var error = "";
     if (!sensor_type || !name || !port) {
-      return error = "Enter input value !";
+      throw Error("Enter input value !");
     }
     else if(!isNumber(port)){
-      return error = "Enter a number as input !";
+      throw Error("Enter a number as input !");
 
     }
   }
@@ -46,7 +46,8 @@ export default function EditSensor({module,_id}) {
     const sensor = { sensor_type, name, port };
 
      e.preventDefault();
-     setValidate(Validate(sensor_type,name,port))
+     try{ 
+     Validate(sensor_type,name,port)
 
 
      const response = await fetch(
@@ -91,6 +92,9 @@ export default function EditSensor({module,_id}) {
       navigate("/user/farm/Modules")
 
      }
+    }catch(err){
+      setValidate(err.message)
+    }
      setModalShow(true);
    };
 

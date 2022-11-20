@@ -30,17 +30,18 @@ export default function NPKInput() {
     console.log(n);
     var error = "";
     if (!n || !p || !k) {
-      return error = "Enter input value !";
+      throw Error("Enter input value !");
     }
     else if(!isNumber(n) || !isNumber(p) || !isNumber(k)){
-      return error = "Enter a number as input !";
+      throw Error("Enter a number as input !");
 
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValidate(Validate(nitrogenLevel,phosphorus,potassium))
+    try{ 
+    Validate(nitrogenLevel,phosphorus,potassium)
     
     const sourceId = farm.NPK_levels_key;
     let timestamp = new Date().toJSON();
@@ -75,6 +76,10 @@ export default function NPKInput() {
       setPotassiumLevel("");
       console.log("New npk level added:", json);
     }
+  }
+  catch(err){
+    setValidate(err.message)
+  }
     setModalShow(true);
   };
 
@@ -134,16 +139,16 @@ export default function NPKInput() {
         </div>
         <button className="btn btn-green btn-block m-4">Submit</button>
         {/* {error && (<DisplayAlert type={'danger'} content={error}/>)}  */}
-        {error && (
+        {validateError && (
           <PopUpModal
             title={"Error"}
-            message={error}
+            message={validateError}
             color="danger"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
         )}
-        {!error && !error && (
+        {!validateError && !error && (
           <PopUpModal
             title={"Successful"}
             message={"New npk levels added successfully"}

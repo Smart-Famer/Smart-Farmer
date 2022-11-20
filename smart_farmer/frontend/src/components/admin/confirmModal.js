@@ -13,7 +13,8 @@ export default function ConfirmDelete(props) {
     // console.log(json)
     if (response.ok) {
       console.log(json);
-      props.updateManagerList(json._id)
+      props.updateManagerList(json._id);
+      props.onHide()
     }
   }
   return (

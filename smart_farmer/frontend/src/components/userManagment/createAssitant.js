@@ -19,7 +19,8 @@ export default function CreateAss(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValidated(Validate(first_name, second_name, email, password, confirmPassword))
+    try{ 
+    Validate(first_name, second_name, email, password, confirmPassword)
     setError(null)
     setSuccess(null)
     const newObj = await signup(first_name, second_name, email, password, location)
@@ -32,6 +33,9 @@ export default function CreateAss(props) {
       setAssistants([...assistants,newObj._doc])
       setSuccess("Assistant Created Successfully!")
     }
+  }catch(err){
+    setValidated(err.message)
+  }
     setModalShow(true);
 
   };

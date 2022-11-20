@@ -69,7 +69,7 @@ const getMangers = async (req, res)=>{
     const {farm_id} = req.body
     try{
         const assistants = await User.find({
-            user_type:"Assistant",
+            user_type:"Manager",
             farms:farm_id
         },{_id:1,email:1,first_name:1,second_name:1,location:1,profile_picture:1})
         res.status(200).json(assistants)  
