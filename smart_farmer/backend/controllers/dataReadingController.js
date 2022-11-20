@@ -7,6 +7,7 @@ const sensorModel = require('../models/sensorModel')
 
 const getReading= async (req,res)=>{
     const {sourceId} = req.params
+    // console.log(sourceId)
     const dataReading = await dataReadingModel.findOne(
       { sourceId: sourceId },
       "sourceId reading",
@@ -15,6 +16,7 @@ const getReading= async (req,res)=>{
     if(!dataReading){
         return res.status(404).json({error:"No such source id found"})
     }
+    // console.log(dataReading)
     res.status(200).json(dataReading)
 }
 const getReadings= async (req,res)=>{
