@@ -66,7 +66,7 @@ export default function Temperature({socket}){
     return(
         <Row>
             {components}
-            {components.length===0&&<strong className="text-center"><p className=" text-danger p-2">No Temperature Sensors found</p></strong>}
+            {components.length===0&&<h4 className="text-center"><p className=" text-danger p-2">No Temperature Sensors found</p></h4>}
         </Row>
     )
 }

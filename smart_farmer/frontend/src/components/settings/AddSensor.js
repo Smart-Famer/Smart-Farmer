@@ -38,8 +38,7 @@ export default function AddSensor() {
 
     const sensor = { sensor_type, name, port };
     if (sensor_type === "RainFall" && farm.sensors.RainFall.length === 1) {
-      setError("Rainfall sensor already added! Delete it to add a new one");
-      return;
+      throw Error("Rainfall sensor already added! Delete it to add a new one");
     }
     const response = await fetch(`${process.env.REACT_APP_HOST}/api/modules/add-sensor`,
       {

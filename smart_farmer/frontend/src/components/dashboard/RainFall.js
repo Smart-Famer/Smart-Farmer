@@ -10,16 +10,25 @@ export default function RainFall({socket}){
     const [rainfall, setRainfall] = useState(null)
     const [error, setError] = useState(null)
 
-    try{
+
       useEffect(() => {
-        const fetchRainFall = async () => {
-          const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${source_Id}`
-          );
-          const json = await response.json()
-  
-          if (response.ok) {
-              setRainfall(json)
-          }
+        
+
+          const fetchRainFall = async () => {
+        try{
+            if(!source_Id){
+              throw Error("No RainFall Sensor Found")
+            }
+            const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${source_Id}`
+            );
+            const json = await response.json()
+    
+            if (response.ok) {
+                setRainfall(json)
+            }
+        }catch(e){
+          setError("Data fetch error")
+        }
         }
     
         fetchRainFall()
@@ -31,15 +40,15 @@ export default function RainFall({socket}){
           setRainfall(temp)
         }
       });
-    }catch(e){
-      setError("Data fetch error")
-    }
+
+
+    
 
     return(
         <Row className="px-5">
             <Col >
               {source_Id&&<h1 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{rainfall && (rainfall.reading)} mm</h1>}
-              {!source_Id&&<div className="text-center"><h3 className="text-danger">No Rainfall Sensor found</h3></div>}
+              {!source_Id&&<div className="text-center"><h4 className="text-danger">No Rainfall Sensor found</h4></div>}
             </Col>
         </Row>
     )

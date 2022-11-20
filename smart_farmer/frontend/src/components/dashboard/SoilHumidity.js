@@ -8,12 +8,13 @@ export default function SoilHumidity({socket}){
     const sourceIds = farm.sensors.Soil.map((sensor)=>sensor.port)
     const [soilhumidities, setSoilHumidities] = useState({})
     const sensor_names = {}
-    farm.sensors.Soil.forEach((sensor) => {
+    farm.sensors.Soil?.forEach((sensor) => {
       sensor_names[sensor.port] = sensor.name.replace(farm.name + "_", "");
     });
     
     useEffect(() => {
         const fetchHumidity=async ()=>{
+          try{
             const response = await fetch(
               `${
                 process.env.REACT_APP_HOST
@@ -23,6 +24,9 @@ export default function SoilHumidity({socket}){
             if (response.ok) {
               setSoilHumidities(json);
             }
+          }catch(e){
+
+          }
     
         }
 
@@ -30,7 +34,7 @@ export default function SoilHumidity({socket}){
     }, [])
 
     socket.on("dataReadingUpdate", (dataReading) => {
-      if (sourceIds.includes(dataReading.sourceId)) {
+      if (sourceIds?.includes(dataReading.sourceId)) {
         const temp = {
           ...soilhumidities,
           [dataReading.sourceId]: dataReading.reading,
@@ -39,7 +43,7 @@ export default function SoilHumidity({socket}){
       }
     });
 
-    const components = sourceIds.map((id)=>{
+    const components = sourceIds?.map((id)=>{
         return (
           <Col
             key={sourceIds.indexOf(id)}
@@ -58,6 +62,7 @@ export default function SoilHumidity({socket}){
     return(
         <Row>
             {components}
+            {components.length===0&&<h4 className="text-center"><p className=" text-danger p-2">No Soil Humidity Sensors found</p></h4>}
         </Row>
     )
 }

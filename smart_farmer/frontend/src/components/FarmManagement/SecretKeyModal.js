@@ -119,7 +119,7 @@ export default function KeyModal() {
                   Enter
                 </button>
               )}
-              {state=="text"&&<button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>}
+              {state=="text"&&<button type="button" className="btn btn-success" data-bs-dismiss="modal">OK</button>}
             </div>
           </div>
         </div>

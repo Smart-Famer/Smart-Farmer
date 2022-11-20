@@ -1,7 +1,7 @@
 import { Link, Navigate } from "react-router-dom";
 import "./navStyle.css";
 import { useLogout } from "../../hooks/useLogout";
-import brand from "../../images/nav-icon.png"
+import brand from "../../images/nav-icon.png";
 
 export default function NavBar() {
   const { logout } = useLogout();
@@ -20,7 +20,7 @@ export default function NavBar() {
             data-bs-target="#offcanvas"
             role="button"
           >
-            <i class="bi bi-list"></i>
+            <i className="bi bi-list"></i>
           </button>
           <span>
             <img
@@ -42,7 +42,7 @@ export default function NavBar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <i class="bi bi-arrow-down-square"></i>
+          <i className="bi bi-arrow-down-square"></i>
         </button>
         <div className="collapse navbar-collapse ul-bg" id="navbarNavDropdown">
           <ul className="navbar-nav ms-auto">
