@@ -67,7 +67,6 @@ const  createDataReading= async (req,res)=>{
             socket.to(farmId).emit("dataReadingUpdate",{timestamp,sourceId,reading})
         });
         
-
         res.json(dataReading)
     }catch(error){
         res.json(error)
