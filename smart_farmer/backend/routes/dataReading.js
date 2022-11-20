@@ -24,5 +24,4 @@ router.post('/npklevel/',createNpkLevel)
 router.get("/npklevel/historicaldata/", getHistoricalNpkLevels);
 router.get('/npklevel/:sourceId',getNpkLevel)
 
-
 module.exports = router

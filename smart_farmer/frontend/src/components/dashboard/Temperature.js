@@ -6,6 +6,7 @@ export default function Temperature({socket}){
     const {farm} = useFarmContext()
     const sourceIds = farm.sensors.Temperature.map((sensor)=>sensor.port)
     const [temperatures, setTemperatures] = useState({})
+    const [error,setError] = useState(null)
 
 
 
@@ -22,13 +23,17 @@ export default function Temperature({socket}){
     useEffect(() => {
         const fetchTemperature=async ()=>{
 
+          try{
             const response = await fetch(
               `${process.env.REACT_APP_HOST}/api/datareading/all/?sourceids=${sourceIds.join()}`
             );
             const json  = await response.json();
-            if(json){
+            if(response.ok){
                 setTemperatures(json);
             }
+          }catch(error){
+              setError("Data Fetch Error")
+          }
 
         }
 
@@ -47,10 +52,12 @@ export default function Temperature({socket}){
       }
     });
 
+
     const components = sourceIds.map((id)=>{
         return (
           <Col key={sourceIds.indexOf(id)}>
             <h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">
+              {error}
               {temperatures[id]}&deg;C
             </h3>
             <h6 className="text-center">{nameId[id]}</h6>
