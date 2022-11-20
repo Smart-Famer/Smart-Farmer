@@ -121,6 +121,7 @@ export default function ManagerList(content) {
               id={delete_id}
               show={modalShow}
               onHide={() => setModalShow(false)}
+              updateManagerList = {content.updateManagerList}
             />
           </tr>
           

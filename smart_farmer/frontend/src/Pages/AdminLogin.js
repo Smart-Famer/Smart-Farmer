@@ -1,15 +1,16 @@
 import React from "react"
 import Login from "../components/login/Login"
 import "../App.css"
-import LoginNavBar from "../components/NavBars/AdminNavBar"
+import LoginNavbar from '../components/NavBars/LoginNavbar'
 
 
 export default function AdminLoginPage() {
  
+    console.log("Admin Login")
+
     return (
         <div className="login">
-            <LoginNavBar/>
-
+            <LoginNavbar/>
             <div className="login-form">
                 <div className="login-form-item-admin">
                     <Login />

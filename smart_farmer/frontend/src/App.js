@@ -24,20 +24,33 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route
           path="/login"
-          element={!user ? <LoginPage /> : <Navigate to="/user/home" />}
+          element={!user ? <LoginPage /> : 
+                                          (user.details.user_type!=="Admin"?
+                                                                          <Navigate to="/user/home"/>
+                                                                          :<Navigate to="/admin/dashboard"/>)}
         />
         <Route
           path="/user/*"
-          element={user && user.details.user_type!= "Admin"? 
-          <FarmContextProvider>
-            <UserLayout socket={socket} /> 
-          </FarmContextProvider>
-          :<Navigate to="/login" />}
-        />
+          element={user ? 
+                        (user.details.user_type!= "Admin" ? 
+                            <FarmContextProvider>
+                              <UserLayout socket={socket} /> 
+                            </FarmContextProvider>
+                            :<Navigate to="/admin/dashboard"/>)
+                        :<Navigate to="/login"/>}
+                      />
 
         {/* routing for admin users */}
-        <Route path='/adminLogin' element={!user ? <AdminLogin/> : <Navigate to="/admin/dashboard"/> }/>
-        <Route path='/admin/*' element={user  ? <AdminLayout/> : <Navigate to="/adminLogin"/> }/>
+        <Route path='/adminLogin' element={!user ? <AdminLogin/> : 
+                                                                  (user.details.user_type==="Admin"?
+                                                                                                  <Navigate to="/admin/dashboard"/>
+                                                                                                  : <Navigate to="/user/home"/>)}/>
+
+        <Route path='/admin/*' element={user  ? 
+                                              (user.details.user_type==="Admin"?
+                                                <AdminLayout/>
+                                                :<Navigate to="/user/home" />) 
+                                              : <Navigate to="/adminLogin"/> }/>
 
         <Route path="*" element={<Error />} />
       </Routes>
