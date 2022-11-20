@@ -27,7 +27,7 @@ export default function Dashboard(props)
             // console.log(socket)
             const farmId = farm._id
             socket.emit("join_room", farmId);  
-            // console.log('joined to '+farmId)
+            console.log('joined to '+farmId)
             
             
             // socket.on("dataReadingUpdate",(dataReading)=>{

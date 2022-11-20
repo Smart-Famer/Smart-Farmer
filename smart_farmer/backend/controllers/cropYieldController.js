@@ -32,7 +32,13 @@ const createYield = async(req,res)=>{
     const month = temp_date.getMonth()+1 
     // console.log(month)
 
+
     try{
+            
+        if (!/^\d+$/.test(yield)) {
+            throw Error("Invalid yield!!!");
+        }
+
         const checkAvailability = await cropYieldModel.find({
             crop_name,
 
@@ -65,8 +71,8 @@ const createYield = async(req,res)=>{
         res.json(cropYield)
     }
     catch(error){
-        console.log(error)
-        res.json(error)
+        console.log(error.message);
+        res.status(404).json({error:error.message});
     }
 }
 module.exports = {createYield,getYield}
