@@ -31,7 +31,6 @@ export default function SensorTable() {
       }
     );
     const json = await response.json();
-
     if (response.ok) {
       setSuccess(`sensor deleted successfuly`);
 
@@ -83,7 +82,7 @@ export default function SensorTable() {
           </tr>
         );
       }),
-      Rainfall: farm?.sensors?.Rainfall?.map((sensor) => {
+      Rainfall: farm?.sensors?.RainFall?.map((sensor) => {
         return (
           <tr>
             <td>{sensor.name.split("_")[1]}</td>
@@ -93,7 +92,7 @@ export default function SensorTable() {
               <button
                 className="btn btn-sm btn-danger"
                 onClick={() => {
-                  deleteModule("Rainfall", sensor._id);
+                  deleteModule("RainFall", sensor._id);
                 }}
               >
                 <i className="bi-trash3"></i>
@@ -191,7 +190,7 @@ export default function SensorTable() {
       <tbody>
         {tableData?.Temperature}
         {tableData?.Humidity}
-        {tableData?.Soil_Humidity}
+        {tableData?.Soil}
         {tableData?.Rainfall}
       </tbody>
     </table>

@@ -49,7 +49,7 @@ export default function SoilHumidity({socket}){
               activeColor={"#ff4d4d"}
               inActiveColor={"#ffe6e6"}
               reading={Number(soilhumidities[id])}
-              readingName={sensor_names[id]}
+              readingName={sensor_names[id].split("_")[1]}
             />
           </Col>
         );

@@ -4,14 +4,14 @@ import { useFarmContext } from "../../hooks/useFarmContext";
 
 export default function Temperature({socket}){
     const {farm} = useFarmContext()
-    const sourceIds = farm.sensors.Temperature.map((sensor)=>sensor.port)
+    const sourceIds = farm.sensors?.Temperature?.map((sensor)=>sensor.port)
     const [temperatures, setTemperatures] = useState({})
     const [error,setError] = useState(null)
 
 
 
     const nameId = {}
-    farm.sensors.Temperature.forEach(data => {
+    farm.sensors?.Temperature?.forEach(data => {
         let temp = data.name.split("_")
         let nameWithoutFarmArr = temp.slice(1)
         let nameWithoutFarm = nameWithoutFarmArr.join("_")
@@ -42,7 +42,7 @@ export default function Temperature({socket}){
 
 
     socket.on("dataReadingUpdate", (dataReading) => {
-      if (sourceIds.includes(dataReading.sourceId)) {
+      if (sourceIds?.includes(dataReading.sourceId)) {
         const temp = {
           ...temperatures,
           [dataReading.sourceId]: dataReading.reading,
@@ -53,11 +53,10 @@ export default function Temperature({socket}){
     });
 
 
-    const components = sourceIds.map((id)=>{
+    const components = sourceIds?.map((id)=>{
         return (
           <Col key={sourceIds.indexOf(id)}>
             <h3 className="bg-secondary bg-opacity-25 rounded py-3 text-center">
-              {error}
               {temperatures[id]}&deg;C
             </h3>
             <h6 className="text-center">{nameId[id]}</h6>
@@ -67,6 +66,7 @@ export default function Temperature({socket}){
     return(
         <Row>
             {components}
+            {components.length===0&&<strong className="text-center"><p className=" text-danger p-2">No Temperature Sensors found</p></strong>}
         </Row>
     )
 }

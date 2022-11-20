@@ -52,9 +52,9 @@ farmSchema.statics.updateKeys = async function (_id) {
     { _id },
     {
       secret_key:hash,
-      weather_api_key: `we-${_id}`,
-      elec_conductivity_key: `elec-${_id}`,
-      NPK_levels_key: `npk-${_id}`,
+      weather_api_key: `${_id}-we`,
+      elec_conductivity_key: `${_id}-elec`,
+      NPK_levels_key: `${_id}-npk`,
     }
   );
   return await this.findOne({ _id });

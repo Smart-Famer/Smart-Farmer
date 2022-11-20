@@ -56,10 +56,10 @@ const createDataReading = async (req, res) => {
   const { timestamp, reading, secret_key } = req.body;
   let { sourceId } = req.body;
 
-  // console.log(reading)
-  // console.log(sourceId)
-  // console.log(timestamp)
-  // console.log(secret_key)
+  console.log(reading)
+  console.log(sourceId)
+  console.log(timestamp)
+  console.log(secret_key)
 
   try {
 
@@ -77,10 +77,10 @@ const createDataReading = async (req, res) => {
 
     console.log(sourceId, farmId);
 
-    const sensor = await sensorModel.findOne({ port: sourceId });
-    if (!sensor) {
-      throw Error("Port Does not Exist");
-    }
+    // const sensor = await sensorModel.findOne({ port: sourceId });
+    // if (!sensor) {
+    //   throw Error("Port Does not Exist");
+    // }
 
     // console.log(sourceId, farmId);
     const dataReading = await dataReadingModel.create({

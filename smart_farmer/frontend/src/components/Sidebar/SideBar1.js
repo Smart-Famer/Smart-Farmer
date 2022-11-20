@@ -121,7 +121,7 @@ export default function Sidebar1() {
                     className="nav-link text-truncate"
                     to="/user/farm/farm-details"
                   >
-                    <i class="bi bi-info-circle"></i>
+                    <i className="bi bi-info-circle"></i>
                     <span className="ms-1 d-none d-sm-inline">
                       Farm Details
                     </span>

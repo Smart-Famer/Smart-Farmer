@@ -1,6 +1,8 @@
 import { Link, Navigate } from "react-router-dom";
 import "./navStyle.css";
 import { useLogout } from "../../hooks/useLogout";
+import brand from "../../images/nav-icon.png"
+
 export default function NavBar() {
   const { logout } = useLogout();
   const handleClick = () => {
@@ -13,23 +15,26 @@ export default function NavBar() {
       <nav className="navbar navbar-expand-md">
         <div className="navbar-brand fs-3 ms-2">
           <button
-            className="btn float-start"
+            className="btn btn-lg float-start me-2"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvas"
             role="button"
           >
+            <i class="bi bi-list"></i>
+          </button>
+          <span>
             <img
-              className="inline-block align-text-top me-2"
+              className="inline-block align-text-top me-2 mt-1"
               alt="Brand"
-              src="../images/nav-icon.png"
+              src={brand}
               width="35"
               height="30"
             />
-          </button>
+          </span>
           <span className="top-nav-logo-name fw-bold">Smart Farmer</span>
         </div>
         <button
-          className="navbar-toggler me-3"
+          className="btn btn-md navbar-toggler me-3"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavDropdown"
@@ -37,7 +42,7 @@ export default function NavBar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <i class="bi bi-arrow-down-square"></i>
         </button>
         <div className="collapse navbar-collapse ul-bg" id="navbarNavDropdown">
           <ul className="navbar-nav ms-auto">

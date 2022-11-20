@@ -2,6 +2,8 @@ import React from 'react'
 import { Link, Navigate } from "react-router-dom";
 import "./navStyle.css";
 import { useAdminLogout } from "../../hooks/useAdminLogout";
+import brand from "../../images/nav-icon.png"
+
 export default function NavBar() {
   const { logout } = useAdminLogout()
   const handleClick = () => {
@@ -22,7 +24,7 @@ export default function NavBar() {
             <img
               className="inline-block align-text-top me-2"
               alt="Brand"
-              src="../images/nav-icon.png"
+              src={brand}
               width="35"
               height="30"
             />

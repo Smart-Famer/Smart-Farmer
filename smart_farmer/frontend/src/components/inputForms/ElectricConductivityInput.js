@@ -37,10 +37,10 @@ export default function ElectricConductivityInput() {
     setValidate(Validate(inputElecCon))
 
     const reading = inputElecCon;
-    const sourceId = farm.elec_conductivity_key;
+    const sourceId = "elec";
     let timestamp = new Date().toJSON();
 
-    const dataReading = { reading, sourceId, timestamp };
+    const dataReading = { reading, sourceId, timestamp, secret_key:farm.secret_key };
 
     const response = await fetch(
       `${process.env.REACT_APP_HOST}/api/datareading`,

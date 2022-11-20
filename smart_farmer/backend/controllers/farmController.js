@@ -2,6 +2,7 @@ const farmModel = require("../models/farmModel");
 const userModel = require("../models/userModel");
 const sensorModel = require("../models/sensorModel");
 const actuatorModel = require("../models/actuatorModel");
+const mongoose = require('mongoose')
 
 const getKeys = async (req, res) => {
   const { farm_id } = req.params;

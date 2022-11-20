@@ -1,6 +1,8 @@
 import React from "react"
 import "./navStyle.css"
 import { Link } from "react-router-dom"
+import brand from "../../images/nav-icon.png"
+
 export default function LoginNavBar(){
     
     return(
@@ -8,7 +10,7 @@ export default function LoginNavBar(){
             <div>
                 <nav className="navbar">
                 <div className="navbar-brand fs-3 ms-2">
-                    <img className="inline-block align-text-top me-2" alt="Brand" src="../images/nav-icon.png" width="35" height="30"/>
+                    <img className="inline-block align-text-top me-2" alt="Brand" src={brand} width="35" height="30"/>
                     <span className="top-nav-logo-name fw-bold" >Smart Farmer</span>
                 </div>
                 {/* <ul className="navbar-nav">

@@ -43,7 +43,7 @@ export default function Humidity({socket}){
     });
 
     const components = sourceIds.map((id)=>{
-        return <Col key={sourceIds.indexOf(id)} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidities[id])} readingName={sensor_names[id]}/></Col>
+        return <Col key={sourceIds.indexOf(id)} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidities[id])} readingName={sensor_names[id].split("_")[1]}/></Col>
     })
 
     return(
