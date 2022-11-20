@@ -10,6 +10,8 @@ import LoginNavBar from "../components/NavBars/LoginNavbar"
 
 export default function LoginPage() {
  
+    console.log("User Login")
+
     return (
         <div className="login">
             <LoginNavBar/>
