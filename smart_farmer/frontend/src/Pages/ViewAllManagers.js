@@ -9,6 +9,9 @@ export default function ViewAll() {
   const [countryListDefault, setCountryListDefault] = useState([]);
   const navigate = useNavigate();
 
+  const updateManagerList = (_id)=>{
+    setCountryListDefault(countryListDefault.filter(manager=>manager._id!==_id))
+  }
   useEffect(() => {
     const fetchManagers = async () => {
       const response = await fetch(
@@ -60,7 +63,7 @@ export default function ViewAll() {
         </div>
 
         <div className="m-5">
-          <ListView iteamList={search(countryListDefault)} />
+          <ListView iteamList={search(countryListDefault)} updateManagerList={updateManagerList}/>
         </div>
       </Container>
     </div>
