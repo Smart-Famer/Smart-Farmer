@@ -22,10 +22,10 @@ export default function AddSensor() {
   const Validate= (sensor_type,name,port)=>{
     var error = "";
     if (!sensor_type || !name || !port) {
-      return error = "Enter input value !";
+      throw Error("Enter input value !");
     }
     else if(!isNumber(port)){
-      return error = "Enter a number as input !";
+      throw Error("Enter a number as input !");
 
     }
   }
@@ -33,7 +33,8 @@ export default function AddSensor() {
   const handleSubmit = async (e) => {
     // console.log(sensor_type)
     e.preventDefault();
-    setValidate(Validate(sensor_type,name,port))
+    try{ 
+    Validate(sensor_type,name,port)
 
     const sensor = { sensor_type, name, port };
     if (sensor_type === "RainFall" && farm.sensors.RainFall.length === 1) {
@@ -67,6 +68,9 @@ export default function AddSensor() {
       dispatchFarm({ type: "ADD-SENSOR", payload: json });
       console.log("New sensor added:", json);
     }
+  }catch(err){
+    setValidate(err.message)
+  }
     setModalShow(true);
   };
 
