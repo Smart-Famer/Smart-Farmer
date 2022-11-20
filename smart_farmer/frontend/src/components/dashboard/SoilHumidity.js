@@ -7,6 +7,7 @@ export default function SoilHumidity({socket}){
     const {farm} = useFarmContext()
     const sourceIds = farm.sensors.Soil.map((sensor)=>sensor.port)
     const [soilhumidities, setSoilHumidities] = useState({})
+    const [components, setComponents] = useState([]);
     const sensor_names = {}
     farm.sensors.Soil?.forEach((sensor) => {
       sensor_names[sensor.port] = sensor.name.replace(farm.name + "_", "");
@@ -33,6 +34,26 @@ export default function SoilHumidity({socket}){
         fetchHumidity()
     }, [])
 
+    useEffect(() => {
+      if(soilhumidities){        
+        setComponents(sourceIds?.map((id)=>{
+          return (
+            <Col
+              key={sourceIds.indexOf(id)}
+              className="d-flex justify-content-center"
+            >
+              <DoughnutChart
+                activeColor={"#ff4d4d"}
+                inActiveColor={"#ffe6e6"}
+                reading={Number(soilhumidities[id]??0)}
+                readingName={sensor_names[id]}
+              />
+            </Col>
+          );
+      }))
+      }
+    }, [soilhumidities]);
+
     socket.on("dataReadingUpdate", (dataReading) => {
       if (sourceIds?.includes(dataReading.sourceId)) {
         const temp = {
@@ -42,22 +63,7 @@ export default function SoilHumidity({socket}){
         setSoilHumidities(temp);
       }
     });
-
-    const components = sourceIds?.map((id)=>{
-        return (
-          <Col
-            key={sourceIds.indexOf(id)}
-            className="d-flex justify-content-center"
-          >
-            <DoughnutChart
-              activeColor={"#ff4d4d"}
-              inActiveColor={"#ffe6e6"}
-              reading={Number(soilhumidities[id])}
-              readingName={sensor_names[id].split("_")[1]}
-            />
-          </Col>
-        );
-    })
+ 
 
     return(
         <Row>

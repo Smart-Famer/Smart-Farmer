@@ -5,6 +5,7 @@ import DonutChart from 'react-donut-chart';
 // ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DoughnutChart(props) {
+  console.log(props)
   const x = props.reading
   return (
     <div className="App">

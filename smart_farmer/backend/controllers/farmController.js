@@ -96,7 +96,7 @@ const createFarm = async (req, res) => {
     }
 
     const farm = await farmModel.create({ name, location, area, address });
-    return res.status(200).json(await farmModel.updateKeys(farm._id));
+    return res.status(200).json(await farmModel.updateKeys(farm._id.toString()));
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

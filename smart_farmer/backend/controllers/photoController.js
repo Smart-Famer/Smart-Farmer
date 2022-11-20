@@ -70,37 +70,9 @@ const getPhotos = async (req, res)=>{
         if(!mongoose.Types.ObjectId.isValid(farm_id)){
             throw Error("Invalid Farm ID")
         }
-        const photos = await photoModel.find({'metadata.farm_id':farm_id})
-        console.log(photos)
-        let new_photos={
-            [new Date(photos[0].timestamp).toLocaleDateString().replaceAll('/','-')]:[]
-        }
+        const photos = await photoModel.find({'metadata.farm_id':farm_id},{ sort: { timestamp : -1 }})
 
-        photos.forEach(photo=>{
-            let d = new Date(photo.timestamp).toLocaleDateString().replaceAll('/','-')
-            let t = new Date(photo.timestamp).toLocaleTimeString()
-            if(Object.keys(new_photos).includes(d)){
-                new_photos[d].push(
-                    {
-                        src:photo.filename,
-                        camera_angle:photo.metadata.camera_angle,
-                        time:t,
-                        _id:photo._id,
-                        description:photo.description
-                    })
-            }else{
-                new_photos[d]=[
-                    {
-                        src:photo.filename,
-                        camera_angle:photo.metadata.camera_angle,
-                        time:t,
-                        _id:photo._id,
-                        description:photo.description
-                    }
-                ]
-            }
-        })
-        res.status(200).json(new_photos)
+        res.status(200).json(photos)
     }catch(err){
         res.status(400).json({error:err.message})
     }

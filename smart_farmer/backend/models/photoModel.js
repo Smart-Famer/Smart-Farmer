@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const gallerySchema = new Schema(
   {
+    timestamp:{
+      type:String,
+      required:true
+    },
     url: {
       type: String,
       required: true,
@@ -12,8 +16,7 @@ const gallerySchema = new Schema(
         farm_id:String,
         camera_angle:String
     }
-  },
-  { timestamps: true }
+  }
 );
 
 module.exports = mongoose.model("photo", gallerySchema);

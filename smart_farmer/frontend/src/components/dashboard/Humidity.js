@@ -7,6 +7,7 @@ export default function Humidity({socket}){
     const {farm} = useFarmContext()
     const sourceIds = farm.sensors.Humidity?.map((sensor)=>sensor.port)
     const [humidities, setHumidities] = useState({})
+    const [components,setComponents] = useState([])
     
     const sensor_names = {}
     farm.sensors.Humidity?.forEach(sensor => {
@@ -34,6 +35,15 @@ export default function Humidity({socket}){
         fetchHumidity()
     }, [])
 
+    useEffect(()=>{
+      if(humidities){
+          setComponents(sourceIds?.map((id)=>{
+            return <Col key={sourceIds.indexOf(id)} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidities[id]??0)} readingName={sensor_names[id]}/></Col>  
+          }))
+      }
+    }
+    ,[humidities])
+
     socket.on("dataReadingUpdate", (dataReading) => {
       if (sourceIds?.includes(dataReading.sourceId)) {
         const temp = {
@@ -44,9 +54,6 @@ export default function Humidity({socket}){
       }
     });
 
-    const components = sourceIds?.map((id)=>{
-        return <Col key={sourceIds.indexOf(id)} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidities[id])} readingName={sensor_names[id].split("_")[1]}/></Col>
-    })
 
     return(
         <Row>

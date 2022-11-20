@@ -18,7 +18,6 @@ const farmSchema = new Schema(
 
     weather_api_key: {
       type: String,
-      unique: true,
     },
     elec_conductivity_key: {
       type: String,
