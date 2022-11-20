@@ -113,7 +113,7 @@ export default function EditSensor({module,_id}) {
             className="form-control"
             id="inputSensorPort"
             required={true}
-            readOnly={true}
+            disabled
           />
         </div>
         <div className="form-group mb-4">
@@ -125,6 +125,7 @@ export default function EditSensor({module,_id}) {
             }}
             id="inputSensorType"
             className="form-control"
+            disabled
           >
             {/* <option selected>Choose...</option> */}
             <option>Temperature</option>
@@ -149,7 +150,7 @@ export default function EditSensor({module,_id}) {
         </div>
 
       <button type="submit" className="btn btn-green">
-        Edit
+        Update
       </button>
       {/* {error&&<div className="error">{error}</div>} */}
       {validateError && (

@@ -85,7 +85,8 @@ export default function CameraContainer() {
         farm_id:farm._id,
         camera_angle:selectedCamUpload,
         public_id:`smart-farmer/${farm.name}`,
-        file_name:fileName
+        file_name:fileName,
+        timestamp:new Date()
       }),
       headers: {
         "Content-type": "application/json",
@@ -93,6 +94,7 @@ export default function CameraContainer() {
     })
     
     const json = await response.json()
+    console.log(json)
     if(response.ok){
       setSuccessUpload("Image Successfully Uploaded")
     }

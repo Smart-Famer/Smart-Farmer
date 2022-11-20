@@ -114,7 +114,7 @@ export default function EditActuator({module,_id}) {
             className="form-control"
             id="inputSensorPort"
             required={true}
-            readOnly={true}
+            disabled
           />
         </div>
         <div className="form-group  mb-4">
@@ -126,6 +126,7 @@ export default function EditActuator({module,_id}) {
             }}
             id="inputActuatorType"
             className="form-control"
+            disabled
           >
             {/* <option selected>Choose...</option> */}
             <option>Water Pump</option>
@@ -148,7 +149,7 @@ export default function EditActuator({module,_id}) {
         </div>
 
       <button type="submit" className="btn btn-green">
-        Edit
+        Update
       </button>
       {/* {error&&<div className="error">{error}</div>} */}
       {validateError && (

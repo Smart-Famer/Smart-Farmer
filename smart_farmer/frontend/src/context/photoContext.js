@@ -40,8 +40,34 @@ export const PhotoContextProvider = ({children})=>{
             })
 
             const json = await response.json()
+            console.log(json)
             if (response.ok){
-                dispatchPhotos({type:"INITIATE", payload:json})
+                let new_photos={}
+        
+                json.forEach(photo=>{
+                    let d = new Date(photo.timestamp).toLocaleDateString().replaceAll('/','-')
+                    let t = new Date(photo.timestamp).toLocaleTimeString()
+                    if(d in new_photos){
+                        new_photos[d].push(
+                            {
+                                src:photo.url,
+                                camera_angle:photo.metadata.camera_angle,
+                                time:t,
+                                _id:photo._id,
+                            })
+                    }else{
+                        new_photos[d]=[
+                            {
+                                src:photo.url,
+                                camera_angle:photo.metadata.camera_angle,
+                                time:t,
+                                _id:photo._id,
+                            }
+                        ]
+                    }
+                })
+        
+                dispatchPhotos({type:"INITIATE", payload:new_photos})
             }
         }
         fetchPhotos()
