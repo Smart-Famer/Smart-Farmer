@@ -22,17 +22,18 @@ export default function AddActuator() {
   const Validate= (actuator_type, name, port )=>{
     var error = "";
     if (!actuator_type || !name || !port) {
-      return error = "Enter input value !";
+      throw Error("Enter input value !");
     }
     else if(!isNumber(port)){
-      return error = "Enter a number as input !";
+      throw Error("Enter a number as input !");
 
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setValidate(Validate(actuator_type,name,port))
+    try{ 
+    Validate(actuator_type,name,port)
 
     const actuator = { actuator_type, name, port };
 
@@ -64,6 +65,9 @@ export default function AddActuator() {
       dispatchFarm({ type: "ADD-ACTUATOR", payload: json });
       console.log("New Actuator added:", json);
     }
+  }catch(err){
+    setValidate(err.message)
+  }
     setModalShow(true);
   };
 
