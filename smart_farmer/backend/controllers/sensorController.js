@@ -70,15 +70,33 @@ const editSensor = async (req,res)=>{
             throw Error("Sensor Name Already Exists");
           }
         const sensor = await sensorModel.findOneAndUpdate(
-            {port},{name,sensor_type});
+            {port},{name,sensor_type},{new:true});
           res.status(200).json(sensor);
         } catch (err) {
           res.status(400).json({ error: err.message });
         }
 }
 
+const deleteSensor = async (req, res)=>{
+  const {_id} = req.params
+  try{
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      throw Error("Invalid sensor ID");
+    }
+
+    const sensor = await sensorModel.findOneAndDelete({_id})
+    if(!sensor){
+      throw Error("sensor doesn't exist");
+    }
+    res.status(200).json(sensor)
+  }catch(err){
+    res.status(400).json({error:err.message})
+  }
+}
+
 module.exports = {
   getSensors,
   get_ports,
   editSensor,
+  deleteSensor
 };

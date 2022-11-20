@@ -3,39 +3,47 @@ import {Row,Col } from "reactstrap";
 import { useFarmContext } from "../../hooks/useFarmContext";
 import DoughnutChart from "./DoughNutChart";
 
-export default function Humidity(){
+export default function Humidity({socket}){
     const {farm} = useFarmContext()
     const sourceIds = farm.sensors.Humidity.map((sensor)=>sensor.port)
-    const [humidities, setHumidities] = useState([])
-
-    const sensor_names = farm.sensors.Humidity.map((sensor)=>sensor.name.replace(farm.name+"_",""))
-      function getActualName(name) {
-        let temp = name.split("_");
-        let nameWithoutFarmArr = temp.slice(1);
-        let nameWithoutFarm = nameWithoutFarmArr.join("_");
-        return nameWithoutFarm;
-      }
+    const [humidities, setHumidities] = useState({})
+    
+    const sensor_names = {}
+    farm.sensors.Humidity.forEach(sensor => {
+        sensor_names[sensor.port] = sensor.name.replace(farm.name + "_", "");
+    });
 
 
     useEffect(() => {
         const fetchHumidity=async ()=>{
-            let i=0;
-            let humidies_list=[]
-            for(i;i< sourceIds.length;i++){
-                const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceIds[i]}`)
-                const json = await response.json()
-                humidies_list.push(json)
+
+            const response = await fetch(
+              `${
+                process.env.REACT_APP_HOST
+              }/api/datareading/all/?sourceids=${sourceIds.join()}`
+            );
+            const json = await response.json();
+            if (response.ok) {
+              setHumidities(json);
             }
-            //console.log(humidies_list)
-            setHumidities(humidies_list)
     
         }
 
         fetchHumidity()
     }, [])
-    // console.log(humidities)
-    const components = humidities.map((humidity)=>{
-        return <Col key={humidity._id} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidity.reading)} readingName={getActualName(sensor_names[humidities.indexOf(humidity)])}/></Col>
+
+    socket.on("dataReadingUpdate", (dataReading) => {
+      if (sourceIds.includes(dataReading.sourceId)) {
+        const temp = {
+          ...humidities,
+          [dataReading.sourceId]: dataReading.reading,
+        };
+        setHumidities(temp);
+      }
+    });
+
+    const components = sourceIds.map((id)=>{
+        return <Col key={sourceIds.indexOf(id)} className="d-flex justify-content-center" ><DoughnutChart activeColor={'#2fb648'} inActiveColor={'#c2efca'} reading={Number(humidities[id])} readingName={sensor_names[id]}/></Col>
     })
 
     return(

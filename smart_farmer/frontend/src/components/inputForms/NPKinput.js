@@ -79,11 +79,11 @@ export default function NPKInput() {
   };
 
   return (
-    <div>
+    <div className="me-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group row p-3">
           <label htmlFor="inputNitrogen" className="col-sm-4 col-form-label">
-            Nitrogen
+            Nitrogen ( mgl<sup>-1</sup> )
           </label>
           <div className="col-sm-4">
             <input
@@ -97,13 +97,10 @@ export default function NPKInput() {
               }}
             />
           </div>
-          <label htmlFor="inputNitrogen" className="col-sm-1 col-form-label">
-            mgl<sup>-1</sup>
-          </label>
         </div>
         <div className="form-group row p-3">
           <label htmlFor="inputPhosphorus" className="col-sm-4 col-form-label">
-            Phosphorus
+            Phosphorus ( mgl<sup>-1</sup> )
           </label>
           <div className="col-sm-4">
             <input
@@ -117,13 +114,10 @@ export default function NPKInput() {
               }}
             />
           </div>
-          <label htmlFor="inputPhosphorus" className="col-sm-1 col-form-label">
-            mgl<sup>-1</sup>
-          </label>
         </div>
         <div className="form-group row p-3">
           <label htmlFor="inputPotassium" className="col-sm-4 col-form-label">
-            Potassium
+            Potassium ( mgl<sup>-1</sup> )
           </label>
           <div className="col-sm-4">
             <input
@@ -137,22 +131,19 @@ export default function NPKInput() {
               }}
             />
           </div>
-          <label htmlFor="inputPotassium" className="col-sm-1 col-form-label">
-            mgl<sup>-1</sup>
-          </label>
         </div>
         <button className="btn btn-green btn-block m-4">Submit</button>
         {/* {error && (<DisplayAlert type={'danger'} content={error}/>)}  */}
-        {validateError && (
+        {error && (
           <PopUpModal
             title={"Error"}
-            message={validateError}
+            message={error}
             color="danger"
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
         )}
-        {!validateError && !error && (
+        {!error && !error && (
           <PopUpModal
             title={"Successful"}
             message={"New npk levels added successfully"}

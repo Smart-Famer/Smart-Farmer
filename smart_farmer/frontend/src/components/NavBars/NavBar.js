@@ -45,23 +45,24 @@ export default function NavBar() {
               <Link
                 className="nav-link mx-3 fs-5"
                 style={{ textDecoration: "none" }}
-                to="/user/viewProfilePage"
+                to="/user/home"
               >
-                Profile
-              </Link>
-            </li>
-            <li className="nav-item ms-auto">
-              <Link onClick={handleClick} className="nav-link mx-3 fs-5" to="/">
-                Logout
+                Home
               </Link>
             </li>
             <li className="nav-item ms-auto">
               <Link
                 className="nav-link mx-3 fs-5"
                 style={{ textDecoration: "none" }}
-                to="/user/home"
+                to="/user/viewProfilePage"
               >
-                Home
+                Profile
+              </Link>
+            </li>
+
+            <li className="nav-item ms-auto">
+              <Link onClick={handleClick} className="nav-link mx-3 fs-5" to="/">
+                Logout
               </Link>
             </li>
           </ul>

@@ -5,7 +5,6 @@ import { useFarmContext } from "../hooks/useFarmContext";
 import LineChart from "./dashboard/LineChart";
 
 export default function NpkLevelChart() {
-  const [data, setData] = useState([]);
   const [duration, setDuration] = useState("weekly");
   const [xAxisV, setXaxisV] = useState([]);
   const [nLevels, setNLevels] = useState([]);
@@ -27,7 +26,8 @@ export default function NpkLevelChart() {
       const json = await response.json();
       if (response.ok) {
         const temp_xAxisV = json.map((level) => {
-          return level.timestamp;
+          const day = new Date(level.timestamp)
+          return `${day.getFullYear()}-${day.getMonth()}-${day.getDate()}`;
         });
         const temp_n = json.map((level) => {
           return level.n;
@@ -55,16 +55,15 @@ export default function NpkLevelChart() {
   const handleTypeChange = (e) => {
     const type = e.currentTarget.id;
     if (e.currentTarget.checked) {
-      console.log(type)
       switch (type) {
         case "nLevel":
           setNVisibility(true);
           break;
         case "pLevel":
-          setNVisibility(true);
+          setPVisibility(true);
           break;
         case "kLevel":
-          setNVisibility(true);
+          setKVisibility(true);
           break;
 
         default:
@@ -76,10 +75,10 @@ export default function NpkLevelChart() {
           setNVisibility(false);
           break;
         case "pLevel":
-          setNVisibility(false);
+          setPVisibility(false);
           break;
         case "kLevel":
-          setNVisibility(false);
+          setKVisibility(false);
           break;
 
         default:
@@ -90,11 +89,11 @@ export default function NpkLevelChart() {
 
   return (
     <>
-    <div className="row">
-        <div className="col-sm-1 text-end">
-          <label htmlFor="secton">Filter By:</label>
+    <div className="row me-4">
+        <div className="col-12 col-sm-2 col-lg-2">
+          <label htmlFor="secton" className="form-label">Filter By:</label>
         </div>
-        <div className="col-sm-2">
+        <div className="col-12 col-sm-4 col-lg-3">
           <select
             name="section"
             id="section"
@@ -106,9 +105,10 @@ export default function NpkLevelChart() {
             <option value="monthly">Monthly</option>
           </select>
         </div>
-        </div>
+    </div>
+    <br></br>
     <div className="row">
-      <div className="col-lg-9">
+      <div className="col-12 col-lg-9">
         <LineChart
           xAxisLabel="Time"
           yAxisLabel="Temperature"
@@ -141,7 +141,7 @@ export default function NpkLevelChart() {
           })}
         />
       </div>
-      <div className="col-lg-3 m-2">
+      <div className="col-12 col-lg-2 me-1">
         <h5>Filter by:</h5>
         <div className="form-check">
           <input

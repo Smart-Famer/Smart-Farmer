@@ -7,11 +7,13 @@ const {
 
 const {
     getSensors,
-    get_ports
+    get_ports,
+    deleteSensor
 } = require('../controllers/sensorController')
 
 const {
-    getActuators
+    getActuators,
+    deleteActuator
 } = require('../controllers/actuatorContoller')
 
 const {editSensor} = require('../controllers/sensorController')
@@ -26,6 +28,8 @@ router.post('/get-actuators',getActuators)
 router.get('/get-ports',get_ports)
 router.put('/edit-sensor',editSensor)
 router.put("/edit-actuator", editActuator);
+router.get("/delete-actuator/:_id", deleteActuator);
+router.get("/delete-sensor/:_id", deleteSensor);
 
 
 

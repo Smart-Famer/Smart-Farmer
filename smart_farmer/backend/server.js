@@ -30,10 +30,11 @@ app.use(morgan("dev"));
 
 const io = new Server(server,{
   cors:{
-    origin:"http://localhost:3000",
+    origin:process.env.REACT_APP_HOST,
     methods: ["GET","POST","PUT","DELETE"]
   }
 })
+
 
 // app.use("/api/user", userRouter);
 // app.use("/api/manager", managerRouter);
@@ -58,8 +59,19 @@ mongoose
   .then(() => {
     // console.log("Connected to the database");
     io.on("connection",(socket)=>{
-      sockets.push(socket);
-      // console.log(`User connected: ${socket.id}`)
+
+
+      socket.once("join_room",(room)=>{
+          socket.join(room)
+          console.log('joined to '+room)
+          // sockets[room]=socket
+          if(sockets[room]){
+            sockets[room].push(socket)
+          }else{
+            sockets[room]=[socket]
+          }
+      })
+
     })
     server.listen(process.env.PORT, () => {
       // console.log("Server is listening on port 4000...");

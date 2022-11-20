@@ -8,7 +8,8 @@ const {
     detachFarm,
     attachFarm,
     updateUser,
-    updatePassword
+    updatePassword,
+    checkPassword
 } = require('../controllers/userController')
 
 router.route('/login').post(login)
@@ -19,6 +20,7 @@ router.route('/get-managers').post(getMangers)
 router.route('/detach-farm').post(detachFarm)
 router.route('/attach-farm').post(attachFarm)
 router.route('/update-password/:_id').post(updatePassword)
+router.route('/check-password/').post(checkPassword)
 
 
 module.exports=router

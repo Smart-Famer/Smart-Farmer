@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt')
 
 const farmSchema = new Schema(
   {
@@ -35,44 +36,22 @@ const farmSchema = new Schema(
       type: Number,
       required: true,
     },
-
-    // current_readings:{
-    //     weather:{
-    //         type:new Schema(
-    //             {
-    //                 reading:String
-    //             },
-    //             {
-    //                 timestamps:true
-    //             }),
-    //     },
-    //     npk_levels:{
-    //         type:new Schema(
-    //             {
-    //                 reading:[String]
-    //             },
-    //             {
-    //                 timestamps:true
-    //             })
-    //     },
-    //     elect_conductivity:{
-    //         type:new Schema(
-    //             {
-    //                 reading:[String]
-    //             },
-    //             {
-    //                 timestamps:true
-    //             })
-    //     }
-    // }
+    secret_key:{
+      type:String,
+      unique:true
+    }
   },
   { timestamps: true }
 );
 
 farmSchema.statics.updateKeys = async function (_id) {
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(_id, salt)
+
   await this.updateOne(
     { _id },
     {
+      secret_key:hash,
       weather_api_key: `we-${_id}`,
       elec_conductivity_key: `elec-${_id}`,
       NPK_levels_key: `npk-${_id}`,
@@ -80,5 +59,19 @@ farmSchema.statics.updateKeys = async function (_id) {
   );
   return await this.findOne({ _id });
 };
+
+farmSchema.statics.updateSecret = async function(_id){
+  const salt = await bcrypt.genSalt(10)
+  const hash = await bcrypt.hash(_id, salt)
+
+  const farm= await this.findOneAndUpdate(
+    {_id},
+    {
+      secret_key:hash
+    },
+    {new:true}
+  )
+  return farm
+}
 
 module.exports = mongoose.model("Farm", farmSchema);

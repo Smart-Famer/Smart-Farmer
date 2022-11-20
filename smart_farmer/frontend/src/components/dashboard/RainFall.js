@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import {Row,Col} from "reactstrap";
 import { useFarmContext } from "../../hooks/useFarmContext";
 
-export default function RainFall(props){
+export default function RainFall({socket}){
     const {farm} = useFarmContext()
   
 
-    const sourceId = farm.sensors.RainFall.map((sensor)=>sensor.port)[0]
+    const source_Id = farm.sensors.RainFall.map((sensor)=>sensor.port)[0]
     const [rainfall, setRainfall] = useState(null)
 
     useEffect(() => {
       const fetchRainFall = async () => {
-        const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${sourceId}`
+        const response = await fetch(`${process.env.REACT_APP_HOST}/api/datareading/${source_Id}`
         );
         const json = await response.json()
 
@@ -22,6 +22,14 @@ export default function RainFall(props){
   
       fetchRainFall()
     }, [])
+
+    socket.on("dataReadingUpdate", (dataReading) => {
+      if (source_Id === dataReading.sourceId){
+        let temp = {reading:dataReading.reading}
+        setRainfall(temp)
+      }
+    });
+
     return(
         <Row className="px-5">
             <Col ><h1 className="bg-secondary bg-opacity-25 rounded py-3 text-center">{rainfall && (rainfall.reading)} mm</h1></Col>

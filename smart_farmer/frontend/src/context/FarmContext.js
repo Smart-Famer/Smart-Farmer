@@ -11,6 +11,13 @@ export const farmReducer = (state, action)=>{
             return {
                 farm:null
             }
+        case "UPDATE":
+            return {
+                farm:{
+                    ...state.farm,
+                    ...action.payload
+                }
+            }
         case "ADD-SENSOR":
             const sensors = {...state.farm.sensors}
             if(action.payload.sensor_type==="Temperature"){

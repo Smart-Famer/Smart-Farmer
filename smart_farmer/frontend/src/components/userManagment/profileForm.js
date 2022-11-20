@@ -83,13 +83,17 @@ export default function ProfileForm(props) {
           />
         </div>
 
-        <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">Position</label>
-            <input type="text" class="form-control" value={user.user_type} readOnly required={true}/>
-        </div>
-        <div class="mb-3">
-            <label for="formGroupExampleInput2" class="form-label">User ID</label>
-            <input type="text" class="form-control" value={user._id} readOnly/>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
+            Position
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            value={user.user_type}
+            readOnly
+            required={true}
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">
@@ -101,7 +105,17 @@ export default function ProfileForm(props) {
             value={user._id}
             readOnly
           />
-
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formGroupExampleInput2" className="form-label">
+            User ID
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            value={user._id}
+            readOnly
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">

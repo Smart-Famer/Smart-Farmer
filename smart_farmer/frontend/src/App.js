@@ -1,22 +1,23 @@
-import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
 
 import "react-router-dom";
-import UserLayout from "./Pages/UserLayout";
-import LoginPage from "./Pages/LoginPage";
-import Error from "./Pages/Error";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { FarmContextProvider } from "./context/FarmContext";
+import { useAuthContext } from "./hooks/useAuthContext";
 import AdminLayout from "./Pages/AdminLayout";
 import AdminLogin from "./Pages/AdminLogin";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext";
-import { FarmContextProvider } from "./context/FarmContext";
-// import io from "socket.io-client";
-// const socket = io.connect('http://localhost:4000')
+import Error from "./Pages/Error";
+import LoginPage from "./Pages/LoginPage";
+import UserLayout from "./Pages/UserLayout";
+import {io} from "socket.io-client";
+const socket = io(`${process.env.REACT_APP_HOST}`);
+
 
 function App() {
-  //console.log(user.username)
-  // console.log(UserSession.username)
   const { user } = useAuthContext();
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +30,7 @@ function App() {
           path="/user/*"
           element={user && user.details.user_type!= "Admin"? 
           <FarmContextProvider>
-            <UserLayout /> 
+            <UserLayout socket={socket} /> 
           </FarmContextProvider>
           :<Navigate to="/login" />}
         />

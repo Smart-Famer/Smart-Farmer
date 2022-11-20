@@ -7,7 +7,7 @@ import Dashboard from './Dashboard';
 import NPKpage from './NPKpage';
 import ElecConPage from './ElectricConductivityInput'
 import Gallery from './Gallery';
-import Settings from './SettingsPage';
+import ModuleActionsPage from './ModuleActions';
 import CreateAss from './CreateAssistantPage';
 import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
@@ -20,8 +20,10 @@ import { AssistantContextProvider } from "../context/AssistantContext";
 import GalleryItem from './GalleryItem'
 import HistoricalNPKpage from "./HistoricalNpkPage";
 import Sidebar from "../components/Sidebar/SideBar1";
+import ModulesPage from "./ModulesPage"
+import FarmDetailsPage from './FarmDetails'
 
-export default function FarmLayout()
+export default function FarmLayout(props)
 {
     return(
         <>
@@ -30,17 +32,19 @@ export default function FarmLayout()
             </div>
             <Routes>
                 <Route path='*' element={<Error/>}/>
-                <Route path='dashboard' element={<Dashboard />}/>
+                <Route path='dashboard' element={<Dashboard socket={props.socket} />}/>
                 <Route path='gallery' element={<Gallery />}/>
                 <Route path='gallery/:date' element={<GalleryItem />}/>
                 <Route path='npkinput' element={<NPKpage />}/>
                 <Route path="historicalnpk" element={<HistoricalNPKpage />} />
                 <Route path='elecinput' element={<ElecConPage />}/>
-                <Route path='settings' element={<Settings  />} />
+                <Route path='Modules' element={<ModulesPage />} />
+                <Route path='Modules/:type/:module/:_id' element={<ModuleActionsPage />} />
                 <Route path='controlPanel' element={<ControlPanel />}/>
                 <Route path='cropYield' element={<CropYieldDataPage />}/>
                 <Route path='cropyieldinput' element={<CropYieldInput />}/>
                 <Route path='history' element={<HistoricalData  />} />
+                <Route path='farm-details' element={<FarmDetailsPage />} />
                 <Route path='createAcc' element={
                     <AssistantContextProvider>
                         <CreateAss />

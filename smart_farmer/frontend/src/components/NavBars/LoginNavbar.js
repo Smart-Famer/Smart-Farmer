@@ -11,11 +11,11 @@ export default function LoginNavBar(){
                     <img className="inline-block align-text-top me-2" alt="Brand" src="../images/nav-icon.png" width="35" height="30"/>
                     <span className="top-nav-logo-name fw-bold" >Smart Farmer</span>
                 </div>
-                <ul className="navbar-nav">
+                {/* <ul className="navbar-nav">
                     <li className="nav-item ms-auto">
                         <Link className="nav-link mx-3 fs-5" style={{textDecoration: 'none'}} to="/home">Contact us</Link>
                     </li>
-                </ul>
+                </ul> */}
                 </nav>
                 <div className="bottom-border"></div>
             </div>

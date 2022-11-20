@@ -45,7 +45,7 @@ export default function Home() {
   }, [user]);
 
   const farm_components = farm_list.map((farm) => (
-    <Col key={farm._id}>
+    <div className="col mb-3" key={farm._id}>
       <FarmCard
         id={farm._id}
         name={farm.name}
@@ -53,7 +53,7 @@ export default function Home() {
         latitude={farm.location.latitude}
         longitude={farm.location.longitude}
       ></FarmCard>
-    </Col>
+    </div>
   ));
 
   return (
@@ -62,18 +62,18 @@ export default function Home() {
         <Header />
         <div className="farm-card p-4">
           {user.details.user_type === "Manager" && (
-            <div className="text-center pb-5">
+            <div className="text-center mb-4">
               <button
-                className="btn btn-lg btn-success rounded-pill"
+                className="btn btn-md btn-success rounded-pill"
                 onClick={handleAction}
               >
-                <HiViewGridAdd size={40} />
+                <i className="bi bi-plus-lg shadow fw-bold"></i>
               </button>
             </div>
           )}
-          <Container>
-            <Row>{farm_components}</Row>
-          </Container>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3">
+            {farm_components}
+          </div>
         </div>
       </div>
     </div>

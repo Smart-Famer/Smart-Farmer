@@ -7,7 +7,6 @@ import Dashboard from './Dashboard';
 import NPKpage from './NPKpage';
 import ElecConPage from './ElectricConductivityInput'
 import Gallery from './Gallery';
-import Settings from './SettingsPage';
 import ControlPanel from './ContolPanel';
 import HistoricalData from './ViewHistorical';
 import CropYieldDataPage from './CropsYieldDataPage';
@@ -19,7 +18,7 @@ import { useFarmContext } from "../hooks/useFarmContext";
 //import Test from './Test';
 
 
-export default function UserLayout()
+export default function UserLayout(props)
 {
     const { farm } = useFarmContext()
     return(
@@ -29,7 +28,7 @@ export default function UserLayout()
                 <Route path='*' element={<Error/>}/>
                 <Route path='home' element={<HomePage />}/>
                 <Route path='farm-actions/:action/:_id' element={<FarmActions />}/>
-                <Route path='farm/*' element={farm ? <FarmLayout />:<Navigate to="/user/home"/>}/>
+                <Route path='farm/*' element={farm ? <FarmLayout socket={props.socket} />:<Navigate to="/user/home"/>}/>
                 <Route path='viewProfilePage' element={<ViewProfilePage />}/>
             </Routes>
         </>

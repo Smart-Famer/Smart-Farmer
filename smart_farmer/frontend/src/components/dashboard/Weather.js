@@ -14,7 +14,7 @@ export default function Weather(){
             fetch(url)
                 .then(response => response.json())
                 .then(response => setWeatherData(response))
-                .catch(err => console.error(err));
+                .catch(error => console.error(error));
         },[])
       
     // console.log(weatherData)

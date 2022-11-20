@@ -10,10 +10,10 @@ function getRandomDate(startDate, endDate) {
   return new Date(timestamp);
 }
 
-const startDate = new Date("2022-9-1");
+const startDate = new Date("2022-12-11");
 let dateArr = [];
 let i = 0;
-for (let i = 0; i < 91 ; i++) {
+for (let i = 0; i < 7 ; i++) {
   const newday = startDate.getDate(startDate) + 1;
   startDate.setDate(newday);
   let daystr = startDate.toString();
@@ -22,7 +22,6 @@ for (let i = 0; i < 91 ; i++) {
 console.log(dateArr);
 
 const sendReading = (type) => {
-  // let timestamp = getRandomDate(new Date("2022-11-29"), new Date("2022-11-30"));
   timestamp = new Date(dateArr[i])
   console.log(timestamp);
   source_index = Math.round(Math.random() * 10);
@@ -43,7 +42,7 @@ const sendReading = (type) => {
               timestamp,
             })
             .then((response) => {
-              console.log(response.data.reading, response.data.sourceId,response.data.timestamp);
+              console.log(response.data);
             })
             .catch((error) => {
               console.log("error");
@@ -142,7 +141,7 @@ const sendReading = (type) => {
 // sendReading('temp')
 
 // sendReading('temp')
-// setInterval(sendReading, 2000, "temp");
+setInterval(sendReading, 2000, "temp");
 // setInterval(sendReading,2000,'hum')
 // setInterval(sendReading,2000,'shum')
-setInterval(sendReading,2000,'rain')
+// setInterval(sendReading,2000,'rain')

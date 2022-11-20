@@ -1,11 +1,13 @@
 import distinctColors from "distinct-colors";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { BarChart } from "../components/BarChart";
+import { useAuthContext } from "../hooks/useAuthContext";
 import { useFarmContext } from "../hooks/useFarmContext";
 
 export default function CropYieldDataPage() {
   const { farm } = useFarmContext();
+  const {user} = useAuthContext();
   const farm_id = farm._id;
 
   const [xAxisV, setXaxisV] = useState([]);
@@ -221,9 +223,9 @@ export default function CropYieldDataPage() {
       </div>
 
       <div className="d-flex flex-row-reverse mt-4">
-        <Link to="/user/farm/cropyieldinput" style={{ textDecoration: "none" }}>
+        {user.details.user_type==='Assistant' && <Link to="/user/farm/cropyieldinput" style={{ textDecoration: "none" }}>
           {"Add Crop Yield Details>"}
-        </Link>
+        </Link>}
       </div>
     </div>
   );

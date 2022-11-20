@@ -6,7 +6,7 @@ import LineChart from "./LineChart";
 
 export default function HistoricalData() {
   const { farm } = useFarmContext();
-   
+
   let sensorPortName = {};
   farm.sensors.Temperature.forEach((sensor) => {
     sensorPortName[sensor.port] = sensor.name;
@@ -21,14 +21,12 @@ export default function HistoricalData() {
     sensorPortName[sensor.port] = sensor.name;
   });
 
-
-  const [type,setType] = useState('temp')
+  const [type, setType] = useState("temp");
   const [xAxisV, setXaxisV] = useState([]);
   const [sensorIds, setSensorIds] = useState([]);
   const [data, setData] = useState([]);
   const [duration, setDuration] = useState("weekly");
   const [error, SetError] = useState("");
-
 
   let currentDate = new Date();
   let temp_startDay = `${currentDate.getFullYear()}-${
@@ -43,7 +41,7 @@ export default function HistoricalData() {
     return palette;
   }
 
-  function getActualName(name){
+  function getActualName(name) {
     let temp = name.split("_");
     let nameWithoutFarmArr = temp.slice(1);
     let nameWithoutFarm = nameWithoutFarmArr.join("_");
@@ -51,42 +49,38 @@ export default function HistoricalData() {
   }
 
   useEffect(() => {
+    let sourceIds = null;
+    let sensorDetails = null;
+    switch (type) {
+      case "temp":
+        sourceIds = farm.sensors.Temperature.map((e) => {
+          return e.port;
+        });
+        break;
+      case "humidity":
+        sourceIds = farm.sensors.Humidity.map((e) => {
+          return e.port;
+        });
+        break;
+      case "soil_humidity":
+        sourceIds = farm.sensors.Soil.map((e) => {
+          return e.port;
+        });
+        break;
+      case "rainfall":
+        sourceIds = farm.sensors.RainFall.map((e) => {
+          return e.port;
+        });
+        break;
+      default:
+        sourceIds = farm.sensors.Temperature.map((e) => {
+          return e.port;
+        });
+    }
 
-      let sourceIds = null
-      let sensorDetails = null
-      switch (type) {
-        case "temp":
-          sourceIds = farm.sensors.Temperature.map((e) => {
-            return e.port;
-          });
-          break;
-        case "humidity":
-          sourceIds = farm.sensors.Humidity.map((e) => {
-            return e.port;
-          });
-          break;
-        case "soil_humidity":
-          sourceIds = farm.sensors.Soil.map((e) => {
-            return e.port;
-          });
-          break;
-        case "rainfall":
-          sourceIds = farm.sensors.RainFall.map((e) => {
-            return e.port;
-          });
-          break;
-        default:
-          sourceIds = farm.sensors.Temperature.map((e) => {
-            return e.port;
-          });
-      }
-      
-      
     const fetchTempData = async () => {
       const response = await fetch(
-        `${
-          process.env.REACT_APP_HOST
-        }/api/history/?&sourceids=${sourceIds.join(
+        `${process.env.REACT_APP_HOST}/api/history/?&sourceids=${sourceIds.join(
           ","
         )}&startdate=${startDate}&duration=${duration}`
       );
@@ -175,20 +169,20 @@ export default function HistoricalData() {
     fetchTempData();
     // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
     // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
-  }, [duration, startDate,type]);
+  }, [duration, startDate, type]);
 
   const handleDurationChange = (e) => {
-  const duration = e.currentTarget.value;
+    const duration = e.currentTarget.value;
     setDuration(duration);
   };
   const handleStartDateChange = (e) => {
     const date = e.currentTarget.value;
     setStartDate(date);
   };
-  const handleTypeChange = (e) =>{
+  const handleTypeChange = (e) => {
     const type = e.currentTarget.value;
     setType(type);
-  }
+  };
 
   const handleSensorChange = (e) => {
     const sensorName = sensorPortName[e.currentTarget.id];
@@ -220,16 +214,18 @@ export default function HistoricalData() {
 
   return (
     <>
-         <div className="form-group">
+      <div className="form-group">
         <div className="row me-4 ms-4">
-          <div class="col col-md-4 col-sm-6">
-            <label for="inputAddress" class="form-label">Address</label>
+          <div className="col col-md-4 col-sm-6">
+            <label htmlFor="inputAddress" className="form-label">
+              Address
+            </label>
             <select
-              class="form-control" 
+              className="form-control"
               id="inputAddress"
               aria-label="Default select example"
               onChange={handleTypeChange}
-              >
+            >
               <option value="temp">Temperature</option>
               <option value="humidity">Humidity</option>
               <option value="soil_humidity">Soil Humidity</option>
@@ -239,39 +235,43 @@ export default function HistoricalData() {
         </div>
         <br></br>
         <div className="row me-4 ms-4">
-          <div class="col col-md-4">
-            <label for="inputEmail4" class="form-label">Email</label>
+          <div className="col col-md-4">
+            <label htmlFor="inputEmail4" className="form-label">
+              Email
+            </label>
             <div className="col-sm">
               <select
                 name="section"
-                class="form-control" 
+                className="form-control"
                 id="inputEmail4"
                 aria-label="Default select example"
                 onChange={handleDurationChange}
-                >
+              >
                 <option value="weekly">Weekly</option>
                 <option value="monthly">Monthly</option>
               </select>
             </div>
-            </div>
-          <div class="col col-md-4">
+          </div>
+          <div className="col col-md-4">
             {duration === "weekly" && (
               <>
-                <label htmlFor="startDate" class="form-label">Start Date:</label>              
+                <label htmlFor="startDate" className="form-label">
+                  Start Date:
+                </label>
                 <input
                   type="date"
-                  class="form-control" 
+                  className="form-control"
                   id="inputPassword4"
                   onChange={handleStartDateChange}
                 />
               </>
             )}
+          </div>
         </div>
-      </div>
       </div>
       <div className="row">
         <div className="col-lg-9">
-        <LineChart
+          <LineChart
             xAxisLabel="Date"
             yAxisLabel="Temperature"
             xAxisValues={xAxisV}

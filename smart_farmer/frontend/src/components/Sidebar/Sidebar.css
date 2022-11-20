@@ -60,3 +60,16 @@
 .offcanvas-header{
     background-color: #3DCD56;;
 }
+
+
+@media screen and (max-width:576px) {
+    .sidebar--icons{
+        margin-left: 1rem !important;
+        font-size:125% !important;    
+    }
+
+    .close--icon{
+        margin-top: 1rem !important;
+        margin-left: 1rem !important;
+    }
+}
