@@ -42,6 +42,7 @@ export default function Temperature({socket}){
           ...temperatures,
           [dataReading.sourceId]: dataReading.reading,
         };
+        // console.log(temp)
         setTemperatures(temp);
       }
     });

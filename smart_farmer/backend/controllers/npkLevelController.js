@@ -86,6 +86,17 @@ const createNpkLevel = async (req, res) => {
   console.log(timestamp);
 
   try {
+
+    if (!/^\d+$/.test(n)) {
+      throw Error("Invalid nitrogen level!!!");
+    }
+    if (!/^\d+$/.test(p)) {
+      throw Error("Invalid posphorous level!!!");
+    }
+    if (!/^\d+$/.test(k)) {
+      throw Error("Invalid potassium level!!!");
+    }
+
     const dataReading = await npkLevelModel.create({
       timestamp,
       sourceId,
@@ -95,7 +106,7 @@ const createNpkLevel = async (req, res) => {
     });
     res.json(dataReading);
   } catch (error) {
-    res.json(error);
+    res.json({error:error.message});
   }
 };
 module.exports = {

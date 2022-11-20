@@ -7,6 +7,5 @@ const {
 const router = express.Router()
 
 router.get("/", getReadingHistory);
-// router.get("/avg", getTempAvg);
 
 module.exports = router

@@ -55,10 +55,12 @@ app.use("/api/farm",farmRouter)
 app.use('/api/history/',historicalDataRouter)
 
 
+
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    // console.log("Connected to the database");
+    console.log("Connected to the database");
     io.on("connection",(socket)=>{
 
 
