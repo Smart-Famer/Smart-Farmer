@@ -13,6 +13,27 @@ export default function EditSensor({module,_id}) {
   const { farm, dispatchFarm } = useFarmContext();
   const navigate = useNavigate()
 
+  const [validateError, setValidate] =useState("");
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (sensor_type,name,port)=>{
+    var error = "";
+    if (!sensor_type || !name || !port) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(port)){
+      return error = "Enter a number as input !";
+
+    }
+  }
+
+
     useEffect(()=>{
       const curSensor = farm?.sensors[module]?.find((sensor)=>sensor._id===_id)
       console.log(module,_id,curSensor)
@@ -25,6 +46,8 @@ export default function EditSensor({module,_id}) {
     const sensor = { sensor_type, name, port };
 
      e.preventDefault();
+     setValidate(Validate(sensor_type,name,port))
+
 
      const response = await fetch(
        `${process.env.REACT_APP_HOST}/api/modules/edit-sensor`,
@@ -121,27 +144,29 @@ export default function EditSensor({module,_id}) {
           />
         </div>
 
-        <button type="submit" className="btn btn-green">
-          Edit
-        </button>
-        {/* {error&&<div className="error">{error}</div>} */}
-        {error && (
-          <ModalTemp
-            title={"Error"}
-            message={error}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        )}
-        {!error && (
-          <ModalTemp
-            title={"Successful"}
-            message={"Sensor Added Successfully"}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        )}
-      </form>
+      <button type="submit" className="btn btn-green">
+        Edit
+      </button>
+      {/* {error&&<div className="error">{error}</div>} */}
+      {validateError && (
+        <ModalTemp
+          title={"Error"}
+          message={error}
+          color="danger"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+      {!validateError && !error && (
+        <ModalTemp
+          title={"Successful"}
+          message={"Sensor Edited Successfully"}
+          color="primary"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+    </form>
     </div>
   );
 }

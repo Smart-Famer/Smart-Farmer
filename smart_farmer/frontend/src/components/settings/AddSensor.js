@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useFarmContext } from "../../hooks/useFarmContext";
-import ModalTemp from "../Modal/Modal";
+import PopUpModal from "../Modal/Modal";
 
 export default function AddSensor() {
   const [modalShow, setModalShow] = useState(false);
@@ -10,10 +10,30 @@ export default function AddSensor() {
   const [port, setPort] = useState("");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
+  const [validateError, setValidate] =useState("");
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (sensor_type,name,port)=>{
+    var error = "";
+    if (!sensor_type || !name || !port) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(port)){
+      return error = "Enter a number as input !";
+
+    }
+  }
 
   const handleSubmit = async (e) => {
     // console.log(sensor_type)
     e.preventDefault();
+    setValidate(Validate(sensor_type,name,port))
 
     const sensor = { sensor_type, name, port };
     if (sensor_type === "RainFall" && farm.sensors.RainFall.length === 1) {
@@ -99,29 +119,29 @@ export default function AddSensor() {
           />
         </div>
 
-        <button type="submit" className="btn btn-green">
-          Connect
-        </button>
-        {/* {error&&<div className="error">{error}</div>} */}
-        {error && (
-          <ModalTemp
-            title={"Error"}
-            message={error}
-            color="danger"
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        )}
-        {!error && (
-          <ModalTemp
-            title={"Successful"}
-            message={"New electric conductivity level added successfully"}
-            color="primary"
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        )}
-      </form>
+      <button type="submit" className="btn btn-green">
+        Connect
+      </button>
+      {/* {error&&<div className="error">{error}</div>} */}
+      {validateError && (
+        <PopUpModal
+          title={"Error"}
+          message={validateError}
+          color="danger"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+      {!validateError && !error && (
+        <PopUpModal
+          title={"Successful"}
+          message={"New sensor added successfully"}
+          color="primary"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+    </form>
     </div>
   );
 }

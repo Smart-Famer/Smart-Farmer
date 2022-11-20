@@ -57,8 +57,9 @@ app.use('/api/history/',historicalDataRouter)
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("Connected to the database");
+    // console.log("Connected to the database");
     io.on("connection",(socket)=>{
+
 
       socket.once("join_room",(room)=>{
           socket.join(room)
@@ -70,14 +71,15 @@ mongoose
             sockets[room]=[socket]
           }
       })
+
     })
     server.listen(process.env.PORT, () => {
-      console.log("Server is listening on port 4000...");
+      // console.log("Server is listening on port 4000...");
     });
   })
   .catch((err) => {
-    console.log(err);
+    // console.log(err);
   });
 
 
-
+module.exports ={app};

@@ -23,6 +23,7 @@ const getYield = async(req,res)=>{
 }
 
 const createYield = async(req,res)=>{
+
     const {farm_id,crop_name,date,yield} = req.body
     // console.log(typeof date)
     const temp_date = new Date(date)
@@ -30,11 +31,14 @@ const createYield = async(req,res)=>{
     const end = `${temp_date.getFullYear()}-${temp_date.getMonth() + 2}-01`;
     const month = temp_date.getMonth()+1 
     // console.log(month)
+
     try{
         const checkAvailability = await cropYieldModel.find({
             crop_name,
+
             farm_id,
             date:{$gte:start,$lt:end}
+
         })
         let cropYield = ''
         if(checkAvailability.length!=0){
