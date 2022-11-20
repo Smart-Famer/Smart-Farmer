@@ -39,7 +39,7 @@ const getReadingHistory = async (req, res) => {
       {
         $sort: { month: 1 },
       },
-    ]);
+    ]).sort({timestamp:1});
     readingHistory = temp.map((e) => {
       return {
         sourceId:e._id.sourceId,
