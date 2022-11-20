@@ -167,8 +167,6 @@ export default function HistoricalData() {
       }
     };
     fetchTempData();
-    // tmp_cropYieldData = JSON.parse(JSON.stringify(cropYieldData));
-    // tmp_cropMonths = JSON.parse(JSON.stringify(temp_cropMonths));
   }, [duration, startDate, type]);
 
   const handleDurationChange = (e) => {

@@ -1,8 +1,6 @@
 import React from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
-import Sidebar from "../components/Sidebar/SideBar";
-import '../components/Sidebar/Sidebar.css'
 import DisplayAlert from "../components/DisplayAlert";
+import '../components/Sidebar/Sidebar.css';
 
 
 export default function Test() {

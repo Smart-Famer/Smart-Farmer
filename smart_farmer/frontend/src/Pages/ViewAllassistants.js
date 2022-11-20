@@ -15,7 +15,7 @@ export default function ViewAll() {
       const json = await response.json();
 
       if (response.ok) {
-        // console.log(json);
+        //
         setCountryListDefault(json);
       }
     };
@@ -25,14 +25,12 @@ export default function ViewAll() {
   const searchKeys = ["first_name", "second_name"];
 
   const search = (data) => {
-    console.log(data);
     return data.filter((iteam) =>
       searchKeys.some((searchKey) =>
         iteam[searchKey].toLowerCase().includes(input)
       )
     );
   };
-
 
   return (
     <div className="p-5">
@@ -45,7 +43,7 @@ export default function ViewAll() {
             onChange={(e) => setInput(e.target.value)}
           ></input>
         </div>
-        <div className="m-2" style={{overflowx:"auto"}}>
+        <div className="m-2" style={{ overflowx: "auto" }}>
           <ListView iteamList={search(countryListDefault)} />
         </div>
       </Container>

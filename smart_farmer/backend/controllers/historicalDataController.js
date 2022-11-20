@@ -53,8 +53,8 @@ const getReadingHistory = async (req, res) => {
       sourceId: {
         $in: sourceIds,
       },
-      timestamp:{$gte:startDate}
-    }).limit(7*sourceIds.length);
+      timestamp:{$gte:startDate},
+    }).sort({ timestamp: 1 }).limit(7*sourceIds.length);
   }
   
   if (!readingHistory) {

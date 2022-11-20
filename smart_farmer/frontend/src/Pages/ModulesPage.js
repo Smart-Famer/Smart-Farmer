@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
-import { useFarmContext } from "../hooks/useFarmContext"
-import SensorTable from "../components/settings/SensorTable"
-import ActuatorTable from "../components/settings/ActuatorTable"
+import React from "react"
 import { useNavigate } from "react-router"
+import ActuatorTable from "../components/settings/ActuatorTable"
+import SensorTable from "../components/settings/SensorTable"
 
 export default function Modules(){
     const navigate = useNavigate()

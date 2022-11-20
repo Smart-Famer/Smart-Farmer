@@ -39,7 +39,7 @@ export default function ProfileForm(props) {
       setLocation(newObj.details.location);
       setEmail(newObj.details.email);
       setSuccess("Profile Updated Successfully!");
-      // console.log(user)
+
       setReadonly(true);
     } else {
       setError(newObj.error);

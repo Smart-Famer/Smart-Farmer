@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Button } from 'reactstrap';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { FormGroup, Input } from 'reactstrap';
 
 export default function Camera(props)
 {

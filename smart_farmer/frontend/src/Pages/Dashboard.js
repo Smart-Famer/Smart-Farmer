@@ -1,4 +1,3 @@
-// import { Navigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Navigate } from "react-router";
 import { Col, Container, Row } from "reactstrap";
@@ -15,98 +14,86 @@ import Weather from "../components/dashboard/Weather";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useFarmContext } from "../hooks/useFarmContext";
 
+export default function Dashboard(props) {
+  const { user } = useAuthContext();
+  const { farm } = useFarmContext();
+  const socket = props.socket;
 
-export default function Dashboard(props)
-{
-    const {user} = useAuthContext()
-    const { farm } = useFarmContext();
-    const socket = props.socket;
-    
-    useEffect(() => {
-        if(user){
-            // console.log(socket)
-            const farmId = farm._id
-            socket.emit("join_room", farmId);  
-            console.log('joined to '+farmId)
-            
-            
-            // socket.on("dataReadingUpdate",(dataReading)=>{
-            //     console.log(dataReading)
-            // });
-            
-        }
-    },[user]);
-
-    if(!user){
-        return <Navigate to="/login"/>      
+  useEffect(() => {
+    if (user) {
+      const farmId = farm._id;
+      socket.emit("join_room", farmId);
     }
+  }, [user]);
 
-    
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
-    return (
-      <div className="row main-container">
-        <div className="">
-          <Container>
-            <Row>
-              <Col>
-                <Meter heading="Temperature">
-                  <Temperature socket={socket} />
-                </Meter>
-              </Col>
+  return (
+    <div className="row main-container">
+      <div className="">
+        <Container>
+          <Row>
+            <Col>
+              <Meter heading="Temperature">
+                <Temperature socket={socket} />
+              </Meter>
+            </Col>
 
-              <Col>
-                <Meter heading="Electric Conductivity">
-                  <ElectricConductivity />
-                </Meter>
-              </Col>
-              <Col>
-                <Meter heading="Rainfall">
-                  <RainFall socket={socket} />
-                </Meter>
-              </Col>
+            <Col>
+              <Meter heading="Electric Conductivity">
+                <ElectricConductivity />
+              </Meter>
+            </Col>
+            <Col>
+              <Meter heading="Rainfall">
+                <RainFall socket={socket} />
+              </Meter>
+            </Col>
 
-              <Col>
-                <Meter heading="Weather">
-                  <Weather />
-                </Meter>
-              </Col>
+            <Col>
+              <Meter heading="Weather">
+                <Weather />
+              </Meter>
+            </Col>
 
-              <Col>
-                <Meter heading="NPK Levels">
-                  <NPK />
-                </Meter>
-              </Col>
+            <Col>
+              <Meter heading="NPK Levels">
+                <NPK />
+              </Meter>
+            </Col>
 
-              <Col>
-                <Meter heading="Humidity">
-                  <Humidity socket={socket} />
-                </Meter>
-              </Col>
+            <Col>
+              <Meter heading="Humidity">
+                <Humidity socket={socket} />
+              </Meter>
+            </Col>
 
-              <Col>
-                <Meter heading="Soil Humidity">
-                  <SoilHumidity socket={socket} />
-                </Meter>
-              </Col>
-            </Row>
-          </Container>
-          <Container>
-            <div className="row">
-              <Col>
-                <Meter heading="Recent Photos">
-                  <RecentPhotos />
-                </Meter>
-              </Col>
-            </div>
-            <div className="row">
-              <Col>
-                <Meter heading="Historical Data">
-                  <HistoricalData />
-                </Meter>
-              </Col>
-            </div>
-          </Container>
-        </div>
+            <Col>
+              <Meter heading="Soil Humidity">
+                <SoilHumidity socket={socket} />
+              </Meter>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <div className="row">
+            <Col>
+              <Meter heading="Recent Photos">
+                <RecentPhotos />
+              </Meter>
+            </Col>
+          </div>
+          <div className="row">
+            <Col>
+              <Meter heading="Historical Data">
+                <HistoricalData />
+              </Meter>
+            </Col>
+          </div>
+        </Container>
       </div>
-    );
+    </div>
+  );
 }

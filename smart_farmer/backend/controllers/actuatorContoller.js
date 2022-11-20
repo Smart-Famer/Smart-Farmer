@@ -1,28 +1,32 @@
-const ActuatorModel = require('../models/actuatorModel')
-const farmModel = require("../models/farmModel")
-const mongoose =require('mongoose')
+const ActuatorModel = require("../models/actuatorModel");
+const farmModel = require("../models/farmModel");
+const mongoose = require("mongoose");
 
-const getActuators = async (req,res)=>{
-    let {actuator_ids} = req.body
+const getActuators = async (req, res) => {
+  let { actuator_ids } = req.body;
 
-    actuator_ids = actuator_ids.filter((id)=>mongoose.Types.ObjectId.isValid(id))
-    const temp_actuators = await ActuatorModel.find({_id:{
-        $in:actuator_ids
-    }})
-    const actuators = {
-        "Pump":[],
-        "Camera":[]
+  actuator_ids = actuator_ids.filter((id) =>
+    mongoose.Types.ObjectId.isValid(id)
+  );
+  const temp_actuators = await ActuatorModel.find({
+    _id: {
+      $in: actuator_ids,
+    },
+  });
+  const actuators = {
+    Pump: [],
+    Camera: [],
+  };
+  temp_actuators.forEach((actuator) => {
+    if (actuator.actuator_type === "Water Pump") {
+      actuators.Pump.push(actuator);
+    } else if (actuator.actuator_type === "Camera") {
+      actuators.Camera.push(actuator);
     }
-    temp_actuators.forEach((actuator)=>{
-        if(actuator.actuator_type==="Water Pump"){
-            actuators.Pump.push(actuator)
-        }else if(actuator.actuator_type==="Camera"){
-            actuators.Camera.push(actuator)
-        }
-    })
+  });
 
-    res.status(200).json(actuators)
-}
+  res.status(200).json(actuators);
+};
 
 const editActuator = async (req, res) => {
   const { actuator, farm_id, farm_name } = req.body;
@@ -41,13 +45,7 @@ const editActuator = async (req, res) => {
     },
     name: name,
   });
-  //   const exists_port = await ActuatorModel.findOne({
-  //     _id: {
-  //       $in: sensor_ids,
-  //     },
-  //     port: port,
-  //   });
-  console.log(exists_name);
+
   try {
     if (exists_name) {
       throw Error("Actuator Name Already Exists");
@@ -55,7 +53,7 @@ const editActuator = async (req, res) => {
     const actuator = await ActuatorModel.findOneAndUpdate(
       { port },
       { name, actuator_type },
-      { new:true }
+      { new: true }
     );
     res.status(200).json(actuator);
   } catch (err) {
@@ -63,25 +61,25 @@ const editActuator = async (req, res) => {
   }
 };
 
-const deleteActuator = async (req, res)=>{
-  const {_id} = req.params
-  try{
+const deleteActuator = async (req, res) => {
+  const { _id } = req.params;
+  try {
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       throw Error("Invalid actuator ID");
     }
 
-    const actuator = await ActuatorModel.findOneAndDelete({_id})
-    if(!actuator){
+    const actuator = await ActuatorModel.findOneAndDelete({ _id });
+    if (!actuator) {
       throw Error("actuator doesn't exist");
     }
-    res.status(200).json(actuator)
-  }catch(err){
-    res.status(400).json({error:err.message})
+    res.status(200).json(actuator);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
-}
+};
 
 module.exports = {
   getActuators,
   editActuator,
-  deleteActuator
+  deleteActuator,
 };

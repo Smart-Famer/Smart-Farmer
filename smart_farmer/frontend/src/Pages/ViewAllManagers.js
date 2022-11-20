@@ -9,19 +9,19 @@ export default function ViewAll() {
   const [countryListDefault, setCountryListDefault] = useState([]);
   const navigate = useNavigate();
 
-  const updateManagerList = (_id)=>{
-    setCountryListDefault(countryListDefault.filter(manager=>manager._id!==_id))
-  }
+  const updateManagerList = (_id) => {
+    setCountryListDefault(
+      countryListDefault.filter((manager) => manager._id !== _id)
+    );
+  };
   useEffect(() => {
     const fetchManagers = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_HOST}/api/admin/get-all-mangers`
       );
       const json = await response.json();
-      // json.push({ id: 2, first_name: "Ome", second_name: "Zue" });
 
       if (response.ok) {
-        console.log(json);
         setCountryListDefault(json);
       }
     };
@@ -31,7 +31,6 @@ export default function ViewAll() {
   const searchKeys = ["first_name", "second_name"];
 
   const search = (data) => {
-    console.log(data);
     return data.filter((iteam) =>
       searchKeys.some((searchKey) =>
         iteam[searchKey].toLowerCase().includes(input)
@@ -41,7 +40,7 @@ export default function ViewAll() {
 
   const handleClick = () => {
     navigate("/admin/createManager");
-  }
+  };
 
   return (
     <div className="p-5">
@@ -57,13 +56,18 @@ export default function ViewAll() {
               ></input>
             </Col>
             <Col className="class-col">
-              <Button color="success" onClick={handleClick}>Add Manager</Button>
+              <Button color="success" onClick={handleClick}>
+                Add Manager
+              </Button>
             </Col>
           </Row>
         </div>
 
         <div className="m-5">
-          <ListView iteamList={search(countryListDefault)} updateManagerList={updateManagerList}/>
+          <ListView
+            iteamList={search(countryListDefault)}
+            updateManagerList={updateManagerList}
+          />
         </div>
       </Container>
     </div>

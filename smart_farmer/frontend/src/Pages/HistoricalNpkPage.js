@@ -1,4 +1,3 @@
-import "../App.css";
 import Input from "../components/inputForms/InputForm";
 import NpkLevelChart from "../components/NpkLevelChart";
 

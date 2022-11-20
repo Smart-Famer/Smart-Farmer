@@ -1,4 +1,3 @@
-// require("dotenv").config({ path: "../.env" });
 const request = require("supertest");
 const baseURL = "http://localhost:4000";
 let sourceId = "6363a46d57669fe158501664-2000";

@@ -15,7 +15,7 @@ import InputForm from "../components/inputForms/InputForm.js";
 
 export default function FarmAction() {
   const { action, _id } = useParams();
-  console.log(action, _id);
+
   let formName = "";
   if (action === "add") {
     formName = "Add New Farm";

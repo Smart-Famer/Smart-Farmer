@@ -10,66 +10,64 @@ export default function AddSensor() {
   const [port, setPort] = useState("");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
-  const [validateError, setValidate] =useState("");
+  const [validateError, setValidate] = useState("");
 
-  const isNumber=(str) =>{
-    if (str.trim() === '') {
+  const isNumber = (str) => {
+    if (str.trim() === "") {
       return false;
     }
-  
+
     return !isNaN(str);
-  }
-  const Validate= (sensor_type,name,port)=>{
+  };
+  const Validate = (sensor_type, name, port) => {
     var error = "";
     if (!sensor_type || !name || !port) {
       throw Error("Enter input value !");
-    }
-    else if(!isNumber(port)){
+    } else if (!isNumber(port)) {
       throw Error("Enter a number as input !");
-
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
-    // console.log(sensor_type)
     e.preventDefault();
-    try{ 
-    Validate(sensor_type,name,port)
+    try {
+      Validate(sensor_type, name, port);
 
-    const sensor = { sensor_type, name, port };
-    if (sensor_type === "RainFall" && farm.sensors.RainFall.length === 1) {
-      throw Error("Rainfall sensor already added! Delete it to add a new one");
-    }
-    const response = await fetch(`${process.env.REACT_APP_HOST}/api/modules/add-sensor`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          sensor,
-          farm_id: farm._id,
-          farm_name: farm.name,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
+      const sensor = { sensor_type, name, port };
+      if (sensor_type === "RainFall" && farm.sensors.RainFall.length === 1) {
+        throw Error(
+          "Rainfall sensor already added! Delete it to add a new one"
+        );
       }
-    );
-    const json = await response.json();
-    console.log(json)
-    if (!response.ok) {
-      setError(json.err);
-      console.log(json.error);
+      const response = await fetch(
+        `${process.env.REACT_APP_HOST}/api/modules/add-sensor`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            sensor,
+            farm_id: farm._id,
+            farm_name: farm.name,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.err);
+      }
+      if (response.ok) {
+        setError(null);
+        setSensor_type("Temperature");
+        setName("");
+        setPort("");
+        dispatchFarm({ type: "ADD-SENSOR", payload: json });
+      }
+    } catch (err) {
+      setValidate(err.message);
     }
-    if (response.ok) {
-      setError(null);
-      setSensor_type("Temperature");
-      setName("");
-      setPort("");
-      dispatchFarm({ type: "ADD-SENSOR", payload: json });
-      console.log("New sensor added:", json);
-    }
-  }catch(err){
-    setValidate(err.message)
-  }
     setModalShow(true);
   };
 
@@ -122,29 +120,29 @@ export default function AddSensor() {
           />
         </div>
 
-      <button type="submit" className="btn btn-green">
-        Connect
-      </button>
-      {/* {error&&<div className="error">{error}</div>} */}
-      {validateError && (
-        <PopUpModal
-          title={"Error"}
-          message={validateError}
-          color="danger"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-      {!validateError && !error && (
-        <PopUpModal
-          title={"Successful"}
-          message={"New sensor added successfully"}
-          color="primary"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-    </form>
+        <button type="submit" className="btn btn-green">
+          Connect
+        </button>
+        {/* {error&&<div className="error">{error}</div>} */}
+        {validateError && (
+          <PopUpModal
+            title={"Error"}
+            message={validateError}
+            color="danger"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!validateError && !error && (
+          <PopUpModal
+            title={"Successful"}
+            message={"New sensor added successfully"}
+            color="primary"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
     </div>
   );
 }

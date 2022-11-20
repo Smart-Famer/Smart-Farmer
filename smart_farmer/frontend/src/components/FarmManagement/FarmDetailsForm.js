@@ -1,66 +1,66 @@
-import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import DisplayAlert from "../DisplayAlert";
+import React from "react";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useNavigate } from "react-router";
 import { useFarmContext } from "../../hooks/useFarmContext";
 
-export default function FarmDetailsForm(props) {
+export default function FarmDetailsForm() {
   const user = useAuthContext().user.details;
-  const {farm} = useFarmContext()
-  // console.log(address)
+  const { farm } = useFarmContext();
+
   return (
     <div className="me-4">
       <form>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput" className="form-label">
-          <strong>Farm Name</strong>
+            <strong>Farm Name</strong>
           </label>
           <input
             type="text"
             className="form-control-plaintext"
             id="formGroupExampleInput"
             placeholder="Farm Name"
-            value={farm.name}
+            defaultValue={farm.name}
           />
         </div>
         <hr></hr>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">
-          <strong>Farm Area (m <sup>2</sup>)</strong>
+            <strong>
+              Farm Area (m <sup>2</sup>)
+            </strong>
           </label>
           <input
             type="number"
             className="form-control-plaintext"
             id="formGroupExampleInput2"
             placeholder="Farm Area"
-            value={farm.area}
+            defaultValue={farm.area}
           />
         </div>
         <hr></hr>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">
-          <strong>Latitude</strong>
+            <strong>Latitude</strong>
           </label>
           <input
             type="number"
             className="form-control-plaintext"
             id="formGroupExampleInput2"
             placeholder="Latitude"
-            value={farm.location.latitude}
+            defaultValue={farm.location.latitude}
           />
         </div>
         <hr></hr>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput2" className="form-label">
-          <strong>Longitude</strong>
+            <strong>Longitude</strong>
           </label>
           <input
             type="number"
             className="form-control-plaintext"
             id="formGroupExampleInput2"
             placeholder="Longitude"
-            value={farm.location.longitude}
+            defaultValue={farm.location.longitude}
           />
         </div>
         <hr></hr>
@@ -73,7 +73,7 @@ export default function FarmDetailsForm(props) {
             className="form-control-plaintext"
             id="formGroupExampleInput2"
             placeholder="Address"
-            value={farm.address}
+            defaultValue={farm.address}
           />
         </div>
       </form>

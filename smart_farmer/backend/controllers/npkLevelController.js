@@ -1,5 +1,4 @@
 const npkLevelModel = require("../models/npkLevelModel");
-const mongoose = require("mongoose");
 
 const getNpkLevel = async (req, res) => {
   const { sourceId } = req.params;
@@ -16,9 +15,7 @@ const getNpkLevel = async (req, res) => {
 const getHistoricalNpkLevels = async (req, res) => {
   const sourceId = req.query.sourceid;
   const duration = req.query.duration;
-  // const startDate = req.query.startdate;
 
-  // console.log(sourceId,duration,startDate)
   let tempHistory = null;
   const months = [
     "January",
@@ -47,30 +44,27 @@ const getHistoricalNpkLevels = async (req, res) => {
             sourceId: "$sourceId",
           },
           n: { $avg: "$n" },
-          p: {$avg:"$p"},
-          k: {$avg:"$k"}
+          p: { $avg: "$p" },
+          k: { $avg: "$k" },
         },
       },
       {
-        $sort: {month:1}
-      }
+        $sort: { month: 1 },
+      },
     ]);
     readingHistory = temp.map((e) => {
       return {
         sourceId: e._id.sourceId,
-        timestamp: months[e._id.month-1],
+        timestamp: months[e._id.month - 1],
         n: e.n,
         p: e.p,
-        k: e.k
+        k: e.k,
       };
     });
-    // console.log(readingHistory_)
-    // readingHistory=temp;
   } else {
-    readingHistory = await npkLevelModel
-      .find({
-        sourceId:sourceId
-      })
+    readingHistory = await npkLevelModel.find({
+      sourceId: sourceId,
+    });
   }
 
   if (!readingHistory) {
@@ -79,14 +73,9 @@ const getHistoricalNpkLevels = async (req, res) => {
   res.status(200).json(readingHistory);
 };
 const createNpkLevel = async (req, res) => {
-  const { timestamp, sourceId, n,p,k } = req.body;
-
-  console.log(n,p,k);
-  console.log(sourceId);
-  console.log(timestamp);
+  const { timestamp, sourceId, n, p, k } = req.body;
 
   try {
-
     if (!/^\d+$/.test(n)) {
       throw Error("Invalid nitrogen level!!!");
     }
@@ -102,11 +91,11 @@ const createNpkLevel = async (req, res) => {
       sourceId,
       n,
       p,
-      k
+      k,
     });
     res.json(dataReading);
   } catch (error) {
-    res.json({error:error.message});
+    res.json({ error: error.message });
   }
 };
 module.exports = {

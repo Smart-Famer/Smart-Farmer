@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Input from "../components/inputForms/InputForm";
 import CreateManager from "../components/userManagment/createManager";
 

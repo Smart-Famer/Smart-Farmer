@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSignup } from '../../hooks/useSignup';
-import DisplayAlert from '../DisplayAlert';
 import ModalTemp from "../Modal/Modal";
 import Validate from './formValidation';
 
@@ -30,6 +29,7 @@ export default function CreateAss(props) {
       setPassword("")
       setLocation("")
       setEmail("")
+      setConfirmPassword("")
       setAssistants([...assistants,newObj._doc])
       setSuccess("Assistant Created Successfully!")
     }
@@ -101,7 +101,7 @@ export default function CreateAss(props) {
                         type="password" 
                         className="form-control" 
                         value={confirmPassword}
-                        onChange={(e)=>{setPassword(e.target.value)}}
+                        onChange={(e)=>{setConfirmPassword(e.target.value)}}
                         required={true}
                         />
             </div>
@@ -135,7 +135,7 @@ export default function CreateAss(props) {
       {!validateError && !error && (
         <ModalTemp
           title={"Successful"}
-          message={"Manager created Successfully"}
+          message={"Assistant created Successfully"}
           show={modalShow}
           color="primary"
           onHide={() => setModalShow(false)}

@@ -15,7 +15,7 @@ export default function FarmForm(props) {
   const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
   const { dispatchAuthState } = useAuthContext();
-  // console.log(address)
+
   const updateFarm = async (farm_id, data) => {
     const response = await fetch(
       `${process.env.REACT_APP_HOST}/api/farm/update-farm/${farm_id}`,
@@ -39,7 +39,6 @@ export default function FarmForm(props) {
       alert("Farm updated successsfully");
       navigate("/user/home");
     } else {
-      // alert(json.error)
       setError(json.error);
     }
   };
@@ -81,11 +80,9 @@ export default function FarmForm(props) {
       );
       const json2 = await response2.json();
       if (response2.ok) {
-        console.log("updated user", json2);
         setSuccess("New farm created successfully");
         dispatchAuthState({ type: "UPDATE", payload: { details: json2 } });
         alert("New farm created successfully");
-        // alert(JSON.stringify(json2))
         navigate("/user/home");
       } else {
         await fetch(
@@ -117,7 +114,6 @@ export default function FarmForm(props) {
 
     const json = await response.json();
     if (response.ok) {
-      // console.log(json)
       setFarmName(json.name);
       setArea(json.area);
       setLatitude(json.location.latitude);

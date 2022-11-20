@@ -10,64 +10,60 @@ export default function AddActuator() {
   const [port, setPort] = useState("");
   const [error, setError] = useState(null);
   const { farm, dispatchFarm } = useFarmContext();
-  const [validateError, setValidate] =useState("");
+  const [validateError, setValidate] = useState("");
 
-  const isNumber=(str) =>{
-    if (str.trim() === '') {
+  const isNumber = (str) => {
+    if (str.trim() === "") {
       return false;
     }
-  
+
     return !isNaN(str);
-  }
-  const Validate= (actuator_type, name, port )=>{
+  };
+  const Validate = (actuator_type, name, port) => {
     var error = "";
     if (!actuator_type || !name || !port) {
       throw Error("Enter input value !");
-    }
-    else if(!isNumber(port)){
+    } else if (!isNumber(port)) {
       throw Error("Enter a number as input !");
-
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{ 
-    Validate(actuator_type,name,port)
+    try {
+      Validate(actuator_type, name, port);
 
-    const actuator = { actuator_type, name, port };
+      const actuator = { actuator_type, name, port };
 
-    //console.log(actuator)
-    const response = await fetch(`${process.env.REACT_APP_HOST}/api/modules/add-actuator`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          actuator,
-          farm_id: farm._id,
-          farm_name: farm.name,
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
+      const response = await fetch(
+        `${process.env.REACT_APP_HOST}/api/modules/add-actuator`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            actuator,
+            farm_id: farm._id,
+            farm_name: farm.name,
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
       }
-    );
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
-      console.log(json.error);
+      if (response.ok) {
+        setError(null);
+        setActuator_type("Water Pump");
+        setName("");
+        setPort("");
+        dispatchFarm({ type: "ADD-ACTUATOR", payload: json });
+      }
+    } catch (err) {
+      setValidate(err.message);
     }
-    if (response.ok) {
-      setError(null);
-      setActuator_type("Water Pump");
-      setName("");
-      setPort("");
-      dispatchFarm({ type: "ADD-ACTUATOR", payload: json });
-      console.log("New Actuator added:", json);
-    }
-  }catch(err){
-    setValidate(err.message)
-  }
     setModalShow(true);
   };
 
@@ -124,27 +120,25 @@ export default function AddActuator() {
         </button>
         {/* {error && <div className="error">{error}</div>} */}
 
-
-      {validateError && (
-        <ModalTemp
-          title={"Error"}
-          message={validateError}
-          color="danger"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-      {!validateError && !error && (
-        <ModalTemp
-          title={"Successful"}
-          message={"New actuator added successfully"}
-          color="primary"
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      )}
-    </form>
+        {validateError && (
+          <ModalTemp
+            title={"Error"}
+            message={validateError}
+            color="danger"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+        {!validateError && !error && (
+          <ModalTemp
+            title={"Successful"}
+            message={"New actuator added successfully"}
+            color="primary"
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        )}
+      </form>
     </div>
-
   );
 }

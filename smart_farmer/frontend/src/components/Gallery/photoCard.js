@@ -21,8 +21,6 @@ export default function PhotoCard({ date, _id }) {
     );
     const json = await response.json();
     if (!response.ok) {
-      console.log("here");
-      console.log(json);
       return;
     }
     if (photos[date].length === 1) {
@@ -34,7 +32,6 @@ export default function PhotoCard({ date, _id }) {
     }
   };
 
-  // console.log(countState)
   return (
     <div className="col">
       <div className="card">

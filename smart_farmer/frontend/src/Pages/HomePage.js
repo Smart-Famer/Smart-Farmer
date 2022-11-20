@@ -1,22 +1,17 @@
-import Header from "../components/login/Header.js";
-import { Link, useNavigate } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
-import LoginNavBar from "../components/NavBars/LoginNavbar";
-import Sidebar from "../components/Sidebar/SideBar.js";
-import FarmCard from "../components/FarmManagement/farmCard";
-import { useAuthContext } from "../hooks/useAuthContext.js";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useFarmContext } from "../hooks/useFarmContext.js";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../components/FarmManagement/farmCard";
-import { HiViewGridAdd } from "react-icons/hi";
+import FarmCard from "../components/FarmManagement/farmCard";
+import Header from "../components/login/Header.js";
+import { useAuthContext } from "../hooks/useAuthContext.js";
+import { useFarmContext } from "../hooks/useFarmContext.js";
 
 export default function Home() {
   const navigate = useNavigate();
   let { user } = useAuthContext();
   const { dispatchFarm } = useFarmContext();
   const [farm_list, setFarmList] = useState([]);
-  //console.log(farm_list)
+
   const handleAction = () => {
     navigate("/user/farm-actions/add/00");
   };
@@ -33,9 +28,7 @@ export default function Home() {
         }
       );
       const json = await response.json();
-      // alert(JSON.stringify(json.length))
 
-      //console.log(json)
       if (response.ok) {
         setFarmList(json);
       }

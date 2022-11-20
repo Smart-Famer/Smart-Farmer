@@ -13,21 +13,20 @@ function getRandomDate(startDate, endDate) {
 const startDate = new Date("2022-12-11");
 let dateArr = [];
 let i = 0;
-for (let i = 0; i < 7 ; i++) {
+for (let i = 0; i < 7; i++) {
   const newday = startDate.getDate(startDate) + 1;
   startDate.setDate(newday);
   let daystr = startDate.toString();
   dateArr.push(daystr);
 }
-console.log(dateArr);
 
 const sendReading = (type) => {
-  timestamp = new Date(dateArr[i])
-  console.log(timestamp);
+  timestamp = new Date(dateArr[i]);
+
   source_index = Math.round(Math.random() * 10);
   source_id = "";
   i++;
-  console.log(i)
+
   switch (type) {
     case "temp":
       for (let index = 0; index < temp_array.length; index++) {
@@ -41,12 +40,8 @@ const sendReading = (type) => {
               reading,
               timestamp,
             })
-            .then((response) => {
-              console.log(response.data);
-            })
-            .catch((error) => {
-              console.log("error");
-            });
+            .then((response) => {})
+            .catch((error) => {});
         }
       }
       sourceId = temp_array[source_index];
@@ -65,15 +60,9 @@ const sendReading = (type) => {
               timestamp,
             })
             .then((response) => {
-              console.log(
-                response.data.reading,
-                response.data.sourceId,
-                response.data.timestamp
-              );
+   
             })
-            .catch((error) => {
-              console.log("error");
-            });
+            .catch((error) => {});
         }
       }
       sourceId = temp_array[source_index];
@@ -91,15 +80,9 @@ const sendReading = (type) => {
               timestamp,
             })
             .then((response) => {
-              console.log(
-                response.data.reading,
-                response.data.sourceId,
-                response.data.timestamp
-              );
+
             })
-            .catch((error) => {
-              console.log("error");
-            });
+            .catch((error) => {});
         }
       }
       sourceId = shum_array[source_index];
@@ -117,15 +100,9 @@ const sendReading = (type) => {
               timestamp,
             })
             .then((response) => {
-              console.log(
-                response.data.reading,
-                response.data.sourceId,
-                response.data.timestamp
-              );
+
             })
-            .catch((error) => {
-              console.log("error");
-            });
+            .catch((error) => {});
         }
       }
       sourceId = rain_array[source_index];
@@ -136,12 +113,4 @@ const sendReading = (type) => {
   }
 };
 
-
-
-// sendReading('temp')
-
-// sendReading('temp')
 setInterval(sendReading, 2000, "temp");
-// setInterval(sendReading,2000,'hum')
-// setInterval(sendReading,2000,'shum')
-// setInterval(sendReading,2000,'rain')

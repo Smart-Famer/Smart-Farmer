@@ -33,7 +33,6 @@ export const useLogin = ()=>{
         }
         if(response.ok){
             setIsLoading(false)
-            // localStorage.setItem('user', JSON.stringify(json))
             dispatchAuthState({type:"LOGIN", payload:json})
         }  
     }

@@ -1,18 +1,13 @@
+import "bootstrap/dist/css/bootstrap.css";
 import { React, useState } from "react";
-import { Container, Row, Col } from "reactstrap";
 import "../App.css";
 import { useAuthContext } from "../hooks/useAuthContext";
-import Sidebar from "./Sidebar/SideBar";
-import "bootstrap/dist/css/bootstrap.css";
-import ProfileForm from "./userManagment/profileForm";
-import { MdSettingsSystemDaydream } from "react-icons/md";
-import DisplayAlert from "./DisplayAlert";
 import InputForm from "./inputForms/InputForm";
+import ProfileForm from "./userManagment/profileForm";
 
 export default function Profile(props) {
   const user = useAuthContext().user.details;
-  console.log(user);
-  const { dispatchAuthState } = useAuthContext();
+
   const [curPass, setCurPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [success, setSuccess] = useState(null);
