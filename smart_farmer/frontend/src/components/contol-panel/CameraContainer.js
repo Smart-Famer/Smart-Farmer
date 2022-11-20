@@ -14,8 +14,13 @@ export default function CameraContainer() {
     const [selectedCamUpload, setCamUpload] = useState("");
     const [successTake, setSuccessTake] = useState(null);
     const [errorTake, setErrorTake] = useState(null);
+    const [successUpload, setSuccessUpload] = useState(null);
+    const [errorUpload, setErrorUpload] = useState(null);
+    const [image, setImage] = useState(null)
+    const [url,setURL] = useState(null)
+    const [fileName, setFileName] = useState("")
     //   const [preview, setPreview] = useState(null);
-
+    console.log(url)
     useEffect(()=>{
         const temp = farm?.actuators.Camera
         if(temp){
@@ -26,6 +31,13 @@ export default function CameraContainer() {
         }
     },[farm])
 
+  const handleUploadChange = (file)=>{
+      setFileName(file.name)
+      const reader = new FileReader();
+      reader.readAsDataURL(file)
+      reader.onloadend = ()=>(setImage(reader.result))
+      setURL(URL.createObjectURL(file))
+  }
 
   async function handleSubmitTake(event) {
     // alert(`Photo Taken from ${selectedCam}`)
@@ -38,6 +50,8 @@ export default function CameraContainer() {
           body: JSON.stringify({
             secret_key:farm.secret_key,
             data:{msg},
+            headers: { "Content-type": "application/json" },
+
           }),
   
           headers: { "Content-type": "application/json" },
@@ -60,10 +74,31 @@ export default function CameraContainer() {
   }
 
   
-  function handleSubmitUpload(event) {
+  async function handleSubmitUpload(event) {
     // alert(`Photo Taken from ${selectedCam}`)
-    setCamTake(event.target.value);
-    event.preventDefault();
+    event.preventDefault()
+    const response = await fetch(`${process.env.REACT_APP_HOST}/api/photos/upload-image`,
+    {
+      method:"POST",
+      body:JSON.stringify({
+        image,
+        farm_id:farm._id,
+        camera_angle:selectedCamUpload,
+        public_id:`smart-farmer/${farm.name}`,
+        file_name:fileName
+      }),
+      headers: {
+        "Content-type": "application/json",
+      }
+    })
+    
+    const json = await response.json()
+    if(response.ok){
+      setSuccessUpload("Image Successfully Uploaded")
+    }
+    if(!response.ok){
+      setErrorUpload(json.error)
+    }
   }
 
 //   function deletePreview() {
@@ -131,7 +166,7 @@ export default function CameraContainer() {
             )} */}
           </div>
           <div className="col-10 col-lg-6 p-lg-5 p-4">
-            <form className="form" onSubmit={handleSubmitUpload}>
+            <form encType="multipart/form-data" className="form" onSubmit={handleSubmitUpload}>
               <legend>Upload Photos</legend>
               <div className="row mb-3">
                 <select
@@ -153,11 +188,14 @@ export default function CameraContainer() {
                   name="camera"
                   placeholder="Select Camera"
                   type="file"
+                  onChange={(e)=>{handleUploadChange(e.target.files[0])}}
                 />
               </div>
               <button type="submit" className="btn btn-green text-white">
                   Upload
                 </button>
+              {successUpload&&<p className="text-success mt-3">{successUpload}</p>}
+              {errorUpload&&<p className="text-danger mt-3">{errorUpload}</p>}
             </form>
           </div>
         </div>

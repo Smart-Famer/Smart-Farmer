@@ -1,32 +1,19 @@
-const mongoose  = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const photoSchema = new Schema(
-    {
-        timestamp:
-        {
-            type:Date,
-            required:true
-        },
-        filename:
-        {
-            type:String,
-            required:true
-        },
-        description:String,
-        metadata:
-        {
-            farm_id:String,
-            camera_angle:String
-        }
+const gallerySchema = new Schema(
+  {
+    url: {
+      type: String,
+      required: true,
     },
-)
-// {
-//     timeseries:{
-//         timeField:'timestamp',
-//         metaField:'metadata',
-//         granularity:'hours'
-//     }`
-// }
+    metadata:
+    {
+        farm_id:String,
+        camera_angle:String
+    }
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('photo', photoSchema)
+module.exports = mongoose.model("photo", gallerySchema);
