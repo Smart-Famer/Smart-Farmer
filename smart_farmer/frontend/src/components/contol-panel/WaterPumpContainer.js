@@ -86,9 +86,9 @@ export default function WaterPumpContainer(props) {
   console.log(waterPumps)
 
   return (
-    <div className="row justify-content-center border">
-      <div className="col-11 col-sm-10 col-md-7 mt-3 ">
-        <div className="pump-container-title mb-3">
+    <div className="row justify-content-center">
+      <div className="col-11 col-sm-10 col-md-7 mt-3 pump">
+        <div className="row bg-success text-white p-2 mb-3">
           <h5>Water Pumps</h5>
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 p-4">

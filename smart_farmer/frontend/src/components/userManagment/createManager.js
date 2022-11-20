@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useSignup } from '../../hooks/useManagerSignUp';
 import DisplayAlert from '../DisplayAlert';
+import ModalTemp from "../Modal/Modal";
+import Validate from './formValidation';
 
 export default function CreateManager() {
-  const [validated, setValidated] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [validateError, setValidated] = useState('');
   const [first_name, setfirstName] = useState("")
   const [second_name, setSecondName] = useState("")
   const [password, setPassword] = useState("")
@@ -16,6 +19,7 @@ export default function CreateManager() {
   const handleSubmit = async (e) => {
     console.log(first_name, second_name, email, password, location);
     e.preventDefault();
+    setValidated(Validate(first_name, second_name, email, password, confirmPassword))
     setError(null)
     setSuccess(null)
     const newObj = await signup(first_name, second_name, email, password, location)
@@ -29,13 +33,15 @@ export default function CreateManager() {
       setEmail("")
       setSuccess("Manager Created Successfully!")
     }
-
+    setModalShow(true);
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+        <label className="col-sm-4 col-form-label">First Name</label>
+
             <div className="col-sm-7">
                 <input 
                         type="text" 
@@ -44,12 +50,14 @@ export default function CreateManager() {
                         onChange={(e)=>{setfirstName(e.target.value)}}
                         required={true}
                         />
-            </div>
-            <label className="col-sm-1 col-form-label">First Name</label>
+              </div>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+        <label className="col-sm-4 col-form-label">Second Name</label>
+
             <div className="col-sm-7">
+
                 <input 
                         type="text" 
                         className="form-control"
@@ -57,12 +65,15 @@ export default function CreateManager() {
                         onChange={(e)=>{setSecondName(e.target.value)}}
                         required={true}
                         />
+                      
             </div>
-            <label className="col-sm-1 col-form-label">Second Name</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+        <label className="col-sm-4 col-form-label">Email</label>
+
             <div className="col-sm-7">
+
                 <input 
                         type="email" 
                         className="form-control" 
@@ -70,12 +81,15 @@ export default function CreateManager() {
                         onChange={(e)=>{setEmail(e.target.value)}}
                         required={true}
                         />
+                        
             </div>
-            <label className="col-sm-1 col-form-label">Email</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+        <label className="col-sm-4 col-form-label">Password</label>
+
             <div className="col-sm-7">
+
                 <input 
                         type="password" 
                         className="form-control" 
@@ -83,12 +97,15 @@ export default function CreateManager() {
                         onChange={(e)=>{setPassword(e.target.value)}}
                         required={true}
                         />
+                      
             </div>
-            <label className="col-sm-1 col-form-label">Password</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+        <label className="col-sm-4 col-form-label">Confirm Password</label>
+
             <div className="col-sm-7">
+
                 <input 
                         type="password" 
                         className="form-control" 
@@ -96,11 +113,12 @@ export default function CreateManager() {
                         onChange={(e)=>{setConfirmPassword(e.target.value)}}
                         required={true}
                         />
+                      
             </div>
-            <label className="col-sm-1 col-form-label">Confirm Password</label>
 
         </div>
-        <div className="form-group row p-3">
+        <div className="form-group mb-3 row">
+        <label className="col-sm-4 col-form-label">Location</label>
             <div className="col-sm-7">
                 <input 
                         type="text" 
@@ -109,13 +127,32 @@ export default function CreateManager() {
                         onChange={(e)=>{setLocation(e.target.value)}}
                         required={true}
                         />
+                        
             </div>
-            <label className="col-sm-1 col-form-label">Location</label>
+            
 
         </div>
         <button type="submit" className="btn btn-green btn-block m-4">Create</button>
-        {error && (<DisplayAlert type={'danger'} content={error} />)}
-        {success && (<DisplayAlert type={'success'} content={success} />)}
+        {/* {error && (<DisplayAlert type={'danger'} content={error} />)}
+        {success && (<DisplayAlert type={'success'} content={success} />)} */}
+        {validateError && (
+        <ModalTemp
+          title={"Error"}
+          message={validateError}
+          color="danger"
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+      {!validateError && !error && (
+        <ModalTemp
+          title={"Successful"}
+          message={"Manager created Successfully"}
+          show={modalShow}
+          color="primary"
+          onHide={() => setModalShow(false)}
+        />
+      )}
       </form>
     </div>
       

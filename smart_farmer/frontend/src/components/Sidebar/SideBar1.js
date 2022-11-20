@@ -113,6 +113,23 @@ export default function Sidebar1() {
                 <span className="ms-1 d-none d-sm-inline">Modules</span>
               </Link>
             </li>
+            <br></br>
+            {user?.details.user_type === "Manager" && (
+              <>
+                <li className="nav-item fs-5">
+                  <Link
+                    className="nav-link text-truncate"
+                    to="/user/farm/farm-details"
+                  >
+                    <i class="bi bi-info-circle"></i>
+                    <span className="ms-1 d-none d-sm-inline">
+                      Farm Details
+                    </span>
+                  </Link>
+                </li>
+                <br></br>
+              </>
+            )}
           </ul>
         </div>
       </div>

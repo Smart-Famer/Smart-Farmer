@@ -14,6 +14,26 @@ export default function EditActuator({module,_id}) {
   const { farm, dispatchFarm } = useFarmContext();
   const navigate = useNavigate()
 
+  const [validateError, setValidate] =useState("");
+
+  const isNumber=(str) =>{
+    if (str.trim() === '') {
+      return false;
+    }
+  
+    return !isNaN(str);
+  }
+  const Validate= (actuator_type, name, port)=>{
+    var error = "";
+    if (!actuator_type || !name || !port) {
+      return error = "Enter input value !";
+    }
+    else if(!isNumber(port)){
+      return error = "Enter a number as input !";
+
+    }
+  }
+
   useEffect(()=>{
 
     const curActuator = farm?.actuators[module]?.find((actuator)=>actuator._id===_id)
@@ -27,6 +47,7 @@ export default function EditActuator({module,_id}) {
     const actuator = { actuator_type, name, port };
 
     e.preventDefault();
+    setValidate(Validate(actuator_type, name, port))
 
     const response = await fetch(
       `${process.env.REACT_APP_HOST}/api/modules/edit-actuator`,
@@ -121,27 +142,27 @@ export default function EditActuator({module,_id}) {
           />
         </div>
 
-        <button type="submit" className="btn btn-green">
-          Edit
-        </button>
-        {/* {error&&<div className="error">{error}</div>} */}
-        {error && (
-          <ModalTemp
-            title={"Error"}
-            message={error}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        )}
-        {!error && (
-          <ModalTemp
-            title={"Successful"}
-            message={"Actuator Edited Successfully"}
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        )}
-      </form>
+      <button type="submit" className="btn btn-green">
+        Edit
+      </button>
+      {/* {error&&<div className="error">{error}</div>} */}
+      {validateError && (
+        <ModalTemp
+          title={"Error"}
+          message={error}
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+      {!validateError && !error && (
+        <ModalTemp
+          title={"Successful"}
+          message={"Actuator Edited Successfully"}
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      )}
+    </form>
     </div>
   );
 }

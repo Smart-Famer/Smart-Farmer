@@ -133,6 +133,19 @@ userSchema.statics.updatePass = async function(data){
     return user
 }
 
+userSchema.statics.comparePass = async function(_id,password){
+    const user = await this.findOne({_id})
+    if(!user){
+        throw Error("No such user found")
+    }
+    const match = await bcrypt.compare(password, user.password)
+    if(!match){
+        throw Error("Password Doesn't match")
+    }
+
+    return user
+
+}
 // userSchema.statics.getPass = async function(data){
 //     const {curPass,newPass,_id}=data
 

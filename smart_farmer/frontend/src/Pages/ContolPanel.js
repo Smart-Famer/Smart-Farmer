@@ -8,27 +8,13 @@ import { useEffect } from "react";
 export default function Dashboard(props) {
   const { farm } = useFarmContext();
 
-  const pumps = farm?.actuators?.Pump;
-
-
-    // const pumps=[
-    //     {
-    //         name:"Pump1",
-    //         status:"on"
-    //     },
-    //     {
-    //         name:"Pump2",
-    //         status:"off"
-    //     }
-    // ]
-    const cameras=["camera-1","camera-2"]
     return(
         <div className="">
             
-                <WaterPumpContainer pumps={pumps} threshhold="10" />
+                <WaterPumpContainer/>
 
             <div>
-                <CameraContainer cameras={cameras}/>
+                <CameraContainer cameras={farm?.actuators.Camera}/>
             </div>       
         </div>
     )

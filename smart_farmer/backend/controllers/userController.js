@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const mongoose=require('mongoose')
+const userModel = require('../models/userModel')
 
 const createToken=({_id, email, user_type, first_name, second_name, location, profile_picture})=>{
     return jwt.sign({_id, email, user_type, first_name, second_name, location, profile_picture},process.env.SECRET, {expiresIn:"1d"})
@@ -159,12 +160,27 @@ const updatePassword = async (req, res)=>{
         if(!mongoose.Types.ObjectId.isValid(_id)){
             throw Error("Invalid User ID")
         }
-        const user = await User.updatePass({...data,_id})
+        const user = await userModel.comparePass(user_id,password)
+
+        
         res.status(200).json(user)
     }catch(err){
         res.status(400).json({error:err.message})
     }
 
+}
+
+const checkPassword = async(req,res) =>{
+    const {user_id, password} = req.body
+    try{
+        if(!mongoose.Types.ObjectId.isValid(user_id)){
+            throw Error("Invalid User ID")
+        }
+        const user = await User.comparePass(user_id, password)
+        res.status(200).json(user)
+    }catch(err){
+        res.status(400).json({error:err.message})
+    }
 }
 module.exports = {
     login,
@@ -177,5 +193,6 @@ module.exports = {
     getAllMangers,
     getAllAssistants,
     getMangers,
-    deleteManger
+    deleteManger,
+    checkPassword
 }

@@ -21,6 +21,7 @@ import GalleryItem from './GalleryItem'
 import HistoricalNPKpage from "./HistoricalNpkPage";
 import Sidebar from "../components/Sidebar/SideBar1";
 import ModulesPage from "./ModulesPage"
+import FarmDetailsPage from './FarmDetails'
 
 export default function FarmLayout(props)
 {
@@ -43,6 +44,7 @@ export default function FarmLayout(props)
                 <Route path='cropYield' element={<CropYieldDataPage />}/>
                 <Route path='cropyieldinput' element={<CropYieldInput />}/>
                 <Route path='history' element={<HistoricalData  />} />
+                <Route path='farm-details' element={<FarmDetailsPage />} />
                 <Route path='createAcc' element={
                     <AssistantContextProvider>
                         <CreateAss />
