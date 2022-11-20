@@ -21,7 +21,7 @@ export default function CropYieldInput(props){
               farm_id: farm_id,
               crop_name: crop_name,
               date: date,
-              _yield: amount,
+              yield: amount,
             }),
 
             headers: { "Content-type": "application/json" },
