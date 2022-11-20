@@ -2,6 +2,7 @@ const dataReadingModel = require('../models/dataReadingModel')
 const mongoose = require('mongoose')
 const sockets = require('../sockets')
 const farmModel = require('../models/farmModel')
+const sensorModel = require('../models/sensorModel')
 
 
 const getReading= async (req,res)=>{
@@ -56,8 +57,15 @@ const  createDataReading= async (req,res)=>{
         if(!farmObj){
             throw Error("Invalid Secret Key. Plz exit an re-enter with a valid key")
         }
+
         const farmId = farmObj._id.toString()
         sourceId = farmId+"-"+sourceId
+
+        const sensor = await sensorModel.findOne({port:sourceId})
+        if(!sensor){
+            throw Error("Port Does not Exist")
+        }
+        
         console.log(sourceId, farmId)
         const dataReading = await dataReadingModel.create({
             timestamp,

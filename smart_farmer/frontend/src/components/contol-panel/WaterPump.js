@@ -11,11 +11,12 @@ export default function WaterPump(props) {
       props?.port.split("-")[1]
     }`;
     const response = await fetch(
-      `${process.env.REACT_APP_DATA_SERVER}/api/get-requests/${farm.secret_key}`,
+      `${process.env.REACT_APP_DATA_SERVER}/api/get-requests`,
       {
         method: "POST",
         body: JSON.stringify({
-          msg,
+          secret_key:farm.secret_key,
+          data:{msg},
         }),
 
         headers: { "Content-type": "application/json" },
