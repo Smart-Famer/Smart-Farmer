@@ -135,10 +135,12 @@ userSchema.statics.updatePass = async function(data){
 
 userSchema.statics.comparePass = async function(_id,password){
     const user = await this.findOne({_id})
+    console.log(user)
     if(!user){
         throw Error("No such user found")
     }
     const match = await bcrypt.compare(password, user.password)
+    console.log(match)
     if(!match){
         throw Error("Password Doesn't match")
     }

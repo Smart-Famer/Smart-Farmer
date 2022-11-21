@@ -215,12 +215,13 @@ const attachFarm = async (req, res) => {
 const updatePassword = async (req, res) => {
   const data = req.body;
   const { _id } = req.params;
+  console.log(data, _id)
   try {
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       throw Error("Invalid User ID");
     }
     const user = await userModel.comparePass(user_id, password);
-
+    console.log(user)
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
