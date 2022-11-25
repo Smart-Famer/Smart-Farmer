@@ -5,9 +5,10 @@ export default function Weather() {
   const [weatherData, setWeatherData] = React.useState(null);
 
 
-  const API_key = "ee5cf369f27ce39d86ae06b3e884e7d5";
+  const API_key = process.env.REACT_APP_WEATHER_API_KEY;
+  const Area = process.env.REACT_APP_WEATHER_Area;
   React.useEffect(() => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=colombo,lk&APPID=${API_key}`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${Area},lk&APPID=${API_key}`;
     fetch(url)
       .then((response) => response.json())
       .then((response) => setWeatherData(response))

@@ -109,8 +109,8 @@ export default function NpkLevelChart() {
     <div className="row">
       <div className="col-12 col-lg-9">
         <LineChart
-          xAxisLabel="Time"
-          yAxisLabel="Temperature"
+          xAxisLabel="Date"
+          yAxisLabel="NPK Level"
           chartTitle="Historical Data"
           xAxisValues={xAxisV}
           dataSets={[

@@ -271,7 +271,7 @@ export default function HistoricalData() {
         <div className="col-lg-9">
           <LineChart
             xAxisLabel="Date"
-            yAxisLabel="Temperature"
+            yAxisLabel="Reading"
             xAxisValues={xAxisV}
             chartTitle="Historical Data"
             dataSets={data.filter((x) => {
