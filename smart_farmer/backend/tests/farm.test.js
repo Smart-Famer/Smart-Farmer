@@ -6,14 +6,14 @@ describe("GET /api/farm/", () => {
     const res = await request(baseURL).get(
       "/api/farm/get-farm/6363a46d57669fe158501664"
     );
-    expect(res.body.name).toEqual("Farm-abc");
+    expect(res.body.name).toEqual("Milo farm");
   });
   it("Should return a farm", async () => {
     const res = await request(baseURL).get(
       "/api/manager/get-keys/6363a46d57669fe158501664"
     );
     expect(res.body.elec_conductivity_key).toEqual(
-      "elec-6363a46d57669fe158501664"
+      "6363a46d57669fe158501664-elec"
     );
   });
 

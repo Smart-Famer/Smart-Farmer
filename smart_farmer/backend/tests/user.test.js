@@ -52,7 +52,7 @@ describe("POST /api/user/", () => {
     });
     //
     expect(res.status).toEqual(200);
-    expect(res.body[0].first_name).toEqual("Madara");
+    expect(res.body[0].first_name).toEqual("Yasith");
   });
 
   it("Should retuen an mangers of a given farm", async () => {
@@ -61,7 +61,7 @@ describe("POST /api/user/", () => {
     });
     //
     expect(res.status).toEqual(200);
-    expect(res.body[0].first_name).toEqual("Hiruna");
+    expect(res.body[0].first_name).toEqual("Nihal");
   });
 
   //   it("Should retuen an mangers of a given farm", async () => {

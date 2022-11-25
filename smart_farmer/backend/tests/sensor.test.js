@@ -17,12 +17,12 @@ describe("POST /api/modules/", () => {
     const res = await request(baseURL).get("/api/modules/get-ports");
 
     expect(res.status).toEqual(200);
-    expect(res.body.Temp_Sensors[0]).toEqual("6363a46d57669fe158501664-2000");
+    expect(res.body.Temp_Sensors[0]).toEqual("637a85318da7e58ff760907d-2000");
     expect(res.body.Humidity_Sensors[0]).toEqual(
-      "6363a46d57669fe158501664-3000"
+      "6363a46d57669fe158501664-2000"
     );
     expect(res.body.RainFall_Sensors[0]).toEqual(
-      "6363a46d57669fe158501664-4000"
+      "637a84b08da7e58ff7609076-4000"
     );
   });
 
